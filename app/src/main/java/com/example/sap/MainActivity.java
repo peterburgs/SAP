@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, myFamily);
         myListView.setAdapter(arrayAdapter);
 
-
+        //Don't know how to use git
         //Show the name of the item clicked
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

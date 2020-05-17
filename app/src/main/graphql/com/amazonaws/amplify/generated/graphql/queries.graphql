@@ -1,0 +1,8 @@
+# this is an auto generated file. This will be overwritten
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    email
+    username
+  }
+}

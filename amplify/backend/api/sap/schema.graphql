@@ -1,0 +1,7 @@
+type User
+  @model(queries: {get: "getUser"}, mutations: null, subscriptions: null)
+  @auth(rules: [{allow: groups, groups: ["admin"], operations: [create, update, delete]}]) {
+  id: ID!
+  email: String!
+  username: String!
+}

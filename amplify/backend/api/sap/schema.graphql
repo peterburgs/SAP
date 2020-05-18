@@ -5,3 +5,9 @@ type User
   email: String!
   username: String!
 }
+type Project
+@model 
+{
+id:ID!
+name: String!
+}

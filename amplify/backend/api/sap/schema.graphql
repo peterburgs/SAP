@@ -1,7 +1,79 @@
 type User
-  @model(queries: {get: "getUser"}, mutations: null, subscriptions: null)
-  @auth(rules: [{allow: groups, groups: ["admin"], operations: [create, update, delete]}]) {
+  @model(queries: {get: "getUser"})
+  @auth(rules: [
+    # Only admin can create, update, delete users
+    {allow: groups, groups: ["admin"], operations: [create, update, delete]},
+
+    # Only authorized users can read their info
+    {allow: owner}
+  ]) {
   id: ID!
   email: String!
   username: String!
+  leadingProjects: [Project] @connection(keyName: "byLeader", fields: ["id"])
+  joinedProjects: [ProjectParticipant] @connection(keyName: "byMember", fields: ["id"])
+}
+
+type Project
+  @model
+  @key(name: "byLeader", fields: ["leaderID"])
+  @auth(rules: [
+    # Only owner (leader) can update, delete projects
+    {allow: owner, operations: [update, delete]}
+  ]) {
+  id: ID!
+  name: String!
+  key: String!
+  leaderID: ID!
+  leader: User @connection(fields:["leaderID"])
+  members: [ProjectParticipant] @connection(keyName: "byProject", fields: ["id"])
+  sprints: [Sprint] @connection(keyName: "byProject", fields: ["Id"])
+}
+
+type ProjectParticipant
+  @model
+  @key(name: "byProject", fields: ["projectID", "memberID"])
+  @key(name: "byMember", fields: ["memberID", "projectID"])
+  @auth(rules: [
+    # Only owner (leader) can update, delete project participants
+    {allow: owner, operations: [update, delete]}
+  ]) {
+  id: ID!
+  projectID: ID!
+  memberID: ID!
+  role: Role!
+  project: Project! @connection(fields: ["projectID"])
+  member: User! @connection(fields: ["memberID"])
+}
+
+enum Role {
+  TEAM_LEADER
+  TEAM_MEMBER
+}
+
+type Sprint
+  @model
+  @key(name: "byProject", fields: ["projectID"])
+  @auth(rules: [{allow: owner}]) {
+  id: ID!
+  startDate: AWSDate!
+  endDate: AWSDate!
+  goal: String!
+  name: String!
+  isCompleted: Boolean!
+  isStarted: Boolean!
+  projectID: ID!
+  project: [Project] @connection(fields: ["projectID"])
+}
+
+type Task
+  @model {
+  id: ID!
+  name: String!
+  label: String!
+  description: String!
+  priority: Int!
+  status: String!
+  storyPoint: Int!
+
 }

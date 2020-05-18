@@ -77,3 +77,9 @@ type Task
   storyPoint: Int!
 
 }
+type Project
+@model 
+{
+id:ID!
+name: String!
+}

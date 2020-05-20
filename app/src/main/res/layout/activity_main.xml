@@ -57,8 +57,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180sp"
+        android:layout_height="70sp"
         android:backgroundTint="#D6414F"
         android:fontFamily="@font/bold"
         android:text="Login"

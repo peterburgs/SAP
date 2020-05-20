@@ -17,12 +17,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Components-->
+    <!--App Theme-->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+    </style>
+
+    <!--Rounded corner Button-->
+    <style name="AppTheme.RoundedCornerMaterialButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/rounded_shape</item>
     </style>
     <!--Bottom Sheets-->
     <style name="ThemeOverlay.MyTheme.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">

@@ -5,13 +5,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_background"
         android:label="SAP"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ConfirmSignup"></activity>
+        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ConfirmSignup" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity

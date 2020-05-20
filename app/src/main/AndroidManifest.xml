@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".ConfirmSignup"></activity>
+        <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"

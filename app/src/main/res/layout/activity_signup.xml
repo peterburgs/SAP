@@ -140,7 +140,6 @@
 
 
     <!--SignUp Button-->
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_signup"
         android:layout_width="180sp"

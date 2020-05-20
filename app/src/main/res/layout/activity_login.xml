@@ -33,6 +33,8 @@
         android:hint="Username"
         app:boxCornerRadiusTopEnd="25dp"
         app:boxCornerRadiusTopStart="25dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

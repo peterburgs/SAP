@@ -7,11 +7,12 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher_background"
         android:label="SAP"
-        android:roundIcon="@drawable/ic_launcher_foreground"
+        android:roundIcon="@drawable/ic_touch_id"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".ConfirmSignup" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />

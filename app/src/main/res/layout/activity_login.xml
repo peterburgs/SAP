@@ -80,7 +80,8 @@
             android:layout_width="350sp"
             android:layout_height="wrap_content"
             android:backgroundTint="#F9F9F9"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
     <!--end of Edittext: Password-->
 

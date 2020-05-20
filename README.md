@@ -1,11 +1,12 @@
 # SAP
 <i>SAP - Simple Android Project</i>
 
-<hr>UI Component: Material Design version 1.2.0-alpha06 
+<hr>
+<li>UI Component: Material Design version 1.2.0-alpha06 
 <br>
-Virtual Device: Google Pixel 3A
+<li>Virtual Device: Google Pixel 3A
 <br>
-API: 29
+<li>API: 29
 <br>
-Android version: 10 (Q)
+<li>Android version: 10 (Q)
 

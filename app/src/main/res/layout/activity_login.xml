@@ -26,11 +26,6 @@
 
 
     <!--Edittext: Username-->
-    <!--end of Edittext: Username-->
-
-
-    <!--Edittext: Password-->
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="350sp"
@@ -53,10 +48,13 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#F9F9F9"
             android:maxLength="20"
-            android:singleLine="true"
-            android:nextFocusDown="@id/edt_password"/>
+            android:nextFocusDown="@id/edt_password"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
+    <!--end of Edittext: Username-->
 
+
+    <!--Edittext: Password-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         android:layout_width="350sp"
@@ -88,8 +86,6 @@
 
 
     <!--Login Button-->
-    <!--end of Login Button-->
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
         android:layout_width="180sp"
@@ -104,6 +100,8 @@
         app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+    <!--end of Login Button-->
+
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView2"

@@ -7,20 +7,6 @@
     tools:context=".SignupActivity">
 
 
-    <!--Edittext: Username-->
-    <!--end of Edittext: Username-->
-
-
-    <!--Edittext: Email-->
-    <!--end of Edittext: Email-->
-
-    <!--Edittext: Password-->
-    <!--end of Edittext: Password-->
-
-
-    <!--Login Button-->
-    <!--end of Login Button-->
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView"
         android:layout_width="wrap_content"
@@ -36,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <!--Edittext: Username-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="350sp"
@@ -60,7 +47,10 @@
             android:nextFocusDown="@+id/edt_email"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
+    <!--end of Edittext: Username-->
 
+
+    <!--Edittext: Email-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
         android:layout_width="350sp"
@@ -85,7 +75,9 @@
             android:nextFocusDown="@+id/edt_password"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
+    <!--end of Edittext: Email-->
 
+    <!--Edittext: Password-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         android:layout_width="350sp"
@@ -114,7 +106,9 @@
             android:nextFocusDown="@+id/edt_confirmPassword"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
+    <!--end of Edittext: Password-->
 
+    <!--Edit text: Confirm Password-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout4"
         android:layout_width="350sp"
@@ -141,6 +135,10 @@
             android:backgroundTint="#F9F9F9"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
+    <!--end of Edit text: Confirm Password-->
+
+
+    <!--SignUp Button-->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_signup"
@@ -156,6 +154,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+    <!--end of SignUp Button-->
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView2"
@@ -170,7 +169,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:layout_constraintVertical_bias="0.954" />
-
+    <!--Edit text: SignIn-->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_signin"
         android:layout_width="wrap_content"
@@ -185,10 +184,5 @@
         app:layout_constraintStart_toEndOf="@+id/materialTextView2"
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:layout_constraintVertical_bias="0.954" />
-
-
-    <!--Textview: Forgot password-->
-
-    <!--end of Textview: Forget password-->
-
+    <!--end of Edit text: SignIn-->
 </androidx.constraintlayout.widget.ConstraintLayout>

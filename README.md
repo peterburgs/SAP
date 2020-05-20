@@ -1,5 +1,5 @@
 # SAP
-<i>SAP - Simple Android Project</i>
+<i><b>S</b>imple <b>A</b>ndroid <b>P</b>roject</i>
 
 <hr>
 <li>UI Component: Material Design version 1.2.0-alpha06 

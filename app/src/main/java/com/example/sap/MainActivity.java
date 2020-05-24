@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResult(UserStateDetails userStateDetails) {
                 if(userStateDetails.getUserState() == UserState.SIGNED_IN) {
-                    // Navigate to project dashboard
+                    Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
+                    startActivity(intent);
                 } else {
                     AWSMobileClient.getInstance().signOut();
                 }

@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
 }
 
@@ -32,7 +36,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-
     //Material Design Dependency
     implementation 'com.google.android.material:material:1.2.0-alpha06'
+
+    //AWSMobileClient
+    implementation('com.amazonaws:aws-android-sdk-mobile-client:2.16.12@aar') { transitive = true }
+    //Cognito UserPools
+    implementation('com.amazonaws:aws-android-sdk-auth-userpools:2.16.12@aar') { transitive = true }
 }

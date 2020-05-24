@@ -4,5 +4,21 @@ query GetUser($id: ID!) {
     id
     email
     username
+    owner
+  }
+}
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      email
+      username
+      owner
+    }
+    nextToken
   }
 }

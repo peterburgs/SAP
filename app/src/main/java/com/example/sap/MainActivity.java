@@ -4,16 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.Callback;
+import com.amazonaws.mobile.client.UserState;
+import com.amazonaws.mobile.client.UserStateDetails;
+
 
 public class MainActivity extends AppCompatActivity {
-    Button btn_login;
-    TextView tv_signup;
-    Toast toastMessage;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private Button btn_login;
+    private TextView tv_signup;
+    private Toast toastMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +42,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //User touches Signup Text view
         tv_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        // Initialize AWSMobileClient to handle authentication
+        AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
+            @Override
+            public void onResult(UserStateDetails userStateDetails) {
+                if(userStateDetails.getUserState() == UserState.SIGNED_IN) {
+                    Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
+                    startActivity(intent);
+                } else {
+                    AWSMobileClient.getInstance().signOut();
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e(TAG,"Error", e);
             }
         });
     }

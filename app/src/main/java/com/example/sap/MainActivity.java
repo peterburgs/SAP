@@ -15,7 +15,11 @@ import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.UserState;
 import com.amazonaws.mobile.client.UserStateDetails;
-
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
+import com.amplifyframework.core.Amplify;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -38,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
-                //Hello World
             }
         });
 
@@ -51,22 +54,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Initialize AWSMobileClient to handle authentication
-        AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
-            @Override
-            public void onResult(UserStateDetails userStateDetails) {
-                if(userStateDetails.getUserState() == UserState.SIGNED_IN) {
-                    Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    AWSMobileClient.getInstance().signOut();
-                }
-            }
+        // Initialize Amplify
+        // Add auth plugin
+        // Add api plugin
+        try {
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+        } catch (AmplifyException e) {
+            e.printStackTrace();
+        }
 
-            @Override
-            public void onError(Exception e) {
-                Log.e(TAG,"Error", e);
-            }
-        });
+        // Get application session
+        Amplify.Auth.fetchAuthSession(
+                result -> {
+                    AWSCognitoAuthSession cognitoAuthSession = (AWSCognitoAuthSession) result;
+                    switch(cognitoAuthSession.getIdentityId().getType()) {
+                        case SUCCESS:
+                            //Navigate to project dashboard activity
+                            Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
+                            startActivity(intent);
+                            break;
+                        case FAILURE:
+                            Log.i(TAG, "IdentityId not present because: " + cognitoAuthSession.getIdentityId().getError().toString());
+                            break;
+                    }
+                },
+                error -> Log.e(TAG,"Error", error)
+        );
     }
 }

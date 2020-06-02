@@ -17,6 +17,10 @@ import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.results.SignUpResult;
 import com.amazonaws.mobile.client.results.UserCodeDeliveryDetails;
+import com.amplifyframework.auth.AuthCodeDeliveryDetails;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
+import com.amplifyframework.core.Amplify;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,57 +61,47 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Get username, password, and email
-                String username = ((EditText)findViewById(R.id.edt_username)).getText().toString();
-                String password = ((EditText)findViewById(R.id.edt_password)).getText().toString();
-                String confirmPassword = ((EditText)findViewById(R.id.edt_confirmPassword)).getText().toString();
-                String email = ((EditText)findViewById(R.id.edt_email)).getText().toString();
-                Map<String, String> attributes = new HashMap<>();
-                attributes.put("email", email);
-                signUp(username, password, confirmPassword, attributes);
+                String username = ((EditText) findViewById(R.id.edt_username)).getText().toString();
+                String password = ((EditText) findViewById(R.id.edt_password)).getText().toString();
+                String confirmPassword = ((EditText) findViewById(R.id.edt_confirmPassword)).getText().toString();
+                String email = ((EditText) findViewById(R.id.edt_email)).getText().toString();
+
+                signUp(username, password, confirmPassword, email);
             }
         });
     }
 
-    private void signUp(final String username, String password, String confirmPassword, Map<String, String> attributes) {
-        if(validateInput(attributes.get("email"), password, confirmPassword)) {
+    private void signUp(final String username, String password, String confirmPassword, String email) {
+        if (validateInput(email, password, confirmPassword)) {
             // Open loading dialog
             loadingDialog.startLoadingDialog();
 
             // Send sign-up request to AWS
-            AWSMobileClient.getInstance().signUp(username, password, attributes, null, new Callback<SignUpResult>() {
-                @Override
-                public void onResult(SignUpResult result) {
-                    // If user need to confirm, navigate to confirm sign up activity
-                    // else display sign up done
-                    if(!result.getConfirmationState()) {
-                        final UserCodeDeliveryDetails details = result.getUserCodeDeliveryDetails();
-
+            Amplify.Auth.signUp(username, password, AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(), email).build(),
+                    result -> {
                         Intent confirmSignUpActivityIntent = new Intent(getApplicationContext(), ConfirmSignupActivity.class);
-                        confirmSignUpActivityIntent.putExtra("msg", "The verification code has been sent to " + details.getDestination());
-                        confirmSignUpActivityIntent.putExtra("username", username);
-                        startActivity(confirmSignUpActivityIntent);
-                    } else {
-                        loadingDialog.dismissDialog();
-                        makeToast(toast,"Sign-up done");
-                    }
-                }
 
-                @Override
-                public void onError(Exception e) {
-                    loadingDialog.dismissDialog();
-                    Log.e(TAG,"Error", e);
-                    runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
-                }
-            });
+                        String destination = result.getNextStep().getCodeDeliveryDetails().getDestination();
+                        confirmSignUpActivityIntent.putExtra("msg", "The verification code has been sent to " + destination);
+                        confirmSignUpActivityIntent.putExtra("username", username);
+                        loadingDialog.dismissDialog();
+                        startActivity(confirmSignUpActivityIntent);
+                    },
+                    error -> {
+                        loadingDialog.dismissDialog();
+                        Log.e(TAG, "Error", error);
+                        runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                    }
+            );
         }
     }
 
     private boolean validateInput(String email, String password, String confirmPassword) {
-        if(password.equals(confirmPassword)) {
+        if (password.equals(confirmPassword)) {
             final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
             Pattern pattern = Pattern.compile(EMAIL_PATTERN);
             Matcher matcher = pattern.matcher(email);
-            if(!matcher.matches()) {
+            if (!matcher.matches()) {
                 makeToast(toast, "Invalid email format");
                 return false;
             }
@@ -119,10 +113,10 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void makeToast(Toast toast, String message) {
-        if(toast!=null){
+        if (toast != null) {
             toast.cancel();
         }
-        toast=Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
     }
 

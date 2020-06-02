@@ -23,3 +23,48 @@ subscription OnDeleteUser($owner: String!) {
     owner
   }
 }
+subscription OnCreateProject {
+  onCreateProject {
+    id
+    name
+    key
+    leaderID
+    leader {
+      id
+      email
+      username
+      owner
+    }
+    owner
+  }
+}
+subscription OnUpdateProject($owner: String!) {
+  onUpdateProject(owner: $owner) {
+    id
+    name
+    key
+    leaderID
+    leader {
+      id
+      email
+      username
+      owner
+    }
+    owner
+  }
+}
+subscription OnDeleteProject($owner: String!) {
+  onDeleteProject(owner: $owner) {
+    id
+    name
+    key
+    leaderID
+    leader {
+      id
+      email
+      username
+      owner
+    }
+    owner
+  }
+}

@@ -1,19 +1,19 @@
 {
     "dev": {
         "awscloudformation": {
-            "AuthRoleName": "amplify-sap-dev-74153-authRole",
-            "UnauthRoleArn": "arn:aws:iam::246085528062:role/amplify-sap-dev-74153-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::246085528062:role/amplify-sap-dev-74153-authRole",
+            "AuthRoleName": "amplify-sap-dev-225216-authRole",
+            "UnauthRoleArn": "arn:aws:iam::246085528062:role/amplify-sap-dev-225216-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::246085528062:role/amplify-sap-dev-225216-authRole",
             "Region": "us-west-2",
-            "DeploymentBucketName": "amplify-sap-dev-74153-deployment",
-            "UnauthRoleName": "amplify-sap-dev-74153-unauthRole",
-            "StackName": "amplify-sap-dev-74153",
-            "StackId": "arn:aws:cloudformation:us-west-2:246085528062:stack/amplify-sap-dev-74153/3769b9e0-97d7-11ea-b8f3-0ac691da606e",
-            "AmplifyAppId": "d2xuc6ssblizk9"
+            "DeploymentBucketName": "amplify-sap-dev-225216-deployment",
+            "UnauthRoleName": "amplify-sap-dev-225216-unauthRole",
+            "StackName": "amplify-sap-dev-225216",
+            "StackId": "arn:aws:cloudformation:us-west-2:246085528062:stack/amplify-sap-dev-225216/e094c8d0-a41f-11ea-8e02-0a51a69474f2",
+            "AmplifyAppId": "d2swypdg8arakv"
         },
         "categories": {
             "auth": {
-                "sapf1ac71ac": {}
+                "sap4667fdb9": {}
             }
         }
     }

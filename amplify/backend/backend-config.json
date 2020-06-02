@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"sapf1ac71ac": {
+		"sap4667fdb9": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
@@ -17,7 +17,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authsapf1ac71ac"
+							"userPoolId": "authsap4667fdb9"
 						}
 					}
 				}

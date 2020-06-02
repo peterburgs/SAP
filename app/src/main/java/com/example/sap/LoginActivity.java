@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.results.SignInResult;
+import com.amplifyframework.core.Amplify;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login.setOnClickListener((v) -> {
             // Get username, password
-            String username = ((EditText)findViewById(R.id.edt_username)).getText().toString();
-            String password = ((EditText)findViewById(R.id.edt_password)).getText().toString();
+            String username = ((EditText) findViewById(R.id.edt_username)).getText().toString();
+            String password = ((EditText) findViewById(R.id.edt_password)).getText().toString();
 
             login(username, password);
         });
@@ -78,30 +79,43 @@ public class LoginActivity extends AppCompatActivity {
         loadingDialog.startLoadingDialog();
 
         // Send sign in request to AWS
-        AWSMobileClient.getInstance().signIn(username, password, null, new Callback<SignInResult>() {
-            @Override
-            public void onResult(SignInResult result) {
-                loadingDialog.dismissDialog();
-                Log.i("Test", result.getSignInState().toString());
-                //Navigate to project dashboard activity
-                Intent intent = new Intent(LoginActivity.this, ProjectDashboardActivity.class);
-                startActivity(intent);
-            }
+        Amplify.Auth.signIn(username, password,
+                result -> {
+                    loadingDialog.dismissDialog();
+                    //Navigate to project dashboard activity
+                    Intent intent = new Intent(LoginActivity.this, ProjectDashboardActivity.class);
+                    startActivity(intent);
+                },
+                error -> {
+                    loadingDialog.dismissDialog();
+                    Log.e(TAG, "Error", error);
+                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                }
+        );
 
-            @Override
-            public void onError(Exception e) {
-                loadingDialog.dismissDialog();
-                Log.e(TAG, "Error", e);
-                runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
-            }
-        });
+//        AWSMobileClient.getInstance().signIn(username, password, null, new Callback<SignInResult>() {
+//            @Override
+//            public void onResult(SignInResult result) {
+//                loadingDialog.dismissDialog();
+//                //Navigate to project dashboard activity
+//                Intent intent = new Intent(LoginActivity.this, ProjectDashboardActivity.class);
+//                startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                loadingDialog.dismissDialog();
+//                Log.e(TAG, "Error", e);
+//                runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
+//            }
+//        });
     }
 
     private void makeToast(Toast toast, String message) {
-        if(toast!=null){
+        if (toast != null) {
             toast.cancel();
         }
-        toast=Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
     }
 

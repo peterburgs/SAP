@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.results.ForgotPasswordResult;
+import com.amplifyframework.core.Amplify;
 
 public class ResetPasswordActivity extends AppCompatActivity {
     Button btn_confirm;
@@ -30,15 +31,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
         // Create loading dialog
         loadingDialog = new LoadingDialog(ResetPasswordActivity.this);
 
-        makeToast(toast,"We have sent the verification code to your email");
+        makeToast(toast, "We have sent the verification code to your email");
 
         btn_confirm = findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String password = ((EditText)findViewById(R.id.edt_password)).getText().toString();
-                String confirmPassword = ((EditText)findViewById(R.id.edt_confirmPassword)).getText().toString();
-                String code = ((EditText)findViewById(R.id.edt_verificationCode)).getText().toString();
+                String password = ((EditText) findViewById(R.id.edt_password)).getText().toString();
+                String confirmPassword = ((EditText) findViewById(R.id.edt_confirmPassword)).getText().toString();
+                String code = ((EditText) findViewById(R.id.edt_verificationCode)).getText().toString();
 
                 resetPassword(password, confirmPassword, code);
             }
@@ -46,36 +47,33 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     private void resetPassword(String password, String confirmPassword, String code) {
-        if(!password.equals(confirmPassword)) {
-            makeToast(toast,"Confirm password does not match");
+        if (!password.equals(confirmPassword)) {
+            makeToast(toast, "Confirm password does not match");
         } else {
             loadingDialog.startLoadingDialog();
 
-            AWSMobileClient.getInstance().confirmForgotPassword(password, code, new Callback<ForgotPasswordResult>() {
-                @Override
-                public void onResult(ForgotPasswordResult result) {
-                    //Navigate to sign in activity
-                    Intent signInActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                    signInActivityIntent.putExtra("SetPasswordSuccessMsg", "Set new password successfully");
-                    loadingDialog.dismissDialog();
-                    startActivity(signInActivityIntent);
-                }
-
-                @Override
-                public void onError(Exception e) {
-                    loadingDialog.dismissDialog();
-                    Log.e(TAG,"Error", e);
-                    runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
-                }
-            });
+            Amplify.Auth.confirmResetPassword(password, code,
+                    () -> {
+                        //Navigate to sign in activity
+                        Intent signInActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                        signInActivityIntent.putExtra("SetPasswordSuccessMsg", "Set new password successfully");
+                        loadingDialog.dismissDialog();
+                        startActivity(signInActivityIntent);
+                    },
+                    error -> {
+                        loadingDialog.dismissDialog();
+                        Log.e(TAG, "Error", error);
+                        runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                    }
+            );
         }
     }
 
     private void makeToast(Toast toast, String message) {
-        if(toast!=null){
+        if (toast != null) {
             toast.cancel();
         }
-        toast=Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
     }
 

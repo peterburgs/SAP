@@ -4,7 +4,7 @@ type User
   id: ID!
   email: String!
   username: String!
-  # leadingProjects: [Project] @connection(keyName: "byLeader", fields: ["id"])
+  leadingProjects: [Project] @connection(keyName: "byLeader", fields: ["id"])
   # joinedProjects: [ProjectParticipant] @connection(keyName: "byMember", fields: ["id"])
 }
 
@@ -17,8 +17,9 @@ type Project
   key: String!
   leaderID: ID!
   leader: User @connection(fields:["leaderID"])
-#   members: [ProjectParticipant] @connection(keyName: "byProject", fields: ["id"])
-#   sprints: [Sprint] @connection(keyName: "byProject", fields: ["Id"])
+  avatarKey: String!
+  # members: [ProjectParticipant] @connection(keyName: "byProject", fields: ["id"])
+  # sprints: [Sprint] @connection(keyName: "byProject", fields: ["Id"])
 }
 
 # type ProjectParticipant

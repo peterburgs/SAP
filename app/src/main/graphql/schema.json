@@ -225,6 +225,59 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "leadingProjects",
+                        "description": null,
+                        "args": [
+                            {
+                                "name": "filter",
+                                "description": null,
+                                "type": {
+                                    "kind": "INPUT_OBJECT",
+                                    "name": "ModelProjectFilterInput",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "sortDirection",
+                                "description": null,
+                                "type": {
+                                    "kind": "ENUM",
+                                    "name": "ModelSortDirection",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "limit",
+                                "description": null,
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "nextToken",
+                                "description": null,
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            }
+                        ],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "ModelProjectConnection",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "owner",
                         "description": null,
                         "args": [],
@@ -254,7 +307,7 @@
             },
             {
                 "kind": "INPUT_OBJECT",
-                "name": "ModelUserFilterInput",
+                "name": "ModelProjectFilterInput",
                 "description": null,
                 "fields": null,
                 "inputFields": [
@@ -269,7 +322,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "email",
+                        "name": "name",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -279,7 +332,27 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "username",
+                        "name": "key",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "leaderID",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelIDInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "avatarKey",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -296,7 +369,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "INPUT_OBJECT",
-                                "name": "ModelUserFilterInput",
+                                "name": "ModelProjectFilterInput",
                                 "ofType": null
                             }
                         },
@@ -310,7 +383,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "INPUT_OBJECT",
-                                "name": "ModelUserFilterInput",
+                                "name": "ModelProjectFilterInput",
                                 "ofType": null
                             }
                         },
@@ -321,7 +394,7 @@
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
-                            "name": "ModelUserFilterInput",
+                            "name": "ModelProjectFilterInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -798,8 +871,31 @@
                 "possibleTypes": null
             },
             {
+                "kind": "ENUM",
+                "name": "ModelSortDirection",
+                "description": null,
+                "fields": null,
+                "inputFields": null,
+                "interfaces": null,
+                "enumValues": [
+                    {
+                        "name": "ASC",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "DESC",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    }
+                ],
+                "possibleTypes": null
+            },
+            {
                 "kind": "OBJECT",
-                "name": "ModelUserConnection",
+                "name": "ModelProjectConnection",
                 "description": null,
                 "fields": [
                     {
@@ -811,7 +907,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "OBJECT",
-                                "name": "User",
+                                "name": "Project",
                                 "ofType": null
                             }
                         },
@@ -918,6 +1014,22 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "avatarKey",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "owner",
                         "description": null,
                         "args": [],
@@ -937,7 +1049,7 @@
             },
             {
                 "kind": "INPUT_OBJECT",
-                "name": "ModelProjectFilterInput",
+                "name": "ModelUserFilterInput",
                 "description": null,
                 "fields": null,
                 "inputFields": [
@@ -952,7 +1064,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "name",
+                        "name": "email",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -962,21 +1074,11 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "key",
+                        "name": "username",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelStringInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "leaderID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -989,7 +1091,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "INPUT_OBJECT",
-                                "name": "ModelProjectFilterInput",
+                                "name": "ModelUserFilterInput",
                                 "ofType": null
                             }
                         },
@@ -1003,7 +1105,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "INPUT_OBJECT",
-                                "name": "ModelProjectFilterInput",
+                                "name": "ModelUserFilterInput",
                                 "ofType": null
                             }
                         },
@@ -1014,7 +1116,7 @@
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
-                            "name": "ModelProjectFilterInput",
+                            "name": "ModelUserFilterInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -1026,7 +1128,7 @@
             },
             {
                 "kind": "OBJECT",
-                "name": "ModelProjectConnection",
+                "name": "ModelUserConnection",
                 "description": null,
                 "fields": [
                     {
@@ -1038,7 +1140,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "OBJECT",
-                                "name": "Project",
+                                "name": "User",
                                 "ofType": null
                             }
                         },
@@ -1537,6 +1639,20 @@
                             }
                         },
                         "defaultValue": null
+                    },
+                    {
+                        "name": "avatarKey",
+                        "description": null,
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
                     }
                 ],
                 "interfaces": null,
@@ -1575,6 +1691,16 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelIDInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "avatarKey",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -1668,6 +1794,16 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "ID",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "avatarKey",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -2760,29 +2896,6 @@
                 "inputFields": null,
                 "interfaces": null,
                 "enumValues": null,
-                "possibleTypes": null
-            },
-            {
-                "kind": "ENUM",
-                "name": "ModelSortDirection",
-                "description": null,
-                "fields": null,
-                "inputFields": null,
-                "interfaces": null,
-                "enumValues": [
-                    {
-                        "name": "ASC",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "DESC",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    }
-                ],
                 "possibleTypes": null
             },
             {

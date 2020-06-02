@@ -1,10 +1,17 @@
 package com.example.sap;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.storage.StorageAccessLevel;
+import com.amplifyframework.storage.options.StorageDownloadFileOptions;
+
+import java.io.File;
 
 public class ProjectDashboardActivity extends AppCompatActivity {
 
@@ -27,12 +34,7 @@ public class ProjectDashboardActivity extends AppCompatActivity {
         ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, s1, s2, img);
         rcvProjectList.setAdapter(projectListAdapter);
         rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
-
-    }
-
-    //Add new Project
-    private void addProject() {
-
+        Log.i("Test", getApplicationContext().getFilesDir().getAbsolutePath());
     }
 
 

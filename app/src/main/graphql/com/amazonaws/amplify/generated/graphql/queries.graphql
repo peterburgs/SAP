@@ -4,6 +4,17 @@ query GetUser($id: ID!) {
     id
     email
     username
+    leadingProjects {
+      items {
+        id
+        name
+        key
+        leaderID
+        avatarKey
+        owner
+      }
+      nextToken
+    }
     owner
   }
 }
@@ -17,6 +28,9 @@ query ListUsers(
       id
       email
       username
+      leadingProjects {
+        nextToken
+      }
       owner
     }
     nextToken
@@ -32,8 +46,12 @@ query GetProject($id: ID!) {
       id
       email
       username
+      leadingProjects {
+        nextToken
+      }
       owner
     }
+    avatarKey
     owner
   }
 }
@@ -54,6 +72,7 @@ query ListProjects(
         username
         owner
       }
+      avatarKey
       owner
     }
     nextToken

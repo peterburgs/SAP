@@ -27,11 +27,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_signup;
     private Toast toastMessage;
 
+    private LoadingDialog loadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        loadingDialog = new LoadingDialog(this);
 
         btn_login = findViewById(R.id.btn_login);
         tv_signup = findViewById(R.id.tv_signup);
@@ -65,11 +67,12 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        loadingDialog.startLoadingDialog();
         // Get application session
         Amplify.Auth.fetchAuthSession(
                 result -> {
                     AWSCognitoAuthSession cognitoAuthSession = (AWSCognitoAuthSession) result;
-                    switch(cognitoAuthSession.getIdentityId().getType()) {
+                    switch (cognitoAuthSession.getIdentityId().getType()) {
                         case SUCCESS:
                             //Navigate to project dashboard activity
                             Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
                 },
-                error -> Log.e(TAG,"Error", error)
+                error -> Log.e(TAG, "Error", error)
         );
     }
 }

@@ -15,23 +15,11 @@
 -->
 
 <resources>
-    <!--    This section is for demo-->
-    <string-array name="Project">
-        <item>Simple Android Project</item>
-        <item>Online Banking</item>
-        <item>Internet Security</item>
-        <item>Super Mall</item>
-        <item>Internet of Things</item>
-    </string-array>
-    <string-array name="Key">
-        <item>SAP</item>
-        <item>OB</item>
-        <item>IS</item>
-        <item>SM</item>
-        <item>IoT</item>
-    </string-array>
 
 
+    <string name="favorite">Favorite</string>
+    <string name="search">Search</string>
+    <string name="more">More</string>
     <string name="app_name">SAP</string>
     <string name="theme_name_hint">Theme name...</string>
 

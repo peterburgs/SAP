@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 ~ Copyright (C) 2019 The Android Open Source Project
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,21 +16,10 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
-        android:id="@+id/top_app_bar_menu_share"
-        android:title="@string/app_bar_menu_share"
-        android:icon="@drawable/ic_share_control_normal_24dp"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/top_app_bar_menu_bookmark"
-        android:title="@string/app_bar_menu_bookmark"
-        android:icon="@drawable/ic_bookmark_control_normal_24dp"
-        app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/top_app_bar_menu_search"
-        android:title="@string/app_bar_menu_search"
-        android:icon="@drawable/ic_search_control_normal_24dp"
+        android:id="@+id/search"
+        android:icon="@drawable/ic_add_24dp"
+        android:title="@string/search"
         app:showAsAction="ifRoom" />
+
 </menu>

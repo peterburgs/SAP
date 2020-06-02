@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     AWSCognitoAuthSession cognitoAuthSession = (AWSCognitoAuthSession) result;
                     switch (cognitoAuthSession.getIdentityId().getType()) {
                         case SUCCESS:
+                            loadingDialog.dismissDialog();
                             //Navigate to project dashboard activity
                             Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
                             startActivity(intent);

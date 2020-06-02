@@ -22,3 +22,40 @@ query ListUsers(
     nextToken
   }
 }
+query GetProject($id: ID!) {
+  getProject(id: $id) {
+    id
+    name
+    key
+    leaderID
+    leader {
+      id
+      email
+      username
+      owner
+    }
+    owner
+  }
+}
+query ListProjects(
+  $filter: ModelProjectFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      key
+      leaderID
+      leader {
+        id
+        email
+        username
+        owner
+      }
+      owner
+    }
+    nextToken
+  }
+}

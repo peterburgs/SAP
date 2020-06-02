@@ -41,8 +41,11 @@ dependencies {
     //Material Design Dependency
     implementation 'com.google.android.material:material:1.2.0-alpha06'
 
-    //AWSMobileClient
-    implementation('com.amazonaws:aws-android-sdk-mobile-client:2.16.12@aar') { transitive = true }
-    //Cognito UserPools
-    implementation('com.amazonaws:aws-android-sdk-auth-userpools:2.16.12@aar') { transitive = true }
+    // Amplify Cognito
+    implementation 'com.amplifyframework:aws-auth-cognito:1.0.0'
+
+    //Amplify Core
+    implementation 'com.amplifyframework:core:1.0.0'
+    // Amplify API
+    implementation 'com.amplifyframework:aws-api:1.0.0'
 }

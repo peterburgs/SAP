@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "sapf1ac71ac_identitypool_f1ac71ac",
+    "identityPoolName": "sap4667fdb9_identitypool_4667fdb9",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "sapf1ac71ac",
-    "userPoolName": "sapf1ac71ac_userpool_f1ac71ac",
+    "resourceNameTruncated": "sap4667fdb9",
+    "userPoolName": "sap4667fdb9_userpool_4667fdb9",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,9 +28,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "sapf1af1ac71ac_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "sap4664667fdb9_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "sapf1ac71ac",
+    "resourceName": "sap4667fdb9",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.results.SignUpResult;
+import com.amplifyframework.core.Amplify;
 
 public class ConfirmSignupActivity extends AppCompatActivity {
 
@@ -34,12 +35,13 @@ public class ConfirmSignupActivity extends AppCompatActivity {
         tv_message.setText(getIntent().getExtras().getString("msg"));
 
         TextView tv_resendCode = findViewById(R.id.tv_resendCode);
-        Handler handler =new Handler();
+        Handler handler = new Handler();
+
         //Show re-send code text view after 10 seconds
         handler.postDelayed(() -> tv_resendCode.setVisibility(View.VISIBLE), 10000);
 
         //Create loading dialog
-        loadingDialog= new LoadingDialog(ConfirmSignupActivity.this);
+        loadingDialog = new LoadingDialog(ConfirmSignupActivity.this);
 
         //Re-send code event
         tv_resendCode.setOnClickListener((v) -> {
@@ -63,23 +65,20 @@ public class ConfirmSignupActivity extends AppCompatActivity {
         loadingDialog.startLoadingDialog();
 
         //Send confirm request to AWS
-        AWSMobileClient.getInstance().confirmSignUp(username, code, new Callback<SignUpResult>() {
-            @Override
-            public void onResult(SignUpResult result) {
-                //Navigate to login activity
-                Intent signInActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                signInActivityIntent.putExtra("SignUpSuccessMsg", "Sign up successfully");
-                loadingDialog.dismissDialog();
-                startActivity(signInActivityIntent);
-            }
-
-            @Override
-            public void onError(Exception e) {
-                loadingDialog.dismissDialog();
-                Log.e(TAG,"Error", e);
-                runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
-            }
-        });
+        Amplify.Auth.confirmSignUp(username, code,
+                result -> {
+                    //Navigate to login activity
+                    Intent signInActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                    signInActivityIntent.putExtra("SignUpSuccessMsg", "Sign up successfully");
+                    loadingDialog.dismissDialog();
+                    startActivity(signInActivityIntent);
+                },
+                error -> {
+                    loadingDialog.dismissDialog();
+                    Log.e(TAG, "Error", error);
+                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                }
+        );
 
     }
 
@@ -88,27 +87,39 @@ public class ConfirmSignupActivity extends AppCompatActivity {
         loadingDialog.startLoadingDialog();
 
         //Send re-send code request to AWS
-        AWSMobileClient.getInstance().resendSignUp(username, new Callback<SignUpResult>() {
-            @Override
-            public void onResult(SignUpResult result) {
-                loadingDialog.dismissDialog();
-                makeToast(toast, "We have sent you the code again. Check your email at " + result.getUserCodeDeliveryDetails().getDestination());
-            }
+        Amplify.Auth.resendSignUpCode(username,
+                result -> {
+                    loadingDialog.dismissDialog();
+                    makeToast(toast, "We have sent you the code again. Check your email at " + result.getNextStep().getCodeDeliveryDetails().getDestination());
+                },
+                error -> {
+                    loadingDialog.dismissDialog();
+                    Log.e(TAG, "Error", error);
+                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                }
+        );
 
-            @Override
-            public void onError(Exception e) {
-                loadingDialog.dismissDialog();
-                Log.e(TAG,"Error", e);
-                runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
-            }
-        });
+//        AWSMobileClient.getInstance().resendSignUp(username, new Callback<SignUpResult>() {
+//            @Override
+//            public void onResult(SignUpResult result) {
+//                loadingDialog.dismissDialog();
+//                makeToast(toast, "We have sent you the code again. Check your email at " + result.getUserCodeDeliveryDetails().getDestination());
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                loadingDialog.dismissDialog();
+//                Log.e(TAG, "Error", e);
+//                runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
+//            }
+//        });
     }
 
     private void makeToast(Toast toast, String message) {
-        if(toast!=null){
+        if (toast != null) {
             toast.cancel();
         }
-        toast=Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
     }
 

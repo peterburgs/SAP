@@ -32,3 +32,57 @@ mutation DeleteUser(
     owner
   }
 }
+mutation CreateProject(
+  $input: CreateProjectInput!
+  $condition: ModelProjectConditionInput
+) {
+  createProject(input: $input, condition: $condition) {
+    id
+    name
+    key
+    leaderID
+    leader {
+      id
+      email
+      username
+      owner
+    }
+    owner
+  }
+}
+mutation UpdateProject(
+  $input: UpdateProjectInput!
+  $condition: ModelProjectConditionInput
+) {
+  updateProject(input: $input, condition: $condition) {
+    id
+    name
+    key
+    leaderID
+    leader {
+      id
+      email
+      username
+      owner
+    }
+    owner
+  }
+}
+mutation DeleteProject(
+  $input: DeleteProjectInput!
+  $condition: ModelProjectConditionInput
+) {
+  deleteProject(input: $input, condition: $condition) {
+    id
+    name
+    key
+    leaderID
+    leader {
+      id
+      email
+      username
+      owner
+    }
+    owner
+  }
+}

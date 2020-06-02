@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.results.ForgotPasswordResult;
+import com.amplifyframework.core.Amplify;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     Button btn_sendCode;
@@ -34,7 +35,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Get username
-                String username = ((EditText)findViewById(R.id.edt_username)).getText().toString();
+                String username = ((EditText) findViewById(R.id.edt_username)).getText().toString();
 
                 sendCode(username);
             }
@@ -45,31 +46,28 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         // Open loading dialog
         loadingDialog.startLoadingDialog();
 
-        //Send forgot password request to AWS
-        AWSMobileClient.getInstance().forgotPassword(username, new Callback<ForgotPasswordResult>() {
-            @Override
-            public void onResult(ForgotPasswordResult result) {
-                loadingDialog.dismissDialog();
+        //Send reset password request to AWS
+        Amplify.Auth.resetPassword(username,
+                result -> {
+                    loadingDialog.dismissDialog();
 
-                //Navigate to reset password activity
-                Intent resetPasswordActivityIntent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
-                startActivity(resetPasswordActivityIntent);
-            }
-
-            @Override
-            public void onError(Exception e) {
-                loadingDialog.dismissDialog();
-                Log.e(TAG,"Error", e);
-                runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
-            }
-        });
+                    //Navigate to reset password activity
+                    Intent resetPasswordActivityIntent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+                    startActivity(resetPasswordActivityIntent);
+                },
+                error -> {
+                    loadingDialog.dismissDialog();
+                    Log.e(TAG, "Error", error);
+                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                }
+        );
     }
 
     private void makeToast(Toast toast, String message) {
-        if(toast!=null){
+        if (toast != null) {
             toast.cancel();
         }
-        toast=Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
     }
 

@@ -15,7 +15,24 @@
 -->
 
 <resources>
-    <string name="app_name">Build a Material Theme</string>
+    <!--    This section is for demo-->
+    <string-array name="Project">
+        <item>Simple Android Project</item>
+        <item>Online Banking</item>
+        <item>Internet Security</item>
+        <item>Super Mall</item>
+        <item>Internet of Things</item>
+    </string-array>
+    <string-array name="Key">
+        <item>SAP</item>
+        <item>OB</item>
+        <item>IS</item>
+        <item>SM</item>
+        <item>IoT</item>
+    </string-array>
+
+
+    <string name="app_name">SAP</string>
     <string name="theme_name_hint">Theme name...</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>

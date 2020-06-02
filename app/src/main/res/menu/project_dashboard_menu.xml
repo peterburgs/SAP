@@ -17,9 +17,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/search"
+        android:id="@+id/createProject"
         android:icon="@drawable/ic_add_24dp"
-        android:title="@string/search"
+        android:title="add"
         app:showAsAction="ifRoom" />
 
 </menu>

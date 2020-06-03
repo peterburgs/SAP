@@ -35,7 +35,7 @@ public class ProjectListActivity extends AppCompatActivity {
 
     RecyclerView rcvProjectList;
     MaterialToolbar topAppBar;
-    com.getbase.floatingactionbutton.FloatingActionButton fabProject;
+    //com.getbase.floatingactionbutton.FloatingActionButton fabProject;
     com.getbase.floatingactionbutton.FloatingActionButton fabTask;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
 
@@ -65,15 +65,15 @@ public class ProjectListActivity extends AppCompatActivity {
         loadingDialog = new LoadingDialog(this);
 
         topAppBar = findViewById(R.id.topAppBar);
-        fabProject = findViewById(R.id.fabProject);
+        //fabProject = findViewById(R.id.fabProject);
         fabTask = findViewById(R.id.fabTask);
         fabAccount = findViewById(R.id.fabAccount);
 
 
         //todo: Handle FAB Menu here
-        fabProject.setOnClickListener(v -> {
-            Toast.makeText(this, "Project Selected", Toast.LENGTH_SHORT).show();
-        });
+//        fabProject.setOnClickListener(v -> {
+//            Toast.makeText(this, "Project Selected", Toast.LENGTH_SHORT).show();
+//        });
         fabTask.setOnClickListener(v -> {
             Toast.makeText(this, "Task Selected", Toast.LENGTH_SHORT).show();
         });
@@ -109,6 +109,7 @@ public class ProjectListActivity extends AppCompatActivity {
         Amplify.API.query(
                 ModelQuery.get(User.class, userId),
                 response -> {
+                    projectList.clear();
                     for (ProjectParticipant p : response.getData().getProjects()) {
                         projectList.add(p.getProject());
                     }

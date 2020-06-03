@@ -50,6 +50,9 @@ public class ProjectListActivity extends AppCompatActivity {
         fabProject = findViewById(R.id.fabProject);
         fabTask = findViewById(R.id.fabTask);
         fabAccount = findViewById(R.id.fabAccount);
+
+
+        //todo: Handle FAB Menu here
         fabProject.setOnClickListener(v -> {
             Toast.makeText(this, "Project Selected", Toast.LENGTH_SHORT).show();
         });

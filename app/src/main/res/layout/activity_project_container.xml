@@ -22,32 +22,63 @@
             app:title="Simple Android Project" />
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.tabs.TabLayout
-            style="@style/Widget.MaterialComponents.TabLayout.Colored"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
-            app:layout_anchor="@+id/appBarLayout"
-            app:layout_anchorGravity="center">
+            android:orientation="vertical">
 
-            <com.google.android.material.tabs.TabItem
-                android:icon="@drawable/ic_key_24dp"
-                android:text="Todo" />
+            <com.google.android.material.tabs.TabLayout
+                style="@style/Widget.MaterialComponents.TabLayout.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorAccent"
+                app:layout_anchor="@+id/appBarLayout"
+                app:layout_anchorGravity="center">
 
-            <com.google.android.material.tabs.TabItem
-                android:icon="@drawable/ic_project"
-                android:text="In Progress" />
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/titToDo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_todo"
+                    android:text="Todo" />
 
-            <com.google.android.material.tabs.TabItem
-                android:icon="@drawable/ic_add_24dp"
-                android:text="Done" />
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/titInProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_inprogress"
+                    android:text="In Progress" />
 
-        </com.google.android.material.tabs.TabLayout>
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/titDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_done"
+                    android:text="Done" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/titBacklog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_backlog"
+                    android:text="Backlog" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/titSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_setting"
+                    android:text="Setting" />
+            </com.google.android.material.tabs.TabLayout>
+
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

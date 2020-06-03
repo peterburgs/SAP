@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProjectListActivity"></activity>
+        <activity android:name=".CreateProjectActivity"></activity>
+        <activity android:name=".ProjectListActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".ConfirmSignupActivity" />

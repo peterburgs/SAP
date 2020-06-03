@@ -52,5 +52,7 @@ dependencies {
     implementation 'com.amplifyframework:aws-api:1.0.0'
     // Amplify Storage
     implementation 'com.amplifyframework:aws-storage-s3:1.0.0'
+    //Floating Button Lib
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
 
 }

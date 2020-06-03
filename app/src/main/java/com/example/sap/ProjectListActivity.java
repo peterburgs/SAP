@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,10 +34,12 @@ public class ProjectListActivity extends AppCompatActivity {
 
     List<Project> projectList;
 
-    int img[] = {R.drawable.project_img1, R.drawable.project_img2, R.drawable.project_img3, R.drawable.project_img4, R.drawable.project_img5};
 
     RecyclerView rcvProjectList;
     MaterialToolbar topAppBar;
+    com.getbase.floatingactionbutton.FloatingActionButton fabProject;
+    com.getbase.floatingactionbutton.FloatingActionButton fabTask;
+    com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +47,23 @@ public class ProjectListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_project_list);
         rcvProjectList = findViewById(R.id.rcvProjectList);
         topAppBar = findViewById(R.id.topAppBar);
-
+        fabProject = findViewById(R.id.fabProject);
+        fabTask = findViewById(R.id.fabTask);
+        fabAccount = findViewById(R.id.fabAccount);
+        fabProject.setOnClickListener(v -> {
+            Toast.makeText(this, "Project Selected", Toast.LENGTH_SHORT).show();
+        });
+        fabTask.setOnClickListener(v -> {
+            Toast.makeText(this, "Task Selected", Toast.LENGTH_SHORT).show();
+        });
+        fabAccount.setOnClickListener(v -> {
+            Toast.makeText(this, "Account Selected", Toast.LENGTH_SHORT).show();
+        });
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                //todo: Create New Project Here
-
+                Intent intent = new Intent(getApplicationContext(), CreateProjectActivity.class);
+                startActivity(intent);
                 return true;
             }
         });
@@ -59,6 +74,12 @@ public class ProjectListActivity extends AppCompatActivity {
 
         query();
 
+    }
+
+    @Override
+    protected void onRestart() {
+        query();
+        super.onRestart();
     }
 
     private void query() {
@@ -83,7 +104,7 @@ public class ProjectListActivity extends AppCompatActivity {
                                 result -> {
                                     // Add project to project list
                                     projectList.add(project);
-                                    projectList.sort((o1, o2) -> ((Date)o1.getCreatedAt().toDate()).compareTo(((Date)o2.getCreatedAt().toDate())));
+                                    projectList.sort((o1, o2) -> ((Date) o1.getCreatedAt().toDate()).compareTo(((Date) o2.getCreatedAt().toDate())));
                                     runOnUiThread(() -> {
                                         ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, projectList);
                                         rcvProjectList.setAdapter(projectListAdapter);

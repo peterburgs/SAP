@@ -1,4 +1,4 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,17 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.results.SignUpResult;
-import com.amazonaws.mobile.client.results.UserCodeDeliveryDetails;
-import com.amplifyframework.auth.AuthCodeDeliveryDetails;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
+import com.example.sap.R;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

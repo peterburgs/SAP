@@ -1,4 +1,4 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,10 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.results.ForgotPasswordResult;
 import com.amplifyframework.core.Amplify;
+import com.example.sap.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     Button btn_sendCode;

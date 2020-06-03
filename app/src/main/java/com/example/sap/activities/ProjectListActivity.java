@@ -1,8 +1,6 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,19 +18,19 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.ProjectParticipant;
 import com.amplifyframework.datastore.generated.model.User;
+import com.example.sap.R;
+import com.example.sap.adapters.ProjectListAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ProjectListActivity extends AppCompatActivity {
 
     private static final String TAG = ProjectListActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
-
-    List<Project> projectList;
+    private ProjectListAdapter projectListAdapter;
+    ArrayList<Project> projectList;
 
 
     RecyclerView rcvProjectList;
@@ -45,7 +43,17 @@ public class ProjectListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_list);
+
+        projectList = new ArrayList<>();
         rcvProjectList = findViewById(R.id.rcvProjectList);
+        rcvProjectList.setHasFixedSize(true);
+        projectListAdapter = new ProjectListAdapter(projectList);
+        //
+        rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
+        rcvProjectList.setAdapter(projectListAdapter);
+//
+        loadingDialog = new LoadingDialog(this);
+
         topAppBar = findViewById(R.id.topAppBar);
         fabProject = findViewById(R.id.fabProject);
         fabTask = findViewById(R.id.fabTask);
@@ -71,9 +79,6 @@ public class ProjectListActivity extends AppCompatActivity {
             }
         });
 
-        projectList = new ArrayList<>();
-
-        loadingDialog = new LoadingDialog(this);
 
         projectListQuery(Amplify.Auth.getCurrentUser().getUserId());
 
@@ -86,23 +91,22 @@ public class ProjectListActivity extends AppCompatActivity {
     }
 
     /*
-    * Get project list from the cloud according to the current user
-    * And update recycler view
-    * */
+     * Get project list from the cloud according to the current user
+     * And update recycler view
+     * */
     private void projectListQuery(String userId) {
         // Get project list
         Amplify.API.query(
                 ModelQuery.get(User.class, userId),
                 response -> {
-                    List<Project> projectList = new ArrayList<>();
-                    for(ProjectParticipant p : response.getData().getProjects()) {
+                    for (ProjectParticipant p : response.getData().getProjects()) {
                         projectList.add(p.getProject());
                     }
 
                     runOnUiThread(() -> {
-                        ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, projectList);
-                        rcvProjectList.setAdapter(projectListAdapter);
-                        rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
+//                        rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
+//                        rcvProjectList.setAdapter(projectListAdapter);
+                        projectListAdapter.notifyDataSetChanged();
                     });
 
                 },

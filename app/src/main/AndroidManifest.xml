@@ -18,15 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CreateProjectActivity"></activity>
-        <activity android:name=".ProjectListActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".ConfirmSignupActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".activities.CreateProjectActivity"></activity>
+        <activity android:name=".activities.ProjectListActivity" />
+        <activity android:name=".activities.ResetPasswordActivity" />
+        <activity android:name=".activities.ForgotPasswordActivity" />
+        <activity android:name=".activities.ConfirmSignupActivity" />
+        <activity android:name=".activities.SignupActivity" />
+        <activity android:name=".activities.LoginActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

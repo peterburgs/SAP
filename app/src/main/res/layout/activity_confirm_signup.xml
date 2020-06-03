@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfirmSignupActivity">
+    tools:context=".activities.ConfirmSignupActivity">
 
     <!--    Announcement:-->
     <com.google.android.material.textview.MaterialTextView

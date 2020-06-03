@@ -1,11 +1,13 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -15,8 +17,7 @@ import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.ProjectParticipant;
 import com.amplifyframework.datastore.generated.model.Role;
 import com.amplifyframework.datastore.generated.model.User;
-
-import java.util.HashMap;
+import com.example.sap.R;
 
 public class CreateProjectActivity extends AppCompatActivity {
 
@@ -40,7 +41,16 @@ public class CreateProjectActivity extends AppCompatActivity {
     /*
     * Create a new project and set current user as a project leader
     * */
-    private void createProjectMutation(String projectName, String projectKey) {
+    public void onCreateProjectClick(View view) {
+        String projectName = edt_projectName.getText().toString();
+        String projectKey = edt_projectKey.getText().toString();
+
+        if(projectName.equals("") || projectKey.equals("")) {
+            makeAlert("Name or key cannot be empty");
+            return;
+        }
+
+        loadingDialog.startLoadingDialog();
         //Get current user
         Amplify.API.query(
                 ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
@@ -64,7 +74,9 @@ public class CreateProjectActivity extends AppCompatActivity {
                                 Amplify.API.mutate(
                                         ModelMutation.create(projectParticipant),
                                         createProjectParticipantRes -> {
-                                            Log.i("Success", "Create Project successfully");
+                                            loadingDialog.dismissDialog();
+                                            Intent intent = new Intent(getApplicationContext(), ProjectListActivity.class);
+                                            startActivity(intent);
                                         },
                                         error -> {
                                             Log.e(TAG, "Error", error);

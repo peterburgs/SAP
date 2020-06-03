@@ -1,8 +1,10 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
+
+import com.example.sap.R;
 
 class LoadingDialog {
     private Activity activity;

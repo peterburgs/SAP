@@ -1,10 +1,6 @@
-package com.example.sap;
+package com.example.sap.adapters;
 
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -19,28 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
+import com.example.sap.R;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
     List<Project> projectList;
-    Context context;
 
-    public ProjectListAdapter(Context ct, List<Project> projectList) {
-        context = ct;
+    public ProjectListAdapter(List<Project> projectList) {
         this.projectList = projectList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.project_row, parent, false);
         return new ViewHolder(view);
     }
@@ -53,7 +43,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
                 projectList.get(position).getAvatarKey(),
                 result -> {
                     Handler uiHandler = new Handler(Looper.getMainLooper());
-                    uiHandler.post(new Runnable(){
+                    uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             Picasso.get().load(result.getUrl().toString()).into(holder.imvProjectImage);
@@ -72,7 +62,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         return projectList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvProjectName;
         TextView tvProjectKey;

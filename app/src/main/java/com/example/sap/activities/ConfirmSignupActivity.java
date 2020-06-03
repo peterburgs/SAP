@@ -1,4 +1,4 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,10 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.results.SignUpResult;
 import com.amplifyframework.core.Amplify;
+import com.example.sap.R;
 
 public class ConfirmSignupActivity extends AppCompatActivity {
 

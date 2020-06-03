@@ -1,16 +1,15 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateUser($owner: String!) {
-  onCreateUser(owner: $owner) {
+subscription OnCreateUser {
+  onCreateUser {
     id
     email
     username
-    leadingProjects {
+    projects {
       items {
         id
-        name
-        key
-        leaderID
-        avatarKey
+        projectID
+        memberID
+        role
         createdAt
         updatedAt
         owner
@@ -27,13 +26,12 @@ subscription OnUpdateUser($owner: String!) {
     id
     email
     username
-    leadingProjects {
+    projects {
       items {
         id
-        name
-        key
-        leaderID
-        avatarKey
+        projectID
+        memberID
+        role
         createdAt
         updatedAt
         owner
@@ -50,13 +48,12 @@ subscription OnDeleteUser($owner: String!) {
     id
     email
     username
-    leadingProjects {
+    projects {
       items {
         id
-        name
-        key
-        leaderID
-        avatarKey
+        projectID
+        memberID
+        role
         createdAt
         updatedAt
         owner
@@ -73,20 +70,21 @@ subscription OnCreateProject {
     id
     name
     key
-    leaderID
-    leader {
-      id
-      email
-      username
-      leadingProjects {
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
     avatarKey
+    avatarUrl
     createdAt
+    members {
+      items {
+        id
+        projectID
+        memberID
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
     updatedAt
     owner
   }
@@ -96,20 +94,21 @@ subscription OnUpdateProject($owner: String!) {
     id
     name
     key
-    leaderID
-    leader {
-      id
-      email
-      username
-      leadingProjects {
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
     avatarKey
+    avatarUrl
     createdAt
+    members {
+      items {
+        id
+        projectID
+        memberID
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
     updatedAt
     owner
   }
@@ -119,19 +118,125 @@ subscription OnDeleteProject($owner: String!) {
     id
     name
     key
-    leaderID
-    leader {
+    avatarKey
+    avatarUrl
+    createdAt
+    members {
+      items {
+        id
+        projectID
+        memberID
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    updatedAt
+    owner
+  }
+}
+subscription OnCreateProjectParticipant {
+  onCreateProjectParticipant {
+    id
+    projectID
+    memberID
+    role
+    project {
+      id
+      name
+      key
+      avatarKey
+      avatarUrl
+      createdAt
+      members {
+        nextToken
+      }
+      updatedAt
+      owner
+    }
+    member {
       id
       email
       username
-      leadingProjects {
+      projects {
         nextToken
       }
       createdAt
       updatedAt
       owner
     }
-    avatarKey
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnUpdateProjectParticipant($owner: String!) {
+  onUpdateProjectParticipant(owner: $owner) {
+    id
+    projectID
+    memberID
+    role
+    project {
+      id
+      name
+      key
+      avatarKey
+      avatarUrl
+      createdAt
+      members {
+        nextToken
+      }
+      updatedAt
+      owner
+    }
+    member {
+      id
+      email
+      username
+      projects {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnDeleteProjectParticipant($owner: String!) {
+  onDeleteProjectParticipant(owner: $owner) {
+    id
+    projectID
+    memberID
+    role
+    project {
+      id
+      name
+      key
+      avatarKey
+      avatarUrl
+      createdAt
+      members {
+        nextToken
+      }
+      updatedAt
+      owner
+    }
+    member {
+      id
+      email
+      username
+      projects {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
     createdAt
     updatedAt
     owner

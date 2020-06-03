@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -45,16 +46,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvProjectName.setText(projectList.get(position).getName());
         holder.tvProjectKey.setText(projectList.get(position).getKey());
-
-        ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        File path =new File(directory,projectList.get(position).getAvatarKey());
-        try {
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(path));
-            holder.imvProjectImage.setImageBitmap(b);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Picasso.get().load(projectList.get(position).getAvatarUrl()).into(holder.imvProjectImage);
     }
 
     @Override

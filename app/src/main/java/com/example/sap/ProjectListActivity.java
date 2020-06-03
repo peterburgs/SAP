@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
+import com.amplifyframework.datastore.generated.model.ProjectParticipant;
 import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import java.util.List;
 
 public class ProjectListActivity extends AppCompatActivity {
 
-    private static final String TAG = LoginActivity.class.getSimpleName();
+    private static final String TAG = ProjectListActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
 
     List<Project> projectList;
@@ -75,71 +75,42 @@ public class ProjectListActivity extends AppCompatActivity {
 
         loadingDialog = new LoadingDialog(this);
 
-        query();
+        query(Amplify.Auth.getCurrentUser().getUserId());
 
     }
 
     @Override
     protected void onRestart() {
-        query();
+        query(Amplify.Auth.getCurrentUser().getUserId());
         super.onRestart();
     }
 
-    private void query() {
-        loadingDialog.startLoadingDialog();
-        // Get projects by user id
+    /*
+    * Get project list from the cloud according to the current user
+    * And update recycler view
+    * */
+    private void query(String userId) {
+        // Get project list
         Amplify.API.query(
-                ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
+                ModelQuery.get(User.class, userId),
                 response -> {
-                    loadingDialog.dismissDialog();
                     List<Project> projectList = new ArrayList<>();
-
-                    // Configure internal storage
-                    ContextWrapper cw = new ContextWrapper(getApplicationContext());
-                    File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-
-                    for (Project project : response.getData().getLeadingProjects()) {
-                        // Get avatar of the project and update UI
-                        File path = new File(directory, project.getAvatarKey());
-                        Amplify.Storage.downloadFile(
-                                project.getAvatarKey(),
-                                path,
-                                result -> {
-                                    // Add project to project list
-                                    projectList.add(project);
-                                    projectList.sort((o1, o2) -> ((Date) o1.getCreatedAt().toDate()).compareTo(((Date) o2.getCreatedAt().toDate())));
-                                    runOnUiThread(() -> {
-                                        ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, projectList);
-                                        rcvProjectList.setAdapter(projectListAdapter);
-                                        rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
-                                    });
-                                },
-                                error -> Log.e("MyAmplifyApp", "Download Failure", error)
-                        );
+                    for(ProjectParticipant p : response.getData().getProjects()) {
+                        projectList.add(p.getProject());
                     }
+
+                    runOnUiThread(() -> {
+                        ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, projectList);
+                        rcvProjectList.setAdapter(projectListAdapter);
+                        rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
+                    });
+
                 },
                 error -> {
                     Log.e(TAG, "Error", error);
                     runOnUiThread(() -> makeAlert(error.getCause().toString()));
                 }
         );
-    }
-
-    private void getProjectsAvatar(List<Project> projectList) {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-
-        for (Project project : projectList) {
-            // Create imageDir
-            File path = new File(directory, project.getAvatarKey());
-            Amplify.Storage.downloadFile(
-                    project.getAvatarKey(),
-                    path,
-                    result -> Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName()),
-                    error -> Log.e("MyAmplifyApp", "Download Failure", error)
-            );
-        }
     }
 
     private void makeToast(Toast toast, String message) {

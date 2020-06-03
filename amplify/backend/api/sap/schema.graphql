@@ -1,48 +1,42 @@
 type User
   @model
-  @auth(rules: [ {allow: owner, operations: [create, update, delete]} ]) {
+  @auth(rules: [ {allow: owner, operations: [update, delete]} ]) {
   id: ID!
   email: String!
   username: String!
-  leadingProjects: [Project] @connection(keyName: "byLeader", fields: ["id"])
-  # joinedProjects: [ProjectParticipant] @connection(keyName: "byMember", fields: ["id"])
+  projects: [ProjectParticipant] @connection(keyName: "byMember", fields: ["id"])
 }
 
 type Project
   @model
-  @key(name: "byLeader", fields: ["leaderID"])
   @auth(rules: [ {allow: owner, operations: [update, delete]} ]) {
   id: ID!
   name: String!
   key: String!
-  leaderID: ID!
-  leader: User @connection(fields:["leaderID"])
   avatarKey: String!
+  avatarUrl: String
   createdAt: AWSDateTime
-  # members: [ProjectParticipant] @connection(keyName: "byProject", fields: ["id"])
+  members: [ProjectParticipant] @connection(keyName: "byProject", fields: ["id"])
   # sprints: [Sprint] @connection(keyName: "byProject", fields: ["Id"])
 }
 
-# type ProjectParticipant
-#   @model
-#   @key(name: "byProject", fields: ["projectID", "memberID"])
-#   @key(name: "byMember", fields: ["memberID", "projectID"])
-#   @auth(rules: [
-#     # Only owner (leader) can update, delete project participants
-#     {allow: owner, operations: [update, delete]}
-#   ]) {
-#   id: ID!
-#   projectID: ID!
-#   memberID: ID!
-#   role: Role!
-#   project: Project! @connection(fields: ["projectID"])
-#   member: User! @connection(fields: ["memberID"])
-# }
+type ProjectParticipant
+  @model
+  @key(name: "byProject", fields: ["projectID", "memberID"])
+  @key(name: "byMember", fields: ["memberID", "projectID"])
+  @auth(rules: [ {allow: owner, operations: [update, delete]} ]) {
+  id: ID!
+  projectID: ID!
+  memberID: ID!
+  role: Role!
+  project: Project! @connection(fields: ["projectID"])
+  member: User! @connection(fields: ["memberID"])
+}
 
-# enum Role {
-#   TEAM_LEADER
-#   TEAM_MEMBER
-# }
+enum Role {
+  PROJECT_LEADER
+  TEAM_MEMBER
+}
 
 # type Sprint
 #   @model

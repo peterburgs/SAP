@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                             break;
                         case FAILURE:
+                            loadingDialog.dismissDialog();
                             Log.i(TAG, "IdentityId not present because: " + cognitoAuthSession.getIdentityId().getError().toString());
                             break;
                     }

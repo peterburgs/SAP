@@ -7,13 +7,12 @@ mutation CreateUser(
     id
     email
     username
-    leadingProjects {
+    projects {
       items {
         id
-        name
-        key
-        leaderID
-        avatarKey
+        projectID
+        memberID
+        role
         createdAt
         updatedAt
         owner
@@ -33,13 +32,12 @@ mutation UpdateUser(
     id
     email
     username
-    leadingProjects {
+    projects {
       items {
         id
-        name
-        key
-        leaderID
-        avatarKey
+        projectID
+        memberID
+        role
         createdAt
         updatedAt
         owner
@@ -59,13 +57,12 @@ mutation DeleteUser(
     id
     email
     username
-    leadingProjects {
+    projects {
       items {
         id
-        name
-        key
-        leaderID
-        avatarKey
+        projectID
+        memberID
+        role
         createdAt
         updatedAt
         owner
@@ -85,20 +82,21 @@ mutation CreateProject(
     id
     name
     key
-    leaderID
-    leader {
-      id
-      email
-      username
-      leadingProjects {
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
     avatarKey
+    avatarUrl
     createdAt
+    members {
+      items {
+        id
+        projectID
+        memberID
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
     updatedAt
     owner
   }
@@ -111,20 +109,21 @@ mutation UpdateProject(
     id
     name
     key
-    leaderID
-    leader {
-      id
-      email
-      username
-      leadingProjects {
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
     avatarKey
+    avatarUrl
     createdAt
+    members {
+      items {
+        id
+        projectID
+        memberID
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
     updatedAt
     owner
   }
@@ -137,19 +136,134 @@ mutation DeleteProject(
     id
     name
     key
-    leaderID
-    leader {
+    avatarKey
+    avatarUrl
+    createdAt
+    members {
+      items {
+        id
+        projectID
+        memberID
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    updatedAt
+    owner
+  }
+}
+mutation CreateProjectParticipant(
+  $input: CreateProjectParticipantInput!
+  $condition: ModelProjectParticipantConditionInput
+) {
+  createProjectParticipant(input: $input, condition: $condition) {
+    id
+    projectID
+    memberID
+    role
+    project {
+      id
+      name
+      key
+      avatarKey
+      avatarUrl
+      createdAt
+      members {
+        nextToken
+      }
+      updatedAt
+      owner
+    }
+    member {
       id
       email
       username
-      leadingProjects {
+      projects {
         nextToken
       }
       createdAt
       updatedAt
       owner
     }
-    avatarKey
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation UpdateProjectParticipant(
+  $input: UpdateProjectParticipantInput!
+  $condition: ModelProjectParticipantConditionInput
+) {
+  updateProjectParticipant(input: $input, condition: $condition) {
+    id
+    projectID
+    memberID
+    role
+    project {
+      id
+      name
+      key
+      avatarKey
+      avatarUrl
+      createdAt
+      members {
+        nextToken
+      }
+      updatedAt
+      owner
+    }
+    member {
+      id
+      email
+      username
+      projects {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation DeleteProjectParticipant(
+  $input: DeleteProjectParticipantInput!
+  $condition: ModelProjectParticipantConditionInput
+) {
+  deleteProjectParticipant(input: $input, condition: $condition) {
+    id
+    projectID
+    memberID
+    role
+    project {
+      id
+      name
+      key
+      avatarKey
+      avatarUrl
+      createdAt
+      members {
+        nextToken
+      }
+      updatedAt
+      owner
+    }
+    member {
+      id
+      email
+      username
+      projects {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
     createdAt
     updatedAt
     owner

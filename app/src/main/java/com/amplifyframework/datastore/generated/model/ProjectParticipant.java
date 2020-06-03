@@ -1,6 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.HasMany;
+import com.amplifyframework.core.model.annotations.BelongsTo;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,37 +16,41 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the User type in your schema. */
+/** This is an auto generated class representing the ProjectParticipant type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Users")
-public final class User implements Model {
+@ModelConfig(pluralName = "ProjectParticipants")
+@Index(name = "byProject", fields = {"projectID","memberID"})
+@Index(name = "byMember", fields = {"memberID","projectID"})
+public final class ProjectParticipant implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField EMAIL = field("email");
-  public static final QueryField USERNAME = field("username");
+  public static final QueryField ROLE = field("role");
+  public static final QueryField PROJECT = field("projectID");
+  public static final QueryField MEMBER = field("memberID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String email;
-  private final @ModelField(targetType="String", isRequired = true) String username;
-  private final @ModelField(targetType="ProjectParticipant") @HasMany(associatedWith = "member", type = ProjectParticipant.class) List<ProjectParticipant> projects = null;
+  private final @ModelField(targetType="Role", isRequired = true) Role role;
+  private final @ModelField(targetType="Project", isRequired = true) @BelongsTo(targetName = "projectID", type = Project.class) Project project;
+  private final @ModelField(targetType="User", isRequired = true) @BelongsTo(targetName = "memberID", type = User.class) User member;
   public String getId() {
       return id;
   }
   
-  public String getEmail() {
-      return email;
+  public Role getRole() {
+      return role;
   }
   
-  public String getUsername() {
-      return username;
+  public Project getProject() {
+      return project;
   }
   
-  public List<ProjectParticipant> getProjects() {
-      return projects;
+  public User getMember() {
+      return member;
   }
   
-  private User(String id, String email, String username) {
+  private ProjectParticipant(String id, Role role, Project project, User member) {
     this.id = id;
-    this.email = email;
-    this.username = username;
+    this.role = role;
+    this.project = project;
+    this.member = member;
   }
   
   @Override
@@ -56,10 +60,11 @@ public final class User implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      User user = (User) obj;
-      return ObjectsCompat.equals(getId(), user.getId()) &&
-              ObjectsCompat.equals(getEmail(), user.getEmail()) &&
-              ObjectsCompat.equals(getUsername(), user.getUsername());
+      ProjectParticipant projectParticipant = (ProjectParticipant) obj;
+      return ObjectsCompat.equals(getId(), projectParticipant.getId()) &&
+              ObjectsCompat.equals(getRole(), projectParticipant.getRole()) &&
+              ObjectsCompat.equals(getProject(), projectParticipant.getProject()) &&
+              ObjectsCompat.equals(getMember(), projectParticipant.getMember());
       }
   }
   
@@ -67,8 +72,9 @@ public final class User implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getEmail())
-      .append(getUsername())
+      .append(getRole())
+      .append(getProject())
+      .append(getMember())
       .toString()
       .hashCode();
   }
@@ -76,15 +82,16 @@ public final class User implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("User {")
+      .append("ProjectParticipant {")
       .append("id=" + String.valueOf(getId()))
-      .append("email=" + String.valueOf(getEmail()))
-      .append("username=" + String.valueOf(getUsername()))
+      .append("role=" + String.valueOf(getRole()))
+      .append("project=" + String.valueOf(getProject()))
+      .append("member=" + String.valueOf(getMember()))
       .append("}")
       .toString();
   }
   
-  public static EmailStep builder() {
+  public static RoleStep builder() {
       return new Builder();
   }
   
@@ -97,7 +104,7 @@ public final class User implements Model {
    * @return an instance of this model with only ID populated
    * @throws IllegalArgumentException Checks that ID is in the proper format
    */
-  public static User justId(String id) {
+  public static ProjectParticipant justId(String id) {
     try {
       UUID.fromString(id); // Check that ID is in the UUID format - if not an exception is thrown
     } catch (Exception exception) {
@@ -107,8 +114,9 @@ public final class User implements Model {
               "creating a new object, use the standard builder method and leave the ID field blank."
       );
     }
-    return new User(
+    return new ProjectParticipant(
       id,
+      null,
       null,
       null
     );
@@ -116,50 +124,65 @@ public final class User implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      email,
-      username);
+      role,
+      project,
+      member);
   }
-  public interface EmailStep {
-    UsernameStep email(String email);
+  public interface RoleStep {
+    ProjectStep role(Role role);
   }
   
 
-  public interface UsernameStep {
-    BuildStep username(String username);
+  public interface ProjectStep {
+    MemberStep project(Project project);
+  }
+  
+
+  public interface MemberStep {
+    BuildStep member(User member);
   }
   
 
   public interface BuildStep {
-    User build();
+    ProjectParticipant build();
     BuildStep id(String id) throws IllegalArgumentException;
   }
   
 
-  public static class Builder implements EmailStep, UsernameStep, BuildStep {
+  public static class Builder implements RoleStep, ProjectStep, MemberStep, BuildStep {
     private String id;
-    private String email;
-    private String username;
+    private Role role;
+    private Project project;
+    private User member;
     @Override
-     public User build() {
+     public ProjectParticipant build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new User(
+        return new ProjectParticipant(
           id,
-          email,
-          username);
+          role,
+          project,
+          member);
     }
     
     @Override
-     public UsernameStep email(String email) {
-        Objects.requireNonNull(email);
-        this.email = email;
+     public ProjectStep role(Role role) {
+        Objects.requireNonNull(role);
+        this.role = role;
         return this;
     }
     
     @Override
-     public BuildStep username(String username) {
-        Objects.requireNonNull(username);
-        this.username = username;
+     public MemberStep project(Project project) {
+        Objects.requireNonNull(project);
+        this.project = project;
+        return this;
+    }
+    
+    @Override
+     public BuildStep member(User member) {
+        Objects.requireNonNull(member);
+        this.member = member;
         return this;
     }
     
@@ -186,20 +209,26 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String email, String username) {
+    private CopyOfBuilder(String id, Role role, Project project, User member) {
       super.id(id);
-      super.email(email)
-        .username(username);
+      super.role(role)
+        .project(project)
+        .member(member);
     }
     
     @Override
-     public CopyOfBuilder email(String email) {
-      return (CopyOfBuilder) super.email(email);
+     public CopyOfBuilder role(Role role) {
+      return (CopyOfBuilder) super.role(role);
     }
     
     @Override
-     public CopyOfBuilder username(String username) {
-      return (CopyOfBuilder) super.username(username);
+     public CopyOfBuilder project(Project project) {
+      return (CopyOfBuilder) super.project(project);
+    }
+    
+    @Override
+     public CopyOfBuilder member(User member) {
+      return (CopyOfBuilder) super.member(member);
     }
   }
   

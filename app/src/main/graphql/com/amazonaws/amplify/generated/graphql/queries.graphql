@@ -4,13 +4,12 @@ query GetUser($id: ID!) {
     id
     email
     username
-    leadingProjects {
+    projects {
       items {
         id
-        name
-        key
-        leaderID
-        avatarKey
+        projectID
+        memberID
+        role
         createdAt
         updatedAt
         owner
@@ -32,7 +31,7 @@ query ListUsers(
       id
       email
       username
-      leadingProjects {
+      projects {
         nextToken
       }
       createdAt
@@ -47,20 +46,21 @@ query GetProject($id: ID!) {
     id
     name
     key
-    leaderID
-    leader {
-      id
-      email
-      username
-      leadingProjects {
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
     avatarKey
+    avatarUrl
     createdAt
+    members {
+      items {
+        id
+        projectID
+        memberID
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
     updatedAt
     owner
   }
@@ -75,8 +75,79 @@ query ListProjects(
       id
       name
       key
-      leaderID
-      leader {
+      avatarKey
+      avatarUrl
+      createdAt
+      members {
+        nextToken
+      }
+      updatedAt
+      owner
+    }
+    nextToken
+  }
+}
+query GetProjectParticipant($id: ID!) {
+  getProjectParticipant(id: $id) {
+    id
+    projectID
+    memberID
+    role
+    project {
+      id
+      name
+      key
+      avatarKey
+      avatarUrl
+      createdAt
+      members {
+        nextToken
+      }
+      updatedAt
+      owner
+    }
+    member {
+      id
+      email
+      username
+      projects {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+query ListProjectParticipants(
+  $filter: ModelProjectParticipantFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listProjectParticipants(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      projectID
+      memberID
+      role
+      project {
+        id
+        name
+        key
+        avatarKey
+        avatarUrl
+        createdAt
+        updatedAt
+        owner
+      }
+      member {
         id
         email
         username
@@ -84,7 +155,6 @@ query ListProjects(
         updatedAt
         owner
       }
-      avatarKey
       createdAt
       updatedAt
       owner

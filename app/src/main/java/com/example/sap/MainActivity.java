@@ -15,6 +15,7 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -54,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Amplify
         // Add auth plugin
         // Add api plugin
+        // Add S3 plugin
         try {
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.configure(getApplicationContext());
         } catch (AmplifyException e) {
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         case SUCCESS:
                             loadingDialog.dismissDialog();
                             //Navigate to project dashboard activity
-                            Intent intent = new Intent(MainActivity.this, ProjectListActivity.class);
+                            Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
                             startActivity(intent);
                             break;
                         case FAILURE:

@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 result -> {
                     loadingDialog.dismissDialog();
                     //Navigate to project dashboard activity
-                    Intent intent = new Intent(LoginActivity.this, ProjectListActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, ProjectDashboardActivity.class);
                     startActivity(intent);
                 },
                 error -> {

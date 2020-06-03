@@ -46,9 +46,11 @@ dependencies {
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
     // Amplify Cognito
     implementation 'com.amplifyframework:aws-auth-cognito:1.0.0'
-
     //Amplify Core
     implementation 'com.amplifyframework:core:1.0.0'
     // Amplify API
     implementation 'com.amplifyframework:aws-api:1.0.0'
+    // Amplify Storage
+    implementation 'com.amplifyframework:aws-storage-s3:1.0.0'
+
 }

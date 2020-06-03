@@ -1,6 +1,10 @@
 package com.example.sap;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +14,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Project;
+
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.List;
+
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
-    String data1[], data2[];
-    int image[];
+    List<Project> projectList;
     Context context;
 
-    public ProjectListAdapter(Context ct, String s1[], String s2[], int img[]) {
+    public ProjectListAdapter(Context ct, List<Project> projectList) {
         context = ct;
-        data1 = s1;
-        data2 = s2;
-        image = img;
+        this.projectList = projectList;
     }
 
     @NonNull
@@ -34,15 +43,24 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvProjectName.setText(data1[position]);
-        holder.tvProjectKey.setText(data2[position]);
-        holder.imvProjectImage.setImageResource(image[position]);
+        holder.tvProjectName.setText(projectList.get(position).getName());
+        holder.tvProjectKey.setText(projectList.get(position).getKey());
+
+        ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        File path =new File(directory,projectList.get(position).getAvatarKey());
+        try {
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(path));
+            holder.imvProjectImage.setImageBitmap(b);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
 
-        return data1.length;
+        return projectList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

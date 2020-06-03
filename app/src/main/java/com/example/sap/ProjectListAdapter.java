@@ -5,6 +5,9 @@ import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +49,21 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvProjectName.setText(projectList.get(position).getName());
         holder.tvProjectKey.setText(projectList.get(position).getKey());
-        Picasso.get().load(projectList.get(position).getAvatarUrl()).into(holder.imvProjectImage);
+        Amplify.Storage.getUrl(
+                projectList.get(position).getAvatarKey(),
+                result -> {
+                    Handler uiHandler = new Handler(Looper.getMainLooper());
+                    uiHandler.post(new Runnable(){
+                        @Override
+                        public void run() {
+                            Picasso.get().load(result.getUrl().toString()).into(holder.imvProjectImage);
+                        }
+                    });
+                },
+                error -> {
+                    Log.e("GetProjectImageError", "Error", error);
+                }
+        );
     }
 
     @Override

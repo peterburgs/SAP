@@ -47,7 +47,6 @@ query GetProject($id: ID!) {
     name
     key
     avatarKey
-    avatarUrl
     createdAt
     members {
       items {
@@ -76,7 +75,6 @@ query ListProjects(
       name
       key
       avatarKey
-      avatarUrl
       createdAt
       members {
         nextToken
@@ -98,7 +96,6 @@ query GetProjectParticipant($id: ID!) {
       name
       key
       avatarKey
-      avatarUrl
       createdAt
       members {
         nextToken
@@ -142,7 +139,6 @@ query ListProjectParticipants(
         name
         key
         avatarKey
-        avatarUrl
         createdAt
         updatedAt
         owner

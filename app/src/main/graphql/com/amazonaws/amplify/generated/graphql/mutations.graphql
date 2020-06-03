@@ -83,7 +83,6 @@ mutation CreateProject(
     name
     key
     avatarKey
-    avatarUrl
     createdAt
     members {
       items {
@@ -110,7 +109,6 @@ mutation UpdateProject(
     name
     key
     avatarKey
-    avatarUrl
     createdAt
     members {
       items {
@@ -137,7 +135,6 @@ mutation DeleteProject(
     name
     key
     avatarKey
-    avatarUrl
     createdAt
     members {
       items {
@@ -169,7 +166,6 @@ mutation CreateProjectParticipant(
       name
       key
       avatarKey
-      avatarUrl
       createdAt
       members {
         nextToken
@@ -207,7 +203,6 @@ mutation UpdateProjectParticipant(
       name
       key
       avatarKey
-      avatarUrl
       createdAt
       members {
         nextToken
@@ -245,7 +240,6 @@ mutation DeleteProjectParticipant(
       name
       key
       avatarKey
-      avatarUrl
       createdAt
       members {
         nextToken

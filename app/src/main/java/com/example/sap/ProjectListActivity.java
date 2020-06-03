@@ -72,13 +72,13 @@ public class ProjectListActivity extends AppCompatActivity {
 
         loadingDialog = new LoadingDialog(this);
 
-        query(Amplify.Auth.getCurrentUser().getUserId());
+        projectListQuery(Amplify.Auth.getCurrentUser().getUserId());
 
     }
 
     @Override
     protected void onRestart() {
-        query(Amplify.Auth.getCurrentUser().getUserId());
+        projectListQuery(Amplify.Auth.getCurrentUser().getUserId());
         super.onRestart();
     }
 
@@ -86,7 +86,7 @@ public class ProjectListActivity extends AppCompatActivity {
     * Get project list from the cloud according to the current user
     * And update recycler view
     * */
-    private void query(String userId) {
+    private void projectListQuery(String userId) {
         // Get project list
         Amplify.API.query(
                 ModelQuery.get(User.class, userId),

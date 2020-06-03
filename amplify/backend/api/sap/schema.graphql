@@ -14,7 +14,6 @@ type Project
   name: String!
   key: String!
   avatarKey: String!
-  avatarUrl: String
   createdAt: AWSDateTime
   members: [ProjectParticipant] @connection(keyName: "byProject", fields: ["id"])
   # sprints: [Sprint] @connection(keyName: "byProject", fields: ["Id"])

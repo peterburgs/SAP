@@ -1,6 +1,6 @@
 {
     "identityPoolName": "sap4667fdb9_identitypool_4667fdb9",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "sap4667fdb9",
     "userPoolName": "sap4667fdb9_userpool_4667fdb9",
     "autoVerifiedAttributes": [

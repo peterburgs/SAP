@@ -71,7 +71,6 @@ subscription OnCreateProject {
     name
     key
     avatarKey
-    avatarUrl
     createdAt
     members {
       items {
@@ -95,7 +94,6 @@ subscription OnUpdateProject($owner: String!) {
     name
     key
     avatarKey
-    avatarUrl
     createdAt
     members {
       items {
@@ -119,7 +117,6 @@ subscription OnDeleteProject($owner: String!) {
     name
     key
     avatarKey
-    avatarUrl
     createdAt
     members {
       items {
@@ -148,7 +145,6 @@ subscription OnCreateProjectParticipant {
       name
       key
       avatarKey
-      avatarUrl
       createdAt
       members {
         nextToken
@@ -183,7 +179,6 @@ subscription OnUpdateProjectParticipant($owner: String!) {
       name
       key
       avatarKey
-      avatarUrl
       createdAt
       members {
         nextToken
@@ -218,7 +213,6 @@ subscription OnDeleteProjectParticipant($owner: String!) {
       name
       key
       avatarKey
-      avatarUrl
       createdAt
       members {
         nextToken

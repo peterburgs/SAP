@@ -25,13 +25,11 @@ public final class Project implements Model {
   public static final QueryField NAME = field("name");
   public static final QueryField KEY = field("key");
   public static final QueryField AVATAR_KEY = field("avatarKey");
-  public static final QueryField AVATAR_URL = field("avatarUrl");
   public static final QueryField CREATED_AT = field("createdAt");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String", isRequired = true) String key;
   private final @ModelField(targetType="String", isRequired = true) String avatarKey;
-  private final @ModelField(targetType="String") String avatarUrl;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
   private final @ModelField(targetType="ProjectParticipant") @HasMany(associatedWith = "project", type = ProjectParticipant.class) List<ProjectParticipant> members = null;
   public String getId() {
@@ -50,10 +48,6 @@ public final class Project implements Model {
       return avatarKey;
   }
   
-  public String getAvatarUrl() {
-      return avatarUrl;
-  }
-  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -62,12 +56,11 @@ public final class Project implements Model {
       return members;
   }
   
-  private Project(String id, String name, String key, String avatarKey, String avatarUrl, Temporal.DateTime createdAt) {
+  private Project(String id, String name, String key, String avatarKey, Temporal.DateTime createdAt) {
     this.id = id;
     this.name = name;
     this.key = key;
     this.avatarKey = avatarKey;
-    this.avatarUrl = avatarUrl;
     this.createdAt = createdAt;
   }
   
@@ -83,7 +76,6 @@ public final class Project implements Model {
               ObjectsCompat.equals(getName(), project.getName()) &&
               ObjectsCompat.equals(getKey(), project.getKey()) &&
               ObjectsCompat.equals(getAvatarKey(), project.getAvatarKey()) &&
-              ObjectsCompat.equals(getAvatarUrl(), project.getAvatarUrl()) &&
               ObjectsCompat.equals(getCreatedAt(), project.getCreatedAt());
       }
   }
@@ -95,7 +87,6 @@ public final class Project implements Model {
       .append(getName())
       .append(getKey())
       .append(getAvatarKey())
-      .append(getAvatarUrl())
       .append(getCreatedAt())
       .toString()
       .hashCode();
@@ -109,7 +100,6 @@ public final class Project implements Model {
       .append("name=" + String.valueOf(getName()))
       .append("key=" + String.valueOf(getKey()))
       .append("avatarKey=" + String.valueOf(getAvatarKey()))
-      .append("avatarUrl=" + String.valueOf(getAvatarUrl()))
       .append("createdAt=" + String.valueOf(getCreatedAt()))
       .append("}")
       .toString();
@@ -143,7 +133,6 @@ public final class Project implements Model {
       null,
       null,
       null,
-      null,
       null
     );
   }
@@ -153,7 +142,6 @@ public final class Project implements Model {
       name,
       key,
       avatarKey,
-      avatarUrl,
       createdAt);
   }
   public interface NameStep {
@@ -174,7 +162,6 @@ public final class Project implements Model {
   public interface BuildStep {
     Project build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep avatarUrl(String avatarUrl);
     BuildStep createdAt(Temporal.DateTime createdAt);
   }
   
@@ -184,7 +171,6 @@ public final class Project implements Model {
     private String name;
     private String key;
     private String avatarKey;
-    private String avatarUrl;
     private Temporal.DateTime createdAt;
     @Override
      public Project build() {
@@ -195,7 +181,6 @@ public final class Project implements Model {
           name,
           key,
           avatarKey,
-          avatarUrl,
           createdAt);
     }
     
@@ -217,12 +202,6 @@ public final class Project implements Model {
      public BuildStep avatarKey(String avatarKey) {
         Objects.requireNonNull(avatarKey);
         this.avatarKey = avatarKey;
-        return this;
-    }
-    
-    @Override
-     public BuildStep avatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
         return this;
     }
     
@@ -255,12 +234,11 @@ public final class Project implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String key, String avatarKey, String avatarUrl, Temporal.DateTime createdAt) {
+    private CopyOfBuilder(String id, String name, String key, String avatarKey, Temporal.DateTime createdAt) {
       super.id(id);
       super.name(name)
         .key(key)
         .avatarKey(avatarKey)
-        .avatarUrl(avatarUrl)
         .createdAt(createdAt);
     }
     
@@ -277,11 +255,6 @@ public final class Project implements Model {
     @Override
      public CopyOfBuilder avatarKey(String avatarKey) {
       return (CopyOfBuilder) super.avatarKey(avatarKey);
-    }
-    
-    @Override
-     public CopyOfBuilder avatarUrl(String avatarUrl) {
-      return (CopyOfBuilder) super.avatarUrl(avatarUrl);
     }
     
     @Override

@@ -1249,18 +1249,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "avatarUrl",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "createdAt",
                         "description": null,
                         "args": [],
@@ -1680,16 +1668,6 @@
                     },
                     {
                         "name": "avatarKey",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelStringInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "avatarUrl",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -2377,16 +2355,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "avatarUrl",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "createdAt",
                         "description": null,
                         "type": {
@@ -2429,16 +2397,6 @@
                     },
                     {
                         "name": "avatarKey",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelStringInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "avatarUrl",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -2542,16 +2500,6 @@
                     },
                     {
                         "name": "avatarKey",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "avatarUrl",
                         "description": null,
                         "type": {
                             "kind": "SCALAR",

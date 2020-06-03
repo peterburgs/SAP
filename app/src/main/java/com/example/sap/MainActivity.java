@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         case SUCCESS:
                             loadingDialog.dismissDialog();
                             //Navigate to project dashboard activity
-                            Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
+                            Intent intent = new Intent(MainActivity.this, ProjectListActivity.class);
                             startActivity(intent);
                             break;
                         case FAILURE:

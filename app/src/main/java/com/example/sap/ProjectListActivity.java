@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -25,9 +24,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
-public class ProjectDashboardActivity extends AppCompatActivity {
+public class ProjectListActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
@@ -42,7 +40,7 @@ public class ProjectDashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_dashboard);
+        setContentView(R.layout.activity_project_list);
         rcvProjectList = findViewById(R.id.rcvProjectList);
         topAppBar = findViewById(R.id.topAppBar);
 
@@ -129,7 +127,7 @@ public class ProjectDashboardActivity extends AppCompatActivity {
     }
 
     private void makeAlert(String content) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ProjectDashboardActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProjectListActivity.this);
         builder.setMessage(content);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override

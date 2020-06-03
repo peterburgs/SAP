@@ -7,14 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.UserState;
-import com.amazonaws.mobile.client.UserStateDetails;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
@@ -76,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         case SUCCESS:
                             loadingDialog.dismissDialog();
                             //Navigate to project dashboard activity
-                            Intent intent = new Intent(MainActivity.this, ProjectDashboardActivity.class);
+                            Intent intent = new Intent(MainActivity.this, ProjectListActivity.class);
                             startActivity(intent);
                             break;
                         case FAILURE:

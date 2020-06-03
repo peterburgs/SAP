@@ -13,9 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.results.SignInResult;
 import com.amplifyframework.core.Amplify;
 
 public class LoginActivity extends AppCompatActivity {
@@ -83,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 result -> {
                     loadingDialog.dismissDialog();
                     //Navigate to project dashboard activity
-                    Intent intent = new Intent(LoginActivity.this, ProjectDashboardActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, ProjectListActivity.class);
                     startActivity(intent);
                 },
                 error -> {

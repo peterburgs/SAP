@@ -1,13 +1,8 @@
 package com.example.sap;
 
-import android.content.ClipData;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-public class ProjectDashboardActivity extends AppCompatActivity {
+public class ProjectListActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
@@ -33,7 +28,7 @@ public class ProjectDashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_dashboard);
+        setContentView(R.layout.activity_project_list);
         rcvProjectList = findViewById(R.id.rcvProjectList);
         topAppBar = findViewById(R.id.topAppBar);
 

@@ -11,10 +11,14 @@ subscription OnCreateUser($owner: String!) {
         key
         leaderID
         avatarKey
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -30,10 +34,14 @@ subscription OnUpdateUser($owner: String!) {
         key
         leaderID
         avatarKey
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -49,10 +57,14 @@ subscription OnDeleteUser($owner: String!) {
         key
         leaderID
         avatarKey
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -69,9 +81,13 @@ subscription OnCreateProject {
       leadingProjects {
         nextToken
       }
+      createdAt
+      updatedAt
       owner
     }
     avatarKey
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -88,9 +104,13 @@ subscription OnUpdateProject($owner: String!) {
       leadingProjects {
         nextToken
       }
+      createdAt
+      updatedAt
       owner
     }
     avatarKey
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -107,9 +127,13 @@ subscription OnDeleteProject($owner: String!) {
       leadingProjects {
         nextToken
       }
+      createdAt
+      updatedAt
       owner
     }
     avatarKey
+    createdAt
+    updatedAt
     owner
   }
 }

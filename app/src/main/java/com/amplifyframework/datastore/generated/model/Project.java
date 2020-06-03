@@ -1,6 +1,7 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.HasOne;
+import com.amplifyframework.core.model.annotations.BelongsTo;
+import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,12 +25,15 @@ public final class Project implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField NAME = field("name");
   public static final QueryField KEY = field("key");
-  public static final QueryField LEADER_ID = field("leaderID");
+  public static final QueryField LEADER = field("leaderID");
+  public static final QueryField AVATAR_KEY = field("avatarKey");
+  public static final QueryField CREATED_AT = field("createdAt");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String", isRequired = true) String key;
-  private final @ModelField(targetType="ID", isRequired = true) String leaderID;
-  private final @ModelField(targetType="User") @HasOne(associatedWith = "id", type = User.class) User leader = null;
+  private final @ModelField(targetType="User") @BelongsTo(targetName = "leaderID", type = User.class) User leader;
+  private final @ModelField(targetType="String", isRequired = true) String avatarKey;
+  private final @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
   public String getId() {
       return id;
   }
@@ -42,19 +46,25 @@ public final class Project implements Model {
       return key;
   }
   
-  public String getLeaderId() {
-      return leaderID;
-  }
-  
   public User getLeader() {
       return leader;
   }
   
-  private Project(String id, String name, String key, String leaderID) {
+  public String getAvatarKey() {
+      return avatarKey;
+  }
+  
+  public Temporal.DateTime getCreatedAt() {
+      return createdAt;
+  }
+  
+  private Project(String id, String name, String key, User leader, String avatarKey, Temporal.DateTime createdAt) {
     this.id = id;
     this.name = name;
     this.key = key;
-    this.leaderID = leaderID;
+    this.leader = leader;
+    this.avatarKey = avatarKey;
+    this.createdAt = createdAt;
   }
   
   @Override
@@ -68,7 +78,9 @@ public final class Project implements Model {
       return ObjectsCompat.equals(getId(), project.getId()) &&
               ObjectsCompat.equals(getName(), project.getName()) &&
               ObjectsCompat.equals(getKey(), project.getKey()) &&
-              ObjectsCompat.equals(getLeaderId(), project.getLeaderId());
+              ObjectsCompat.equals(getLeader(), project.getLeader()) &&
+              ObjectsCompat.equals(getAvatarKey(), project.getAvatarKey()) &&
+              ObjectsCompat.equals(getCreatedAt(), project.getCreatedAt());
       }
   }
   
@@ -78,7 +90,9 @@ public final class Project implements Model {
       .append(getId())
       .append(getName())
       .append(getKey())
-      .append(getLeaderId())
+      .append(getLeader())
+      .append(getAvatarKey())
+      .append(getCreatedAt())
       .toString()
       .hashCode();
   }
@@ -90,7 +104,9 @@ public final class Project implements Model {
       .append("id=" + String.valueOf(getId()))
       .append("name=" + String.valueOf(getName()))
       .append("key=" + String.valueOf(getKey()))
-      .append("leaderID=" + String.valueOf(getLeaderId()))
+      .append("leader=" + String.valueOf(getLeader()))
+      .append("avatarKey=" + String.valueOf(getAvatarKey()))
+      .append("createdAt=" + String.valueOf(getCreatedAt()))
       .append("}")
       .toString();
   }
@@ -122,6 +138,8 @@ public final class Project implements Model {
       id,
       null,
       null,
+      null,
+      null,
       null
     );
   }
@@ -130,7 +148,9 @@ public final class Project implements Model {
     return new CopyOfBuilder(id,
       name,
       key,
-      leaderID);
+      leader,
+      avatarKey,
+      createdAt);
   }
   public interface NameStep {
     KeyStep name(String name);
@@ -138,26 +158,30 @@ public final class Project implements Model {
   
 
   public interface KeyStep {
-    LeaderIdStep key(String key);
+    AvatarKeyStep key(String key);
   }
   
 
-  public interface LeaderIdStep {
-    BuildStep leaderId(String leaderId);
+  public interface AvatarKeyStep {
+    BuildStep avatarKey(String avatarKey);
   }
   
 
   public interface BuildStep {
     Project build();
     BuildStep id(String id) throws IllegalArgumentException;
+    BuildStep leader(User leader);
+    BuildStep createdAt(Temporal.DateTime createdAt);
   }
   
 
-  public static class Builder implements NameStep, KeyStep, LeaderIdStep, BuildStep {
+  public static class Builder implements NameStep, KeyStep, AvatarKeyStep, BuildStep {
     private String id;
     private String name;
     private String key;
-    private String leaderID;
+    private String avatarKey;
+    private User leader;
+    private Temporal.DateTime createdAt;
     @Override
      public Project build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -166,7 +190,9 @@ public final class Project implements Model {
           id,
           name,
           key,
-          leaderID);
+          leader,
+          avatarKey,
+          createdAt);
     }
     
     @Override
@@ -177,16 +203,28 @@ public final class Project implements Model {
     }
     
     @Override
-     public LeaderIdStep key(String key) {
+     public AvatarKeyStep key(String key) {
         Objects.requireNonNull(key);
         this.key = key;
         return this;
     }
     
     @Override
-     public BuildStep leaderId(String leaderId) {
-        Objects.requireNonNull(leaderId);
-        this.leaderID = leaderId;
+     public BuildStep avatarKey(String avatarKey) {
+        Objects.requireNonNull(avatarKey);
+        this.avatarKey = avatarKey;
+        return this;
+    }
+    
+    @Override
+     public BuildStep leader(User leader) {
+        this.leader = leader;
+        return this;
+    }
+    
+    @Override
+     public BuildStep createdAt(Temporal.DateTime createdAt) {
+        this.createdAt = createdAt;
         return this;
     }
     
@@ -213,11 +251,13 @@ public final class Project implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String key, String leaderId) {
+    private CopyOfBuilder(String id, String name, String key, User leader, String avatarKey, Temporal.DateTime createdAt) {
       super.id(id);
       super.name(name)
         .key(key)
-        .leaderId(leaderId);
+        .avatarKey(avatarKey)
+        .leader(leader)
+        .createdAt(createdAt);
     }
     
     @Override
@@ -231,8 +271,18 @@ public final class Project implements Model {
     }
     
     @Override
-     public CopyOfBuilder leaderId(String leaderId) {
-      return (CopyOfBuilder) super.leaderId(leaderId);
+     public CopyOfBuilder avatarKey(String avatarKey) {
+      return (CopyOfBuilder) super.avatarKey(avatarKey);
+    }
+    
+    @Override
+     public CopyOfBuilder leader(User leader) {
+      return (CopyOfBuilder) super.leader(leader);
+    }
+    
+    @Override
+     public CopyOfBuilder createdAt(Temporal.DateTime createdAt) {
+      return (CopyOfBuilder) super.createdAt(createdAt);
     }
   }
   

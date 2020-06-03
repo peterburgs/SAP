@@ -18,6 +18,7 @@ type Project
   leaderID: ID!
   leader: User @connection(fields:["leaderID"])
   avatarKey: String!
+  createdAt: AWSDateTime
   # members: [ProjectParticipant] @connection(keyName: "byProject", fields: ["id"])
   # sprints: [Sprint] @connection(keyName: "byProject", fields: ["Id"])
 }

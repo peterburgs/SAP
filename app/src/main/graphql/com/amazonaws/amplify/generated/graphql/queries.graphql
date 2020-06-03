@@ -11,10 +11,14 @@ query GetUser($id: ID!) {
         key
         leaderID
         avatarKey
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -31,6 +35,8 @@ query ListUsers(
       leadingProjects {
         nextToken
       }
+      createdAt
+      updatedAt
       owner
     }
     nextToken
@@ -49,9 +55,13 @@ query GetProject($id: ID!) {
       leadingProjects {
         nextToken
       }
+      createdAt
+      updatedAt
       owner
     }
     avatarKey
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -70,9 +80,13 @@ query ListProjects(
         id
         email
         username
+        createdAt
+        updatedAt
         owner
       }
       avatarKey
+      createdAt
+      updatedAt
       owner
     }
     nextToken

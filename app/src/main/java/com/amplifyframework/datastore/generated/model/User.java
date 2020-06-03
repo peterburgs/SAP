@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +26,7 @@ public final class User implements Model {
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String email;
   private final @ModelField(targetType="String", isRequired = true) String username;
+  private final @ModelField(targetType="Project") @HasMany(associatedWith = "leader", type = Project.class) List<Project> leadingProjects = null;
   public String getId() {
       return id;
   }
@@ -35,6 +37,10 @@ public final class User implements Model {
   
   public String getUsername() {
       return username;
+  }
+  
+  public List<Project> getLeadingProjects() {
+      return leadingProjects;
   }
   
   private User(String id, String email, String username) {

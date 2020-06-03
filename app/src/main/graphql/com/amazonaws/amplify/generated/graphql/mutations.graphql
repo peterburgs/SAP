@@ -14,10 +14,14 @@ mutation CreateUser(
         key
         leaderID
         avatarKey
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -36,10 +40,14 @@ mutation UpdateUser(
         key
         leaderID
         avatarKey
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -58,10 +66,14 @@ mutation DeleteUser(
         key
         leaderID
         avatarKey
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -81,9 +93,13 @@ mutation CreateProject(
       leadingProjects {
         nextToken
       }
+      createdAt
+      updatedAt
       owner
     }
     avatarKey
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -103,9 +119,13 @@ mutation UpdateProject(
       leadingProjects {
         nextToken
       }
+      createdAt
+      updatedAt
       owner
     }
     avatarKey
+    createdAt
+    updatedAt
     owner
   }
 }
@@ -125,9 +145,13 @@ mutation DeleteProject(
       leadingProjects {
         nextToken
       }
+      createdAt
+      updatedAt
       owner
     }
     avatarKey
+    createdAt
+    updatedAt
     owner
   }
 }

@@ -51,7 +51,17 @@ public class ProjectListActivity extends AppCompatActivity {
         //
         rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
         rcvProjectList.setAdapter(projectListAdapter);
-//
+        projectListAdapter.setOnItemClickListener(new ProjectListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //todo: Navigate to Project Container
+                Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
         loadingDialog = new LoadingDialog(this);
 
         topAppBar = findViewById(R.id.topAppBar);
@@ -104,8 +114,6 @@ public class ProjectListActivity extends AppCompatActivity {
                     }
 
                     runOnUiThread(() -> {
-//                        rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
-//                        rcvProjectList.setAdapter(projectListAdapter);
                         projectListAdapter.notifyDataSetChanged();
                     });
 

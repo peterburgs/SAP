@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.core.Amplify;
@@ -22,9 +23,19 @@ import java.util.List;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
     List<Project> projectList;
+    private OnItemClickListener mListener;
 
     public ProjectListAdapter(List<Project> projectList) {
         this.projectList = projectList;
+    }
+
+    //Interface to Handle Clicking a specific item
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 
     @NonNull
@@ -32,7 +43,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.project_row, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mListener);
     }
 
     @Override
@@ -68,12 +79,41 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         TextView tvProjectKey;
         ImageView imvProjectImage;
 
-        public ViewHolder(@NonNull View itemView) {
+        protected CardView cardView;
+
+        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.cvProjectList);
             tvProjectName = itemView.findViewById(R.id.tvProjectName);
             tvProjectKey = itemView.findViewById(R.id.tvProjectKey);
             imvProjectImage = itemView.findViewById(R.id.imvProjectImage);
 
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+
+    private void deleteItem(int position) {
+        if (position != RecyclerView.NO_POSITION) {
+            projectList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    private void addItem(int position, Project project) {
+        if (position != RecyclerView.NO_POSITION) {
+            projectList.add(position, project);
+            notifyItemInserted(position);
         }
     }
 }

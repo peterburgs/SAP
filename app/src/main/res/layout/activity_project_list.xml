@@ -32,7 +32,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvProjectList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clickable="true"/>
     </androidx.core.widget.NestedScrollView>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu

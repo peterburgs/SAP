@@ -32,7 +32,6 @@ public class ProjectListActivity extends AppCompatActivity {
     private ProjectListAdapter projectListAdapter;
     ArrayList<Project> projectList;
 
-
     RecyclerView rcvProjectList;
     MaterialToolbar topAppBar;
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
@@ -89,9 +88,7 @@ public class ProjectListActivity extends AppCompatActivity {
             }
         });
 
-
         projectListQuery(Amplify.Auth.getCurrentUser().getUserId());
-
     }
 
     @Override
@@ -109,6 +106,7 @@ public class ProjectListActivity extends AppCompatActivity {
         Amplify.API.query(
                 ModelQuery.get(User.class, userId),
                 response -> {
+                    projectList.clear();
                     for (ProjectParticipant p : response.getData().getProjects()) {
                         projectList.add(p.getProject());
                     }

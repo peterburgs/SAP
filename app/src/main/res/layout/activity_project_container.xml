@@ -104,16 +104,6 @@
             app:fab_title="Projects" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabTask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/colorAccent"
-            app:fab_colorPressed="@color/black_800"
-            app:fab_icon="@drawable/ic_task"
-            app:fab_size="mini"
-            app:fab_title="Task" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

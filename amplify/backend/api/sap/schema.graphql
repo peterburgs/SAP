@@ -67,13 +67,19 @@ type Task
   name: String!
   summary: String!
   label: String
-  description: String!
+  description: String
   projectID: ID!
   assigneeID: ID!
   sprintID: ID!
   priority: Int
-  status: String
+  status: TaskStatus
   project: Project! @connection(fields: ["projectID"])
   assignee: User! @connection(fields: ["assigneeID"])
   sprint: Sprint! @connection(fields: ["sprintID"])
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
 }

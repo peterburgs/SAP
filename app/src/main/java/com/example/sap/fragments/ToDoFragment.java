@@ -8,13 +8,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Project;
+import com.amplifyframework.datastore.generated.model.Sprint;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
+import com.example.sap.activities.CreateProjectActivity;
 import com.example.sap.adapters.ToDoAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,11 +45,14 @@ public class ToDoFragment extends Fragment {
     private String mParam2;
     RecyclerView rcvToDo;
 
+    private ArrayList<Task> taskList;
+    private ToDoAdapter toDoAdapter;
+    private Handler mHandler;
     //Hardcoded Data:
-    String taskName[] = {"SAP-1", "SAP-2", "SAP-3", "SAP-4", "SAP-1", "SAP-2", "SAP-3", "SAP-4"};
-    String taskSummary[] = {"Design raw UI", "Apply Material Design Component", "Add Constraints", "Beautify", "Design raw UI", "Apply Material Design Component", "Add Constraints", "Beautify"};
-    String taskLabel[] = {"Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI"};
-    String assignee[] = {"peterburgs", "peterburgs", "peterburgs", "starea", "peterburgs", "peterburgs", "peterburgs", "starea"};
+//    String taskName[] = {"SAP-1", "SAP-2", "SAP-3", "SAP-4", "SAP-1", "SAP-2", "SAP-3", "SAP-4"};
+//    String taskSummary[] = {"Design raw UI", "Apply Material Design Component", "Add Constraints", "Beautify", "Design raw UI", "Apply Material Design Component", "Add Constraints", "Beautify"};
+//    String taskLabel[] = {"Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI"};
+//    String assignee[] = {"peterburgs", "peterburgs", "peterburgs", "starea", "peterburgs", "peterburgs", "peterburgs", "starea"};
 
     //
     public ToDoFragment() {
@@ -75,9 +90,12 @@ public class ToDoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rcvToDo = getView().findViewById(R.id.rcvToDo);
 
-        ToDoAdapter toDoAdapter = new ToDoAdapter(getContext(), taskName, taskSummary, taskLabel, assignee);
+        taskList = new ArrayList<>();
+        mHandler = new Handler(Looper.getMainLooper());
+
+        rcvToDo = getView().findViewById(R.id.rcvToDo);
+        toDoAdapter = new ToDoAdapter(getContext(), taskList);
 
         rcvToDo.setAdapter(toDoAdapter);
         rcvToDo.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -88,13 +106,64 @@ public class ToDoFragment extends Fragment {
                 Toast.makeText(getContext(), "Task Clicked", Toast.LENGTH_SHORT).show();
             }
         });
+
+        todoTasksQuery();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_to_do, container, false);
     }
+
+    private void todoTasksQuery() {
+        if (getProjectID() != null) {
+            // Get project by id
+            Amplify.API.query(
+                    ModelQuery.get(Project.class, getProjectID()),
+                    response -> {
+                        taskList.clear();
+                        if(response.getData() != null) {
+                            Sprint activatedSprint = null;
+                            // Get activated sprint
+                            for (Sprint sprint : response.getData().getSprints()) {
+                                if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                                    activatedSprint = sprint;
+                                }
+                            }
+
+                            // Get tasks of the sprint
+                            Amplify.API.query(
+                                    ModelQuery.get(Sprint.class, activatedSprint.getId()),
+                                    getSprintRes -> {
+                                        for(Task task : getSprintRes.getData().getTasks()) {
+                                            if(task.getStatus().equals(TaskStatus.TODO)) {
+                                                taskList.addAll(getSprintRes.getData().getTasks());
+                                            }
+                                        }
+                                        mHandler.post(() -> toDoAdapter.notifyDataSetChanged());
+                                    },
+                                    error -> Log.e("GetProjectError", error.toString())
+                            );
+                        }
+                    },
+                    error -> {
+                        Log.e("GetProjectError", error.toString());
+                    }
+            );
+        }
+    }
+
+    private String getProjectID() {
+        String newString;
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras == null) {
+            newString = null;
+        } else {
+            newString = extras.getString("PROJECT_ID");
+        }
+        return newString;
+    }
+
 }

@@ -11,6 +11,97 @@ query GetUser($id: ID!) {
         projectID
         memberID
         role
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        member {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -28,6 +119,146 @@ query GetUser($id: ID!) {
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -50,9 +281,119 @@ query ListUsers(
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -74,6 +415,97 @@ query GetProject($id: ID!) {
         projectID
         memberID
         role
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        member {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -91,6 +523,146 @@ query GetProject($id: ID!) {
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -108,6 +680,108 @@ query GetProject($id: ID!) {
         isStarted
         projectID
         isBacklog
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -130,12 +804,171 @@ query ListProjects(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -156,12 +989,171 @@ query GetProjectParticipant($id: ID!) {
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -172,9 +1164,119 @@ query GetProjectParticipant($id: ID!) {
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -205,6 +1307,109 @@ query ListProjectParticipants(
         key
         avatarKey
         createdAt
+        members {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        sprints {
+          items {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         updatedAt
       }
       member {
@@ -212,6 +1417,81 @@ query ListProjectParticipants(
         email
         username
         avatarKey
+        projects {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -239,12 +1519,171 @@ query GetSprint($id: ID!) {
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -261,6 +1700,146 @@ query GetSprint($id: ID!) {
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -294,9 +1873,183 @@ query ListSprints(
         key
         avatarKey
         createdAt
+        members {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        sprints {
+          items {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         updatedAt
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -325,12 +2078,171 @@ query GetTask($id: ID!) {
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -341,9 +2253,119 @@ query GetTask($id: ID!) {
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -365,9 +2387,183 @@ query GetTask($id: ID!) {
         key
         avatarKey
         createdAt
+        members {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        sprints {
+          items {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         updatedAt
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -402,6 +2598,109 @@ query ListTasks(
         key
         avatarKey
         createdAt
+        members {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        sprints {
+          items {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         updatedAt
       }
       assignee {
@@ -409,6 +2708,81 @@ query ListTasks(
         email
         username
         avatarKey
+        projects {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -422,6 +2796,108 @@ query ListTasks(
         isStarted
         projectID
         isBacklog
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner

@@ -37,9 +37,9 @@ public final class Task implements Model {
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String", isRequired = true) String summary;
   private final @ModelField(targetType="String") String label;
-  private final @ModelField(targetType="String", isRequired = true) String description;
+  private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="Int") Integer priority;
-  private final @ModelField(targetType="String") String status;
+  private final @ModelField(targetType="TaskStatus") TaskStatus status;
   private final @ModelField(targetType="Project", isRequired = true) @BelongsTo(targetName = "projectID", type = Project.class) Project project;
   private final @ModelField(targetType="User", isRequired = true) @BelongsTo(targetName = "assigneeID", type = User.class) User assignee;
   private final @ModelField(targetType="Sprint", isRequired = true) @BelongsTo(targetName = "sprintID", type = Sprint.class) Sprint sprint;
@@ -67,7 +67,7 @@ public final class Task implements Model {
       return priority;
   }
   
-  public String getStatus() {
+  public TaskStatus getStatus() {
       return status;
   }
   
@@ -83,7 +83,7 @@ public final class Task implements Model {
       return sprint;
   }
   
-  private Task(String id, String name, String summary, String label, String description, Integer priority, String status, Project project, User assignee, Sprint sprint) {
+  private Task(String id, String name, String summary, String label, String description, Integer priority, TaskStatus status, Project project, User assignee, Sprint sprint) {
     this.id = id;
     this.name = name;
     this.summary = summary;
@@ -207,12 +207,7 @@ public final class Task implements Model {
   
 
   public interface SummaryStep {
-    DescriptionStep summary(String summary);
-  }
-  
-
-  public interface DescriptionStep {
-    ProjectStep description(String description);
+    ProjectStep summary(String summary);
   }
   
 
@@ -235,22 +230,23 @@ public final class Task implements Model {
     Task build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep label(String label);
+    BuildStep description(String description);
     BuildStep priority(Integer priority);
-    BuildStep status(String status);
+    BuildStep status(TaskStatus status);
   }
   
 
-  public static class Builder implements NameStep, SummaryStep, DescriptionStep, ProjectStep, AssigneeStep, SprintStep, BuildStep {
+  public static class Builder implements NameStep, SummaryStep, ProjectStep, AssigneeStep, SprintStep, BuildStep {
     private String id;
     private String name;
     private String summary;
-    private String description;
     private Project project;
     private User assignee;
     private Sprint sprint;
     private String label;
+    private String description;
     private Integer priority;
-    private String status;
+    private TaskStatus status;
     @Override
      public Task build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -276,16 +272,9 @@ public final class Task implements Model {
     }
     
     @Override
-     public DescriptionStep summary(String summary) {
+     public ProjectStep summary(String summary) {
         Objects.requireNonNull(summary);
         this.summary = summary;
-        return this;
-    }
-    
-    @Override
-     public ProjectStep description(String description) {
-        Objects.requireNonNull(description);
-        this.description = description;
         return this;
     }
     
@@ -317,13 +306,19 @@ public final class Task implements Model {
     }
     
     @Override
+     public BuildStep description(String description) {
+        this.description = description;
+        return this;
+    }
+    
+    @Override
      public BuildStep priority(Integer priority) {
         this.priority = priority;
         return this;
     }
     
     @Override
-     public BuildStep status(String status) {
+     public BuildStep status(TaskStatus status) {
         this.status = status;
         return this;
     }
@@ -351,15 +346,15 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String summary, String label, String description, Integer priority, String status, Project project, User assignee, Sprint sprint) {
+    private CopyOfBuilder(String id, String name, String summary, String label, String description, Integer priority, TaskStatus status, Project project, User assignee, Sprint sprint) {
       super.id(id);
       super.name(name)
         .summary(summary)
-        .description(description)
         .project(project)
         .assignee(assignee)
         .sprint(sprint)
         .label(label)
+        .description(description)
         .priority(priority)
         .status(status);
     }
@@ -372,11 +367,6 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder summary(String summary) {
       return (CopyOfBuilder) super.summary(summary);
-    }
-    
-    @Override
-     public CopyOfBuilder description(String description) {
-      return (CopyOfBuilder) super.description(description);
     }
     
     @Override
@@ -400,12 +390,17 @@ public final class Task implements Model {
     }
     
     @Override
+     public CopyOfBuilder description(String description) {
+      return (CopyOfBuilder) super.description(description);
+    }
+    
+    @Override
      public CopyOfBuilder priority(Integer priority) {
       return (CopyOfBuilder) super.priority(priority);
     }
     
     @Override
-     public CopyOfBuilder status(String status) {
+     public CopyOfBuilder status(TaskStatus status) {
       return (CopyOfBuilder) super.status(status);
     }
   }

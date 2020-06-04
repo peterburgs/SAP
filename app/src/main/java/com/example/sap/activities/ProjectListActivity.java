@@ -53,6 +53,7 @@ public class ProjectListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
+                intent.putExtra("PROJECT_ID", projectList.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -98,9 +99,11 @@ public class ProjectListActivity extends AppCompatActivity {
      * */
     private void projectListQuery(String userId) {
         // Get project list
+        loadingDialog.startLoadingDialog();
         Amplify.API.query(
                 ModelQuery.get(User.class, userId),
                 response -> {
+                    loadingDialog.dismissDialog();
                     if(response.getData() != null) {
                         projectList.clear();
                         for (ProjectParticipant p : response.getData().getProjects()) {

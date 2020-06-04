@@ -16,6 +16,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.ProjectParticipant;
 import com.amplifyframework.datastore.generated.model.Role;
+import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.User;
 import com.example.sap.R;
 
@@ -65,11 +66,30 @@ public class CreateProjectActivity extends AppCompatActivity {
                     Amplify.API.mutate(
                             ModelMutation.create(project),
                             createProjectRes -> {
+                                Sprint sprint = Sprint.builder()
+                                        .goal("No goal for backlog")
+                                        .name("Backlog")
+                                        .isBacklog(true)
+                                        .project(createProjectRes.getData())
+                                        .build();
+
+                                // Create backlog for the project
+                                Amplify.API.mutate(
+                                        ModelMutation.create(sprint),
+                                        createBacklogRes -> {
+                                            Log.i("Success", "Create backlog for project successfully");
+                                        },
+                                        error -> {
+                                            Log.e(TAG, "Error", error);
+                                        }
+                                );
+
                                 ProjectParticipant projectParticipant = ProjectParticipant.builder()
                                         .role(Role.PROJECT_LEADER)
                                         .project(createProjectRes.getData())
                                         .member(getUserRes.getData())
                                         .build();
+
                                 // Add new project and user to project participant
                                 Amplify.API.mutate(
                                         ModelMutation.create(projectParticipant),

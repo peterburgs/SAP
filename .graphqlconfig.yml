@@ -7,9 +7,10 @@ projects:
       - ./amplify/**
     extensions:
       amplify:
-        codeGenTarget: ''
+        codeGenTarget: android
         generatedFileName: ''
         docsFilePath: app/src/main/graphql/com/amazonaws/amplify/generated/graphql
+        maxDepth: 6
 extensions:
   amplify:
     version: 3

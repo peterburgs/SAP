@@ -14,6 +14,97 @@ mutation CreateUser(
         projectID
         memberID
         role
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        member {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -31,6 +122,146 @@ mutation CreateUser(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -56,6 +287,97 @@ mutation UpdateUser(
         projectID
         memberID
         role
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        member {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -73,6 +395,146 @@ mutation UpdateUser(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -98,6 +560,97 @@ mutation DeleteUser(
         projectID
         memberID
         role
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        member {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -115,6 +668,146 @@ mutation DeleteUser(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -141,6 +834,97 @@ mutation CreateProject(
         projectID
         memberID
         role
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        member {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -158,6 +942,146 @@ mutation CreateProject(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -175,6 +1099,108 @@ mutation CreateProject(
         isStarted
         projectID
         isBacklog
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -200,6 +1226,97 @@ mutation UpdateProject(
         projectID
         memberID
         role
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        member {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -217,6 +1334,146 @@ mutation UpdateProject(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -234,6 +1491,108 @@ mutation UpdateProject(
         isStarted
         projectID
         isBacklog
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -259,6 +1618,97 @@ mutation DeleteProject(
         projectID
         memberID
         role
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        member {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -276,6 +1726,146 @@ mutation DeleteProject(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -293,6 +1883,108 @@ mutation DeleteProject(
         isStarted
         projectID
         isBacklog
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -318,12 +2010,171 @@ mutation CreateProjectParticipant(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -334,9 +2185,119 @@ mutation CreateProjectParticipant(
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -362,12 +2323,171 @@ mutation UpdateProjectParticipant(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -378,9 +2498,119 @@ mutation UpdateProjectParticipant(
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -406,12 +2636,171 @@ mutation DeleteProjectParticipant(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -422,9 +2811,119 @@ mutation DeleteProjectParticipant(
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -455,12 +2954,171 @@ mutation CreateSprint(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -477,6 +3135,146 @@ mutation CreateSprint(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -509,12 +3307,171 @@ mutation UpdateSprint(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -531,6 +3488,146 @@ mutation UpdateSprint(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -563,12 +3660,171 @@ mutation DeleteSprint(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -585,6 +3841,146 @@ mutation DeleteSprint(
         sprintID
         priority
         status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -618,12 +4014,171 @@ mutation CreateTask(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -634,9 +4189,119 @@ mutation CreateTask(
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -658,9 +4323,183 @@ mutation CreateTask(
         key
         avatarKey
         createdAt
+        members {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        sprints {
+          items {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         updatedAt
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -694,12 +4533,171 @@ mutation UpdateTask(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -710,9 +4708,119 @@ mutation UpdateTask(
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -734,9 +4842,183 @@ mutation UpdateTask(
         key
         avatarKey
         createdAt
+        members {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        sprints {
+          items {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         updatedAt
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -770,12 +5052,171 @@ mutation DeleteTask(
       avatarKey
       createdAt
       members {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       sprints {
+        items {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       updatedAt
@@ -786,9 +5227,119 @@ mutation DeleteTask(
       username
       avatarKey
       projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -810,9 +5361,183 @@ mutation DeleteTask(
         key
         avatarKey
         createdAt
+        members {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+              owner
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        sprints {
+          items {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         updatedAt
       }
       tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt

@@ -102,6 +102,15 @@
             app:fab_icon="@drawable/ic_project"
             app:fab_size="mini"
             app:fab_title="Projects" />
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/black_800"
+            app:fab_icon="@drawable/ic_sprint"
+            app:fab_size="mini"
+            app:fab_title="Sprint" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAccount"

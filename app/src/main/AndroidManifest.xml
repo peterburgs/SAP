@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.AccountActivity"></activity>
+        <activity android:name=".recyclerView.todo_row"></activity>
+        <activity android:name=".activities.AccountActivity" />
         <activity android:name=".activities.ProjectContainerActivity" />
         <activity android:name=".activities.CreateProjectActivity" />
         <activity android:name=".activities.ProjectListActivity" />

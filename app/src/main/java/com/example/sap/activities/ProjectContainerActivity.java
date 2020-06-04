@@ -24,7 +24,6 @@ public class ProjectContainerActivity extends AppCompatActivity {
     public PageAdapter pagerAdapter;
 
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
-    com.getbase.floatingactionbutton.FloatingActionButton fabTask;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
     com.getbase.floatingactionbutton.FloatingActionButton fabSetting;
 
@@ -40,15 +39,11 @@ public class ProjectContainerActivity extends AppCompatActivity {
         titDone = findViewById(R.id.titDone);
         titBacklog = findViewById(R.id.titBacklog);
         fabProject = findViewById(R.id.fabProject);
-        fabTask = findViewById(R.id.fabTask);
         fabAccount = findViewById(R.id.fabAccount);
         fabSetting = findViewById(R.id.fabSetting);
 
         fabProject.setOnClickListener(v -> {
             Toast.makeText(this, "Project Selected", Toast.LENGTH_SHORT).show();
-        });
-        fabTask.setOnClickListener(v -> {
-            Toast.makeText(this, "Task Selected", Toast.LENGTH_SHORT).show();
         });
         fabAccount.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), AccountActivity.class);

@@ -35,7 +35,6 @@ public class ProjectListActivity extends AppCompatActivity {
     RecyclerView rcvProjectList;
     MaterialToolbar topAppBar;
     //com.getbase.floatingactionbutton.FloatingActionButton fabProject;
-    com.getbase.floatingactionbutton.FloatingActionButton fabTask;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
 
     @Override
@@ -62,8 +61,8 @@ public class ProjectListActivity extends AppCompatActivity {
         loadingDialog = new LoadingDialog(this);
 
         topAppBar = findViewById(R.id.topAppBar);
+
         //fabProject = findViewById(R.id.fabProject);
-        fabTask = findViewById(R.id.fabTask);
         fabAccount = findViewById(R.id.fabAccount);
 
 
@@ -71,9 +70,6 @@ public class ProjectListActivity extends AppCompatActivity {
 //        fabProject.setOnClickListener(v -> {
 //            Toast.makeText(this, "Project Selected", Toast.LENGTH_SHORT).show();
 //        });
-        fabTask.setOnClickListener(v -> {
-            Toast.makeText(this, "Task Selected", Toast.LENGTH_SHORT).show();
-        });
         fabAccount.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
             startActivity(intent);
@@ -105,15 +101,16 @@ public class ProjectListActivity extends AppCompatActivity {
         Amplify.API.query(
                 ModelQuery.get(User.class, userId),
                 response -> {
-                    projectList.clear();
-                    for (ProjectParticipant p : response.getData().getProjects()) {
-                        projectList.add(p.getProject());
+                    if(response.getData() != null) {
+                        projectList.clear();
+                        for (ProjectParticipant p : response.getData().getProjects()) {
+                            projectList.add(p.getProject());
+                        }
+
+                        runOnUiThread(() -> {
+                            projectListAdapter.notifyDataSetChanged();
+                        });
                     }
-
-                    runOnUiThread(() -> {
-                        projectListAdapter.notifyDataSetChanged();
-                    });
-
                 },
                 error -> {
                     Log.e(TAG, "Error", error);

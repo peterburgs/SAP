@@ -27,7 +27,6 @@ public class AccountActivity extends AppCompatActivity {
     ImageView imv_avatar;
 
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
-    com.getbase.floatingactionbutton.FloatingActionButton fabTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +37,11 @@ public class AccountActivity extends AppCompatActivity {
         tv_email = findViewById(R.id.tv_email);
         imv_avatar = findViewById(R.id.imv_avatar);
         fabProject = findViewById(R.id.fabProject);
-        fabTask = findViewById(R.id.fabTask);
         loadingDialog = new LoadingDialog(AccountActivity.this);
 
         fabProject.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProjectListActivity.class);
             startActivity(intent);
-        });
-        fabTask.setOnClickListener(v -> {
-            Toast.makeText(this, "Task Selected", Toast.LENGTH_SHORT).show();
         });
 
         userQuery();

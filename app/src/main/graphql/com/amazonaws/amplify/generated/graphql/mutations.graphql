@@ -19,6 +19,7 @@ mutation CreateUser(
       }
       nextToken
     }
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -44,6 +45,7 @@ mutation UpdateUser(
       }
       nextToken
     }
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -69,6 +71,7 @@ mutation DeleteUser(
       }
       nextToken
     }
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -180,6 +183,7 @@ mutation CreateProjectParticipant(
       projects {
         nextToken
       }
+      avatarKey
       createdAt
       updatedAt
       owner
@@ -217,6 +221,7 @@ mutation UpdateProjectParticipant(
       projects {
         nextToken
       }
+      avatarKey
       createdAt
       updatedAt
       owner
@@ -254,6 +259,7 @@ mutation DeleteProjectParticipant(
       projects {
         nextToken
       }
+      avatarKey
       createdAt
       updatedAt
       owner

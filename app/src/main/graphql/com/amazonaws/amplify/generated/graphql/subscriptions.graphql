@@ -16,13 +16,14 @@ subscription OnCreateUser {
       }
       nextToken
     }
+    avatarKey
     createdAt
     updatedAt
     owner
   }
 }
-subscription OnUpdateUser($owner: String!) {
-  onUpdateUser(owner: $owner) {
+subscription OnUpdateUser {
+  onUpdateUser {
     id
     email
     username
@@ -38,6 +39,7 @@ subscription OnUpdateUser($owner: String!) {
       }
       nextToken
     }
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -60,6 +62,7 @@ subscription OnDeleteUser($owner: String!) {
       }
       nextToken
     }
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -159,6 +162,7 @@ subscription OnCreateProjectParticipant {
       projects {
         nextToken
       }
+      avatarKey
       createdAt
       updatedAt
       owner
@@ -193,6 +197,7 @@ subscription OnUpdateProjectParticipant($owner: String!) {
       projects {
         nextToken
       }
+      avatarKey
       createdAt
       updatedAt
       owner
@@ -227,6 +232,7 @@ subscription OnDeleteProjectParticipant($owner: String!) {
       projects {
         nextToken
       }
+      avatarKey
       createdAt
       updatedAt
       owner

@@ -1,10 +1,11 @@
 type User
   @model
-  @auth(rules: [ {allow: owner, operations: [update, delete]} ]) {
+  @auth(rules: [ {allow: owner, operations: [delete]} ]) {
   id: ID!
   email: String!
   username: String!
   projects: [ProjectParticipant] @connection(keyName: "byMember", fields: ["id"])
+  avatarKey: String!
 }
 
 type Project

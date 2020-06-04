@@ -47,16 +47,14 @@ public class ProjectListActivity extends AppCompatActivity {
         rcvProjectList = findViewById(R.id.rcvProjectList);
         rcvProjectList.setHasFixedSize(true);
         projectListAdapter = new ProjectListAdapter(projectList);
-        //
+
         rcvProjectList.setLayoutManager(new LinearLayoutManager(this));
         rcvProjectList.setAdapter(projectListAdapter);
         projectListAdapter.setOnItemClickListener(new ProjectListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //todo: Navigate to Project Container
                 Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
                 startActivity(intent);
-
             }
         });
 
@@ -77,7 +75,8 @@ public class ProjectListActivity extends AppCompatActivity {
             Toast.makeText(this, "Task Selected", Toast.LENGTH_SHORT).show();
         });
         fabAccount.setOnClickListener(v -> {
-            Toast.makeText(this, "Account Selected", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+            startActivity(intent);
         });
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

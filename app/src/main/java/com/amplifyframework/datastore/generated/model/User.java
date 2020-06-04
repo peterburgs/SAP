@@ -23,10 +23,12 @@ public final class User implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField EMAIL = field("email");
   public static final QueryField USERNAME = field("username");
+  public static final QueryField AVATAR_KEY = field("avatarKey");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String email;
   private final @ModelField(targetType="String", isRequired = true) String username;
   private final @ModelField(targetType="ProjectParticipant") @HasMany(associatedWith = "member", type = ProjectParticipant.class) List<ProjectParticipant> projects = null;
+  private final @ModelField(targetType="String", isRequired = true) String avatarKey;
   public String getId() {
       return id;
   }
@@ -43,10 +45,15 @@ public final class User implements Model {
       return projects;
   }
   
-  private User(String id, String email, String username) {
+  public String getAvatarKey() {
+      return avatarKey;
+  }
+  
+  private User(String id, String email, String username, String avatarKey) {
     this.id = id;
     this.email = email;
     this.username = username;
+    this.avatarKey = avatarKey;
   }
   
   @Override
@@ -59,7 +66,8 @@ public final class User implements Model {
       User user = (User) obj;
       return ObjectsCompat.equals(getId(), user.getId()) &&
               ObjectsCompat.equals(getEmail(), user.getEmail()) &&
-              ObjectsCompat.equals(getUsername(), user.getUsername());
+              ObjectsCompat.equals(getUsername(), user.getUsername()) &&
+              ObjectsCompat.equals(getAvatarKey(), user.getAvatarKey());
       }
   }
   
@@ -69,6 +77,7 @@ public final class User implements Model {
       .append(getId())
       .append(getEmail())
       .append(getUsername())
+      .append(getAvatarKey())
       .toString()
       .hashCode();
   }
@@ -80,6 +89,7 @@ public final class User implements Model {
       .append("id=" + String.valueOf(getId()))
       .append("email=" + String.valueOf(getEmail()))
       .append("username=" + String.valueOf(getUsername()))
+      .append("avatarKey=" + String.valueOf(getAvatarKey()))
       .append("}")
       .toString();
   }
@@ -110,6 +120,7 @@ public final class User implements Model {
     return new User(
       id,
       null,
+      null,
       null
     );
   }
@@ -117,7 +128,8 @@ public final class User implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       email,
-      username);
+      username,
+      avatarKey);
   }
   public interface EmailStep {
     UsernameStep email(String email);
@@ -125,7 +137,12 @@ public final class User implements Model {
   
 
   public interface UsernameStep {
-    BuildStep username(String username);
+    AvatarKeyStep username(String username);
+  }
+  
+
+  public interface AvatarKeyStep {
+    BuildStep avatarKey(String avatarKey);
   }
   
 
@@ -135,10 +152,11 @@ public final class User implements Model {
   }
   
 
-  public static class Builder implements EmailStep, UsernameStep, BuildStep {
+  public static class Builder implements EmailStep, UsernameStep, AvatarKeyStep, BuildStep {
     private String id;
     private String email;
     private String username;
+    private String avatarKey;
     @Override
      public User build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -146,7 +164,8 @@ public final class User implements Model {
         return new User(
           id,
           email,
-          username);
+          username,
+          avatarKey);
     }
     
     @Override
@@ -157,9 +176,16 @@ public final class User implements Model {
     }
     
     @Override
-     public BuildStep username(String username) {
+     public AvatarKeyStep username(String username) {
         Objects.requireNonNull(username);
         this.username = username;
+        return this;
+    }
+    
+    @Override
+     public BuildStep avatarKey(String avatarKey) {
+        Objects.requireNonNull(avatarKey);
+        this.avatarKey = avatarKey;
         return this;
     }
     
@@ -186,10 +212,11 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String email, String username) {
+    private CopyOfBuilder(String id, String email, String username, String avatarKey) {
       super.id(id);
       super.email(email)
-        .username(username);
+        .username(username)
+        .avatarKey(avatarKey);
     }
     
     @Override
@@ -200,6 +227,11 @@ public final class User implements Model {
     @Override
      public CopyOfBuilder username(String username) {
       return (CopyOfBuilder) super.username(username);
+    }
+    
+    @Override
+     public CopyOfBuilder avatarKey(String avatarKey) {
+      return (CopyOfBuilder) super.avatarKey(avatarKey);
     }
   }
   

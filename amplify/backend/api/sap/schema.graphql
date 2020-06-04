@@ -4,8 +4,9 @@ type User
   id: ID!
   email: String!
   username: String!
-  projects: [ProjectParticipant] @connection(keyName: "byMember", fields: ["id"])
   avatarKey: String!
+  projects: [ProjectParticipant] @connection(keyName: "byMember", fields: ["id"])
+  tasks: [Task] @connection(keyName: "byAssignee", fields: ["id"])
 }
 
 type Project
@@ -17,7 +18,8 @@ type Project
   avatarKey: String!
   createdAt: AWSDateTime
   members: [ProjectParticipant] @connection(keyName: "byProject", fields: ["id"])
-  # sprints: [Sprint] @connection(keyName: "byProject", fields: ["Id"])
+  tasks: [Task] @connection(keyName: "byProject", fields: ["id"])
+  sprints: [Sprint] @connection(keyName: "byProject", fields: ["id"])
 }
 
 type ProjectParticipant
@@ -38,28 +40,39 @@ enum Role {
   TEAM_MEMBER
 }
 
-# type Sprint
-#   @model
-#   @key(name: "byProject", fields: ["projectID"])
-#   @auth(rules: [{allow: owner}]) {
-#   id: ID!
-#   startDate: AWSDate!
-#   endDate: AWSDate!
-#   goal: String!
-#   name: String!
-#   isCompleted: Boolean!
-#   isStarted: Boolean!
-#   projectID: ID!
-#   project: [Project] @connection(fields: ["projectID"])
-# }
+type Sprint
+  @model
+  @key(name: "byProject", fields: ["projectID"])
+  @auth(rules: [{allow: owner}]) {
+  id: ID!
+  startDate: AWSDate
+  endDate: AWSDate
+  goal: String!
+  name: String!
+  isCompleted: Boolean
+  isStarted: Boolean
+  projectID: ID!
+  isBacklog: Boolean!
+  project: Project! @connection(fields: ["projectID"])
+  tasks: [Task] @connection(keyName: "bySprint", fields: ["id"])
+}
 
-# type Task
-#   @model {
-#   id: ID!
-#   name: String!
-#   label: String!
-#   description: String!
-#   priority: Int!
-#   status: String!
-#   storyPoint: Int!
-# }
+type Task
+  @model
+  @key(name: "byProject", fields: ["projectID"])
+  @key(name: "byAssignee", fields: ["assigneeID"])
+  @key(name: "bySprint", fields: ["sprintID"])
+  @auth(rules: [{allow: owner}]) {
+  id: ID!
+  name: String!
+  label: String
+  description: String!
+  projectID: ID!
+  assigneeID: ID!
+  sprintID: ID!
+  priority: Int
+  status: String
+  project: Project! @connection(fields: ["projectID"])
+  assignee: User! @connection(fields: ["assigneeID"])
+  sprint: Sprint! @connection(fields: ["sprintID"])
+}

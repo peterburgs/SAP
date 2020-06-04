@@ -64,7 +64,9 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+
+            >
 
         </androidx.viewpager.widget.ViewPager>
     </LinearLayout>
@@ -100,6 +102,15 @@
             app:fab_icon="@drawable/ic_project"
             app:fab_size="mini"
             app:fab_title="Projects" />
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/black_800"
+            app:fab_icon="@drawable/ic_sprint"
+            app:fab_size="mini"
+            app:fab_title="Sprint" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAccount"

@@ -7,7 +7,7 @@
     android:layout_margin="5dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvToDo"
+        android:id="@+id/cvInProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#EAECF7"

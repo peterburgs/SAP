@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.sap.R;
 import com.example.sap.adapters.PageAdapter;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -56,6 +57,12 @@ public class ProjectContainerActivity extends AppCompatActivity {
 
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
+
+        BadgeDrawable badgeDrawable = tabLayout.getTabAt(0).getOrCreateBadge();
+        badgeDrawable.setVisible(true);
+        //todo: Get Number of ToDo Tasks and pass to  "badgeDrawable.setNumber([number])"
+        badgeDrawable.setNumber(10);
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

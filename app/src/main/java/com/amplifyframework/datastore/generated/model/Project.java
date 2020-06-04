@@ -32,6 +32,8 @@ public final class Project implements Model {
   private final @ModelField(targetType="String", isRequired = true) String avatarKey;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
   private final @ModelField(targetType="ProjectParticipant") @HasMany(associatedWith = "project", type = ProjectParticipant.class) List<ProjectParticipant> members = null;
+  private final @ModelField(targetType="Task") @HasMany(associatedWith = "project", type = Task.class) List<Task> tasks = null;
+  private final @ModelField(targetType="Sprint") @HasMany(associatedWith = "project", type = Sprint.class) List<Sprint> sprints = null;
   public String getId() {
       return id;
   }
@@ -54,6 +56,14 @@ public final class Project implements Model {
   
   public List<ProjectParticipant> getMembers() {
       return members;
+  }
+  
+  public List<Task> getTasks() {
+      return tasks;
+  }
+  
+  public List<Sprint> getSprints() {
+      return sprints;
   }
   
   private Project(String id, String name, String key, String avatarKey, Temporal.DateTime createdAt) {

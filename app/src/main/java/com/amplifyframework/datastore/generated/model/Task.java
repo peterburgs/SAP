@@ -25,6 +25,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 public final class Task implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField NAME = field("name");
+  public static final QueryField SUMMARY = field("summary");
   public static final QueryField LABEL = field("label");
   public static final QueryField DESCRIPTION = field("description");
   public static final QueryField PRIORITY = field("priority");
@@ -34,6 +35,7 @@ public final class Task implements Model {
   public static final QueryField SPRINT = field("sprintID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String name;
+  private final @ModelField(targetType="String", isRequired = true) String summary;
   private final @ModelField(targetType="String") String label;
   private final @ModelField(targetType="String", isRequired = true) String description;
   private final @ModelField(targetType="Int") Integer priority;
@@ -47,6 +49,10 @@ public final class Task implements Model {
   
   public String getName() {
       return name;
+  }
+  
+  public String getSummary() {
+      return summary;
   }
   
   public String getLabel() {
@@ -77,9 +83,10 @@ public final class Task implements Model {
       return sprint;
   }
   
-  private Task(String id, String name, String label, String description, Integer priority, String status, Project project, User assignee, Sprint sprint) {
+  private Task(String id, String name, String summary, String label, String description, Integer priority, String status, Project project, User assignee, Sprint sprint) {
     this.id = id;
     this.name = name;
+    this.summary = summary;
     this.label = label;
     this.description = description;
     this.priority = priority;
@@ -99,6 +106,7 @@ public final class Task implements Model {
       Task task = (Task) obj;
       return ObjectsCompat.equals(getId(), task.getId()) &&
               ObjectsCompat.equals(getName(), task.getName()) &&
+              ObjectsCompat.equals(getSummary(), task.getSummary()) &&
               ObjectsCompat.equals(getLabel(), task.getLabel()) &&
               ObjectsCompat.equals(getDescription(), task.getDescription()) &&
               ObjectsCompat.equals(getPriority(), task.getPriority()) &&
@@ -114,6 +122,7 @@ public final class Task implements Model {
     return new StringBuilder()
       .append(getId())
       .append(getName())
+      .append(getSummary())
       .append(getLabel())
       .append(getDescription())
       .append(getPriority())
@@ -131,6 +140,7 @@ public final class Task implements Model {
       .append("Task {")
       .append("id=" + String.valueOf(getId()))
       .append("name=" + String.valueOf(getName()))
+      .append("summary=" + String.valueOf(getSummary()))
       .append("label=" + String.valueOf(getLabel()))
       .append("description=" + String.valueOf(getDescription()))
       .append("priority=" + String.valueOf(getPriority()))
@@ -174,6 +184,7 @@ public final class Task implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -181,6 +192,7 @@ public final class Task implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       name,
+      summary,
       label,
       description,
       priority,
@@ -190,7 +202,12 @@ public final class Task implements Model {
       sprint);
   }
   public interface NameStep {
-    DescriptionStep name(String name);
+    SummaryStep name(String name);
+  }
+  
+
+  public interface SummaryStep {
+    DescriptionStep summary(String summary);
   }
   
 
@@ -223,9 +240,10 @@ public final class Task implements Model {
   }
   
 
-  public static class Builder implements NameStep, DescriptionStep, ProjectStep, AssigneeStep, SprintStep, BuildStep {
+  public static class Builder implements NameStep, SummaryStep, DescriptionStep, ProjectStep, AssigneeStep, SprintStep, BuildStep {
     private String id;
     private String name;
+    private String summary;
     private String description;
     private Project project;
     private User assignee;
@@ -240,6 +258,7 @@ public final class Task implements Model {
         return new Task(
           id,
           name,
+          summary,
           label,
           description,
           priority,
@@ -250,9 +269,16 @@ public final class Task implements Model {
     }
     
     @Override
-     public DescriptionStep name(String name) {
+     public SummaryStep name(String name) {
         Objects.requireNonNull(name);
         this.name = name;
+        return this;
+    }
+    
+    @Override
+     public DescriptionStep summary(String summary) {
+        Objects.requireNonNull(summary);
+        this.summary = summary;
         return this;
     }
     
@@ -325,9 +351,10 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String label, String description, Integer priority, String status, Project project, User assignee, Sprint sprint) {
+    private CopyOfBuilder(String id, String name, String summary, String label, String description, Integer priority, String status, Project project, User assignee, Sprint sprint) {
       super.id(id);
       super.name(name)
+        .summary(summary)
         .description(description)
         .project(project)
         .assignee(assignee)
@@ -340,6 +367,11 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder name(String name) {
       return (CopyOfBuilder) super.name(name);
+    }
+    
+    @Override
+     public CopyOfBuilder summary(String summary) {
+      return (CopyOfBuilder) super.summary(summary);
     }
     
     @Override

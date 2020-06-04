@@ -20,6 +20,7 @@ subscription OnCreateUser {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -58,6 +59,7 @@ subscription OnUpdateUser {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -96,6 +98,7 @@ subscription OnDeleteUser {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -135,6 +138,7 @@ subscription OnCreateProject {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -190,6 +194,7 @@ subscription OnUpdateProject {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -245,6 +250,7 @@ subscription OnDeleteProject {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -433,6 +439,7 @@ subscription OnCreateSprint($owner: String!) {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -483,6 +490,7 @@ subscription OnUpdateSprint($owner: String!) {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -533,6 +541,7 @@ subscription OnDeleteSprint($owner: String!) {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -555,6 +564,7 @@ subscription OnCreateTask($owner: String!) {
   onCreateTask(owner: $owner) {
     id
     name
+    summary
     label
     description
     projectID
@@ -627,6 +637,7 @@ subscription OnUpdateTask($owner: String!) {
   onUpdateTask(owner: $owner) {
     id
     name
+    summary
     label
     description
     projectID
@@ -699,6 +710,7 @@ subscription OnDeleteTask($owner: String!) {
   onDeleteTask(owner: $owner) {
     id
     name
+    summary
     label
     description
     projectID

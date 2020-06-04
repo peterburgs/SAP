@@ -65,6 +65,7 @@ type Task
   @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String!
+  summary: String!
   label: String
   description: String!
   projectID: ID!

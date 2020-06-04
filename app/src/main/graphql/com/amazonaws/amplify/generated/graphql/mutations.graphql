@@ -23,6 +23,7 @@ mutation CreateUser(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -64,6 +65,7 @@ mutation UpdateUser(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -105,6 +107,7 @@ mutation DeleteUser(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -147,6 +150,7 @@ mutation CreateProject(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -205,6 +209,7 @@ mutation UpdateProject(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -263,6 +268,7 @@ mutation DeleteProject(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -463,6 +469,7 @@ mutation CreateSprint(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -516,6 +523,7 @@ mutation UpdateSprint(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -569,6 +577,7 @@ mutation DeleteSprint(
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -594,6 +603,7 @@ mutation CreateTask(
   createTask(input: $input, condition: $condition) {
     id
     name
+    summary
     label
     description
     projectID
@@ -669,6 +679,7 @@ mutation UpdateTask(
   updateTask(input: $input, condition: $condition) {
     id
     name
+    summary
     label
     description
     projectID
@@ -744,6 +755,7 @@ mutation DeleteTask(
   deleteTask(input: $input, condition: $condition) {
     id
     name
+    summary
     label
     description
     projectID

@@ -20,6 +20,7 @@ query GetUser($id: ID!) {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -82,6 +83,7 @@ query GetProject($id: ID!) {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -251,6 +253,7 @@ query GetSprint($id: ID!) {
       items {
         id
         name
+        summary
         label
         description
         projectID
@@ -307,6 +310,7 @@ query GetTask($id: ID!) {
   getTask(id: $id) {
     id
     name
+    summary
     label
     description
     projectID
@@ -384,6 +388,7 @@ query ListTasks(
     items {
       id
       name
+      summary
       label
       description
       projectID

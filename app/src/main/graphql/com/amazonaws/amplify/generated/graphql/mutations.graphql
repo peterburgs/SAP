@@ -15,14 +15,12 @@ mutation CreateUser(
         role
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 mutation UpdateUser(
@@ -41,14 +39,12 @@ mutation UpdateUser(
         role
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 mutation DeleteUser(
@@ -67,14 +63,12 @@ mutation DeleteUser(
         role
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 mutation CreateProject(
@@ -95,12 +89,10 @@ mutation CreateProject(
         role
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
 mutation UpdateProject(
@@ -121,12 +113,10 @@ mutation UpdateProject(
         role
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
 mutation DeleteProject(
@@ -147,12 +137,10 @@ mutation DeleteProject(
         role
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
 mutation CreateProjectParticipant(
@@ -174,7 +162,6 @@ mutation CreateProjectParticipant(
         nextToken
       }
       updatedAt
-      owner
     }
     member {
       id
@@ -186,11 +173,9 @@ mutation CreateProjectParticipant(
       avatarKey
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation UpdateProjectParticipant(
@@ -212,7 +197,6 @@ mutation UpdateProjectParticipant(
         nextToken
       }
       updatedAt
-      owner
     }
     member {
       id
@@ -224,11 +208,9 @@ mutation UpdateProjectParticipant(
       avatarKey
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation DeleteProjectParticipant(
@@ -250,7 +232,6 @@ mutation DeleteProjectParticipant(
         nextToken
       }
       updatedAt
-      owner
     }
     member {
       id
@@ -262,10 +243,8 @@ mutation DeleteProjectParticipant(
       avatarKey
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }

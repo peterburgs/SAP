@@ -1,6 +1,6 @@
 type User
   @model
-  @auth(rules: [ {allow: owner, operations: [delete]} ]) {
+  @auth(rules: [ {allow: owner, operations: [create, delete]} ]) {
   id: ID!
   email: String!
   username: String!
@@ -10,7 +10,7 @@ type User
 
 type Project
   @model
-  @auth(rules: [ {allow: owner, operations: [update, delete]} ]) {
+  @auth(rules: [ {allow: owner, operations: [create, update, delete]} ]) {
   id: ID!
   name: String!
   key: String!
@@ -24,7 +24,7 @@ type ProjectParticipant
   @model
   @key(name: "byProject", fields: ["projectID", "memberID"])
   @key(name: "byMember", fields: ["memberID", "projectID"])
-  @auth(rules: [ {allow: owner, operations: [update, delete]} ]) {
+  @auth(rules: [ {allow: owner, operations: [create, update, delete]} ]) {
   id: ID!
   projectID: ID!
   memberID: ID!

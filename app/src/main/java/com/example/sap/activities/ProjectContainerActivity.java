@@ -32,12 +32,11 @@ public class ProjectContainerActivity extends AppCompatActivity {
         titInProgress = findViewById(R.id.titInProgress);
         titDone = findViewById(R.id.titDone);
         titBacklog = findViewById(R.id.titBacklog);
-        //tabLayout.setupWithViewPager(viewPager);
 
 
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());

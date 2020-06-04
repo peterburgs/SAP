@@ -4,6 +4,7 @@ subscription OnCreateUser {
     id
     email
     username
+    avatarKey
     projects {
       items {
         id
@@ -12,14 +13,29 @@ subscription OnCreateUser {
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
-    avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 subscription OnUpdateUser {
@@ -27,6 +43,7 @@ subscription OnUpdateUser {
     id
     email
     username
+    avatarKey
     projects {
       items {
         id
@@ -35,21 +52,37 @@ subscription OnUpdateUser {
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
-    avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
-subscription OnDeleteUser($owner: String!) {
-  onDeleteUser(owner: $owner) {
+subscription OnDeleteUser {
+  onDeleteUser {
     id
     email
     username
+    avatarKey
     projects {
       items {
         id
@@ -58,14 +91,29 @@ subscription OnDeleteUser($owner: String!) {
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
-    avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 subscription OnCreateProject {
@@ -83,16 +131,49 @@ subscription OnCreateProject {
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    sprints {
+      items {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
-subscription OnUpdateProject($owner: String!) {
-  onUpdateProject(owner: $owner) {
+subscription OnUpdateProject {
+  onUpdateProject {
     id
     name
     key
@@ -106,16 +187,49 @@ subscription OnUpdateProject($owner: String!) {
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    sprints {
+      items {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
-subscription OnDeleteProject($owner: String!) {
-  onDeleteProject(owner: $owner) {
+subscription OnDeleteProject {
+  onDeleteProject {
     id
     name
     key
@@ -129,12 +243,45 @@ subscription OnDeleteProject($owner: String!) {
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    sprints {
+      items {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
 subscription OnCreateProjectParticipant {
@@ -152,28 +299,34 @@ subscription OnCreateProjectParticipant {
       members {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
       updatedAt
-      owner
     }
     member {
       id
       email
       username
+      avatarKey
       projects {
         nextToken
       }
-      avatarKey
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
-subscription OnUpdateProjectParticipant($owner: String!) {
-  onUpdateProjectParticipant(owner: $owner) {
+subscription OnUpdateProjectParticipant {
+  onUpdateProjectParticipant {
     id
     projectID
     memberID
@@ -187,28 +340,34 @@ subscription OnUpdateProjectParticipant($owner: String!) {
       members {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
       updatedAt
-      owner
     }
     member {
       id
       email
       username
+      avatarKey
       projects {
         nextToken
       }
-      avatarKey
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
-subscription OnDeleteProjectParticipant($owner: String!) {
-  onDeleteProjectParticipant(owner: $owner) {
+subscription OnDeleteProjectParticipant {
+  onDeleteProjectParticipant {
     id
     projectID
     memberID
@@ -222,17 +381,395 @@ subscription OnDeleteProjectParticipant($owner: String!) {
       members {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
       updatedAt
-      owner
     }
     member {
       id
       email
       username
+      avatarKey
       projects {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateSprint($owner: String!) {
+  onCreateSprint(owner: $owner) {
+    id
+    startDate
+    endDate
+    goal
+    name
+    isCompleted
+    isStarted
+    projectID
+    isBacklog
+    project {
+      id
+      name
+      key
       avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnUpdateSprint($owner: String!) {
+  onUpdateSprint(owner: $owner) {
+    id
+    startDate
+    endDate
+    goal
+    name
+    isCompleted
+    isStarted
+    projectID
+    isBacklog
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnDeleteSprint($owner: String!) {
+  onDeleteSprint(owner: $owner) {
+    id
+    startDate
+    endDate
+    goal
+    name
+    isCompleted
+    isStarted
+    projectID
+    isBacklog
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnCreateTask($owner: String!) {
+  onCreateTask(owner: $owner) {
+    id
+    name
+    summary
+    label
+    description
+    projectID
+    assigneeID
+    sprintID
+    priority
+    status
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    assignee {
+      id
+      email
+      username
+      avatarKey
+      projects {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    sprint {
+      id
+      startDate
+      endDate
+      goal
+      name
+      isCompleted
+      isStarted
+      projectID
+      isBacklog
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnUpdateTask($owner: String!) {
+  onUpdateTask(owner: $owner) {
+    id
+    name
+    summary
+    label
+    description
+    projectID
+    assigneeID
+    sprintID
+    priority
+    status
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    assignee {
+      id
+      email
+      username
+      avatarKey
+      projects {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    sprint {
+      id
+      startDate
+      endDate
+      goal
+      name
+      isCompleted
+      isStarted
+      projectID
+      isBacklog
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnDeleteTask($owner: String!) {
+  onDeleteTask(owner: $owner) {
+    id
+    name
+    summary
+    label
+    description
+    projectID
+    assigneeID
+    sprintID
+    priority
+    status
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    assignee {
+      id
+      email
+      username
+      avatarKey
+      projects {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    sprint {
+      id
+      startDate
+      endDate
+      goal
+      name
+      isCompleted
+      isStarted
+      projectID
+      isBacklog
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
       owner

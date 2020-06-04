@@ -4,6 +4,7 @@ query GetUser($id: ID!) {
     id
     email
     username
+    avatarKey
     projects {
       items {
         id
@@ -12,14 +13,29 @@ query GetUser($id: ID!) {
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
-    avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 query ListUsers(
@@ -32,13 +48,15 @@ query ListUsers(
       id
       email
       username
+      avatarKey
       projects {
         nextToken
       }
-      avatarKey
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
     nextToken
   }
@@ -58,12 +76,45 @@ query GetProject($id: ID!) {
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    sprints {
+      items {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
 query ListProjects(
@@ -81,8 +132,13 @@ query ListProjects(
       members {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
       updatedAt
-      owner
     }
     nextToken
   }
@@ -102,24 +158,30 @@ query GetProjectParticipant($id: ID!) {
       members {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
       updatedAt
-      owner
     }
     member {
       id
       email
       username
+      avatarKey
       projects {
         nextToken
       }
-      avatarKey
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
 query ListProjectParticipants(
@@ -144,13 +206,222 @@ query ListProjectParticipants(
         avatarKey
         createdAt
         updatedAt
-        owner
       }
       member {
         id
         email
         username
         avatarKey
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetSprint($id: ID!) {
+  getSprint(id: $id) {
+    id
+    startDate
+    endDate
+    goal
+    name
+    isCompleted
+    isStarted
+    projectID
+    isBacklog
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+query ListSprints(
+  $filter: ModelSprintFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSprints(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      startDate
+      endDate
+      goal
+      name
+      isCompleted
+      isStarted
+      projectID
+      isBacklog
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    nextToken
+  }
+}
+query GetTask($id: ID!) {
+  getTask(id: $id) {
+    id
+    name
+    summary
+    label
+    description
+    projectID
+    assigneeID
+    sprintID
+    priority
+    status
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    assignee {
+      id
+      email
+      username
+      avatarKey
+      projects {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    sprint {
+      id
+      startDate
+      endDate
+      goal
+      name
+      isCompleted
+      isStarted
+      projectID
+      isBacklog
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+query ListTasks(
+  $filter: ModelTaskFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      summary
+      label
+      description
+      projectID
+      assigneeID
+      sprintID
+      priority
+      status
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      assignee {
+        id
+        email
+        username
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      sprint {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
         createdAt
         updatedAt
         owner

@@ -27,8 +27,9 @@ public final class User implements Model {
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String email;
   private final @ModelField(targetType="String", isRequired = true) String username;
-  private final @ModelField(targetType="ProjectParticipant") @HasMany(associatedWith = "member", type = ProjectParticipant.class) List<ProjectParticipant> projects = null;
   private final @ModelField(targetType="String", isRequired = true) String avatarKey;
+  private final @ModelField(targetType="ProjectParticipant") @HasMany(associatedWith = "member", type = ProjectParticipant.class) List<ProjectParticipant> projects = null;
+  private final @ModelField(targetType="Task") @HasMany(associatedWith = "assignee", type = Task.class) List<Task> tasks = null;
   public String getId() {
       return id;
   }
@@ -41,12 +42,16 @@ public final class User implements Model {
       return username;
   }
   
+  public String getAvatarKey() {
+      return avatarKey;
+  }
+  
   public List<ProjectParticipant> getProjects() {
       return projects;
   }
   
-  public String getAvatarKey() {
-      return avatarKey;
+  public List<Task> getTasks() {
+      return tasks;
   }
   
   private User(String id, String email, String username, String avatarKey) {

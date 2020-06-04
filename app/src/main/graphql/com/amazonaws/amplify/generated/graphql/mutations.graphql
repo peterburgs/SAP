@@ -7,6 +7,7 @@ mutation CreateUser(
     id
     email
     username
+    avatarKey
     projects {
       items {
         id
@@ -15,14 +16,29 @@ mutation CreateUser(
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
-    avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 mutation UpdateUser(
@@ -33,6 +49,7 @@ mutation UpdateUser(
     id
     email
     username
+    avatarKey
     projects {
       items {
         id
@@ -41,14 +58,29 @@ mutation UpdateUser(
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
-    avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 mutation DeleteUser(
@@ -59,6 +91,7 @@ mutation DeleteUser(
     id
     email
     username
+    avatarKey
     projects {
       items {
         id
@@ -67,14 +100,29 @@ mutation DeleteUser(
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
-    avatarKey
     createdAt
     updatedAt
-    owner
   }
 }
 mutation CreateProject(
@@ -95,12 +143,45 @@ mutation CreateProject(
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    sprints {
+      items {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
 mutation UpdateProject(
@@ -121,12 +202,45 @@ mutation UpdateProject(
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    sprints {
+      items {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
 mutation DeleteProject(
@@ -147,12 +261,45 @@ mutation DeleteProject(
         role
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    sprints {
+      items {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
+        createdAt
+        updatedAt
         owner
       }
       nextToken
     }
     updatedAt
-    owner
   }
 }
 mutation CreateProjectParticipant(
@@ -173,24 +320,30 @@ mutation CreateProjectParticipant(
       members {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
       updatedAt
-      owner
     }
     member {
       id
       email
       username
+      avatarKey
       projects {
         nextToken
       }
-      avatarKey
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation UpdateProjectParticipant(
@@ -211,24 +364,30 @@ mutation UpdateProjectParticipant(
       members {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
       updatedAt
-      owner
     }
     member {
       id
       email
       username
+      avatarKey
       projects {
         nextToken
       }
-      avatarKey
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation DeleteProjectParticipant(
@@ -249,17 +408,413 @@ mutation DeleteProjectParticipant(
       members {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
       updatedAt
-      owner
     }
     member {
       id
       email
       username
+      avatarKey
       projects {
         nextToken
       }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateSprint(
+  $input: CreateSprintInput!
+  $condition: ModelSprintConditionInput
+) {
+  createSprint(input: $input, condition: $condition) {
+    id
+    startDate
+    endDate
+    goal
+    name
+    isCompleted
+    isStarted
+    projectID
+    isBacklog
+    project {
+      id
+      name
+      key
       avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation UpdateSprint(
+  $input: UpdateSprintInput!
+  $condition: ModelSprintConditionInput
+) {
+  updateSprint(input: $input, condition: $condition) {
+    id
+    startDate
+    endDate
+    goal
+    name
+    isCompleted
+    isStarted
+    projectID
+    isBacklog
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation DeleteSprint(
+  $input: DeleteSprintInput!
+  $condition: ModelSprintConditionInput
+) {
+  deleteSprint(input: $input, condition: $condition) {
+    id
+    startDate
+    endDate
+    goal
+    name
+    isCompleted
+    isStarted
+    projectID
+    isBacklog
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    tasks {
+      items {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation CreateTask(
+  $input: CreateTaskInput!
+  $condition: ModelTaskConditionInput
+) {
+  createTask(input: $input, condition: $condition) {
+    id
+    name
+    summary
+    label
+    description
+    projectID
+    assigneeID
+    sprintID
+    priority
+    status
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    assignee {
+      id
+      email
+      username
+      avatarKey
+      projects {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    sprint {
+      id
+      startDate
+      endDate
+      goal
+      name
+      isCompleted
+      isStarted
+      projectID
+      isBacklog
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation UpdateTask(
+  $input: UpdateTaskInput!
+  $condition: ModelTaskConditionInput
+) {
+  updateTask(input: $input, condition: $condition) {
+    id
+    name
+    summary
+    label
+    description
+    projectID
+    assigneeID
+    sprintID
+    priority
+    status
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    assignee {
+      id
+      email
+      username
+      avatarKey
+      projects {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    sprint {
+      id
+      startDate
+      endDate
+      goal
+      name
+      isCompleted
+      isStarted
+      projectID
+      isBacklog
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation DeleteTask(
+  $input: DeleteTaskInput!
+  $condition: ModelTaskConditionInput
+) {
+  deleteTask(input: $input, condition: $condition) {
+    id
+    name
+    summary
+    label
+    description
+    projectID
+    assigneeID
+    sprintID
+    priority
+    status
+    project {
+      id
+      name
+      key
+      avatarKey
+      createdAt
+      members {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      sprints {
+        nextToken
+      }
+      updatedAt
+    }
+    assignee {
+      id
+      email
+      username
+      avatarKey
+      projects {
+        nextToken
+      }
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    sprint {
+      id
+      startDate
+      endDate
+      goal
+      name
+      isCompleted
+      isStarted
+      projectID
+      isBacklog
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        updatedAt
+      }
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
       owner

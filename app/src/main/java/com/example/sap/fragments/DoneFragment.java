@@ -1,5 +1,6 @@
 package com.example.sap.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
+import com.example.sap.activities.EditTaskActivity;
 import com.example.sap.adapters.DoneAdapter;
 import com.example.sap.adapters.ToDoAdapter;
 
@@ -114,8 +116,9 @@ public class DoneFragment extends Fragment {
         doneAdapter.setOnItemClickListener(new DoneAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //todo: handle Nav to EditTask
-                Toast.makeText(getContext(), "Task Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), EditTaskActivity.class);
+                intent.putExtra("TASK_ID", taskList.get(position).getId());
+                startActivity(intent);
             }
         });
 

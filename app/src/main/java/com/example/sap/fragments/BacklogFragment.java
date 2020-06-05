@@ -27,6 +27,7 @@ import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
 import com.example.sap.activities.CreateTaskActivity;
+import com.example.sap.activities.EditTaskActivity;
 import com.example.sap.adapters.BacklogAdapter;
 import com.example.sap.adapters.ToDoAdapter;
 
@@ -119,8 +120,10 @@ public class BacklogFragment extends Fragment {
         backlogAdapter.setOnItemClickListener(new BacklogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //todo: handle Nav to EditTask
-                Toast.makeText(getContext(), "Task Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), EditTaskActivity.class);
+                intent.putExtra("TASK_ID", taskList.get(position).getId());
+                startActivity(intent);
+
             }
         });
 
@@ -153,7 +156,7 @@ public class BacklogFragment extends Fragment {
                                                 taskList.addAll(getSprintRes.getData().getTasks());
                                             }
                                             mHandler.post(() -> {
-                                                if(taskList.isEmpty()) {
+                                                if (taskList.isEmpty()) {
                                                     imvBacklogEmpty.setImageResource(R.drawable.img_empty);
                                                 } else {
                                                     backlogAdapter.notifyDataSetChanged();

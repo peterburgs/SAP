@@ -19,7 +19,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.amplifyframework.api.ApiOperation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
@@ -108,6 +110,7 @@ public class BacklogFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CreateTaskActivity.class);
+                intent.putExtra("PROJECT_ID", getProjectID());
                 startActivity(intent);
 
             }
@@ -128,6 +131,7 @@ public class BacklogFragment extends Fragment {
         });
 
         backlogTaskQuery();
+        taskCreateSubscribe();
     }
 
     private void backlogTaskQuery() {
@@ -152,9 +156,7 @@ public class BacklogFragment extends Fragment {
                                         ModelQuery.get(Sprint.class, backlog.getId()),
                                         getSprintRes -> {
                                             taskList.clear();
-                                            for (Task task : getSprintRes.getData().getTasks()) {
-                                                taskList.addAll(getSprintRes.getData().getTasks());
-                                            }
+                                            taskList.addAll(getSprintRes.getData().getTasks());
                                             mHandler.post(() -> {
                                                 if (taskList.isEmpty()) {
                                                     imvBacklogEmpty.setImageResource(R.drawable.img_empty);
@@ -173,6 +175,18 @@ public class BacklogFragment extends Fragment {
                     }
             );
         }
+    }
+
+    private void taskCreateSubscribe() {
+        ApiOperation subscription = Amplify.API.subscribe(
+                ModelSubscription.onCreate(Task.class),
+                onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
+                onCreated -> {
+                    backlogTaskQuery();
+                },
+                onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
+        );
     }
 
     private String getProjectID() {

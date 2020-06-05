@@ -88,6 +88,7 @@
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#D6414F"
                 android:fontFamily="@font/bold"
+                android:onClick="onCreateTaskClick"
                 android:shadowColor="@color/black_800"
                 android:shadowDy="@android:integer/config_longAnimTime"
                 android:text="Create Task"

@@ -14,11 +14,15 @@ public class CreateTaskActivity extends AppCompatActivity {
     EditText edtSummary;
     EditText edtDescription;
     Button btnCreateTask;
+    private static final String TAG = CreateTaskActivity.class.getSimpleName();
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
+
+        loadingDialog = new LoadingDialog(this);
 
         edtSummary = findViewById(R.id.edtSummary);
         edtDescription = findViewById(R.id.edtDescription);
@@ -29,5 +33,22 @@ public class CreateTaskActivity extends AppCompatActivity {
                 Toast.makeText(CreateTaskActivity.this, "Task is created!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void onCreateTaskClick(View view) {
+
+        // Get project
+
+    }
+
+    private String getProjectID() {
+        String newString;
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            newString = null;
+        } else {
+            newString = extras.getString("PROJECT_ID");
+        }
+        return newString;
     }
 }

@@ -60,5 +60,7 @@ dependencies {
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //Material Dialog
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
 }

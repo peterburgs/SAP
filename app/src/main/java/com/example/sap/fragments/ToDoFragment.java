@@ -1,5 +1,6 @@
 package com.example.sap.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
 import com.example.sap.activities.CreateProjectActivity;
+import com.example.sap.activities.EditTaskActivity;
 import com.example.sap.adapters.ToDoAdapter;
 
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ public class ToDoFragment extends Fragment {
     private ArrayList<Task> taskList;
     private ToDoAdapter toDoAdapter;
     private Handler mHandler;
+
     //
     public ToDoFragment() {
         // Required empty public constructor
@@ -97,7 +100,8 @@ public class ToDoFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 //todo: handle Nav to EditTask
-                Toast.makeText(getContext(), "Task Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), EditTaskActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -118,7 +122,7 @@ public class ToDoFragment extends Fragment {
                     ModelQuery.get(Project.class, getProjectID()),
                     response -> {
                         taskList.clear();
-                        if(response.getData() != null) {
+                        if (response.getData() != null) {
                             Sprint activatedSprint = null;
                             // Get activated sprint
                             for (Sprint sprint : response.getData().getSprints()) {
@@ -127,14 +131,14 @@ public class ToDoFragment extends Fragment {
                                 }
                             }
 
-                            if(activatedSprint != null) {
+                            if (activatedSprint != null) {
                                 // Get tasks of the sprint
                                 Amplify.API.query(
                                         ModelQuery.get(Sprint.class, activatedSprint.getId()),
                                         getSprintRes -> {
                                             taskList.clear();
-                                            for(Task task : getSprintRes.getData().getTasks()) {
-                                                if(task.getStatus().equals(TaskStatus.TODO)) {
+                                            for (Task task : getSprintRes.getData().getTasks()) {
+                                                if (task.getStatus().equals(TaskStatus.TODO)) {
                                                     taskList.add(task);
                                                 }
                                             }

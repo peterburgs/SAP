@@ -28,7 +28,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         // Create loading dialog
         loadingDialog = new LoadingDialog(ResetPasswordActivity.this);
-
+        //todo: Handle Sending Email
         makeToast(toast, "We have sent the verification code to your email");
 
         btn_confirm = findViewById(R.id.btn_confirm);

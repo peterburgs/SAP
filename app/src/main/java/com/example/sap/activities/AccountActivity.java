@@ -59,6 +59,13 @@ public class AccountActivity extends AppCompatActivity {
         );
     }
 
+    public void onResetPassword(View view) {
+        loadingDialog.startLoadingDialog();
+        Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+        startActivity(intent);
+        loadingDialog.dismissDialog();
+    }
+
     private void userQuery() {
         loadingDialog.startLoadingDialog();
         Amplify.API.query(

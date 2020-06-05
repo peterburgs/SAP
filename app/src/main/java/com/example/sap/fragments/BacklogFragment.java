@@ -2,13 +2,31 @@ package com.example.sap.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Project;
+import com.amplifyframework.datastore.generated.model.Sprint;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
+import com.example.sap.adapters.BacklogAdapter;
+import com.example.sap.adapters.ToDoAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,14 +35,18 @@ import com.example.sap.R;
  */
 public class BacklogFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ArrayList<Task> taskList;
+    private BacklogAdapter backlogAdapter;
+    private Handler mHandler;
+
+    RecyclerView rcvBacklog;
 
     public BacklogFragment() {
         // Required empty public constructor
@@ -62,5 +84,79 @@ public class BacklogFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_backlog, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        taskList = new ArrayList<>();
+        mHandler = new Handler(Looper.getMainLooper());
+
+        rcvBacklog = getView().findViewById(R.id.rcvBacklog);
+        backlogAdapter = new BacklogAdapter(getContext(), taskList);
+
+        rcvBacklog.setAdapter(backlogAdapter);
+        rcvBacklog.setLayoutManager(new LinearLayoutManager(getContext()));
+        backlogAdapter.setOnItemClickListener(new BacklogAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //todo: handle Nav to EditTask
+                Toast.makeText(getContext(), "Task Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        backlogTaskQuery();
+    }
+
+    private void backlogTaskQuery() {
+        if (getProjectID() != null) {
+            // Get project by id
+            Amplify.API.query(
+                    ModelQuery.get(Project.class, getProjectID()),
+                    response -> {
+                        taskList.clear();
+                        if (response.getData() != null) {
+                            Sprint backlog = null;
+                            // Get activated sprint
+                            for (Sprint sprint : response.getData().getSprints()) {
+                                if (sprint.getIsBacklog()) {
+                                    backlog = sprint;
+                                }
+                            }
+
+                            if (backlog != null) {
+                                // Get tasks of the sprint
+                                Amplify.API.query(
+                                        ModelQuery.get(Sprint.class, backlog.getId()),
+                                        getSprintRes -> {
+                                            taskList.clear();
+                                            for (Task task : getSprintRes.getData().getTasks()) {
+
+                                                taskList.addAll(getSprintRes.getData().getTasks());
+                                            }
+                                            mHandler.post(() -> backlogAdapter.notifyDataSetChanged());
+                                        },
+                                        error -> Log.e("GetProjectError", error.toString())
+                                );
+                            }
+                        }
+                    },
+                    error -> {
+                        Log.e("GetProjectError", error.toString());
+                    }
+            );
+        }
+    }
+
+    private String getProjectID() {
+        String newString;
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras == null) {
+            newString = null;
+        } else {
+            newString = extras.getString("PROJECT_ID");
+        }
+        return newString;
     }
 }

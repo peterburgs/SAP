@@ -58,10 +58,21 @@ public class ProjectContainerActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
-        BadgeDrawable badgeDrawable = tabLayout.getTabAt(0).getOrCreateBadge();
-        badgeDrawable.setVisible(true);
-        //todo: Get Number of ToDo Tasks and pass to  "badgeDrawable.setNumber([number])"
-        badgeDrawable.setNumber(10);
+        BadgeDrawable toDoBadge, inProgressBadge, doneBadge, backlogBadge;
+        toDoBadge = tabLayout.getTabAt(0).getOrCreateBadge();
+        inProgressBadge = tabLayout.getTabAt(1).getOrCreateBadge();
+        doneBadge = tabLayout.getTabAt(2).getOrCreateBadge();
+        backlogBadge = tabLayout.getTabAt(3).getOrCreateBadge();
+        toDoBadge.setVisible(true);
+        inProgressBadge.setVisible(true);
+        doneBadge.setVisible(true);
+        backlogBadge.setVisible(true);
+
+        //todo: Get Number of ToDo Tasks and pass to  badges
+        toDoBadge.setNumber(10);
+        inProgressBadge.setNumber(10);
+        doneBadge.setNumber(10);
+        backlogBadge.setNumber(10);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

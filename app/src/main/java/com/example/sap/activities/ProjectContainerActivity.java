@@ -44,7 +44,8 @@ public class ProjectContainerActivity extends AppCompatActivity {
         fabSetting = findViewById(R.id.fabSetting);
 
         fabProject.setOnClickListener(v -> {
-            Toast.makeText(this, "Project Selected", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), ProjectListActivity.class);
+            startActivity(intent);
         });
         fabAccount.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), AccountActivity.class);

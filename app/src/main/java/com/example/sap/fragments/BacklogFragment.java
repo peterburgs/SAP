@@ -1,5 +1,6 @@
 package com.example.sap.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -23,6 +25,7 @@ import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
+import com.example.sap.activities.CreateTaskActivity;
 import com.example.sap.adapters.BacklogAdapter;
 import com.example.sap.adapters.ToDoAdapter;
 
@@ -47,6 +50,7 @@ public class BacklogFragment extends Fragment {
     private Handler mHandler;
 
     RecyclerView rcvBacklog;
+    Button btnCreateTask;
 
     public BacklogFragment() {
         // Required empty public constructor
@@ -94,7 +98,18 @@ public class BacklogFragment extends Fragment {
         mHandler = new Handler(Looper.getMainLooper());
 
         rcvBacklog = getView().findViewById(R.id.rcvBacklog);
+        btnCreateTask = getView().findViewById(R.id.btnCreateTask);
+
+        btnCreateTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CreateTaskActivity.class);
+                startActivity(intent);
+
+            }
+        });
         backlogAdapter = new BacklogAdapter(getContext(), taskList);
+
 
         rcvBacklog.setAdapter(backlogAdapter);
         rcvBacklog.setLayoutManager(new LinearLayoutManager(getContext()));

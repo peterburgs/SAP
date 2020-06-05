@@ -15,11 +15,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvDayRemaining"
+                android:id="@+id/tvTodoDayRemaining"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right"
-                android:text="14 days remaining"
                 android:textAlignment="gravity"
                 android:textSize="14sp"
                 android:layout_marginRight="5dp"/>

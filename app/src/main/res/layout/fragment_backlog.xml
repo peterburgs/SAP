@@ -23,16 +23,6 @@
                 app:cornerRadius="15dp"
                 android:layout_marginLeft="5dp"
                 android:text="Create Task" />
-
-            <TextView
-                android:id="@+id/tvDayRemaining"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:gravity="right"
-                android:text="14 days remaining"
-                android:textAlignment="gravity"
-                android:textSize="14sp" />
         </LinearLayout>
 
         <ScrollView

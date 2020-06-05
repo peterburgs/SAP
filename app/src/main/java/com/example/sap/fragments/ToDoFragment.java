@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -26,7 +27,13 @@ import com.example.sap.R;
 import com.example.sap.activities.CreateProjectActivity;
 import com.example.sap.adapters.ToDoAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +55,7 @@ public class ToDoFragment extends Fragment {
     private ArrayList<Task> taskList;
     private ToDoAdapter toDoAdapter;
     private Handler mHandler;
+    private TextView tvDayRemaining;
     //
     public ToDoFragment() {
         // Required empty public constructor
@@ -89,7 +97,10 @@ public class ToDoFragment extends Fragment {
         mHandler = new Handler(Looper.getMainLooper());
 
         rcvToDo = getView().findViewById(R.id.rcvToDo);
+        tvDayRemaining = getView().findViewById(R.id.tvTodoDayRemaining);
+
         toDoAdapter = new ToDoAdapter(getContext(), taskList);
+
 
         rcvToDo.setAdapter(toDoAdapter);
         rcvToDo.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -129,6 +140,7 @@ public class ToDoFragment extends Fragment {
 
                             if(activatedSprint != null) {
                                 // Get tasks of the sprint
+                                Sprint finalActivatedSprint = activatedSprint;
                                 Amplify.API.query(
                                         ModelQuery.get(Sprint.class, activatedSprint.getId()),
                                         getSprintRes -> {
@@ -138,7 +150,14 @@ public class ToDoFragment extends Fragment {
                                                     taskList.add(task);
                                                 }
                                             }
-                                            mHandler.post(() -> toDoAdapter.notifyDataSetChanged());
+                                            mHandler.post(() -> {
+                                                try {
+                                                    getDayRemaining(finalActivatedSprint);
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                toDoAdapter.notifyDataSetChanged();
+                                            });
                                         },
                                         error -> Log.e("GetSprintError", error.toString())
                                 );
@@ -150,6 +169,18 @@ public class ToDoFragment extends Fragment {
                     }
             );
         }
+    }
+
+    private void getDayRemaining(Sprint activatedSprint) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date firstDate = sdf.parse(LocalDate.now().toString());
+        String end = activatedSprint.getEndDate().format();
+        Date secondDate = sdf.parse(end.substring(0, end.length() - 1));
+
+        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+        tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
     }
 
     private String getProjectID() {

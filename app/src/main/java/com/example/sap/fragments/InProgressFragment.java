@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,7 @@ public class InProgressFragment extends Fragment {
     private InProgressAdapter inProgressAdapter;
     private Handler mHandler;
     private TextView tvDayRemaining;
+    private ImageView imvInProgressEmpty;
 
     //
     public InProgressFragment() {
@@ -96,6 +98,7 @@ public class InProgressFragment extends Fragment {
         rcvInProgress = getView().findViewById(R.id.rcvInProgress);
         inProgressAdapter = new InProgressAdapter(getContext(), taskList);
         tvDayRemaining = getView().findViewById(R.id.tvInProgressDayRemaining);
+        imvInProgressEmpty = getView().findViewById(R.id.imvInProgressEmpty);
 
         rcvInProgress.setAdapter(inProgressAdapter);
         rcvInProgress.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -147,12 +150,16 @@ public class InProgressFragment extends Fragment {
                                                 }
                                             }
                                             mHandler.post(() -> {
-                                                try {
-                                                    getDayRemaining(finalActivatedSprint);
-                                                } catch (ParseException e) {
-                                                    e.printStackTrace();
+                                                if(taskList.isEmpty()) {
+                                                    imvInProgressEmpty.setImageResource(R.drawable.img_empty);
+                                                } else {
+                                                    try {
+                                                        getDayRemaining(finalActivatedSprint);
+                                                    } catch (ParseException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    inProgressAdapter.notifyDataSetChanged();
                                                 }
-                                                inProgressAdapter.notifyDataSetChanged();
                                             });
                                         },
                                         error -> Log.e("GetSprintError", error.toString())

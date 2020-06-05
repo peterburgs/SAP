@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,6 @@ import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
-import com.example.sap.activities.CreateProjectActivity;
 import com.example.sap.adapters.ToDoAdapter;
 
 import java.text.ParseException;
@@ -56,6 +56,7 @@ public class ToDoFragment extends Fragment {
     private ToDoAdapter toDoAdapter;
     private Handler mHandler;
     private TextView tvDayRemaining;
+    private ImageView imvTodoEmpty;
     //
     public ToDoFragment() {
         // Required empty public constructor
@@ -98,9 +99,9 @@ public class ToDoFragment extends Fragment {
 
         rcvToDo = getView().findViewById(R.id.rcvToDo);
         tvDayRemaining = getView().findViewById(R.id.tvTodoDayRemaining);
+        imvTodoEmpty = getView().findViewById(R.id.imvTodoEmpty);
 
         toDoAdapter = new ToDoAdapter(getContext(), taskList);
-
 
         rcvToDo.setAdapter(toDoAdapter);
         rcvToDo.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -151,12 +152,16 @@ public class ToDoFragment extends Fragment {
                                                 }
                                             }
                                             mHandler.post(() -> {
-                                                try {
-                                                    getDayRemaining(finalActivatedSprint);
-                                                } catch (ParseException e) {
-                                                    e.printStackTrace();
+                                                if(taskList.isEmpty()) {
+                                                    imvTodoEmpty.setImageResource(R.drawable.img_empty);
+                                                } else {
+                                                    try {
+                                                        getDayRemaining(finalActivatedSprint);
+                                                    } catch (ParseException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    toDoAdapter.notifyDataSetChanged();
                                                 }
-                                                toDoAdapter.notifyDataSetChanged();
                                             });
                                         },
                                         error -> Log.e("GetSprintError", error.toString())

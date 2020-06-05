@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class DoneFragment extends Fragment {
     private DoneAdapter doneAdapter;
     private Handler mHandler;
     private TextView tvDayRemaining;
+    private ImageView imvDoneEmpty;
 
     public DoneFragment() {
         // Required empty public constructor
@@ -105,6 +107,7 @@ public class DoneFragment extends Fragment {
         rcvDone = getView().findViewById(R.id.rcvDone);
         doneAdapter = new DoneAdapter(getContext(), taskList);
         tvDayRemaining = getView().findViewById(R.id.tvDoneDayRemaining);
+        imvDoneEmpty = getView().findViewById(R.id.imvDoneEmpty);
 
         rcvDone.setAdapter(doneAdapter);
         rcvDone.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -148,12 +151,16 @@ public class DoneFragment extends Fragment {
                                             }
                                         }
                                         mHandler.post(() -> {
-                                            try {
-                                                getDayRemaining(finalActivatedSprint);
-                                            } catch (ParseException e) {
-                                                e.printStackTrace();
+                                            if(taskList.isEmpty()) {
+                                                imvDoneEmpty.setImageResource(R.drawable.img_empty);
+                                            } else {
+                                                try {
+                                                    getDayRemaining(finalActivatedSprint);
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                doneAdapter.notifyDataSetChanged();
                                             }
-                                            doneAdapter.notifyDataSetChanged();
                                         });
                                     },
                                     error -> Log.e("GetSprintError", error.toString())

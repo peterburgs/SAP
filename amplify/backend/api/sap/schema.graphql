@@ -70,11 +70,11 @@ type Task
   description: String
   projectID: ID!
   assigneeID: ID!
-  sprintID: ID!
+  sprintID: ID
   priority: Int
   status: TaskStatus
   project: Project! @connection(fields: ["projectID"])
-  assignee: User! @connection(fields: ["assigneeID"])
+  assignee: User @connection(fields: ["assigneeID"])
   sprint: Sprint! @connection(fields: ["sprintID"])
 }
 

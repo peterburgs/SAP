@@ -133,19 +133,22 @@ public class ToDoFragment extends Fragment {
                                 }
                             }
 
-                            // Get tasks of the sprint
-                            Amplify.API.query(
-                                    ModelQuery.get(Sprint.class, activatedSprint.getId()),
-                                    getSprintRes -> {
-                                        for(Task task : getSprintRes.getData().getTasks()) {
-                                            if(task.getStatus().equals(TaskStatus.TODO)) {
-                                                taskList.addAll(getSprintRes.getData().getTasks());
+                            if(activatedSprint != null) {
+                                // Get tasks of the sprint
+                                Amplify.API.query(
+                                        ModelQuery.get(Sprint.class, activatedSprint.getId()),
+                                        getSprintRes -> {
+                                            taskList.clear();
+                                            for(Task task : getSprintRes.getData().getTasks()) {
+                                                if(task.getStatus().equals(TaskStatus.TODO)) {
+                                                    taskList.addAll(getSprintRes.getData().getTasks());
+                                                }
                                             }
-                                        }
-                                        mHandler.post(() -> toDoAdapter.notifyDataSetChanged());
-                                    },
-                                    error -> Log.e("GetProjectError", error.toString())
-                            );
+                                            mHandler.post(() -> toDoAdapter.notifyDataSetChanged());
+                                        },
+                                        error -> Log.e("GetProjectError", error.toString())
+                                );
+                            }
                         }
                     },
                     error -> {

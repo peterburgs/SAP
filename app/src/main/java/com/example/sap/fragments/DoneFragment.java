@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -26,7 +28,13 @@ import com.example.sap.R;
 import com.example.sap.adapters.DoneAdapter;
 import com.example.sap.adapters.ToDoAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +57,8 @@ public class DoneFragment extends Fragment {
     private ArrayList<Task> taskList;
     private DoneAdapter doneAdapter;
     private Handler mHandler;
+    private TextView tvDayRemaining;
+    private ImageView imvDoneEmpty;
 
     public DoneFragment() {
         // Required empty public constructor
@@ -96,6 +106,8 @@ public class DoneFragment extends Fragment {
 
         rcvDone = getView().findViewById(R.id.rcvDone);
         doneAdapter = new DoneAdapter(getContext(), taskList);
+        tvDayRemaining = getView().findViewById(R.id.tvDoneDayRemaining);
+        imvDoneEmpty = getView().findViewById(R.id.imvDoneEmpty);
 
         rcvDone.setAdapter(doneAdapter);
         rcvDone.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -128,6 +140,7 @@ public class DoneFragment extends Fragment {
                             }
 
                             // Get tasks of the sprint
+                            Sprint finalActivatedSprint = activatedSprint;
                             Amplify.API.query(
                                     ModelQuery.get(Sprint.class, activatedSprint.getId()),
                                     getSprintRes -> {
@@ -137,7 +150,18 @@ public class DoneFragment extends Fragment {
                                                 taskList.add(task);
                                             }
                                         }
-                                        mHandler.post(() -> doneAdapter.notifyDataSetChanged());
+                                        mHandler.post(() -> {
+                                            if(taskList.isEmpty()) {
+                                                imvDoneEmpty.setImageResource(R.drawable.img_empty);
+                                            } else {
+                                                try {
+                                                    getDayRemaining(finalActivatedSprint);
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                doneAdapter.notifyDataSetChanged();
+                                            }
+                                        });
                                     },
                                     error -> Log.e("GetSprintError", error.toString())
                             );
@@ -148,6 +172,18 @@ public class DoneFragment extends Fragment {
                     }
             );
         }
+    }
+
+    private void getDayRemaining(Sprint activatedSprint) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date firstDate = sdf.parse(LocalDate.now().toString());
+        String end = activatedSprint.getEndDate().format();
+        Date secondDate = sdf.parse(end.substring(0, end.length() - 1));
+
+        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+        tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
     }
 
     private String getProjectID() {

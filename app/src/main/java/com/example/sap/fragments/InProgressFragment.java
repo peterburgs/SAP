@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -26,7 +28,13 @@ import com.example.sap.R;
 import com.example.sap.adapters.InProgressAdapter;
 import com.example.sap.adapters.ToDoAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +54,8 @@ public class InProgressFragment extends Fragment {
     private ArrayList<Task> taskList;
     private InProgressAdapter inProgressAdapter;
     private Handler mHandler;
+    private TextView tvDayRemaining;
+    private ImageView imvInProgressEmpty;
 
     //
     public InProgressFragment() {
@@ -86,7 +96,9 @@ public class InProgressFragment extends Fragment {
         mHandler = new Handler(Looper.getMainLooper());
 
         rcvInProgress = getView().findViewById(R.id.rcvInProgress);
-        inProgressAdapter=new InProgressAdapter(getContext(), taskList);
+        inProgressAdapter = new InProgressAdapter(getContext(), taskList);
+        tvDayRemaining = getView().findViewById(R.id.tvInProgressDayRemaining);
+        imvInProgressEmpty = getView().findViewById(R.id.imvInProgressEmpty);
 
         rcvInProgress.setAdapter(inProgressAdapter);
         rcvInProgress.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -116,7 +128,7 @@ public class InProgressFragment extends Fragment {
                     ModelQuery.get(Project.class, getProjectID()),
                     response -> {
                         taskList.clear();
-                        if(response.getData() != null) {
+                        if (response.getData() != null) {
                             Sprint activatedSprint = null;
                             // Get activated sprint
                             for (Sprint sprint : response.getData().getSprints()) {
@@ -125,18 +137,30 @@ public class InProgressFragment extends Fragment {
                                 }
                             }
 
-                            if(activatedSprint != null) {
+                            if (activatedSprint != null) {
                                 // Get tasks of the sprint
+                                Sprint finalActivatedSprint = activatedSprint;
                                 Amplify.API.query(
                                         ModelQuery.get(Sprint.class, activatedSprint.getId()),
                                         getSprintRes -> {
                                             taskList.clear();
-                                            for(Task task : getSprintRes.getData().getTasks()) {
-                                                if(task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                                            for (Task task : getSprintRes.getData().getTasks()) {
+                                                if (task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
                                                     taskList.add(task);
                                                 }
                                             }
-                                            mHandler.post(() -> inProgressAdapter.notifyDataSetChanged());
+                                            mHandler.post(() -> {
+                                                if(taskList.isEmpty()) {
+                                                    imvInProgressEmpty.setImageResource(R.drawable.img_empty);
+                                                } else {
+                                                    try {
+                                                        getDayRemaining(finalActivatedSprint);
+                                                    } catch (ParseException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    inProgressAdapter.notifyDataSetChanged();
+                                                }
+                                            });
                                         },
                                         error -> Log.e("GetSprintError", error.toString())
                                 );
@@ -148,6 +172,18 @@ public class InProgressFragment extends Fragment {
                     }
             );
         }
+    }
+
+    private void getDayRemaining(Sprint activatedSprint) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date firstDate = sdf.parse(LocalDate.now().toString());
+        String end = activatedSprint.getEndDate().format();
+        Date secondDate = sdf.parse(end.substring(0, end.length() - 1));
+
+        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+        tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
     }
 
     private String getProjectID() {

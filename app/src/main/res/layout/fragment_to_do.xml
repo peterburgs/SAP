@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ToDoFragment">
+
+    <ImageView
+        android:id="@+id/imvTodoEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,11 +21,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvDayRemaining"
+                android:id="@+id/tvTodoDayRemaining"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right"
-                android:text="14 days remaining"
                 android:textAlignment="gravity"
                 android:textSize="14sp"
                 android:layout_marginRight="5dp"/>
@@ -27,8 +32,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvToDo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
 
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>

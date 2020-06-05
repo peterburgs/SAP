@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -48,6 +49,7 @@ public class BacklogFragment extends Fragment {
     private ArrayList<Task> taskList;
     private BacklogAdapter backlogAdapter;
     private Handler mHandler;
+    private ImageView imvBacklogEmpty;
 
     RecyclerView rcvBacklog;
     Button btnCreateTask;
@@ -99,6 +101,7 @@ public class BacklogFragment extends Fragment {
 
         rcvBacklog = getView().findViewById(R.id.rcvBacklog);
         btnCreateTask = getView().findViewById(R.id.btnCreateTask);
+        imvBacklogEmpty = getView().findViewById(R.id.imvBacklogEmpty);
 
         btnCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,7 +152,13 @@ public class BacklogFragment extends Fragment {
                                             for (Task task : getSprintRes.getData().getTasks()) {
                                                 taskList.addAll(getSprintRes.getData().getTasks());
                                             }
-                                            mHandler.post(() -> backlogAdapter.notifyDataSetChanged());
+                                            mHandler.post(() -> {
+                                                if(taskList.isEmpty()) {
+                                                    imvBacklogEmpty.setImageResource(R.drawable.img_empty);
+                                                } else {
+                                                    backlogAdapter.notifyDataSetChanged();
+                                                }
+                                            });
                                         },
                                         error -> Log.e("GetSprintError", error.toString())
                                 );

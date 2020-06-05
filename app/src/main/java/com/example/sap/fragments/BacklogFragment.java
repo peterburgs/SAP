@@ -118,7 +118,7 @@ public class BacklogFragment extends Fragment {
                         taskList.clear();
                         if (response.getData() != null) {
                             Sprint backlog = null;
-                            // Get activated sprint
+                            // Get backlog
                             for (Sprint sprint : response.getData().getSprints()) {
                                 if (sprint.getIsBacklog()) {
                                     backlog = sprint;
@@ -126,18 +126,17 @@ public class BacklogFragment extends Fragment {
                             }
 
                             if (backlog != null) {
-                                // Get tasks of the sprint
+                                // Get tasks of the backlog
                                 Amplify.API.query(
                                         ModelQuery.get(Sprint.class, backlog.getId()),
                                         getSprintRes -> {
                                             taskList.clear();
                                             for (Task task : getSprintRes.getData().getTasks()) {
-
                                                 taskList.addAll(getSprintRes.getData().getTasks());
                                             }
                                             mHandler.post(() -> backlogAdapter.notifyDataSetChanged());
                                         },
-                                        error -> Log.e("GetProjectError", error.toString())
+                                        error -> Log.e("GetSprintError", error.toString())
                                 );
                             }
                         }

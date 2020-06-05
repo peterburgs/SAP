@@ -42,7 +42,6 @@ subscription OnCreateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -59,7 +58,6 @@ subscription OnCreateUser {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -95,7 +93,6 @@ subscription OnCreateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -150,7 +147,6 @@ subscription OnCreateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -167,7 +163,6 @@ subscription OnCreateUser {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -203,7 +198,6 @@ subscription OnCreateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -251,17 +245,14 @@ subscription OnCreateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -312,7 +303,6 @@ subscription OnUpdateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -329,7 +319,6 @@ subscription OnUpdateUser {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -365,7 +354,6 @@ subscription OnUpdateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -420,7 +408,6 @@ subscription OnUpdateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -437,7 +424,6 @@ subscription OnUpdateUser {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -473,7 +459,6 @@ subscription OnUpdateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -521,17 +506,14 @@ subscription OnUpdateUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -582,7 +564,6 @@ subscription OnDeleteUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -599,7 +580,6 @@ subscription OnDeleteUser {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -635,7 +615,6 @@ subscription OnDeleteUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -690,7 +669,6 @@ subscription OnDeleteUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -707,7 +685,6 @@ subscription OnDeleteUser {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -743,7 +720,6 @@ subscription OnDeleteUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -791,17 +767,14 @@ subscription OnDeleteUser {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -853,7 +826,6 @@ subscription OnCreateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -870,7 +842,6 @@ subscription OnCreateProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -906,7 +877,6 @@ subscription OnCreateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -961,7 +931,6 @@ subscription OnCreateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -978,7 +947,6 @@ subscription OnCreateProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1014,7 +982,6 @@ subscription OnCreateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1062,17 +1029,14 @@ subscription OnCreateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1118,7 +1082,6 @@ subscription OnCreateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1135,7 +1098,6 @@ subscription OnCreateProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1181,17 +1143,14 @@ subscription OnCreateProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1242,7 +1201,6 @@ subscription OnUpdateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1259,7 +1217,6 @@ subscription OnUpdateProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1295,7 +1252,6 @@ subscription OnUpdateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1350,7 +1306,6 @@ subscription OnUpdateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1367,7 +1322,6 @@ subscription OnUpdateProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1403,7 +1357,6 @@ subscription OnUpdateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1451,17 +1404,14 @@ subscription OnUpdateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1507,7 +1457,6 @@ subscription OnUpdateProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1524,7 +1473,6 @@ subscription OnUpdateProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1570,17 +1518,14 @@ subscription OnUpdateProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1631,7 +1576,6 @@ subscription OnDeleteProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1648,7 +1592,6 @@ subscription OnDeleteProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1684,7 +1627,6 @@ subscription OnDeleteProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1739,7 +1681,6 @@ subscription OnDeleteProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1756,7 +1697,6 @@ subscription OnDeleteProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1792,7 +1732,6 @@ subscription OnDeleteProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1840,17 +1779,14 @@ subscription OnDeleteProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1896,7 +1832,6 @@ subscription OnDeleteProject {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1913,7 +1848,6 @@ subscription OnDeleteProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1959,17 +1893,14 @@ subscription OnDeleteProject {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -2096,11 +2027,9 @@ subscription OnCreateProjectParticipant {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2146,13 +2075,11 @@ subscription OnCreateProjectParticipant {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2271,11 +2198,9 @@ subscription OnCreateProjectParticipant {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2406,11 +2331,9 @@ subscription OnUpdateProjectParticipant {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2456,13 +2379,11 @@ subscription OnUpdateProjectParticipant {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2581,11 +2502,9 @@ subscription OnUpdateProjectParticipant {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2716,11 +2635,9 @@ subscription OnDeleteProjectParticipant {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2766,13 +2683,11 @@ subscription OnDeleteProjectParticipant {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2891,11 +2806,9 @@ subscription OnDeleteProjectParticipant {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2906,8 +2819,8 @@ subscription OnDeleteProjectParticipant {
     updatedAt
   }
 }
-subscription OnCreateSprint($owner: String!) {
-  onCreateSprint(owner: $owner) {
+subscription OnCreateSprint {
+  onCreateSprint {
     id
     startDate
     endDate
@@ -3031,11 +2944,9 @@ subscription OnCreateSprint($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3081,13 +2992,11 @@ subscription OnCreateSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3136,7 +3045,6 @@ subscription OnCreateSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3153,7 +3061,6 @@ subscription OnCreateSprint($owner: String!) {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3189,7 +3096,6 @@ subscription OnCreateSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3237,27 +3143,23 @@ subscription OnCreateSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     createdAt
     updatedAt
-    owner
   }
 }
-subscription OnUpdateSprint($owner: String!) {
-  onUpdateSprint(owner: $owner) {
+subscription OnUpdateSprint {
+  onUpdateSprint {
     id
     startDate
     endDate
@@ -3381,11 +3283,9 @@ subscription OnUpdateSprint($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3431,13 +3331,11 @@ subscription OnUpdateSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3486,7 +3384,6 @@ subscription OnUpdateSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3503,7 +3400,6 @@ subscription OnUpdateSprint($owner: String!) {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3539,7 +3435,6 @@ subscription OnUpdateSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3587,27 +3482,23 @@ subscription OnUpdateSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     createdAt
     updatedAt
-    owner
   }
 }
-subscription OnDeleteSprint($owner: String!) {
-  onDeleteSprint(owner: $owner) {
+subscription OnDeleteSprint {
+  onDeleteSprint {
     id
     startDate
     endDate
@@ -3731,11 +3622,9 @@ subscription OnDeleteSprint($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3781,13 +3670,11 @@ subscription OnDeleteSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3836,7 +3723,6 @@ subscription OnDeleteSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3853,7 +3739,6 @@ subscription OnDeleteSprint($owner: String!) {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3889,7 +3774,6 @@ subscription OnDeleteSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3937,27 +3821,23 @@ subscription OnDeleteSprint($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     createdAt
     updatedAt
-    owner
   }
 }
-subscription OnCreateTask($owner: String!) {
-  onCreateTask(owner: $owner) {
+subscription OnCreateTask {
+  onCreateTask {
     id
     name
     summary
@@ -4082,11 +3962,9 @@ subscription OnCreateTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4132,13 +4010,11 @@ subscription OnCreateTask($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4257,11 +4133,9 @@ subscription OnCreateTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4351,11 +4225,9 @@ subscription OnCreateTask($owner: String!) {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4383,7 +4255,6 @@ subscription OnCreateTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4455,25 +4326,21 @@ subscription OnCreateTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
-subscription OnUpdateTask($owner: String!) {
-  onUpdateTask(owner: $owner) {
+subscription OnUpdateTask {
+  onUpdateTask {
     id
     name
     summary
@@ -4598,11 +4465,9 @@ subscription OnUpdateTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4648,13 +4513,11 @@ subscription OnUpdateTask($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4773,11 +4636,9 @@ subscription OnUpdateTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4867,11 +4728,9 @@ subscription OnUpdateTask($owner: String!) {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4899,7 +4758,6 @@ subscription OnUpdateTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4971,25 +4829,21 @@ subscription OnUpdateTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
-subscription OnDeleteTask($owner: String!) {
-  onDeleteTask(owner: $owner) {
+subscription OnDeleteTask {
+  onDeleteTask {
     id
     name
     summary
@@ -5114,11 +4968,9 @@ subscription OnDeleteTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -5164,13 +5016,11 @@ subscription OnDeleteTask($owner: String!) {
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -5289,11 +5139,9 @@ subscription OnDeleteTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -5383,11 +5231,9 @@ subscription OnDeleteTask($owner: String!) {
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5415,7 +5261,6 @@ subscription OnDeleteTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5487,20 +5332,16 @@ subscription OnDeleteTask($owner: String!) {
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }

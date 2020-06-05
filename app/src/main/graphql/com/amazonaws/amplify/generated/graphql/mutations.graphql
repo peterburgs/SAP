@@ -45,7 +45,6 @@ mutation CreateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -62,7 +61,6 @@ mutation CreateUser(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -98,7 +96,6 @@ mutation CreateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -153,7 +150,6 @@ mutation CreateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -170,7 +166,6 @@ mutation CreateUser(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -206,7 +201,6 @@ mutation CreateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -254,17 +248,14 @@ mutation CreateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -318,7 +309,6 @@ mutation UpdateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -335,7 +325,6 @@ mutation UpdateUser(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -371,7 +360,6 @@ mutation UpdateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -426,7 +414,6 @@ mutation UpdateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -443,7 +430,6 @@ mutation UpdateUser(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -479,7 +465,6 @@ mutation UpdateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -527,17 +512,14 @@ mutation UpdateUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -591,7 +573,6 @@ mutation DeleteUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -608,7 +589,6 @@ mutation DeleteUser(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -644,7 +624,6 @@ mutation DeleteUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -699,7 +678,6 @@ mutation DeleteUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -716,7 +694,6 @@ mutation DeleteUser(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -752,7 +729,6 @@ mutation DeleteUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -800,17 +776,14 @@ mutation DeleteUser(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -865,7 +838,6 @@ mutation CreateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -882,7 +854,6 @@ mutation CreateProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -918,7 +889,6 @@ mutation CreateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -973,7 +943,6 @@ mutation CreateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -990,7 +959,6 @@ mutation CreateProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1026,7 +994,6 @@ mutation CreateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1074,17 +1041,14 @@ mutation CreateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1130,7 +1094,6 @@ mutation CreateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1147,7 +1110,6 @@ mutation CreateProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1193,17 +1155,14 @@ mutation CreateProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1257,7 +1216,6 @@ mutation UpdateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1274,7 +1232,6 @@ mutation UpdateProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1310,7 +1267,6 @@ mutation UpdateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1365,7 +1321,6 @@ mutation UpdateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1382,7 +1337,6 @@ mutation UpdateProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1418,7 +1372,6 @@ mutation UpdateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1466,17 +1419,14 @@ mutation UpdateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1522,7 +1472,6 @@ mutation UpdateProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1539,7 +1488,6 @@ mutation UpdateProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1585,17 +1533,14 @@ mutation UpdateProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1649,7 +1594,6 @@ mutation DeleteProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1666,7 +1610,6 @@ mutation DeleteProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1702,7 +1645,6 @@ mutation DeleteProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1757,7 +1699,6 @@ mutation DeleteProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1774,7 +1715,6 @@ mutation DeleteProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1810,7 +1750,6 @@ mutation DeleteProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1858,17 +1797,14 @@ mutation DeleteProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -1914,7 +1850,6 @@ mutation DeleteProject(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1931,7 +1866,6 @@ mutation DeleteProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1977,17 +1911,14 @@ mutation DeleteProject(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -2117,11 +2048,9 @@ mutation CreateProjectParticipant(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2167,13 +2096,11 @@ mutation CreateProjectParticipant(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2292,11 +2219,9 @@ mutation CreateProjectParticipant(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2430,11 +2355,9 @@ mutation UpdateProjectParticipant(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2480,13 +2403,11 @@ mutation UpdateProjectParticipant(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2605,11 +2526,9 @@ mutation UpdateProjectParticipant(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2743,11 +2662,9 @@ mutation DeleteProjectParticipant(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2793,13 +2710,11 @@ mutation DeleteProjectParticipant(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2918,11 +2833,9 @@ mutation DeleteProjectParticipant(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3061,11 +2974,9 @@ mutation CreateSprint(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3111,13 +3022,11 @@ mutation CreateSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3166,7 +3075,6 @@ mutation CreateSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3183,7 +3091,6 @@ mutation CreateSprint(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3219,7 +3126,6 @@ mutation CreateSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3267,23 +3173,19 @@ mutation CreateSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation UpdateSprint(
@@ -3414,11 +3316,9 @@ mutation UpdateSprint(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3464,13 +3364,11 @@ mutation UpdateSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3519,7 +3417,6 @@ mutation UpdateSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3536,7 +3433,6 @@ mutation UpdateSprint(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3572,7 +3468,6 @@ mutation UpdateSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3620,23 +3515,19 @@ mutation UpdateSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation DeleteSprint(
@@ -3767,11 +3658,9 @@ mutation DeleteSprint(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3817,13 +3706,11 @@ mutation DeleteSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3872,7 +3759,6 @@ mutation DeleteSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3889,7 +3775,6 @@ mutation DeleteSprint(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3925,7 +3810,6 @@ mutation DeleteSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3973,23 +3857,19 @@ mutation DeleteSprint(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation CreateTask(
@@ -4121,11 +4001,9 @@ mutation CreateTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4171,13 +4049,11 @@ mutation CreateTask(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4296,11 +4172,9 @@ mutation CreateTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4390,11 +4264,9 @@ mutation CreateTask(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4422,7 +4294,6 @@ mutation CreateTask(
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4494,21 +4365,17 @@ mutation CreateTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation UpdateTask(
@@ -4640,11 +4507,9 @@ mutation UpdateTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4690,13 +4555,11 @@ mutation UpdateTask(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4815,11 +4678,9 @@ mutation UpdateTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4909,11 +4770,9 @@ mutation UpdateTask(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4941,7 +4800,6 @@ mutation UpdateTask(
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5013,21 +4871,17 @@ mutation UpdateTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }
 mutation DeleteTask(
@@ -5159,11 +5013,9 @@ mutation DeleteTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -5209,13 +5061,11 @@ mutation DeleteTask(
               status
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -5334,11 +5184,9 @@ mutation DeleteTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -5428,11 +5276,9 @@ mutation DeleteTask(
               isBacklog
               createdAt
               updatedAt
-              owner
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5460,7 +5306,6 @@ mutation DeleteTask(
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5532,20 +5377,16 @@ mutation DeleteTask(
             }
             createdAt
             updatedAt
-            owner
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
     createdAt
     updatedAt
-    owner
   }
 }

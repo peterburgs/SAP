@@ -43,7 +43,7 @@ enum Role {
 type Sprint
   @model
   @key(name: "byProject", fields: ["projectID"])
-  @auth(rules: [{allow: owner}]) {
+  @auth(rules: [{ allow: groups, groups: ["project_member"] }]) {
   id: ID!
   startDate: AWSDate
   endDate: AWSDate
@@ -62,7 +62,7 @@ type Task
   @key(name: "byProject", fields: ["projectID"])
   @key(name: "byAssignee", fields: ["assigneeID"])
   @key(name: "bySprint", fields: ["sprintID"])
-  @auth(rules: [{allow: owner}]) {
+  @auth(rules: [{ allow: groups, groups: ["project_member"] }]) {
   id: ID!
   name: String!
   summary: String!
@@ -70,11 +70,11 @@ type Task
   description: String
   projectID: ID!
   assigneeID: ID!
-  sprintID: ID
+  sprintID: ID!
   priority: Int
   status: TaskStatus
   project: Project! @connection(fields: ["projectID"])
-  assignee: User @connection(fields: ["assigneeID"])
+  assignee: User! @connection(fields: ["assigneeID"])
   sprint: Sprint! @connection(fields: ["sprintID"])
 }
 

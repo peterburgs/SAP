@@ -10,11 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
+
+import java.util.ArrayList;
 
 public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.ViewHolder> {
 
-    private String taskName[], taskSummary[], taskLabel[], assignee[];
+    private ArrayList<Task> taskList;
     private Context context;
     private OnItemClickListener mListener;
 
@@ -27,12 +30,9 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.Vi
         mListener = listener;
     }
 
-    public InProgressAdapter(Context context, String taskName[], String taskSummary[], String taskLabel[], String assignee[]) {
+    public InProgressAdapter(Context context, ArrayList<Task> taskList) {
         this.context = context;
-        this.taskName = taskName;
-        this.taskSummary = taskSummary;
-        this.taskLabel = taskLabel;
-        this.assignee = assignee;
+        this.taskList = taskList;
     }
 
     @NonNull
@@ -47,17 +47,15 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.tvTaskName.setText(taskName[position]);
-        holder.tvTaskSummary.setText(taskSummary[position]);
-        holder.tvTaskLabel.setText(taskLabel[position]);
-        holder.tvAssignee.setText(assignee[position]);
+        holder.tvTaskName.setText(taskList.get(position).getName());
+        holder.tvTaskSummary.setText(taskList.get(position).getSummary());
+        holder.tvTaskLabel.setText(taskList.get(position).getLabel());
+        holder.tvAssignee.setText(taskList.get(position).getAssignee().getUsername());
     }
 
     @Override
     public int getItemCount() {
-        //Hardcode Here
-        //todo: Set Item Count
-        return 8;
+        return taskList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

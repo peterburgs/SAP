@@ -48,12 +48,6 @@ public class ToDoFragment extends Fragment {
     private ArrayList<Task> taskList;
     private ToDoAdapter toDoAdapter;
     private Handler mHandler;
-    //Hardcoded Data:
-//    String taskName[] = {"SAP-1", "SAP-2", "SAP-3", "SAP-4", "SAP-1", "SAP-2", "SAP-3", "SAP-4"};
-//    String taskSummary[] = {"Design raw UI", "Apply Material Design Component", "Add Constraints", "Beautify", "Design raw UI", "Apply Material Design Component", "Add Constraints", "Beautify"};
-//    String taskLabel[] = {"Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI"};
-//    String assignee[] = {"peterburgs", "peterburgs", "peterburgs", "starea", "peterburgs", "peterburgs", "peterburgs", "starea"};
-
     //
     public ToDoFragment() {
         // Required empty public constructor
@@ -141,12 +135,12 @@ public class ToDoFragment extends Fragment {
                                             taskList.clear();
                                             for(Task task : getSprintRes.getData().getTasks()) {
                                                 if(task.getStatus().equals(TaskStatus.TODO)) {
-                                                    taskList.addAll(getSprintRes.getData().getTasks());
+                                                    taskList.add(task);
                                                 }
                                             }
                                             mHandler.post(() -> toDoAdapter.notifyDataSetChanged());
                                         },
-                                        error -> Log.e("GetProjectError", error.toString())
+                                        error -> Log.e("GetSprintError", error.toString())
                                 );
                             }
                         }

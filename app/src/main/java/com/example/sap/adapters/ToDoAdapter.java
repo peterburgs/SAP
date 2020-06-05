@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
-//    private String taskName[], taskSummary[], taskLabel[], assignee[];
     private ArrayList<Task> taskList;
     private Context context;
     private OnItemClickListener mListener;

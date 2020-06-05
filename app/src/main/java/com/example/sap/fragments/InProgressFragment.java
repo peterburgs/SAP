@@ -8,13 +8,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Project;
+import com.amplifyframework.datastore.generated.model.Sprint;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
 import com.example.sap.adapters.InProgressAdapter;
+import com.example.sap.adapters.ToDoAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,11 +43,9 @@ public class InProgressFragment extends Fragment {
     private String mParam2;
     RecyclerView rcvInProgress;
 
-    //Hardcoded Data:
-    String taskName[] = {"SAP-1", "SAP-2", "SAP-3", "SAP-4", "SAP-1", "SAP-2", "SAP-3", "SAP-4"};
-    String taskSummary[] = {"Design raw UI", "Apply Material Design Component", "Add Constraints", "Beautify", "Design raw UI", "Apply Material Design Component", "Add Constraints", "Beautify"};
-    String taskLabel[] = {"Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI", "Design UI"};
-    String assignee[] = {"peterburgs", "peterburgs", "peterburgs", "starea", "peterburgs", "peterburgs", "peterburgs", "starea"};
+    private ArrayList<Task> taskList;
+    private InProgressAdapter inProgressAdapter;
+    private Handler mHandler;
 
     //
     public InProgressFragment() {
@@ -71,8 +81,12 @@ public class InProgressFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        taskList = new ArrayList<>();
+        mHandler = new Handler(Looper.getMainLooper());
+
         rcvInProgress = getView().findViewById(R.id.rcvInProgress);
-        InProgressAdapter inProgressAdapter=new InProgressAdapter(getContext(), taskName, taskSummary, taskLabel, assignee);
+        inProgressAdapter=new InProgressAdapter(getContext(), taskList);
 
         rcvInProgress.setAdapter(inProgressAdapter);
         rcvInProgress.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -84,6 +98,8 @@ public class InProgressFragment extends Fragment {
                 Toast.makeText(getContext(), "Task Clicked", Toast.LENGTH_SHORT).show();
             }
         });
+
+        inProgressTasksQuery();
     }
 
     @Override
@@ -91,5 +107,57 @@ public class InProgressFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_in_progress, container, false);
+    }
+
+    private void inProgressTasksQuery() {
+        if (getProjectID() != null) {
+            // Get project by id
+            Amplify.API.query(
+                    ModelQuery.get(Project.class, getProjectID()),
+                    response -> {
+                        taskList.clear();
+                        if(response.getData() != null) {
+                            Sprint activatedSprint = null;
+                            // Get activated sprint
+                            for (Sprint sprint : response.getData().getSprints()) {
+                                if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                                    activatedSprint = sprint;
+                                }
+                            }
+
+                            if(activatedSprint != null) {
+                                // Get tasks of the sprint
+                                Amplify.API.query(
+                                        ModelQuery.get(Sprint.class, activatedSprint.getId()),
+                                        getSprintRes -> {
+                                            taskList.clear();
+                                            for(Task task : getSprintRes.getData().getTasks()) {
+                                                if(task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                                                    taskList.add(task);
+                                                }
+                                            }
+                                            mHandler.post(() -> inProgressAdapter.notifyDataSetChanged());
+                                        },
+                                        error -> Log.e("GetSprintError", error.toString())
+                                );
+                            }
+                        }
+                    },
+                    error -> {
+                        Log.e("GetProjectError", error.toString());
+                    }
+            );
+        }
+    }
+
+    private String getProjectID() {
+        String newString;
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras == null) {
+            newString = null;
+        } else {
+            newString = extras.getString("PROJECT_ID");
+        }
+        return newString;
     }
 }

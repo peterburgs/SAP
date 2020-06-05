@@ -131,14 +131,15 @@ public class DoneFragment extends Fragment {
                             Amplify.API.query(
                                     ModelQuery.get(Sprint.class, activatedSprint.getId()),
                                     getSprintRes -> {
+                                        taskList.clear();
                                         for (Task task : getSprintRes.getData().getTasks()) {
                                             if (task.getStatus().equals(TaskStatus.DONE)) {
-                                                taskList.addAll(getSprintRes.getData().getTasks());
+                                                taskList.add(task);
                                             }
                                         }
                                         mHandler.post(() -> doneAdapter.notifyDataSetChanged());
                                     },
-                                    error -> Log.e("GetProjectError", error.toString())
+                                    error -> Log.e("GetSprintError", error.toString())
                             );
                         }
                     },

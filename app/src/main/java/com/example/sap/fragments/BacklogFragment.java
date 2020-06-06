@@ -26,6 +26,7 @@ import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
+import com.example.sap.activities.BacklogEditTaskActivity;
 import com.example.sap.activities.CreateTaskActivity;
 import com.example.sap.activities.SprintEditTaskActivity;
 import com.example.sap.adapters.BacklogAdapter;
@@ -121,7 +122,7 @@ public class BacklogFragment extends Fragment {
         backlogAdapter.setOnItemClickListener(new BacklogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getContext(), SprintEditTaskActivity.class);
+                Intent intent = new Intent(getContext(), BacklogEditTaskActivity.class);
                 intent.putExtra("TASK_ID", taskList.get(position).getId());
                 startActivity(intent);
 

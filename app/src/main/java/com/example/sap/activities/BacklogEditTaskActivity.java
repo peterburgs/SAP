@@ -5,18 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amplifyframework.api.graphql.model.ModelMutation;
-import com.amplifyframework.api.graphql.model.ModelQuery;
-import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Comment;
-import com.amplifyframework.datastore.generated.model.Project;
-import com.amplifyframework.datastore.generated.model.ProjectParticipant;
-import com.amplifyframework.datastore.generated.model.Task;
-import com.amplifyframework.datastore.generated.model.TaskStatus;
-import com.amplifyframework.datastore.generated.model.User;
-import com.example.sap.adapters.CommentListAdapter;
-import com.google.android.material.appbar.MaterialToolbar;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -29,20 +17,29 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Comment;
+import com.amplifyframework.datastore.generated.model.Project;
+import com.amplifyframework.datastore.generated.model.ProjectParticipant;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStatus;
+import com.amplifyframework.datastore.generated.model.User;
 import com.example.sap.R;
+import com.example.sap.adapters.CommentListAdapter;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
-public class SprintEditTaskActivity extends AppCompatActivity {
+public class BacklogEditTaskActivity extends AppCompatActivity {
 
-    private static final String TAG = SprintEditTaskActivity.class.getSimpleName();
+    private static final String TAG = BacklogEditTaskActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
-
     private CommentListAdapter commentListAdapter;
     ArrayList<Comment> commentList;
     RecyclerView rcvCommentList;
-
     MaterialToolbar topAppBar;
     Task task;
     Project project;
@@ -58,10 +55,11 @@ public class SprintEditTaskActivity extends AppCompatActivity {
     ArrayList<String> assigneeList;
     ArrayList<TaskStatus> statusList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sprint_edit_task);
+        setContentView(R.layout.activity_backlog_edit_task);
 
         edtComment = findViewById(R.id.edtComment);
         edtCommentLayout = findViewById(R.id.edtCommentLayout);
@@ -72,7 +70,7 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                 edtComment.setText("");
                 closeKeyboard();
                 //todo: Handle Upload Comment + Subscribe
-                Toast.makeText(SprintEditTaskActivity.this, "Comment Uploaded!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BacklogEditTaskActivity.this, "Comment Uploaded!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,6 +90,7 @@ public class SprintEditTaskActivity extends AppCompatActivity {
         loadingDialog = new LoadingDialog(this);
 
         assigneeList = new ArrayList<>();
+
         // Spinner
         spnAssignee = findViewById(R.id.spnAssignee);
         spnAssigneeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, assigneeList);
@@ -114,7 +113,7 @@ public class SprintEditTaskActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getOrder() == 1) {
 
-                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SprintEditTaskActivity.this)
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(BacklogEditTaskActivity.this)
                             .setIcon(R.drawable.ic_alert)
                             .setTitle("Remove Task")
                             .setMessage("Do you want to remove this task?")
@@ -141,7 +140,6 @@ public class SprintEditTaskActivity extends AppCompatActivity {
         });
 
         taskQuery();
-
     }
 
     private void taskQuery() {
@@ -199,14 +197,13 @@ public class SprintEditTaskActivity extends AppCompatActivity {
         );
     }
 
-
     private void onSaveTaskClick() {
         loadingDialog.startLoadingDialog();
         // Get assignee
         Amplify.API.query(
                 ModelQuery.list(User.class, User.USERNAME.contains(spnAssignee.getSelectedItem().toString())),
                 getAssigneeRes -> {
-                    User selectedAssignee = ((ArrayList<User>)getAssigneeRes.getData()).get(0);
+                    User selectedAssignee = ((ArrayList<User>) getAssigneeRes.getData()).get(0);
 
                     // Update Task
                     Task taskMutation = Task.builder()
@@ -218,7 +215,7 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                             .description(edtDescription.getText().toString())
                             .label(edtLabel.getText().toString())
                             .id(task.getId())
-                            .status((TaskStatus)spnStatus.getSelectedItem())
+                            .status((TaskStatus) spnStatus.getSelectedItem())
                             .build();
 
                     Amplify.API.mutate(
@@ -263,7 +260,9 @@ public class SprintEditTaskActivity extends AppCompatActivity {
         }
     }
 
-    public void onMoveToBacklog(View view) {
-        //todo: Backend - Handle move to backlog & navigate
+    public void onMoveToActiveSprint(View view) {
+        //todo: Backend - Handle move to active sprint & navigate
     }
+
+
 }

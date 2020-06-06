@@ -1,4 +1,4 @@
-package com.example.sap;
+package com.example.sap.app;
 
 import android.app.Application;
 import android.app.NotificationChannel;

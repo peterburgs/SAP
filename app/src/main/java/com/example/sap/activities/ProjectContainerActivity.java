@@ -1,12 +1,9 @@
 package com.example.sap.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Notification;
 import android.content.Intent;
@@ -14,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -27,10 +23,9 @@ import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
 import com.example.sap.adapters.PageAdapter;
 import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-import static com.example.sap.App.CHANNEL_ID;
+import static com.example.sap.app.App.CHANNEL_ID;
 
 public class ProjectContainerActivity extends AppCompatActivity {
 

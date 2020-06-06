@@ -23,8 +23,8 @@
     </string-array>
     <!--Tab Items-->
     <string-array name="tabs">
-        <item>ToDo</item>
-        <item>InProgress</item>
+        <item>To do</item>
+        <item>In progress</item>
         <item>Done</item>
     </string-array>
     <string name="favorite">Favorite</string>

@@ -157,6 +157,7 @@ public class DoneFragment extends Fragment {
                                             }
                                         }
                                         mHandler.post(() -> {
+                                            doneAdapter.notifyDataSetChanged();
                                             if(taskList.isEmpty()) {
                                                 imvDoneEmpty.setImageResource(R.drawable.img_empty);
                                             } else {
@@ -165,7 +166,6 @@ public class DoneFragment extends Fragment {
                                                 } catch (ParseException e) {
                                                     e.printStackTrace();
                                                 }
-                                                doneAdapter.notifyDataSetChanged();
                                             }
                                         });
                                     },

@@ -38,7 +38,6 @@ subscription OnCreateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -89,7 +88,6 @@ subscription OnCreateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -114,7 +112,6 @@ subscription OnCreateUser {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -143,7 +140,6 @@ subscription OnCreateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -194,7 +190,6 @@ subscription OnCreateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -241,7 +236,6 @@ subscription OnCreateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -275,7 +269,6 @@ subscription OnCreateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -332,7 +325,6 @@ subscription OnUpdateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -383,7 +375,6 @@ subscription OnUpdateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -408,7 +399,6 @@ subscription OnUpdateUser {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -437,7 +427,6 @@ subscription OnUpdateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -488,7 +477,6 @@ subscription OnUpdateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -535,7 +523,6 @@ subscription OnUpdateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -569,7 +556,6 @@ subscription OnUpdateUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -626,7 +612,6 @@ subscription OnDeleteUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -677,7 +662,6 @@ subscription OnDeleteUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -702,7 +686,6 @@ subscription OnDeleteUser {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -731,7 +714,6 @@ subscription OnDeleteUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -782,7 +764,6 @@ subscription OnDeleteUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -829,7 +810,6 @@ subscription OnDeleteUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -863,7 +843,6 @@ subscription OnDeleteUser {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -921,7 +900,6 @@ subscription OnCreateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -972,7 +950,6 @@ subscription OnCreateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -997,7 +974,6 @@ subscription OnCreateProject {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -1026,7 +1002,6 @@ subscription OnCreateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1077,7 +1052,6 @@ subscription OnCreateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1124,7 +1098,6 @@ subscription OnCreateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1158,7 +1131,6 @@ subscription OnCreateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1210,7 +1182,6 @@ subscription OnCreateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1245,7 +1216,6 @@ subscription OnCreateProject {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -1332,7 +1302,6 @@ subscription OnUpdateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1383,7 +1352,6 @@ subscription OnUpdateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1408,7 +1376,6 @@ subscription OnUpdateProject {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -1437,7 +1404,6 @@ subscription OnUpdateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1488,7 +1454,6 @@ subscription OnUpdateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1535,7 +1500,6 @@ subscription OnUpdateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1569,7 +1533,6 @@ subscription OnUpdateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1621,7 +1584,6 @@ subscription OnUpdateProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1656,7 +1618,6 @@ subscription OnUpdateProject {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -1743,7 +1704,6 @@ subscription OnDeleteProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1794,7 +1754,6 @@ subscription OnDeleteProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1819,7 +1778,6 @@ subscription OnDeleteProject {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -1848,7 +1806,6 @@ subscription OnDeleteProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1899,7 +1856,6 @@ subscription OnDeleteProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1946,7 +1902,6 @@ subscription OnDeleteProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -1980,7 +1935,6 @@ subscription OnDeleteProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -2032,7 +1986,6 @@ subscription OnDeleteProject {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -2067,7 +2020,6 @@ subscription OnDeleteProject {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -2178,7 +2130,6 @@ subscription OnCreateProjectParticipant {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -2289,7 +2240,6 @@ subscription OnCreateProjectParticipant {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -2360,7 +2310,6 @@ subscription OnCreateProjectParticipant {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -2504,7 +2453,6 @@ subscription OnUpdateProjectParticipant {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -2615,7 +2563,6 @@ subscription OnUpdateProjectParticipant {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -2686,7 +2633,6 @@ subscription OnUpdateProjectParticipant {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -2830,7 +2776,6 @@ subscription OnDeleteProjectParticipant {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -2941,7 +2886,6 @@ subscription OnDeleteProjectParticipant {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3012,7 +2956,6 @@ subscription OnDeleteProjectParticipant {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -3161,7 +3104,6 @@ subscription OnCreateSprint {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -3272,7 +3214,6 @@ subscription OnCreateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3296,7 +3237,6 @@ subscription OnCreateSprint {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -3325,7 +3265,6 @@ subscription OnCreateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3376,7 +3315,6 @@ subscription OnCreateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3423,7 +3361,6 @@ subscription OnCreateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3457,7 +3394,6 @@ subscription OnCreateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3544,7 +3480,6 @@ subscription OnUpdateSprint {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -3655,7 +3590,6 @@ subscription OnUpdateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3679,7 +3613,6 @@ subscription OnUpdateSprint {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -3708,7 +3641,6 @@ subscription OnUpdateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3759,7 +3691,6 @@ subscription OnUpdateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3806,7 +3737,6 @@ subscription OnUpdateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3840,7 +3770,6 @@ subscription OnUpdateSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -3927,7 +3856,6 @@ subscription OnDeleteSprint {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -4038,7 +3966,6 @@ subscription OnDeleteSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -4062,7 +3989,6 @@ subscription OnDeleteSprint {
         projectID
         assigneeID
         sprintID
-        priority
         status
         project {
           id
@@ -4091,7 +4017,6 @@ subscription OnDeleteSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -4142,7 +4067,6 @@ subscription OnDeleteSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -4189,7 +4113,6 @@ subscription OnDeleteSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -4223,7 +4146,6 @@ subscription OnDeleteSprint {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -4251,7 +4173,6 @@ subscription OnCreateTask {
     projectID
     assigneeID
     sprintID
-    priority
     status
     project {
       id
@@ -4311,7 +4232,6 @@ subscription OnCreateTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -4422,7 +4342,6 @@ subscription OnCreateTask {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -4493,7 +4412,6 @@ subscription OnCreateTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -4622,7 +4540,6 @@ subscription OnCreateTask {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -4700,7 +4617,6 @@ subscription OnCreateTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -4809,7 +4725,6 @@ subscription OnCreateTask {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -4828,7 +4743,6 @@ subscription OnCreateTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -4917,7 +4831,6 @@ subscription OnUpdateTask {
     projectID
     assigneeID
     sprintID
-    priority
     status
     project {
       id
@@ -4977,7 +4890,6 @@ subscription OnUpdateTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -5088,7 +5000,6 @@ subscription OnUpdateTask {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -5159,7 +5070,6 @@ subscription OnUpdateTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -5288,7 +5198,6 @@ subscription OnUpdateTask {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -5366,7 +5275,6 @@ subscription OnUpdateTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -5475,7 +5383,6 @@ subscription OnUpdateTask {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -5494,7 +5401,6 @@ subscription OnUpdateTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -5583,7 +5489,6 @@ subscription OnDeleteTask {
     projectID
     assigneeID
     sprintID
-    priority
     status
     project {
       id
@@ -5643,7 +5548,6 @@ subscription OnDeleteTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -5754,7 +5658,6 @@ subscription OnDeleteTask {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -5825,7 +5728,6 @@ subscription OnDeleteTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -5954,7 +5856,6 @@ subscription OnDeleteTask {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -6032,7 +5933,6 @@ subscription OnDeleteTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -6141,7 +6041,6 @@ subscription OnDeleteTask {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -6160,7 +6059,6 @@ subscription OnDeleteTask {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -6303,7 +6201,6 @@ subscription OnCreateComment {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -6388,7 +6285,6 @@ subscription OnCreateComment {
       projectID
       assigneeID
       sprintID
-      priority
       status
       project {
         id
@@ -6433,7 +6329,6 @@ subscription OnCreateComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -6543,7 +6438,6 @@ subscription OnCreateComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -6622,7 +6516,6 @@ subscription OnCreateComment {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -6657,7 +6550,6 @@ subscription OnCreateComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -6729,7 +6621,6 @@ subscription OnCreateComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -6840,7 +6731,6 @@ subscription OnUpdateComment {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -6925,7 +6815,6 @@ subscription OnUpdateComment {
       projectID
       assigneeID
       sprintID
-      priority
       status
       project {
         id
@@ -6970,7 +6859,6 @@ subscription OnUpdateComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -7080,7 +6968,6 @@ subscription OnUpdateComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -7159,7 +7046,6 @@ subscription OnUpdateComment {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -7194,7 +7080,6 @@ subscription OnUpdateComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -7266,7 +7151,6 @@ subscription OnUpdateComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -7377,7 +7261,6 @@ subscription OnDeleteComment {
           projectID
           assigneeID
           sprintID
-          priority
           status
           project {
             id
@@ -7462,7 +7345,6 @@ subscription OnDeleteComment {
       projectID
       assigneeID
       sprintID
-      priority
       status
       project {
         id
@@ -7507,7 +7389,6 @@ subscription OnDeleteComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -7617,7 +7498,6 @@ subscription OnDeleteComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -7696,7 +7576,6 @@ subscription OnDeleteComment {
               projectID
               assigneeID
               sprintID
-              priority
               status
               createdAt
               updatedAt
@@ -7731,7 +7610,6 @@ subscription OnDeleteComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id
@@ -7803,7 +7681,6 @@ subscription OnDeleteComment {
             projectID
             assigneeID
             sprintID
-            priority
             status
             project {
               id

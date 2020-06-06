@@ -156,6 +156,7 @@ public class InProgressFragment extends Fragment {
                                                 }
                                             }
                                             mHandler.post(() -> {
+                                                inProgressAdapter.notifyDataSetChanged();
                                                 if (taskList.isEmpty()) {
                                                     imvInProgressEmpty.setImageResource(R.drawable.img_empty);
                                                 } else {
@@ -164,7 +165,6 @@ public class InProgressFragment extends Fragment {
                                                     } catch (ParseException e) {
                                                         e.printStackTrace();
                                                     }
-                                                    inProgressAdapter.notifyDataSetChanged();
                                                 }
                                             });
                                         },

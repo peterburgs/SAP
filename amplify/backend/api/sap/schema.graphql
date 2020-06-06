@@ -71,7 +71,6 @@ type Task
   projectID: ID!
   assigneeID: ID!
   sprintID: ID!
-  priority: Int
   status: TaskStatus
   project: Project! @connection(fields: ["projectID"])
   assignee: User! @connection(fields: ["assigneeID"])

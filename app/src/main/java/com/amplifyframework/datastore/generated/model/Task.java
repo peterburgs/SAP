@@ -29,7 +29,6 @@ public final class Task implements Model {
   public static final QueryField SUMMARY = field("summary");
   public static final QueryField LABEL = field("label");
   public static final QueryField DESCRIPTION = field("description");
-  public static final QueryField PRIORITY = field("priority");
   public static final QueryField STATUS = field("status");
   public static final QueryField PROJECT = field("projectID");
   public static final QueryField ASSIGNEE = field("assigneeID");
@@ -39,7 +38,6 @@ public final class Task implements Model {
   private final @ModelField(targetType="String", isRequired = true) String summary;
   private final @ModelField(targetType="String") String label;
   private final @ModelField(targetType="String") String description;
-  private final @ModelField(targetType="Int") Integer priority;
   private final @ModelField(targetType="TaskStatus") TaskStatus status;
   private final @ModelField(targetType="Project", isRequired = true) @BelongsTo(targetName = "projectID", type = Project.class) Project project;
   private final @ModelField(targetType="User", isRequired = true) @BelongsTo(targetName = "assigneeID", type = User.class) User assignee;
@@ -65,10 +63,6 @@ public final class Task implements Model {
       return description;
   }
   
-  public Integer getPriority() {
-      return priority;
-  }
-  
   public TaskStatus getStatus() {
       return status;
   }
@@ -89,13 +83,12 @@ public final class Task implements Model {
       return comments;
   }
   
-  private Task(String id, String name, String summary, String label, String description, Integer priority, TaskStatus status, Project project, User assignee, Sprint sprint) {
+  private Task(String id, String name, String summary, String label, String description, TaskStatus status, Project project, User assignee, Sprint sprint) {
     this.id = id;
     this.name = name;
     this.summary = summary;
     this.label = label;
     this.description = description;
-    this.priority = priority;
     this.status = status;
     this.project = project;
     this.assignee = assignee;
@@ -115,7 +108,6 @@ public final class Task implements Model {
               ObjectsCompat.equals(getSummary(), task.getSummary()) &&
               ObjectsCompat.equals(getLabel(), task.getLabel()) &&
               ObjectsCompat.equals(getDescription(), task.getDescription()) &&
-              ObjectsCompat.equals(getPriority(), task.getPriority()) &&
               ObjectsCompat.equals(getStatus(), task.getStatus()) &&
               ObjectsCompat.equals(getProject(), task.getProject()) &&
               ObjectsCompat.equals(getAssignee(), task.getAssignee()) &&
@@ -131,7 +123,6 @@ public final class Task implements Model {
       .append(getSummary())
       .append(getLabel())
       .append(getDescription())
-      .append(getPriority())
       .append(getStatus())
       .append(getProject())
       .append(getAssignee())
@@ -149,7 +140,6 @@ public final class Task implements Model {
       .append("summary=" + String.valueOf(getSummary()))
       .append("label=" + String.valueOf(getLabel()))
       .append("description=" + String.valueOf(getDescription()))
-      .append("priority=" + String.valueOf(getPriority()))
       .append("status=" + String.valueOf(getStatus()))
       .append("project=" + String.valueOf(getProject()))
       .append("assignee=" + String.valueOf(getAssignee()))
@@ -190,7 +180,6 @@ public final class Task implements Model {
       null,
       null,
       null,
-      null,
       null
     );
   }
@@ -201,7 +190,6 @@ public final class Task implements Model {
       summary,
       label,
       description,
-      priority,
       status,
       project,
       assignee,
@@ -237,7 +225,6 @@ public final class Task implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep label(String label);
     BuildStep description(String description);
-    BuildStep priority(Integer priority);
     BuildStep status(TaskStatus status);
   }
   
@@ -251,7 +238,6 @@ public final class Task implements Model {
     private Sprint sprint;
     private String label;
     private String description;
-    private Integer priority;
     private TaskStatus status;
     @Override
      public Task build() {
@@ -263,7 +249,6 @@ public final class Task implements Model {
           summary,
           label,
           description,
-          priority,
           status,
           project,
           assignee,
@@ -318,12 +303,6 @@ public final class Task implements Model {
     }
     
     @Override
-     public BuildStep priority(Integer priority) {
-        this.priority = priority;
-        return this;
-    }
-    
-    @Override
      public BuildStep status(TaskStatus status) {
         this.status = status;
         return this;
@@ -352,7 +331,7 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String summary, String label, String description, Integer priority, TaskStatus status, Project project, User assignee, Sprint sprint) {
+    private CopyOfBuilder(String id, String name, String summary, String label, String description, TaskStatus status, Project project, User assignee, Sprint sprint) {
       super.id(id);
       super.name(name)
         .summary(summary)
@@ -361,7 +340,6 @@ public final class Task implements Model {
         .sprint(sprint)
         .label(label)
         .description(description)
-        .priority(priority)
         .status(status);
     }
     
@@ -398,11 +376,6 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder description(String description) {
       return (CopyOfBuilder) super.description(description);
-    }
-    
-    @Override
-     public CopyOfBuilder priority(Integer priority) {
-      return (CopyOfBuilder) super.priority(priority);
     }
     
     @Override

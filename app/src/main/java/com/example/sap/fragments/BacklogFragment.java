@@ -1,16 +1,10 @@
 package com.example.sap.fragments;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,27 +18,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.amplifyframework.api.ApiOperation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
-import com.amplifyframework.datastore.generated.model.TaskStatus;
-import com.example.sap.App;
 import com.example.sap.R;
 import com.example.sap.activities.CreateTaskActivity;
 import com.example.sap.activities.EditTaskActivity;
-import com.example.sap.activities.ProjectContainerActivity;
 import com.example.sap.adapters.BacklogAdapter;
-import com.example.sap.adapters.ToDoAdapter;
 
 import java.util.ArrayList;
-
-import static com.example.sap.App.CHANNEL_ID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -172,10 +158,9 @@ public class BacklogFragment extends Fragment {
                                             taskList.clear();
                                             taskList.addAll(getSprintRes.getData().getTasks());
                                             mHandler.post(() -> {
+                                                backlogAdapter.notifyDataSetChanged();
                                                 if (taskList.isEmpty()) {
                                                     imvBacklogEmpty.setImageResource(R.drawable.img_empty);
-                                                } else {
-                                                    backlogAdapter.notifyDataSetChanged();
                                                 }
                                             });
                                         },

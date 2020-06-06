@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher_background"
         android:label="SAP"
@@ -20,7 +21,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activities.EditTaskActivity"></activity>
         <activity android:name=".activities.CreateTaskActivity" />
-        <activity android:name=".recyclerView.todo_row" />
         <activity android:name=".activities.AccountActivity" />
         <activity android:name=".activities.ProjectContainerActivity" />
         <activity android:name=".activities.CreateProjectActivity" />

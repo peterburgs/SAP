@@ -1,10 +1,13 @@
 package com.example.sap.fragments;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
@@ -36,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.sap.App.CHANNEL_ID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -117,6 +123,8 @@ public class ToDoFragment extends Fragment {
         });
 
         todoTasksQuery();
+        taskUpdateSubscribe();
+        taskDeleteSubscribe();
     }
 
     @Override
@@ -189,6 +197,30 @@ public class ToDoFragment extends Fragment {
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
         tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
+    }
+
+    private void taskUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Task.class),
+                onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
+                onUpdated -> {
+                    todoTasksQuery();
+                },
+                onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void taskDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Task.class),
+                onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
+                onDeleted -> {
+                    todoTasksQuery();
+                },
+                onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
+        );
     }
 
     private String getProjectID() {

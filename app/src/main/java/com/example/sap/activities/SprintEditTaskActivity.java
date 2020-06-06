@@ -34,9 +34,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
-public class EditTaskActivity extends AppCompatActivity {
+public class SprintEditTaskActivity extends AppCompatActivity {
 
-    private static final String TAG = EditTaskActivity.class.getSimpleName();
+    private static final String TAG = SprintEditTaskActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
 
     private CommentListAdapter commentListAdapter;
@@ -61,7 +61,7 @@ public class EditTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_task);
+        setContentView(R.layout.activity_sprint_edit_task);
 
         edtComment = findViewById(R.id.edtComment);
         edtCommentLayout = findViewById(R.id.edtCommentLayout);
@@ -71,7 +71,7 @@ public class EditTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 edtComment.setText("");
                 closeKeyboard();
-                Toast.makeText(EditTaskActivity.this, "Comment Uploaded!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SprintEditTaskActivity.this, "Comment Uploaded!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,7 +113,7 @@ public class EditTaskActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getOrder() == 1) {
 
-                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(EditTaskActivity.this)
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SprintEditTaskActivity.this)
                             .setIcon(R.drawable.ic_alert)
                             .setTitle("Remove Task")
                             .setMessage("Do you want to remove this task?")

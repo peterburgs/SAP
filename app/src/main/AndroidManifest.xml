@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.EditTaskActivity"></activity>
+        <activity android:name=".activities.SprintEditTaskActivity"></activity>
         <activity android:name=".activities.CreateTaskActivity" />
         <activity android:name=".activities.AccountActivity" />
         <activity android:name=".activities.ProjectContainerActivity" />

@@ -1,0 +1,97 @@
+package com.example.sap.adapters;
+
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Project;
+import com.example.sap.R;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Comment;
+
+import java.util.List;
+
+public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.ViewHolder> {
+
+    List<Comment> commentList;
+
+    private OnItemClickListener mListener;
+
+    //Constructor
+    public CommentListAdapter(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    //Interface to Handle Clicking a specific item
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.comment_row, parent, false);
+        return new ViewHolder(view, mListener);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //todo: Handle here
+    }
+
+    @Override
+    public int getItemCount() {
+
+        return commentList.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView imvAvatar;
+        TextView tvUserName;
+        TextView tvCommentContent;
+        Spinner spnCommentOption;
+
+        protected CardView cvComment;
+
+        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+            super(itemView);
+            cvComment = itemView.findViewById(R.id.cvComment);
+            tvUserName = itemView.findViewById(R.id.tvUserName);
+            tvCommentContent = itemView.findViewById(R.id.tvCommentContent);
+            imvAvatar = itemView.findViewById(R.id.imvAvatar);
+            spnCommentOption = itemView.findViewById(R.id.spnCommentOption);
+
+            spnCommentOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+
+}

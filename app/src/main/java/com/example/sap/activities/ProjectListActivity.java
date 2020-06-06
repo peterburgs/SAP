@@ -105,7 +105,7 @@ public class ProjectListActivity extends AppCompatActivity {
                 ModelQuery.get(User.class, userId),
                 response -> {
                     loadingDialog.dismissDialog();
-                    if(response.getData() != null) {
+                    if (response.getData() != null) {
                         projectList.clear();
                         for (ProjectParticipant p : response.getData().getProjects()) {
                             projectList.add(p.getProject());

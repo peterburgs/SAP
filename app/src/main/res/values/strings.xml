@@ -16,7 +16,17 @@
 
 <resources>
 
-
+    <!--    Comment Option Items-->
+    <string-array name="commentOption">
+        <item>Delete</item>
+        <item>Edit</item>
+    </string-array>
+    <!--Tab Items-->
+    <string-array name="tabs">
+        <item>ToDo</item>
+        <item>InProgress</item>
+        <item>Done</item>
+    </string-array>
     <string name="favorite">Favorite</string>
     <string name="search">Search</string>
     <string name="more">More</string>

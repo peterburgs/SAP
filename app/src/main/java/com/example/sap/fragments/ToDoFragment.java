@@ -26,7 +26,7 @@ import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
-import com.example.sap.activities.EditTaskActivity;
+import com.example.sap.activities.SprintEditTaskActivity;
 import com.example.sap.adapters.ToDoAdapter;
 
 import java.text.ParseException;
@@ -110,7 +110,7 @@ public class ToDoFragment extends Fragment {
         toDoAdapter.setOnItemClickListener(new ToDoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getContext(), EditTaskActivity.class);
+                Intent intent = new Intent(getContext(), SprintEditTaskActivity.class);
                 intent.putExtra("TASK_ID", taskList.get(position).getId());
                 startActivity(intent);
             }

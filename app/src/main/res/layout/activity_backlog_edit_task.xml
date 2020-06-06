@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.AppCompat"
-    tools:context=".activities.EditTaskActivity">
+    tools:context=".activities.BacklogEditTaskActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--todo: Backend - Set Title corresponding to task name-->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -23,8 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/projectListMenu"
-                app:menu="@menu/edit_task_menu"
-                app:title="Edit SAP-1" />
+                app:menu="@menu/edit_task_menu" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -66,20 +64,6 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="22sp" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/gradient">
-
-                    <Spinner
-                        android:id="@+id/spnStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:spinnerMode="dialog" />
-                </FrameLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -155,21 +139,20 @@
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMoveToBacklog"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:onClick="onMoveToBacklog"
-                    android:text="Move to Backlog"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:onClick="onMoveToActiveSprint"
+                    android:text="Move to active sprint"
                     android:textColor="@color/white"
                     app:cornerRadius="15dp"
-                    app:icon="@drawable/ic_backlog"
+                    app:icon="@drawable/ic_sprint"
                     app:iconTint="@color/white"
-                    app:strokeColor="@color/colorAccent" />
+                    app:strokeColor="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="wrap_content"

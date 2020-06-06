@@ -1,6 +1,7 @@
 package com.amplifyframework.datastore.generated.model;
 
 import com.amplifyframework.core.model.annotations.BelongsTo;
+import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,6 +44,7 @@ public final class Task implements Model {
   private final @ModelField(targetType="Project", isRequired = true) @BelongsTo(targetName = "projectID", type = Project.class) Project project;
   private final @ModelField(targetType="User", isRequired = true) @BelongsTo(targetName = "assigneeID", type = User.class) User assignee;
   private final @ModelField(targetType="Sprint", isRequired = true) @BelongsTo(targetName = "sprintID", type = Sprint.class) Sprint sprint;
+  private final @ModelField(targetType="Comment") @HasMany(associatedWith = "task", type = Comment.class) List<Comment> comments = null;
   public String getId() {
       return id;
   }
@@ -81,6 +83,10 @@ public final class Task implements Model {
   
   public Sprint getSprint() {
       return sprint;
+  }
+  
+  public List<Comment> getComments() {
+      return comments;
   }
   
   private Task(String id, String name, String summary, String label, String description, Integer priority, TaskStatus status, Project project, User assignee, Sprint sprint) {

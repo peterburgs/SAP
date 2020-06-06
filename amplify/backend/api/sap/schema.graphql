@@ -76,10 +76,24 @@ type Task
   project: Project! @connection(fields: ["projectID"])
   assignee: User! @connection(fields: ["assigneeID"])
   sprint: Sprint! @connection(fields: ["sprintID"])
+  comments: [Comment] @connection(keyName: "byTask", fields: ["id"])
 }
 
 enum TaskStatus {
   TODO
   IN_PROGRESS
   DONE
+}
+
+type Comment
+  @model
+  @key(name: "byTask", fields: ["taskID"])
+  @auth(rules: [{ allow: groups, groups: ["project_member"] }]) {
+  id: ID!
+  content: String!
+  createdAt: AWSDateTime
+  taskID: ID!
+  authorID: ID!
+  author: User! @connection(fields: ["authorID"])
+  task: Task! @connection(fields: ["taskID"])
 }

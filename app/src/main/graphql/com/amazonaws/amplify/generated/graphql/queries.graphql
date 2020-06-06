@@ -251,6 +251,39 @@ query GetUser($id: ID!) {
           createdAt
           updatedAt
         }
+        comments {
+          items {
+            id
+            content
+            createdAt
+            taskID
+            authorID
+            author {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            task {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -379,6 +412,17 @@ query ListUsers(
             }
             createdAt
             updatedAt
+          }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
           }
           createdAt
           updatedAt
@@ -644,6 +688,39 @@ query GetProject($id: ID!) {
           createdAt
           updatedAt
         }
+        comments {
+          items {
+            id
+            content
+            createdAt
+            taskID
+            authorID
+            author {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            task {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -752,6 +829,9 @@ query GetProject($id: ID!) {
               isBacklog
               createdAt
               updatedAt
+            }
+            comments {
+              nextToken
             }
             createdAt
             updatedAt
@@ -886,6 +966,17 @@ query ListProjects(
             }
             createdAt
             updatedAt
+          }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
           }
           createdAt
           updatedAt
@@ -1068,6 +1159,17 @@ query GetProjectParticipant($id: ID!) {
             createdAt
             updatedAt
           }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1239,6 +1341,17 @@ query GetProjectParticipant($id: ID!) {
             createdAt
             updatedAt
           }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1339,6 +1452,9 @@ query ListProjectParticipants(
               isBacklog
               createdAt
               updatedAt
+            }
+            comments {
+              nextToken
             }
             createdAt
             updatedAt
@@ -1446,6 +1562,9 @@ query ListProjectParticipants(
               isBacklog
               createdAt
               updatedAt
+            }
+            comments {
+              nextToken
             }
             createdAt
             updatedAt
@@ -1586,6 +1705,17 @@ query GetSprint($id: ID!) {
             }
             createdAt
             updatedAt
+          }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
           }
           createdAt
           updatedAt
@@ -1791,6 +1921,39 @@ query GetSprint($id: ID!) {
           createdAt
           updatedAt
         }
+        comments {
+          items {
+            id
+            content
+            createdAt
+            taskID
+            authorID
+            author {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            task {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1889,6 +2052,9 @@ query ListSprints(
               isBacklog
               createdAt
               updatedAt
+            }
+            comments {
+              nextToken
             }
             createdAt
             updatedAt
@@ -1990,6 +2156,17 @@ query ListSprints(
             }
             createdAt
             updatedAt
+          }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
           }
           createdAt
           updatedAt
@@ -2128,6 +2305,17 @@ query GetTask($id: ID!) {
             }
             createdAt
             updatedAt
+          }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
           }
           createdAt
           updatedAt
@@ -2300,6 +2488,17 @@ query GetTask($id: ID!) {
             createdAt
             updatedAt
           }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2391,6 +2590,9 @@ query GetTask($id: ID!) {
               isBacklog
               createdAt
               updatedAt
+            }
+            comments {
+              nextToken
             }
             createdAt
             updatedAt
@@ -2493,6 +2695,17 @@ query GetTask($id: ID!) {
             createdAt
             updatedAt
           }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -2500,6 +2713,133 @@ query GetTask($id: ID!) {
       }
       createdAt
       updatedAt
+    }
+    comments {
+      items {
+        id
+        content
+        createdAt
+        taskID
+        authorID
+        author {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        task {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        updatedAt
+      }
+      nextToken
     }
     createdAt
     updatedAt
@@ -2595,6 +2935,9 @@ query ListTasks(
               isBacklog
               createdAt
               updatedAt
+            }
+            comments {
+              nextToken
             }
             createdAt
             updatedAt
@@ -2702,6 +3045,9 @@ query ListTasks(
               isBacklog
               createdAt
               updatedAt
+            }
+            comments {
+              nextToken
             }
             createdAt
             updatedAt
@@ -2814,6 +3160,9 @@ query ListTasks(
               createdAt
               updatedAt
             }
+            comments {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -2822,7 +3171,898 @@ query ListTasks(
         createdAt
         updatedAt
       }
+      comments {
+        items {
+          id
+          content
+          createdAt
+          taskID
+          authorID
+          author {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          task {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+            }
+            comments {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetComment($id: ID!) {
+  getComment(id: $id) {
+    id
+    content
+    createdAt
+    taskID
+    authorID
+    author {
+      id
+      email
+      username
+      avatarKey
+      projects {
+        items {
+          id
+          projectID
+          memberID
+          role
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          member {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tasks {
+        items {
+          id
+          name
+          summary
+          label
+          description
+          projectID
+          assigneeID
+          sprintID
+          priority
+          status
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          assignee {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sprint {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          comments {
+            items {
+              id
+              content
+              createdAt
+              taskID
+              authorID
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    task {
+      id
+      name
+      summary
+      label
+      description
+      projectID
+      assigneeID
+      sprintID
+      priority
+      status
+      project {
+        id
+        name
+        key
+        avatarKey
+        createdAt
+        members {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+            }
+            comments {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        sprints {
+          items {
+            id
+            startDate
+            endDate
+            goal
+            name
+            isCompleted
+            isStarted
+            projectID
+            isBacklog
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        updatedAt
+      }
+      assignee {
+        id
+        email
+        username
+        avatarKey
+        projects {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+            }
+            comments {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      sprint {
+        id
+        startDate
+        endDate
+        goal
+        name
+        isCompleted
+        isStarted
+        projectID
+        isBacklog
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+            }
+            comments {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      comments {
+        items {
+          id
+          content
+          createdAt
+          taskID
+          authorID
+          author {
+            id
+            email
+            username
+            avatarKey
+            projects {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          task {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+            }
+            comments {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    updatedAt
+  }
+}
+query ListComments(
+  $filter: ModelCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      content
+      createdAt
+      taskID
+      authorID
+      author {
+        id
+        email
+        username
+        avatarKey
+        projects {
+          items {
+            id
+            projectID
+            memberID
+            role
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            member {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tasks {
+          items {
+            id
+            name
+            summary
+            label
+            description
+            projectID
+            assigneeID
+            sprintID
+            priority
+            status
+            project {
+              id
+              name
+              key
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            assignee {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            sprint {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+            }
+            comments {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      task {
+        id
+        name
+        summary
+        label
+        description
+        projectID
+        assigneeID
+        sprintID
+        priority
+        status
+        project {
+          id
+          name
+          key
+          avatarKey
+          createdAt
+          members {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          sprints {
+            items {
+              id
+              startDate
+              endDate
+              goal
+              name
+              isCompleted
+              isStarted
+              projectID
+              isBacklog
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          updatedAt
+        }
+        assignee {
+          id
+          email
+          username
+          avatarKey
+          projects {
+            items {
+              id
+              projectID
+              memberID
+              role
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sprint {
+          id
+          startDate
+          endDate
+          goal
+          name
+          isCompleted
+          isStarted
+          projectID
+          isBacklog
+          project {
+            id
+            name
+            key
+            avatarKey
+            createdAt
+            members {
+              nextToken
+            }
+            tasks {
+              nextToken
+            }
+            sprints {
+              nextToken
+            }
+            updatedAt
+          }
+          tasks {
+            items {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        comments {
+          items {
+            id
+            content
+            createdAt
+            taskID
+            authorID
+            author {
+              id
+              email
+              username
+              avatarKey
+              createdAt
+              updatedAt
+            }
+            task {
+              id
+              name
+              summary
+              label
+              description
+              projectID
+              assigneeID
+              sprintID
+              priority
+              status
+              createdAt
+              updatedAt
+            }
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       updatedAt
     }
     nextToken

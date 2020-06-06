@@ -43,8 +43,7 @@ public class EditTaskActivity extends AppCompatActivity {
         task = null;
 
         taskQuery();
-
-
+        
         topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

@@ -21,9 +21,13 @@
     Design GUI:<br/>
         - Welcome Activity 
      <br/>
-    - Login Activity
+    - Login Activity (and related activities)
      <br/>
-     - Signup Activity
+     - Signup Activity (and related activities)
+ <br/>
+     - Project Activity: Project Container, Project List, Create Project, Edit Project
+      <br/>
+     - Task Activity: Create Task, Edit Task
     </li>
   </ul>
    <h3>

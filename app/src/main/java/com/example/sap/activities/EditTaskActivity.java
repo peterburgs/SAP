@@ -15,11 +15,13 @@ import com.amplifyframework.datastore.generated.model.User;
 import com.example.sap.adapters.CommentListAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -47,20 +49,30 @@ public class EditTaskActivity extends AppCompatActivity {
     EditText edtSummary;
     EditText edtLabel;
     EditText edtDescription;
-    TextView tvTaskName;
+    com.google.android.material.textfield.TextInputLayout edtCommentLayout;
+    com.google.android.material.textfield.TextInputEditText edtComment;
     Spinner spnStatus;
     Spinner spnAssignee;
-    Spinner spnSprint;
     ArrayAdapter<String> spnAssigneeAdapter;
     ArrayAdapter<CharSequence> spnStatusAdapter;
-    ArrayAdapter<String> spnSprintAdapter;
     ArrayList<String> assignee = new ArrayList<String>();
-    ArrayList<String> sprint = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
+
+        edtComment = findViewById(R.id.edtComment);
+        edtCommentLayout = findViewById(R.id.edtCommentLayout);
+
+        edtCommentLayout.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtComment.setText("");
+                closeKeyboard();
+                Toast.makeText(EditTaskActivity.this, "Comment Uploaded!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         commentList = new ArrayList<>();
         rcvCommentList = findViewById(R.id.rcvComment);
@@ -70,36 +82,10 @@ public class EditTaskActivity extends AppCompatActivity {
         rcvCommentList.setLayoutManager(new LinearLayoutManager(this));
         rcvCommentList.setAdapter(commentListAdapter);
 
-        //Comment
-//        spnCommentOption = findViewById(R.id.spnCommentOption);
-//        ArrayAdapter<CharSequence> spnCommentOptionAdapter = ArrayAdapter.createFromResource(this, R.array.commentOption, android.R.layout.simple_spinner_dropdown_item);
-//        spnCommentOptionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spnCommentOption.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Object item = parent.getItemAtPosition(position);
-//                //todo:Handle Options: delete || edit
-//                if (item.toString().equals("Delete")) {
-//                    Toast.makeText(EditTaskActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-//                }
-//                if (item.toString().equals("Edit")) {
-//                    Toast.makeText(EditTaskActivity.this, "Edited", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//        spnCommentOption.setAdapter(spnCommentOptionAdapter);
-
 
         edtDescription = findViewById(R.id.edtDescription);
         edtSummary = findViewById(R.id.edtSummary);
         edtLabel = findViewById(R.id.edtLabel);
-        tvTaskName = findViewById(R.id.tvTaskName);
         task = null;
         project = null;
         loadingDialog = new LoadingDialog(this);
@@ -140,23 +126,6 @@ public class EditTaskActivity extends AppCompatActivity {
         });
         spnStatus.setAdapter(spnStatusAdapter);
 
-        // Spinner
-        spnSprint = findViewById(R.id.spnSprint);
-        spnSprintAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sprint);
-        spnSprintAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnSprint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Object item = parent.getItemAtPosition(position);
-                //todo:Handle Status
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spnSprint.setAdapter(spnSprintAdapter);
 
         topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -216,7 +185,6 @@ public class EditTaskActivity extends AppCompatActivity {
                                     edtSummary.setText(task.getSummary());
                                     edtDescription.setText(task.getDescription());
                                     edtLabel.setText(task.getLabel());
-                                    tvTaskName.setText(task.getName());
 
                                     assignee.clear();
                                     for (ProjectParticipant member : project.getMembers()) {
@@ -225,10 +193,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
                                     spnAssigneeAdapter.notifyDataSetChanged();
 
-                                    sprint.clear();
-                                    project.getSprints().forEach((s) -> sprint.add(s.getName()));
 
-                                    spnSprintAdapter.notifyDataSetChanged();
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
 
@@ -259,4 +224,15 @@ public class EditTaskActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    public void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public void onMoveToBacklog(View view) {
+        //todo: Backend - Handle move to backlog & navigate
+    }
 }

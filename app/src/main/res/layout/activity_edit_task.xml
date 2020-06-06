@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!--todo: Backend - Set Title corresponding to task name-->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -23,7 +24,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/projectListMenu"
                 app:menu="@menu/edit_task_menu"
-                app:title="Edit Task" />
+                app:title="Edit SAP-1" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,13 +41,6 @@
                 android:layout_marginRight="10dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvTaskName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -59,7 +53,6 @@
                     app:layout_constraintVertical_bias="0.15"
                     app:startIconDrawable="@drawable/ic_task">
 
-                    <!--todo: Fetch Task Name-->
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtSummary"
                         android:layout_width="match_parent"
@@ -69,7 +62,6 @@
                         android:lines="1"
                         android:maxLines="5"
                         android:minLines="1"
-                        android:nextFocusDown="@id/edtDescription"
                         android:scrollbars="vertical"
                         android:textColor="@color/colorPrimary"
                         android:textSize="22sp" />
@@ -100,7 +92,6 @@
                     app:layout_constraintVertical_bias="0.15"
                     app:startIconDrawable="@drawable/ic_des">
 
-                    <!--todo: Fetch Task Name-->
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtDescription"
                         android:layout_width="match_parent"
@@ -130,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/gradient">
-                    <!--todo: Add List of Assignee-->
+
                     <Spinner
                         android:id="@+id/spnAssignee"
                         android:layout_width="wrap_content"
@@ -150,7 +141,6 @@
                     app:layout_constraintVertical_bias="0.15"
                     app:startIconDrawable="@drawable/ic_label">
 
-                    <!--todo: Fetch Task Name-->
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtLabel"
                         android:layout_width="match_parent"
@@ -165,34 +155,25 @@
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnMoveToBacklog"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Sprint"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <!--todo: Convert Spinner to button: Move to backlog-->
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/gradient">
-                    <!--todo: Add List of Sprint-->
-                    <Spinner
-                        android:id="@+id/spnSprint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:spinnerMode="dialog" />
-                </FrameLayout>
+                    android:backgroundTint="@color/colorAccent"
+                    android:onClick="onMoveToBacklog"
+                    android:text="Move to Backlog"
+                    android:textColor="@color/white"
+                    app:cornerRadius="15dp"
+                    app:icon="@drawable/ic_backlog"
+                    app:iconTint="@color/white"
+                    app:strokeColor="@color/colorAccent" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:text="Comments"
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp"
@@ -216,32 +197,41 @@
             </LinearLayout>
         </ScrollView>
 
-        <com.google.android.material.textfield.TextInputLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Write a comment"
-            app:boxBackgroundColor="#FFF"
-            app:boxCornerRadiusBottomEnd="25dp"
-            app:boxCornerRadiusBottomStart="25dp"
-            app:boxCornerRadiusTopEnd="25dp"
-            app:boxCornerRadiusTopStart="25dp"
-            app:boxStrokeColor="#FFF"
-            app:boxStrokeWidth="0dp"
-            app:endIconMode="clear_text">
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtCommentInput"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtCommentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#F9F9F9"
-                android:inputType="text"
-                android:scrollbars="vertical"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="10dp"
+                android:hint="Write a comment"
+                app:boxBackgroundColor="#FFF"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxStrokeColor="#FFF"
+                app:boxStrokeWidth="0dp"
+                app:endIconDrawable="@drawable/ic_send"
+                app:endIconMode="custom"
+                app:endIconTint="@color/colorAccent">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#F9F9F9"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

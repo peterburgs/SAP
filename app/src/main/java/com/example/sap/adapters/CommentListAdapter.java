@@ -1,5 +1,6 @@
 package com.example.sap.adapters;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -7,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -84,8 +87,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         ImageView imvAvatar;
         TextView tvUserName;
         TextView tvCommentContent;
-        Spinner spnCommentOption;
-
+        ImageButton imbRemoveComment;
         protected CardView cvComment;
 
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
@@ -94,24 +96,16 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvCommentContent = itemView.findViewById(R.id.tvCommentContent);
             imvAvatar = itemView.findViewById(R.id.imvAvatar);
-            spnCommentOption = itemView.findViewById(R.id.spnCommentOption);
+            imbRemoveComment = itemView.findViewById(R.id.imbRemoveComment);
 
-            spnCommentOption.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            imbRemoveComment.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (listener != null) {
-                        int taskPosition = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
+                public void onClick(View v) {
+                    //todo:Backend -  Remove comment
+                    Log.i("Remove", String.valueOf(getAdapterPosition()));
                 }
             });
+
         }
 
     }

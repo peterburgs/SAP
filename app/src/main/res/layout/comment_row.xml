@@ -31,11 +31,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
+
                     android:id="@+id/imvAvatar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="top"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="0.1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -50,14 +52,13 @@
 
                     <TextView
                         android:id="@+id/tvUserName"
-                        style="@android:style/Theme.Panel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/rounded_corner"
+                        android:background="@drawable/comment_username"
                         android:text="Peter Burgs"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tvCommentContent"
@@ -66,17 +67,20 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="16dp"
                         android:text="This is my comment"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
                 <!--todo: Convert Spinner into Icon-->
-                <Spinner
-                    android:id="@+id/spnCommentOption"
+                <ImageButton
+                    android:id="@+id/imbRemoveComment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="0.1"
-                    android:spinnerMode="dialog" />
+                    android:background="@null"
+                    android:src="@drawable/ic_remove"
+                    android:tint="@color/red" />
 
 
             </LinearLayout>

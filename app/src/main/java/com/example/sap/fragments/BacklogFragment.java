@@ -1,10 +1,17 @@
 package com.example.sap.fragments;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,13 +34,17 @@ import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
+import com.example.sap.App;
 import com.example.sap.R;
 import com.example.sap.activities.CreateTaskActivity;
 import com.example.sap.activities.EditTaskActivity;
+import com.example.sap.activities.ProjectContainerActivity;
 import com.example.sap.adapters.BacklogAdapter;
 import com.example.sap.adapters.ToDoAdapter;
 
 import java.util.ArrayList;
+
+import static com.example.sap.App.CHANNEL_ID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +64,7 @@ public class BacklogFragment extends Fragment {
     private BacklogAdapter backlogAdapter;
     private Handler mHandler;
     private ImageView imvBacklogEmpty;
+    private NotificationManagerCompat notificationManagerCompat;
 
     RecyclerView rcvBacklog;
     Button btnCreateTask;
@@ -132,6 +144,8 @@ public class BacklogFragment extends Fragment {
 
         backlogTaskQuery();
         taskCreateSubscribe();
+        taskUpdateSubscribe();
+        taskDeleteSubscribe();
     }
 
     private void backlogTaskQuery() {
@@ -178,7 +192,7 @@ public class BacklogFragment extends Fragment {
     }
 
     private void taskCreateSubscribe() {
-        ApiOperation subscription = Amplify.API.subscribe(
+        Amplify.API.subscribe(
                 ModelSubscription.onCreate(Task.class),
                 onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
                 onCreated -> {
@@ -186,6 +200,30 @@ public class BacklogFragment extends Fragment {
                 },
                 onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void taskUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Task.class),
+                onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
+                onUpdated -> {
+                    backlogTaskQuery();
+                },
+                onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void taskDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Task.class),
+                onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
+                onDeleted -> {
+                    backlogTaskQuery();
+                },
+                onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
         );
     }
 

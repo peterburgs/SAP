@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
@@ -115,6 +116,8 @@ public class InProgressFragment extends Fragment {
         });
 
         inProgressTasksQuery();
+        taskUpdateSubscribe();
+        taskDeleteSubscribe();
     }
 
     @Override
@@ -187,6 +190,30 @@ public class InProgressFragment extends Fragment {
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
         tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
+    }
+
+    private void taskUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Task.class),
+                onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
+                onUpdated -> {
+                    inProgressTasksQuery();
+                },
+                onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void taskDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Task.class),
+                onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
+                onDeleted -> {
+                    inProgressTasksQuery();
+                },
+                onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
+        );
     }
 
     private String getProjectID() {

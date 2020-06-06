@@ -2,10 +2,13 @@ package com.example.sap.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
@@ -26,6 +30,8 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
+import static com.example.sap.App.CHANNEL_ID;
+
 public class ProjectContainerActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
@@ -34,6 +40,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
     private BadgeDrawable toDoBadge, inProgressBadge, doneBadge, backlogBadge;
     public PageAdapter pagerAdapter;
     private Handler mHandler;
+    private NotificationManagerCompat notificationManagerCompat;
 
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
@@ -80,7 +87,12 @@ public class ProjectContainerActivity extends AppCompatActivity {
         doneBadge.setVisible(true);
         backlogBadge.setVisible(true);
 
+        notificationManagerCompat = NotificationManagerCompat.from(this);
+
         setBadgeNumber();
+        taskCreateSubscribe();
+        taskUpdateSubscribe();
+        taskDeleteSubscribe();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -173,6 +185,56 @@ public class ProjectContainerActivity extends AppCompatActivity {
                     Log.e("Error", error.toString());
                 }
         );
+    }
+
+    private void taskCreateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onCreate(Task.class),
+                onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
+                onCreated -> {
+                    showNotification("SAP", onCreated.getData().getName() + " has been created in backlog");
+                    setBadgeNumber();
+                },
+                onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void taskUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Task.class),
+                onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
+                onUpdated -> {
+                    showNotification("SAP", onUpdated.getData().getName() + " has been updated");
+                    setBadgeNumber();
+                },
+                onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void taskDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Task.class),
+                onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
+                onDeleted -> {
+                    showNotification("SAP", onDeleted.getData().getName() + " has been deleted");
+                    setBadgeNumber();
+                },
+                onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void showNotification(String title, String message) {
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_bookmark_24dp)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+        notificationManagerCompat.notify(1, notification);
     }
 
     private String getProjectID() {

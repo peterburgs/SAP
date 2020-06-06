@@ -71,6 +71,7 @@ public class SprintEditTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 edtComment.setText("");
                 closeKeyboard();
+                //todo: Handle Upload Comment + Subscribe
                 Toast.makeText(SprintEditTaskActivity.this, "Comment Uploaded!", Toast.LENGTH_SHORT).show();
             }
         });

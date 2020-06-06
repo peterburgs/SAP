@@ -44,7 +44,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="SAP-1"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp" />
 
@@ -71,7 +70,6 @@
                         android:minLines="1"
                         android:nextFocusDown="@id/edtDescription"
                         android:scrollbars="vertical"
-                        android:text="Design Database"
                         android:textColor="@color/colorPrimary"
                         android:textSize="22sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -83,7 +81,7 @@
                     android:background="@drawable/gradient">
 
                     <Spinner
-                        android:id="@+id/spnTab"
+                        android:id="@+id/spnStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -112,7 +110,6 @@
                         android:maxLines="6"
                         android:minLines="3"
                         android:scrollbars="vertical"
-                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
                         android:textColor="@color/black_800"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -162,7 +159,6 @@
                         android:maxLines="6"
                         android:minLines="1"
                         android:scrollbars="vertical"
-                        android:text="Database Design"
                         android:textColor="@color/black_800"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>

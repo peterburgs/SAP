@@ -1,47 +1,34 @@
 package com.example.sap.activities;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Comment;
+import com.amplifyframework.datastore.generated.model.Project;
+import com.amplifyframework.datastore.generated.model.ProjectParticipant;
 import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.User;
 import com.example.sap.adapters.CommentListAdapter;
-import com.example.sap.adapters.PageAdapter;
-import com.example.sap.fragments.ToDoFragment;
 import com.google.android.material.appbar.MaterialToolbar;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sap.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.tabs.TabLayout;
-
-import org.w3c.dom.Comment;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.UserDataHandler;
 
 import java.util.ArrayList;
 
@@ -50,19 +37,23 @@ public class EditTaskActivity extends AppCompatActivity {
     private static final String TAG = EditTaskActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
 
-
     private CommentListAdapter commentListAdapter;
     ArrayList<Comment> commentList;
     RecyclerView rcvCommentList;
 
-
     MaterialToolbar topAppBar;
     Task task;
+    Project project;
+    EditText edtSummary;
+    EditText edtLabel;
     EditText edtDescription;
+    TextView tvTaskName;
     Spinner spnStatus;
     Spinner spnAssignee;
     Spinner spnSprint;
-    Spinner spnCommentOption;
+    ArrayAdapter<String> spnAssigneeAdapter;
+    ArrayAdapter<CharSequence> spnStatusAdapter;
+    ArrayAdapter<String> spnSprintAdapter;
     ArrayList<String> assignee = new ArrayList<String>();
     ArrayList<String> sprint = new ArrayList<String>();
 
@@ -71,20 +62,13 @@ public class EditTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
-        //commentList = new ArrayList<>();
-        // rcvCommentList = findViewById(R.id.rcvComment);
-        //rcvCommentList.setHasFixedSize(true);
-        //commentListAdapter = new CommentListAdapter(commentList);
+        commentList = new ArrayList<>();
+        rcvCommentList = findViewById(R.id.rcvComment);
+        rcvCommentList.setHasFixedSize(true);
+        commentListAdapter = new CommentListAdapter(commentList);
 
-        //rcvCommentList.setLayoutManager(new LinearLayoutManager(this));
-        //rcvCommentList.setAdapter(commentListAdapter);
-        //commentListAdapter.setOnItemClickListener(new CommentListAdapter.OnItemClickListener() {
-        // @Override
-        //  public void onItemClick(int position) {
-
-        //}
-        // });
-
+        rcvCommentList.setLayoutManager(new LinearLayoutManager(this));
+        rcvCommentList.setAdapter(commentListAdapter);
 
         //Comment
 //        spnCommentOption = findViewById(R.id.spnCommentOption);
@@ -113,24 +97,17 @@ public class EditTaskActivity extends AppCompatActivity {
 
 
         edtDescription = findViewById(R.id.edtDescription);
+        edtSummary = findViewById(R.id.edtSummary);
+        edtLabel = findViewById(R.id.edtLabel);
+        tvTaskName = findViewById(R.id.tvTaskName);
         task = null;
+        project = null;
+        loadingDialog = new LoadingDialog(this);
 
-        taskQuery();
-        //Hardcode for Assignee
-        assignee.add("Peter");
-        assignee.add("John");
-        assignee.add("Jimmy");
-
-        //Hardcode for Sprint
-        sprint.add("Week 1");
-        sprint.add("Week 2");
-        sprint.add("Week 3");
-
-
+        // Spinner
         spnAssignee = findViewById(R.id.spnAssignee);
-        ArrayAdapter<String> spnAssigneeAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, assignee);
+        spnAssigneeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, assignee);
         spnAssigneeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spnAssignee.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -144,11 +121,11 @@ public class EditTaskActivity extends AppCompatActivity {
             }
         });
         spnAssignee.setAdapter(spnAssigneeAdapter);
-        //
-        //Spinner
-        spnStatus = findViewById(R.id.spnTab);
-        ArrayAdapter<CharSequence> spnTabAdapter = ArrayAdapter.createFromResource(this, R.array.tabs, android.R.layout.simple_spinner_dropdown_item);
-        spnTabAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Spinner
+        spnStatus = findViewById(R.id.spnStatus);
+        spnStatusAdapter = ArrayAdapter.createFromResource(this, R.array.tabs, android.R.layout.simple_spinner_dropdown_item);
+        spnStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -161,8 +138,26 @@ public class EditTaskActivity extends AppCompatActivity {
 
             }
         });
-        spnStatus.setAdapter(spnTabAdapter);
-        //Spinner
+        spnStatus.setAdapter(spnStatusAdapter);
+
+        // Spinner
+        spnSprint = findViewById(R.id.spnSprint);
+        spnSprintAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sprint);
+        spnSprintAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnSprint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                //todo:Handle Status
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spnSprint.setAdapter(spnSprintAdapter);
+
         topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -200,30 +195,49 @@ public class EditTaskActivity extends AppCompatActivity {
             }
         });
 
-        spnSprint = findViewById(R.id.spnSprint);
-        ArrayAdapter<CharSequence> spnSprintAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sprint);
-        spnSprintAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnSprint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Object item = parent.getItemAtPosition(position);
-                //todo:Handle Status
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spnSprint.setAdapter(spnSprintAdapter);
+        taskQuery();
 
     }
 
     private void taskQuery() {
+        loadingDialog.startLoadingDialog();
         Amplify.API.query(
                 ModelQuery.get(Task.class, getTaskID()),
-                response -> {
-                    task = response.getData();
+                getTaskRes -> {
+                    task = getTaskRes.getData();
+
+                    // Get project
+                    Amplify.API.query(
+                            ModelQuery.get(Project.class, task.getProject().getId()),
+                            getProjectRes -> {
+                                loadingDialog.dismissDialog();
+                                runOnUiThread(() -> {
+                                    project = getProjectRes.getData();
+                                    edtSummary.setText(task.getSummary());
+                                    edtDescription.setText(task.getDescription());
+                                    edtLabel.setText(task.getLabel());
+                                    tvTaskName.setText(task.getName());
+
+                                    assignee.clear();
+                                    for (ProjectParticipant member : project.getMembers()) {
+                                        assignee.add(member.getMember().getUsername());
+                                    }
+
+                                    spnAssigneeAdapter.notifyDataSetChanged();
+
+                                    sprint.clear();
+                                    project.getSprints().forEach((s) -> sprint.add(s.getName()));
+
+                                    spnSprintAdapter.notifyDataSetChanged();
+                                    commentList.clear();
+                                    commentList.addAll(task.getComments());
+
+                                    commentListAdapter.notifyDataSetChanged();
+                                });
+
+                            },
+                            error -> Log.e(TAG, error.toString())
+                    );
                 },
                 error -> Log.e(TAG, error.toString())
         );

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,11 +16,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Comment;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.example.sap.R;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Comment;
 
 import java.util.List;
 
@@ -53,7 +53,24 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //todo: Handle here
+        holder.tvUserName.setText(commentList.get(position).getAuthor().getUsername());
+        holder.tvCommentContent.setText(commentList.get(position).getContent());
+        Amplify.Storage.getUrl(
+                commentList.get(position).getAuthor().getAvatarKey(),
+                result -> {
+                    Handler uiHandler = new Handler(Looper.getMainLooper());
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Picasso.get().load(result.getUrl().toString()).into(holder.imvAvatar);
+                        }
+                    });
+                },
+                error -> {
+                    Log.e("GetProjectImageError", "Error", error);
+                }
+        );
+
     }
 
     @Override
@@ -79,15 +96,20 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             imvAvatar = itemView.findViewById(R.id.imvAvatar);
             spnCommentOption = itemView.findViewById(R.id.spnCommentOption);
 
-            spnCommentOption.setOnClickListener(new View.OnClickListener() {
+            spnCommentOption.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
-                public void onClick(View v) {
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (listener != null) {
-                        int position = getAdapterPosition();
+                        int taskPosition = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
                         }
                     }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
                 }
             });
         }

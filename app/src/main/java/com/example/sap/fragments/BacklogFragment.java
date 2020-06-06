@@ -122,9 +122,9 @@ public class BacklogFragment extends Fragment {
         backlogAdapter.setOnItemClickListener(new BacklogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getContext(), BacklogEditTaskActivity.class);
-                intent.putExtra("TASK_ID", taskList.get(position).getId());
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(), BacklogEditTaskActivity.class);
+//                intent.putExtra("TASK_ID", taskList.get(position).getId());
+//                startActivity(intent);
 
             }
         });

@@ -22,7 +22,7 @@
             app:title="Simple Android Project" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+            android:id="@+id/tloStatus"
             style="@style/Widget.MaterialComponents.TabLayout.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,13 +62,9 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
+            android:id="@+id/vpgStatus"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            >
-
-        </androidx.viewpager.widget.ViewPager>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 
@@ -102,6 +98,7 @@
             app:fab_icon="@drawable/ic_project"
             app:fab_size="mini"
             app:fab_title="Projects" />
+
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabSprint"
             android:layout_width="wrap_content"

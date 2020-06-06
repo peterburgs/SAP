@@ -29,7 +29,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="8">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,11 +105,12 @@
                         android:id="@+id/edtDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:backgroundTint="#F9F9F9"
                         android:inputType="textMultiLine"
-                        android:lines="3"
+                        android:lines="2"
                         android:maxLines="6"
-                        android:minLines="3"
+                        android:minLines="2"
                         android:scrollbars="vertical"
                         android:textColor="@color/black_800"
                         android:textSize="16sp" />
@@ -172,6 +174,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <!--todo: Convert Spinner to button: Move to backlog-->
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -211,9 +214,34 @@
 
 
             </LinearLayout>
-
-
         </ScrollView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Write a comment"
+            app:boxBackgroundColor="#FFF"
+            app:boxCornerRadiusBottomEnd="25dp"
+            app:boxCornerRadiusBottomStart="25dp"
+            app:boxCornerRadiusTopEnd="25dp"
+            app:boxCornerRadiusTopStart="25dp"
+            app:boxStrokeColor="#FFF"
+            app:boxStrokeWidth="0dp"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCommentInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F9F9F9"
+                android:inputType="text"
+                android:scrollbars="vertical"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

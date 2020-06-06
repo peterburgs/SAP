@@ -32,9 +32,10 @@
 
                 <ImageView
                     android:id="@+id/imvAvatar"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="0.1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +44,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="5"
                     android:orientation="vertical">
 
@@ -55,7 +57,7 @@
                         android:background="@drawable/rounded_corner"
                         android:text="Peter Burgs"
                         android:textColor="@color/white"
-                        android:textSize="26sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tvCommentContent"
@@ -65,9 +67,9 @@
                         android:layout_marginBottom="16dp"
                         android:text="This is my comment"
                         android:textColor="@color/colorAccent"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
-
+                <!--todo: Convert Spinner into Icon-->
                 <Spinner
                     android:id="@+id/spnCommentOption"
                     android:layout_width="wrap_content"

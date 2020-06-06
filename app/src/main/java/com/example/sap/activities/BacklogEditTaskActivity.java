@@ -2,9 +2,11 @@ package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Comment;
 import com.amplifyframework.datastore.generated.model.Project;
@@ -67,9 +70,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
         edtCommentLayout.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtComment.setText("");
-                closeKeyboard();
-                Toast.makeText(BacklogEditTaskActivity.this, "Comment Uploaded!", Toast.LENGTH_SHORT).show();
+                commentMutation(edtComment.getText().toString());
             }
         });
 
@@ -128,6 +129,59 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
         });
 
         taskQuery();
+        commentCreateSubscribe();
+        commentDeleteSubscribe();
+
+        commentListAdapter.setOnItemClickListener((position -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(BacklogEditTaskActivity.this);
+            builder.setMessage("Do you want to remove this comment?");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Get current user
+                    loadingDialog.startLoadingDialog();
+                    Amplify.API.query(
+                            ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
+                            getCurrentUserRes -> {
+                                if(!getCurrentUserRes.getData().equals(commentList.get(position).getAuthor())) {
+                                    AlertDialog.Builder builder2 = new AlertDialog.Builder(BacklogEditTaskActivity.this);
+                                    builder2.setMessage("You are not allowed to delete this comment");
+                                    builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                                    AlertDialog dialog2 = builder2.create();
+                                    dialog2.show();
+                                } else {
+                                    Amplify.API.mutate(
+                                            ModelMutation.delete(commentList.get(position)),
+                                            deleteCommentRes -> {
+                                                loadingDialog.dismissDialog();
+                                                runOnUiThread(() -> {
+                                                    Toast.makeText(BacklogEditTaskActivity.this, "Delete comment successfully", Toast.LENGTH_SHORT).show();
+                                                });
+                                            },
+                                            error -> Log.e("DeleteCommentError", error.toString())
+                                    );
+                                }
+                            },
+                            error -> Log.e("DeleteCommentError", error.toString())
+                    );
+                }
+            });
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }));
     }
 
     private void taskQuery() {
@@ -171,6 +225,37 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
         );
     }
 
+    private void commentMutation(String content) {
+        loadingDialog.startLoadingDialog();
+        // Get User
+        Amplify.API.mutate(
+                ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
+                getUserRes -> {
+
+                    // Add comment
+                    Comment comment = Comment.builder()
+                            .content(content)
+                            .author(getUserRes.getData())
+                            .task(task)
+                            .build();
+
+                    Amplify.API.mutate(
+                            ModelMutation.create(comment),
+                            createCommentRes -> {
+                                loadingDialog.dismissDialog();
+                                runOnUiThread(() -> {
+                                    edtComment.setText("");
+                                });
+                                closeKeyboard();
+                            },
+                            error -> Log.e(TAG, error.toString())
+                    );
+
+                },
+                error -> Log.e(TAG, error.toString())
+        );
+    }
+
     private void onDeleteTaskClick() {
         loadingDialog.startLoadingDialog();
         // Delete task
@@ -184,14 +269,13 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
         );
     }
 
-
     private void onSaveTaskClick() {
         loadingDialog.startLoadingDialog();
         // Get assignee
         Amplify.API.query(
                 ModelQuery.list(User.class, User.USERNAME.contains(spnAssignee.getSelectedItem().toString())),
                 getAssigneeRes -> {
-                    User selectedAssignee = ((ArrayList<User>)getAssigneeRes.getData()).get(0);
+                    User selectedAssignee = ((ArrayList<User>) getAssigneeRes.getData()).get(0);
 
                     // Update Task
                     Task taskMutation = Task.builder()
@@ -260,36 +344,39 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                             getProjectRes -> {
                                 loadingDialog.dismissDialog();
                                 Sprint activeSprint = null;
-                                for(Sprint sprint: getProjectRes.getData().getSprints()) {
-                                    if(sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                                for (Sprint sprint : getProjectRes.getData().getSprints()) {
+                                    if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
                                         activeSprint = sprint;
                                     }
                                 }
 
-                                // Update Task
-                                Task taskMutation = Task.builder()
-                                        .name(task.getName())
-                                        .summary(task.getSummary())
-                                        .project(task.getProject())
-                                        .assignee(task.getAssignee())
-                                        .sprint(activeSprint)
-                                        .description(task.getDescription())
-                                        .label(task.getLabel())
-                                        .status(TaskStatus.TODO)
-                                        .id(task.getId())
-                                        .build();
+                                if(activeSprint == null) {
+                                    runOnUiThread(() -> makeAlert("There is no active sprint"));
+                                } else {
+                                    // Update Task
+                                    Task taskMutation = Task.builder()
+                                            .name(task.getName())
+                                            .summary(task.getSummary())
+                                            .project(task.getProject())
+                                            .assignee(task.getAssignee())
+                                            .sprint(activeSprint)
+                                            .description(task.getDescription())
+                                            .label(task.getLabel())
+                                            .status(TaskStatus.TODO)
+                                            .id(task.getId())
+                                            .build();
 
-                                Amplify.API.mutate(
-                                        ModelMutation.update(taskMutation),
-                                        updateTaskRes -> {
-                                            loadingDialog.dismissDialog();
-                                            runOnUiThread(this::onBackPressed);
-                                        },
-                                        error -> {
-                                            Log.e(TAG, error.toString());
-                                        }
-                                );
-
+                                    Amplify.API.mutate(
+                                            ModelMutation.update(taskMutation),
+                                            updateTaskRes -> {
+                                                loadingDialog.dismissDialog();
+                                                runOnUiThread(this::onBackPressed);
+                                            },
+                                            error -> {
+                                                Log.e(TAG, error.toString());
+                                            }
+                                    );
+                                }
                             },
                             error -> Log.e(TAG, error.toString())
                     );
@@ -298,4 +385,65 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
         );
     }
 
+    private void commentCreateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onCreate(Comment.class),
+                onEstablished -> Log.i("commentCreateSubscribe", "Subscription established"),
+                onUpdated -> {
+                    Amplify.API.query(
+                            ModelQuery.get(Task.class, getTaskID()),
+                            getTaskRes -> {
+                                task = getTaskRes.getData();
+
+                                runOnUiThread(() -> {
+                                    commentList.clear();
+                                    commentList.addAll(task.getComments());
+                                    commentListAdapter.notifyDataSetChanged();
+                                });
+                            },
+                            error -> Log.e(TAG, error.toString())
+                    );
+                },
+                onFailure -> Log.e("commentCreateSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("commentCreateSubscribe", "Subscription completed")
+        );
+    }
+
+    private void commentDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Comment.class),
+                onEstablished -> Log.i("OnDeleteCommentSubscribe", "Subscription established"),
+                onUpdated -> {
+                    Amplify.API.query(
+                            ModelQuery.get(Task.class, getTaskID()),
+                            getTaskRes -> {
+                                task = getTaskRes.getData();
+
+                                runOnUiThread(() -> {
+                                    commentList.clear();
+                                    commentList.addAll(task.getComments());
+                                    commentListAdapter.notifyDataSetChanged();
+                                });
+                            },
+                            error -> Log.e(TAG, error.toString())
+                    );
+                },
+                onFailure -> Log.e("OnDeleteCommentSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteCommentSubscribe", "Subscription completed")
+        );
+    }
+
+    private void makeAlert(String content) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(BacklogEditTaskActivity.this);
+        builder.setMessage(content);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

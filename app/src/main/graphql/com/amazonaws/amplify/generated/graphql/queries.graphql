@@ -55,6 +55,7 @@ query GetUser($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -157,6 +158,7 @@ query GetUser($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -209,6 +211,7 @@ query GetUser($id: ID!) {
           isStarted
           projectID
           isBacklog
+          label
           project {
             id
             name
@@ -391,6 +394,7 @@ query ListUsers(
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -484,6 +488,7 @@ query GetProject($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -586,6 +591,7 @@ query GetProject($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -638,6 +644,7 @@ query GetProject($id: ID!) {
           isStarted
           projectID
           isBacklog
+          label
           project {
             id
             name
@@ -722,6 +729,7 @@ query GetProject($id: ID!) {
         isStarted
         projectID
         isBacklog
+        label
         project {
           id
           name
@@ -766,6 +774,7 @@ query GetProject($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -810,6 +819,7 @@ query GetProject($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -935,6 +945,7 @@ query ListProjects(
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -976,6 +987,7 @@ query ListProjects(
           isStarted
           projectID
           isBacklog
+          label
           project {
             id
             name
@@ -1125,6 +1137,7 @@ query GetProjectParticipant($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -1166,6 +1179,7 @@ query GetProjectParticipant($id: ID!) {
           isStarted
           projectID
           isBacklog
+          label
           project {
             id
             name
@@ -1305,6 +1319,7 @@ query GetProjectParticipant($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -1427,6 +1442,7 @@ query ListProjectParticipants(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -1449,6 +1465,7 @@ query ListProjectParticipants(
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -1536,6 +1553,7 @@ query ListProjectParticipants(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -1567,6 +1585,7 @@ query GetSprint($id: ID!) {
     isStarted
     projectID
     isBacklog
+    label
     project {
       id
       name
@@ -1667,6 +1686,7 @@ query GetSprint($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -1708,6 +1728,7 @@ query GetSprint($id: ID!) {
           isStarted
           projectID
           isBacklog
+          label
           project {
             id
             name
@@ -1803,6 +1824,7 @@ query GetSprint($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -1855,6 +1877,7 @@ query GetSprint($id: ID!) {
           isStarted
           projectID
           isBacklog
+          label
           project {
             id
             name
@@ -1948,6 +1971,7 @@ query ListSprints(
       isStarted
       projectID
       isBacklog
+      label
       project {
         id
         name
@@ -2018,6 +2042,7 @@ query ListSprints(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -2040,6 +2065,7 @@ query ListSprints(
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -2110,6 +2136,7 @@ query ListSprints(
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -2257,6 +2284,7 @@ query GetTask($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -2298,6 +2326,7 @@ query GetTask($id: ID!) {
           isStarted
           projectID
           isBacklog
+          label
           project {
             id
             name
@@ -2437,6 +2466,7 @@ query GetTask($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -2480,6 +2510,7 @@ query GetTask($id: ID!) {
       isStarted
       projectID
       isBacklog
+      label
       project {
         id
         name
@@ -2550,6 +2581,7 @@ query GetTask($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -2572,6 +2604,7 @@ query GetTask($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -2642,6 +2675,7 @@ query GetTask($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -2768,6 +2802,7 @@ query GetTask($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -2890,6 +2925,7 @@ query ListTasks(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -2912,6 +2948,7 @@ query ListTasks(
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -2999,6 +3036,7 @@ query ListTasks(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3023,6 +3061,7 @@ query ListTasks(
         isStarted
         projectID
         isBacklog
+        label
         project {
           id
           name
@@ -3067,6 +3106,7 @@ query ListTasks(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3111,6 +3151,7 @@ query ListTasks(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3182,6 +3223,7 @@ query ListTasks(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3307,6 +3349,7 @@ query GetComment($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -3420,6 +3463,7 @@ query GetComment($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3442,6 +3486,7 @@ query GetComment($id: ID!) {
             isStarted
             projectID
             isBacklog
+            label
             project {
               id
               name
@@ -3529,6 +3574,7 @@ query GetComment($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3553,6 +3599,7 @@ query GetComment($id: ID!) {
         isStarted
         projectID
         isBacklog
+        label
         project {
           id
           name
@@ -3597,6 +3644,7 @@ query GetComment($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3641,6 +3689,7 @@ query GetComment($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3712,6 +3761,7 @@ query GetComment($id: ID!) {
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3812,6 +3862,7 @@ query ListComments(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3880,6 +3931,7 @@ query ListComments(
               isStarted
               projectID
               isBacklog
+              label
               createdAt
               updatedAt
             }
@@ -3932,6 +3984,7 @@ query ListComments(
           isStarted
           projectID
           isBacklog
+          label
           project {
             id
             name

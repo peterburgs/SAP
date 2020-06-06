@@ -1,6 +1,8 @@
 package com.example.sap.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -18,10 +20,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Comment;
 import com.amplifyframework.datastore.generated.model.Project;
+import com.amplifyframework.datastore.generated.model.User;
 import com.example.sap.R;
+import com.example.sap.activities.BacklogEditTaskActivity;
+import com.example.sap.activities.LoadingDialog;
+import com.example.sap.activities.SignupActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -29,13 +38,8 @@ import java.util.List;
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.ViewHolder> {
 
     List<Comment> commentList;
-
     private OnItemClickListener mListener;
-
-    //Constructor
-    public CommentListAdapter(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
+    private LoadingDialog loadingDialog;
 
     //Interface to Handle Clicking a specific item
     public interface OnItemClickListener {
@@ -45,12 +49,17 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
+    //Constructor
+    public CommentListAdapter(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.comment_row, parent, false);
+
         return new ViewHolder(view, mListener);
     }
 
@@ -101,8 +110,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             imbRemoveComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //todo:Backend -  Remove comment
-                    Log.i("Remove", String.valueOf(getAdapterPosition()));
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
                 }
             });
 

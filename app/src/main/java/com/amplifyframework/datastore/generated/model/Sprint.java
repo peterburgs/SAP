@@ -31,6 +31,7 @@ public final class Sprint implements Model {
   public static final QueryField IS_COMPLETED = field("isCompleted");
   public static final QueryField IS_STARTED = field("isStarted");
   public static final QueryField IS_BACKLOG = field("isBacklog");
+  public static final QueryField LABEL = field("label");
   public static final QueryField PROJECT = field("projectID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="AWSDate") Temporal.Date startDate;
@@ -40,6 +41,7 @@ public final class Sprint implements Model {
   private final @ModelField(targetType="Boolean") Boolean isCompleted;
   private final @ModelField(targetType="Boolean") Boolean isStarted;
   private final @ModelField(targetType="Boolean", isRequired = true) Boolean isBacklog;
+  private final @ModelField(targetType="String") String label;
   private final @ModelField(targetType="Project", isRequired = true) @BelongsTo(targetName = "projectID", type = Project.class) Project project;
   private final @ModelField(targetType="Task") @HasMany(associatedWith = "sprint", type = Task.class) List<Task> tasks = null;
   public String getId() {
@@ -74,6 +76,10 @@ public final class Sprint implements Model {
       return isBacklog;
   }
   
+  public String getLabel() {
+      return label;
+  }
+  
   public Project getProject() {
       return project;
   }
@@ -82,7 +88,7 @@ public final class Sprint implements Model {
       return tasks;
   }
   
-  private Sprint(String id, Temporal.Date startDate, Temporal.Date endDate, String goal, String name, Boolean isCompleted, Boolean isStarted, Boolean isBacklog, Project project) {
+  private Sprint(String id, Temporal.Date startDate, Temporal.Date endDate, String goal, String name, Boolean isCompleted, Boolean isStarted, Boolean isBacklog, String label, Project project) {
     this.id = id;
     this.startDate = startDate;
     this.endDate = endDate;
@@ -91,6 +97,7 @@ public final class Sprint implements Model {
     this.isCompleted = isCompleted;
     this.isStarted = isStarted;
     this.isBacklog = isBacklog;
+    this.label = label;
     this.project = project;
   }
   
@@ -110,6 +117,7 @@ public final class Sprint implements Model {
               ObjectsCompat.equals(getIsCompleted(), sprint.getIsCompleted()) &&
               ObjectsCompat.equals(getIsStarted(), sprint.getIsStarted()) &&
               ObjectsCompat.equals(getIsBacklog(), sprint.getIsBacklog()) &&
+              ObjectsCompat.equals(getLabel(), sprint.getLabel()) &&
               ObjectsCompat.equals(getProject(), sprint.getProject());
       }
   }
@@ -125,6 +133,7 @@ public final class Sprint implements Model {
       .append(getIsCompleted())
       .append(getIsStarted())
       .append(getIsBacklog())
+      .append(getLabel())
       .append(getProject())
       .toString()
       .hashCode();
@@ -142,6 +151,7 @@ public final class Sprint implements Model {
       .append("isCompleted=" + String.valueOf(getIsCompleted()))
       .append("isStarted=" + String.valueOf(getIsStarted()))
       .append("isBacklog=" + String.valueOf(getIsBacklog()))
+      .append("label=" + String.valueOf(getLabel()))
       .append("project=" + String.valueOf(getProject()))
       .append("}")
       .toString();
@@ -179,6 +189,7 @@ public final class Sprint implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -192,6 +203,7 @@ public final class Sprint implements Model {
       isCompleted,
       isStarted,
       isBacklog,
+      label,
       project);
   }
   public interface GoalStep {
@@ -221,6 +233,7 @@ public final class Sprint implements Model {
     BuildStep endDate(Temporal.Date endDate);
     BuildStep isCompleted(Boolean isCompleted);
     BuildStep isStarted(Boolean isStarted);
+    BuildStep label(String label);
   }
   
 
@@ -234,6 +247,7 @@ public final class Sprint implements Model {
     private Temporal.Date endDate;
     private Boolean isCompleted;
     private Boolean isStarted;
+    private String label;
     @Override
      public Sprint build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -247,6 +261,7 @@ public final class Sprint implements Model {
           isCompleted,
           isStarted,
           isBacklog,
+          label,
           project);
     }
     
@@ -302,6 +317,12 @@ public final class Sprint implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep label(String label) {
+        this.label = label;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -325,7 +346,7 @@ public final class Sprint implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Temporal.Date startDate, Temporal.Date endDate, String goal, String name, Boolean isCompleted, Boolean isStarted, Boolean isBacklog, Project project) {
+    private CopyOfBuilder(String id, Temporal.Date startDate, Temporal.Date endDate, String goal, String name, Boolean isCompleted, Boolean isStarted, Boolean isBacklog, String label, Project project) {
       super.id(id);
       super.goal(goal)
         .name(name)
@@ -334,7 +355,8 @@ public final class Sprint implements Model {
         .startDate(startDate)
         .endDate(endDate)
         .isCompleted(isCompleted)
-        .isStarted(isStarted);
+        .isStarted(isStarted)
+        .label(label);
     }
     
     @Override
@@ -375,6 +397,11 @@ public final class Sprint implements Model {
     @Override
      public CopyOfBuilder isStarted(Boolean isStarted) {
       return (CopyOfBuilder) super.isStarted(isStarted);
+    }
+    
+    @Override
+     public CopyOfBuilder label(String label) {
+      return (CopyOfBuilder) super.label(label);
     }
   }
   

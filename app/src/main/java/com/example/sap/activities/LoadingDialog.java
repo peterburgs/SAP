@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 
 import com.example.sap.R;
 
-class LoadingDialog {
+public class LoadingDialog {
     private Activity activity;
     private AlertDialog alertDialog;
 

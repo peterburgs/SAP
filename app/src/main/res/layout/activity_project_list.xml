@@ -33,7 +33,7 @@
             android:id="@+id/rcvProjectList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"/>
+            android:clickable="true" />
     </androidx.core.widget.NestedScrollView>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -45,18 +45,17 @@
         android:layout_gravity="bottom|end"
         app:fab_addButtonColorNormal="@color/colorAccent"
         app:fab_addButtonColorPressed="@color/black_800"
-        app:fab_labelStyle="@style/custom_fab"
-        >
+        app:fab_labelStyle="@style/custom_fab">
 
-<!--        <com.getbase.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fabProject"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:fab_colorNormal="@color/colorAccent"-->
-<!--            app:fab_colorPressed="@color/black_800"-->
-<!--            app:fab_icon="@drawable/ic_project"-->
-<!--            app:fab_size="mini"-->
-<!--            app:fab_title="Project" />-->
+        <!--        <com.getbase.floatingactionbutton.FloatingActionButton-->
+        <!--            android:id="@+id/fabProject"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:fab_colorNormal="@color/colorAccent"-->
+        <!--            app:fab_colorPressed="@color/black_800"-->
+        <!--            app:fab_icon="@drawable/ic_project"-->
+        <!--            app:fab_size="mini"-->
+        <!--            app:fab_title="Project" />-->
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAccount"

@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <!--todo: Backend - Set Title corresponding to task name-->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -28,10 +27,11 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="8">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,7 +40,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:orientation="vertical">
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -59,9 +58,9 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="#F9F9F9"
                         android:inputType="textMultiLine"
-                        android:lines="1"
+                        android:lines="2"
                         android:maxLines="5"
-                        android:minLines="1"
+                        android:minLines="2"
                         android:scrollbars="vertical"
                         android:textColor="@color/colorPrimary"
                         android:textSize="22sp" />
@@ -198,40 +197,35 @@
         </ScrollView>
 
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtCommentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:hint="Write a comment"
+            app:boxBackgroundColor="#FFF"
+            app:boxCornerRadiusBottomEnd="25dp"
+            app:boxCornerRadiusBottomStart="25dp"
+            app:boxCornerRadiusTopEnd="25dp"
+            app:boxCornerRadiusTopStart="25dp"
+            app:boxStrokeColor="#FFF"
+            app:boxStrokeWidth="0dp"
+            app:endIconDrawable="@drawable/ic_send"
+            app:endIconMode="custom"
+            app:endIconTint="@color/colorAccent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtCommentLayout"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Write a comment"
-                app:boxBackgroundColor="#FFF"
-                app:boxCornerRadiusBottomEnd="25dp"
-                app:boxCornerRadiusBottomStart="25dp"
-                app:boxCornerRadiusTopEnd="25dp"
-                app:boxCornerRadiusTopStart="25dp"
-                app:boxStrokeColor="#FFF"
-                app:boxStrokeWidth="0dp"
-                app:endIconDrawable="@drawable/ic_send"
-                app:endIconMode="custom"
-                app:endIconTint="@color/colorAccent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtComment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#F9F9F9"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:backgroundTint="#F9F9F9"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

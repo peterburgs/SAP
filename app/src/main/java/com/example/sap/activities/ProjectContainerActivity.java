@@ -29,7 +29,7 @@ import static com.example.sap.app.App.CHANNEL_ID;
 
 public class ProjectContainerActivity extends AppCompatActivity {
 
-    private TabLayout tabLayout;
+    private TabLayout tloStatus;
     private ViewPager viewPager;
     private com.google.android.material.tabs.TabItem titToDo, titInProgress, titDone, titBacklog;
     private BadgeDrawable toDoBadge, inProgressBadge, doneBadge, backlogBadge;
@@ -40,14 +40,15 @@ public class ProjectContainerActivity extends AppCompatActivity {
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
     com.getbase.floatingactionbutton.FloatingActionButton fabSetting;
+    com.getbase.floatingactionbutton.FloatingActionButton fabSprint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_container);
 
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
+        tloStatus = findViewById(R.id.tloStatus);
+        viewPager = findViewById(R.id.vpgStatus);
         titToDo = findViewById(R.id.titToDo);
         titInProgress = findViewById(R.id.titInProgress);
         titDone = findViewById(R.id.titDone);
@@ -55,6 +56,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
         fabProject = findViewById(R.id.fabProject);
         fabAccount = findViewById(R.id.fabAccount);
         fabSetting = findViewById(R.id.fabSetting);
+        fabSprint = findViewById(R.id.fabSprint);
 
         fabProject.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProjectListActivity.class);
@@ -67,16 +69,19 @@ public class ProjectContainerActivity extends AppCompatActivity {
         fabSetting.setOnClickListener(v -> {
             Toast.makeText(this, "Setting Selected", Toast.LENGTH_SHORT).show();
         });
-
+        fabSprint.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), SprintListActivity.class);
+            startActivity(intent);
+        });
         mHandler = new Handler(Looper.getMainLooper());
 
-        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tloStatus.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
-        toDoBadge = tabLayout.getTabAt(0).getOrCreateBadge();
-        inProgressBadge = tabLayout.getTabAt(1).getOrCreateBadge();
-        doneBadge = tabLayout.getTabAt(2).getOrCreateBadge();
-        backlogBadge = tabLayout.getTabAt(3).getOrCreateBadge();
+        toDoBadge = tloStatus.getTabAt(0).getOrCreateBadge();
+        inProgressBadge = tloStatus.getTabAt(1).getOrCreateBadge();
+        doneBadge = tloStatus.getTabAt(2).getOrCreateBadge();
+        backlogBadge = tloStatus.getTabAt(3).getOrCreateBadge();
         toDoBadge.setVisible(true);
         inProgressBadge.setVisible(true);
         doneBadge.setVisible(true);
@@ -89,7 +94,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
         taskUpdateSubscribe();
         taskDeleteSubscribe();
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tloStatus.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
@@ -114,7 +119,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
 
             }
         });
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tloStatus));
     }
 
     private void setBadgeNumber() {
@@ -125,15 +130,15 @@ public class ProjectContainerActivity extends AppCompatActivity {
                     Sprint activatedSprint = null;
                     Sprint backlog = null;
 
-                    for(Sprint sprint: getProjectRes.getData().getSprints()) {
-                        if(sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                    for (Sprint sprint : getProjectRes.getData().getSprints()) {
+                        if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
                             activatedSprint = sprint;
-                        } else if(sprint.getIsBacklog()) {
+                        } else if (sprint.getIsBacklog()) {
                             backlog = sprint;
                         }
                     }
 
-                    if(activatedSprint != null) {
+                    if (activatedSprint != null) {
                         // Get tasks of the activated sprint
                         Amplify.API.query(
                                 ModelQuery.get(Sprint.class, activatedSprint.getId()),
@@ -141,14 +146,14 @@ public class ProjectContainerActivity extends AppCompatActivity {
                                     int todo = 0;
                                     int inProgress = 0;
                                     int done = 0;
-                                    for(Task task : getSprintRes.getData().getTasks()) {
-                                        if(task.getStatus().equals(TaskStatus.TODO)) {
+                                    for (Task task : getSprintRes.getData().getTasks()) {
+                                        if (task.getStatus().equals(TaskStatus.TODO)) {
                                             todo++;
                                         }
-                                        if(task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                                        if (task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
                                             inProgress++;
                                         }
-                                        if(task.getStatus().equals(TaskStatus.DONE)) {
+                                        if (task.getStatus().equals(TaskStatus.DONE)) {
                                             done++;
                                         }
                                     }
@@ -165,7 +170,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                         );
                     }
 
-                    if(backlog != null) {
+                    if (backlog != null) {
                         // Get tasks of the backlog
                         Amplify.API.query(
                                 ModelQuery.get(Sprint.class, backlog.getId()),

@@ -26,9 +26,7 @@ import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
-import com.example.sap.activities.BacklogEditTaskActivity;
 import com.example.sap.activities.CreateTaskActivity;
-import com.example.sap.activities.SprintEditTaskActivity;
 import com.example.sap.adapters.BacklogAdapter;
 
 import java.util.ArrayList;

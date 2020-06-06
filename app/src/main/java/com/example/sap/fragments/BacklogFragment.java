@@ -189,6 +189,18 @@ public class BacklogFragment extends Fragment {
         );
     }
 
+    private void taskUpdateSubscribe() {
+        ApiOperation subscription = Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Task.class),
+                onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
+                onCreated -> {
+                    backlogTaskQuery();
+                },
+                onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
+        );
+    }
+
     private String getProjectID() {
         String newString;
         Bundle extras = getActivity().getIntent().getExtras();

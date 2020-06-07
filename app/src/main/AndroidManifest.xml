@@ -21,13 +21,13 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".activities.BacklogEditTaskActivity"></activity>
-        <activity android:name=".activities.SprintListActivity"></activity>
         <activity android:name=".activities.SprintEditTaskActivity" />
         <activity android:name=".activities.CreateTaskActivity" />
         <activity android:name=".activities.AccountActivity" />
         <activity android:name=".activities.ProjectContainerActivity" />
         <activity android:name=".activities.CreateProjectActivity" />
         <activity android:name=".activities.ProjectListActivity" />
+        <activity android:name=".activities.SprintContainerActivity" />
         <activity android:name=".activities.ResetPasswordActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.ConfirmSignupActivity" />

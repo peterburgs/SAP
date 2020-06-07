@@ -79,7 +79,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
             Toast.makeText(this, "Setting Selected", Toast.LENGTH_SHORT).show();
         });
         fabSprint.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), SprintListActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SprintContainerActivity.class);
             startActivity(intent);
         });
         mHandler = new Handler(Looper.getMainLooper());

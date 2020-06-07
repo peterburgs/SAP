@@ -25,12 +25,17 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
 import com.example.sap.activities.BacklogEditTaskActivity;
 import com.example.sap.activities.CreateTaskActivity;
 import com.example.sap.activities.SprintEditTaskActivity;
 import com.example.sap.adapters.BacklogAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -40,18 +45,15 @@ import java.util.ArrayList;
  */
 public class BacklogFragment extends Fragment {
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String TASK_LIST = "taskList";
+    private static final String BACKLOG = "backlog";
 
-    private String mParam1;
-    private String mParam2;
+    private ArrayList<Task> mTaskList;
+    private Sprint mBacklog;
 
-    private ArrayList<Task> taskList;
     private BacklogAdapter backlogAdapter;
     private Handler mHandler;
     private ImageView imvBacklogEmpty;
-    private NotificationManagerCompat notificationManagerCompat;
 
     RecyclerView rcvBacklog;
     Button btnCreateTask;
@@ -60,20 +62,12 @@ public class BacklogFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BacklogFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BacklogFragment newInstance(String param1, String param2) {
+    public static BacklogFragment newInstance(ArrayList<Task> taskList, Sprint backlog) {
         BacklogFragment fragment = new BacklogFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        Gson gson = new Gson();
+        args.putString(TASK_LIST, gson.toJson(taskList));
+        args.putString(BACKLOG, gson.toJson(backlog));
         fragment.setArguments(args);
         return fragment;
     }
@@ -82,8 +76,12 @@ public class BacklogFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            Gson gson = new Gson();
+            Bundle args = getArguments();
+            Type founderListType = new TypeToken<ArrayList<Task>>() {
+            }.getType();
+            mTaskList = gson.fromJson(args.getString(TASK_LIST), founderListType);
+            mBacklog = gson.fromJson(args.getString(BACKLOG), Sprint.class);
         }
     }
 
@@ -98,7 +96,6 @@ public class BacklogFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        taskList = new ArrayList<>();
         mHandler = new Handler(Looper.getMainLooper());
 
         rcvBacklog = getView().findViewById(R.id.rcvBacklog);
@@ -114,103 +111,30 @@ public class BacklogFragment extends Fragment {
 
             }
         });
-        backlogAdapter = new BacklogAdapter(getContext(), taskList);
-
+        backlogAdapter = new BacklogAdapter(getContext(), mTaskList);
 
         rcvBacklog.setAdapter(backlogAdapter);
         rcvBacklog.setLayoutManager(new LinearLayoutManager(getContext()));
         backlogAdapter.setOnItemClickListener(new BacklogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                Intent intent = new Intent(getContext(), BacklogEditTaskActivity.class);
-//                intent.putExtra("TASK_ID", taskList.get(position).getId());
-//                startActivity(intent);
+                Intent intent = new Intent(getContext(), BacklogEditTaskActivity.class);
+                intent.putExtra("TASK_ID", mTaskList.get(position).getId());
+                startActivity(intent);
 
             }
         });
 
-        backlogTaskQuery();
+        mHandler.post(() -> {
+            backlogAdapter.notifyDataSetChanged();
+            if (mTaskList.isEmpty()) {
+                imvBacklogEmpty.setImageResource(R.drawable.img_empty);
+            }
+        });
+
         taskCreateSubscribe();
         taskUpdateSubscribe();
         taskDeleteSubscribe();
-    }
-
-    private void backlogTaskQuery() {
-        if (getProjectID() != null) {
-            // Get project by id
-            Amplify.API.query(
-                    ModelQuery.get(Project.class, getProjectID()),
-                    response -> {
-                        taskList.clear();
-                        if (response.getData() != null) {
-                            Sprint backlog = null;
-                            // Get backlog
-                            for (Sprint sprint : response.getData().getSprints()) {
-                                if (sprint.getIsBacklog()) {
-                                    backlog = sprint;
-                                }
-                            }
-
-                            if (backlog != null) {
-                                // Get tasks of the backlog
-                                Amplify.API.query(
-                                        ModelQuery.get(Sprint.class, backlog.getId()),
-                                        getSprintRes -> {
-                                            taskList.clear();
-                                            taskList.addAll(getSprintRes.getData().getTasks());
-                                            mHandler.post(() -> {
-                                                backlogAdapter.notifyDataSetChanged();
-                                                if (taskList.isEmpty()) {
-                                                    imvBacklogEmpty.setImageResource(R.drawable.img_empty);
-                                                }
-                                            });
-                                        },
-                                        error -> Log.e("GetSprintError", error.toString())
-                                );
-                            }
-                        }
-                    },
-                    error -> {
-                        Log.e("GetProjectError", error.toString());
-                    }
-            );
-        }
-    }
-
-    private void taskCreateSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onCreate(Task.class),
-                onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
-                onCreated -> {
-                    backlogTaskQuery();
-                },
-                onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
-        );
-    }
-
-    private void taskUpdateSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onUpdate(Task.class),
-                onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
-                onUpdated -> {
-                    backlogTaskQuery();
-                },
-                onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
-        );
-    }
-
-    private void taskDeleteSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onDelete(Task.class),
-                onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
-                onDeleted -> {
-                    backlogTaskQuery();
-                },
-                onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
-        );
     }
 
     private String getProjectID() {
@@ -222,5 +146,58 @@ public class BacklogFragment extends Fragment {
             newString = extras.getString("PROJECT_ID");
         }
         return newString;
+    }
+
+    private void taskQuery() {
+        if (mBacklog != null) {
+            // Get tasks of the activated sprint
+            Amplify.API.query(
+                    ModelQuery.get(Sprint.class, mBacklog.getId()),
+                    getSprintRes -> {
+                        mTaskList.clear();
+                        mTaskList.addAll(getSprintRes.getData().getTasks());
+                        mHandler.post(() -> {
+                            backlogAdapter.notifyDataSetChanged();
+                        });
+                    },
+                    error -> Log.e("GetSprintError", error.toString())
+            );
+        }
+    }
+
+    private void taskCreateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onCreate(Task.class),
+                onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
+                onCreated -> {
+                    taskQuery();
+                },
+                onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void taskUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Task.class),
+                onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
+                onUpdated -> {
+                    taskQuery();
+                },
+                onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
+        );
+    }
+
+    private void taskDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Task.class),
+                onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
+                onDeleted -> {
+                    taskQuery();
+                },
+                onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
+        );
     }
 }

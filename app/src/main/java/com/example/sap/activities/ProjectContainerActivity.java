@@ -25,6 +25,8 @@ import com.example.sap.adapters.PageAdapter;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 import static com.example.sap.app.App.CHANNEL_ID;
 
 public class ProjectContainerActivity extends AppCompatActivity {
@@ -36,6 +38,13 @@ public class ProjectContainerActivity extends AppCompatActivity {
     public PageAdapter pagerAdapter;
     private Handler mHandler;
     private NotificationManagerCompat notificationManagerCompat;
+    private ArrayList<Task> todoTasks;
+    private ArrayList<Task> inProgressTasks;
+    private ArrayList<Task> doneTasks;
+    private ArrayList<Task> backlogTasks;
+    private Sprint activeSprint;
+    private Sprint backlog;
+    private LoadingDialog loadingDialog;
 
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
@@ -75,8 +84,17 @@ public class ProjectContainerActivity extends AppCompatActivity {
         });
         mHandler = new Handler(Looper.getMainLooper());
 
-        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tloStatus.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
+        loadingDialog = new LoadingDialog(this);
+
+        // Handle PageAdapter
+        todoTasks = new ArrayList<>();
+        inProgressTasks = new ArrayList<>();
+        doneTasks = new ArrayList<>();
+        backlogTasks = new ArrayList<>();
+        backlog = null;
+        activeSprint = null;
+
+        initializePageAdapter();
 
         toDoBadge = tloStatus.getTabAt(0).getOrCreateBadge();
         inProgressBadge = tloStatus.getTabAt(1).getOrCreateBadge();
@@ -89,7 +107,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
 
         notificationManagerCompat = NotificationManagerCompat.from(this);
 
-        setBadgeNumber();
+        taskQuery();
         taskCreateSubscribe();
         taskUpdateSubscribe();
         taskDeleteSubscribe();
@@ -122,60 +140,107 @@ public class ProjectContainerActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tloStatus));
     }
 
-    private void setBadgeNumber() {
+    private void taskQuery() {
+        if (activeSprint != null) {
+            // Get tasks of the activated sprint
+            Amplify.API.query(
+                    ModelQuery.get(Sprint.class, activeSprint.getId()),
+                    getSprintRes -> {
+                        todoTasks.clear();
+                        inProgressTasks.clear();
+                        doneTasks.clear();
+                        for (Task task : getSprintRes.getData().getTasks()) {
+                            if (task.getStatus().equals(TaskStatus.TODO)) {
+                                todoTasks.add(task);
+                            }
+                            if (task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                                inProgressTasks.add(task);
+                            }
+                            if (task.getStatus().equals(TaskStatus.DONE)) {
+                                doneTasks.add(task);
+                            }
+                        }
+                        mHandler.post(() -> {
+                            toDoBadge.setNumber(todoTasks.size());
+                            inProgressBadge.setNumber(inProgressTasks.size());
+                            doneBadge.setNumber(doneTasks.size());
+                        });
+                    },
+                    error -> Log.e("GetSprintError", error.toString())
+            );
+        }
+
+        if (backlog != null) {
+            // Get tasks of the backlog
+            Amplify.API.query(
+                    ModelQuery.get(Sprint.class, backlog.getId()),
+                    getBacklogRes -> {
+                        backlogTasks.clear();
+                        backlogTasks.addAll(getBacklogRes.getData().getTasks());
+                        mHandler.post(() -> {
+                            backlogBadge.setNumber(getBacklogRes.getData().getTasks().size());
+                        });
+                    },
+                    error -> Log.e("GetSprintError", error.toString())
+            );
+        }
+    }
+
+    private void initializePageAdapter() {
+        loadingDialog.startLoadingDialog();
         // Get project by id
         Amplify.API.query(
                 ModelQuery.get(Project.class, getProjectID()),
                 getProjectRes -> {
-                    Sprint activatedSprint = null;
-                    Sprint backlog = null;
-
                     for (Sprint sprint : getProjectRes.getData().getSprints()) {
                         if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
-                            activatedSprint = sprint;
+                            activeSprint = sprint;
                         } else if (sprint.getIsBacklog()) {
                             backlog = sprint;
                         }
                     }
-
-                    if (activatedSprint != null) {
+                    if (activeSprint != null) {
                         // Get tasks of the activated sprint
                         Amplify.API.query(
-                                ModelQuery.get(Sprint.class, activatedSprint.getId()),
+                                ModelQuery.get(Sprint.class, activeSprint.getId()),
                                 getSprintRes -> {
-                                    int todo = 0;
-                                    int inProgress = 0;
-                                    int done = 0;
+                                    todoTasks.clear();
+                                    inProgressTasks.clear();
+                                    doneTasks.clear();
                                     for (Task task : getSprintRes.getData().getTasks()) {
                                         if (task.getStatus().equals(TaskStatus.TODO)) {
-                                            todo++;
+                                            todoTasks.add(task);
                                         }
                                         if (task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
-                                            inProgress++;
+                                            inProgressTasks.add(task);
                                         }
                                         if (task.getStatus().equals(TaskStatus.DONE)) {
-                                            done++;
+                                            doneTasks.add(task);
                                         }
                                     }
-                                    int finalTodo = todo;
-                                    int finalInProgress = inProgress;
-                                    int finalDone = done;
                                     mHandler.post(() -> {
-                                        toDoBadge.setNumber(finalTodo);
-                                        inProgressBadge.setNumber(finalInProgress);
-                                        doneBadge.setNumber(finalDone);
+                                        toDoBadge.setNumber(todoTasks.size());
+                                        inProgressBadge.setNumber(inProgressTasks.size());
+                                        doneBadge.setNumber(doneTasks.size());
                                     });
-                                },
-                                error -> Log.e("GetSprintError", error.toString())
-                        );
-                    }
 
-                    if (backlog != null) {
-                        // Get tasks of the backlog
-                        Amplify.API.query(
-                                ModelQuery.get(Sprint.class, backlog.getId()),
-                                getBacklogRes -> {
-                                    backlogBadge.setNumber(getBacklogRes.getData().getTasks().size());
+                                    if (backlog != null) {
+                                        loadingDialog.dismissDialog();
+                                        // Get tasks of the backlog
+                                        Amplify.API.query(
+                                                ModelQuery.get(Sprint.class, backlog.getId()),
+                                                getBacklogRes -> {
+                                                    backlogTasks.clear();
+                                                    backlogTasks.addAll(getBacklogRes.getData().getTasks());
+                                                    mHandler.post(() -> {
+                                                        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tloStatus.getTabCount(), todoTasks, inProgressTasks, doneTasks, activeSprint, backlogTasks, backlog);
+                                                        viewPager.setAdapter(pagerAdapter);
+                                                        backlogBadge.setNumber(getBacklogRes.getData().getTasks().size());
+                                                    });
+                                                },
+                                                error -> Log.e("GetSprintError", error.toString())
+                                        );
+                                    }
                                 },
                                 error -> Log.e("GetSprintError", error.toString())
                         );
@@ -193,7 +258,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                 onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
                 onCreated -> {
                     showNotification("SAP", onCreated.getData().getName() + " has been created in backlog");
-                    setBadgeNumber();
+                    taskQuery();
                 },
                 onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
@@ -206,7 +271,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                 onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
                 onUpdated -> {
                     showNotification("SAP", onUpdated.getData().getName() + " has been updated");
-                    setBadgeNumber();
+                    taskQuery();
                 },
                 onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
@@ -219,7 +284,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                 onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
                 onDeleted -> {
                     showNotification("SAP", onDeleted.getData().getName() + " has been deleted");
-                    setBadgeNumber();
+                    taskQuery();
                 },
                 onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")

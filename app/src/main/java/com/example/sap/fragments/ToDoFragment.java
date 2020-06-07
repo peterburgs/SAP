@@ -28,7 +28,14 @@ import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
 import com.example.sap.activities.SprintEditTaskActivity;
 import com.example.sap.adapters.ToDoAdapter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -44,40 +51,30 @@ import java.util.concurrent.TimeUnit;
  */
 public class ToDoFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String TASK_LIST = "taskList";
+    private static final String ACTIVE_SPRINT = "activeSprint";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ArrayList<Task> mTaskList;
+    private Sprint mActiveSprint;
+
+
     RecyclerView rcvToDo;
-
-    private ArrayList<Task> taskList;
     private ToDoAdapter toDoAdapter;
     private Handler mHandler;
     private TextView tvDayRemaining;
     private ImageView imvTodoEmpty;
+
     //
     public ToDoFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ToDoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ToDoFragment newInstance(String param1, String param2) {
+    public static ToDoFragment newInstance(ArrayList<Task> taskList, Sprint activeSprint) {
         ToDoFragment fragment = new ToDoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        Gson gson = new Gson();
+        args.putString(TASK_LIST, gson.toJson(taskList));
+        args.putString(ACTIVE_SPRINT, gson.toJson(activeSprint));
         fragment.setArguments(args);
         return fragment;
     }
@@ -86,24 +83,26 @@ public class ToDoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            Gson gson = new Gson();
+            Bundle args = getArguments();
+            Type founderListType = new TypeToken<ArrayList<Task>>() {
+            }.getType();
+            mTaskList = gson.fromJson(args.getString(TASK_LIST), founderListType);
+            mActiveSprint = gson.fromJson(args.getString(ACTIVE_SPRINT), Sprint.class);
         }
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        taskList = new ArrayList<>();
         mHandler = new Handler(Looper.getMainLooper());
 
         rcvToDo = getView().findViewById(R.id.rcvToDo);
         tvDayRemaining = getView().findViewById(R.id.tvTodoDayRemaining);
         imvTodoEmpty = getView().findViewById(R.id.imvTodoEmpty);
 
-        toDoAdapter = new ToDoAdapter(getContext(), taskList);
+        toDoAdapter = new ToDoAdapter(getContext(), mTaskList);
 
         rcvToDo.setAdapter(toDoAdapter);
         rcvToDo.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -111,12 +110,27 @@ public class ToDoFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), SprintEditTaskActivity.class);
-                intent.putExtra("TASK_ID", taskList.get(position).getId());
+                intent.putExtra("TASK_ID", mTaskList.get(position).getId());
                 startActivity(intent);
             }
         });
 
-        todoTasksQuery();
+        mHandler.post(() -> {
+            toDoAdapter.notifyDataSetChanged();
+            if (mTaskList.isEmpty()) {
+                imvTodoEmpty.setImageResource(R.drawable.img_empty);
+            } else {
+                try {
+                    if (mActiveSprint != null) {
+                        getDayRemaining(mActiveSprint);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        taskCreateSubscribe();
         taskUpdateSubscribe();
         taskDeleteSubscribe();
     }
@@ -128,63 +142,10 @@ public class ToDoFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_to_do, container, false);
     }
 
-    private void todoTasksQuery() {
-        if (getProjectID() != null) {
-            // Get project by id
-            Amplify.API.query(
-                    ModelQuery.get(Project.class, getProjectID()),
-                    response -> {
-                        taskList.clear();
-                        if(response.getData() != null) {
-                            Sprint activatedSprint = null;
-                            // Get activated sprint
-                            for (Sprint sprint : response.getData().getSprints()) {
-                                if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
-                                    activatedSprint = sprint;
-                                }
-                            }
-
-                            if(activatedSprint != null) {
-                                // Get tasks of the sprint
-                                Sprint finalActivatedSprint = activatedSprint;
-                                Amplify.API.query(
-                                        ModelQuery.get(Sprint.class, activatedSprint.getId()),
-                                        getSprintRes -> {
-                                            taskList.clear();
-                                            for(Task task : getSprintRes.getData().getTasks()) {
-                                                if(task.getStatus().equals(TaskStatus.TODO)) {
-                                                    taskList.add(task);
-                                                }
-                                            }
-                                            mHandler.post(() -> {
-                                                toDoAdapter.notifyDataSetChanged();
-                                                if(taskList.isEmpty()) {
-                                                    imvTodoEmpty.setImageResource(R.drawable.img_empty);
-                                                } else {
-                                                    try {
-                                                        getDayRemaining(finalActivatedSprint);
-                                                    } catch (ParseException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            });
-                                        },
-                                        error -> Log.e("GetSprintError", error.toString())
-                                );
-                            }
-                        }
-                    },
-                    error -> {
-                        Log.e("GetProjectError", error.toString());
-                    }
-            );
-        }
-    }
-
-    private void getDayRemaining(Sprint activatedSprint) throws ParseException {
+    private void getDayRemaining(Sprint activeSprint) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date firstDate = sdf.parse(LocalDate.now().toString());
-        String end = activatedSprint.getEndDate().format();
+        String end = activeSprint.getEndDate().format();
         Date secondDate = sdf.parse(end.substring(0, end.length() - 1));
 
         long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
@@ -193,12 +154,45 @@ public class ToDoFragment extends Fragment {
         tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
     }
 
+    private void taskQuery() {
+        if (mActiveSprint != null) {
+            // Get tasks of the activated sprint
+            Amplify.API.query(
+                    ModelQuery.get(Sprint.class, mActiveSprint.getId()),
+                    getSprintRes -> {
+                        mTaskList.clear();
+                        for (Task task : getSprintRes.getData().getTasks()) {
+                            if (task.getStatus().equals(TaskStatus.TODO)) {
+                                mTaskList.add(task);
+                            }
+                        }
+                        mHandler.post(() -> {
+                            toDoAdapter.notifyDataSetChanged();
+                        });
+                    },
+                    error -> Log.e("GetSprintError", error.toString())
+            );
+        }
+    }
+
+    private void taskCreateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onCreate(Task.class),
+                onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
+                onCreated -> {
+                    taskQuery();
+                },
+                onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
+        );
+    }
+
     private void taskUpdateSubscribe() {
         Amplify.API.subscribe(
                 ModelSubscription.onUpdate(Task.class),
                 onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
                 onUpdated -> {
-                    todoTasksQuery();
+                    taskQuery();
                 },
                 onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
@@ -210,22 +204,11 @@ public class ToDoFragment extends Fragment {
                 ModelSubscription.onDelete(Task.class),
                 onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
                 onDeleted -> {
-                    todoTasksQuery();
+                    taskQuery();
                 },
                 onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
         );
-    }
-
-    private String getProjectID() {
-        String newString;
-        Bundle extras = getActivity().getIntent().getExtras();
-        if (extras == null) {
-            newString = null;
-        } else {
-            newString = extras.getString("PROJECT_ID");
-        }
-        return newString;
     }
 
 }

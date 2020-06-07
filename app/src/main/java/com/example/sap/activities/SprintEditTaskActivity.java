@@ -15,6 +15,7 @@ import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.amplifyframework.datastore.generated.model.User;
 import com.example.sap.adapters.CommentListAdapter;
+import com.example.sap.adapters.PageAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import android.content.Context;
@@ -225,6 +226,11 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                             ModelMutation.update(taskMutation),
                             updateTaskRes -> {
                                 loadingDialog.dismissDialog();
+                              //todo: Update changes after saving
+
+
+
+
                                 runOnUiThread(this::onBackPressed);
                             },
                             error -> {

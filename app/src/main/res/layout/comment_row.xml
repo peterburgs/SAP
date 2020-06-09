@@ -70,7 +70,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
-                <!--todo: Convert Spinner into Icon-->
+
                 <ImageButton
                     android:id="@+id/imbRemoveComment"
                     android:layout_width="wrap_content"

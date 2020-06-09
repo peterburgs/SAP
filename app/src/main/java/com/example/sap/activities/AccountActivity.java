@@ -2,6 +2,8 @@ package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,10 +62,23 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     public void onResetPassword(View view) {
+        // Open loading dialog
         loadingDialog.startLoadingDialog();
-        Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
-        startActivity(intent);
-        loadingDialog.dismissDialog();
+
+        //Send reset password request to AWS
+        Amplify.Auth.resetPassword(Amplify.Auth.getCurrentUser().getUsername(),
+                result -> {
+                    loadingDialog.dismissDialog();
+                    //Navigate to reset password activity
+                    Intent resetPasswordActivityIntent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+                    startActivity(resetPasswordActivityIntent);
+                },
+                error -> {
+                    loadingDialog.dismissDialog();
+                    Log.e(TAG, "Error", error);
+                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                }
+        );
     }
 
     private void userQuery() {
@@ -87,5 +102,19 @@ public class AccountActivity extends AppCompatActivity {
                 },
                 error -> Log.e(TAG, "Error", error)
         );
+    }
+
+    private void makeAlert(String content) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AccountActivity.this);
+        builder.setMessage(content);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -28,7 +28,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         // Create loading dialog
         loadingDialog = new LoadingDialog(ResetPasswordActivity.this);
-        //todo: Handle Sending Email
         makeToast(toast, "We have sent the verification code to your email");
 
         btn_confirm = findViewById(R.id.btn_confirm);
@@ -52,11 +51,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
             Amplify.Auth.confirmResetPassword(password, code,
                     () -> {
-                        //Navigate to sign in activity
-                        Intent signInActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                        signInActivityIntent.putExtra("SetPasswordSuccessMsg", "Set new password successfully");
-                        loadingDialog.dismissDialog();
-                        startActivity(signInActivityIntent);
+                        Amplify.Auth.signOut(
+                                () -> {
+                                    Log.i("Sign-out", "Sign out successfully");
+                                    //Navigate to sign in activity
+                                    Intent signInActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    signInActivityIntent.putExtra("SetPasswordSuccessMsg", "Set new password successfully");
+                                    loadingDialog.dismissDialog();
+                                    startActivity(signInActivityIntent);
+                                },
+                                error -> {
+                                    Log.e(TAG, "Error", error);
+                                }
+                        );
                     },
                     error -> {
                         loadingDialog.dismissDialog();

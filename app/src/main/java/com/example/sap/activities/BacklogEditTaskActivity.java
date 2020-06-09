@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -60,6 +61,8 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
     Spinner spnSprint;
     ArrayAdapter<Sprint> spnSprintAdapter;
     ArrayList<Sprint> sprintList;
+    Sprint previousSelectedSprint;
+    boolean isInitializeSprintSelection = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,7 +194,43 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
             dialog.show();
         }));
 
-        
+        spnSprint.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!isInitializeSprintSelection) {
+                    if(sprintList.get(position).getIsStarted() != null && sprintList.get(position).getIsStarted()) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(BacklogEditTaskActivity.this);
+                        builder.setMessage("Sprint scope will be affected by this action");
+                        builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                spnSprint.setSelection(sprintList.indexOf(previousSelectedSprint));
+                                dialog.cancel();
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    } else {
+                        previousSelectedSprint = sprintList.get(position);
+                    }
+                } else {
+                    isInitializeSprintSelection = false;
+                    previousSelectedSprint = sprintList.get(position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void taskQuery() {

@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.CreateSprintActivity"></activity>
+        <activity android:name=".activities.SprintDetailActivity"></activity>
+        <activity android:name=".activities.CreateSprintActivity" />
         <activity android:name=".activities.BacklogEditTaskActivity" />
         <activity android:name=".activities.SprintEditTaskActivity" />
         <activity android:name=".activities.CreateTaskActivity" />

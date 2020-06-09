@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:theme="@style/Theme.AppCompat"
+    tools:context=".activities.SprintDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--Todo: Set the name of the sprint to the Toolbar-->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/projectListMenu"
+            app:menu="@menu/edit_sprint_menu" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="Sprint Name"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxStrokeColor="#FFF"
+                app:boxStrokeWidth="0dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintVertical_bias="0.15"
+                app:startIconDrawable="@drawable/ic_sprint"
+                app:startIconTint="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSprintName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#F9F9F9"
+                    android:inputType="textMultiLine"
+                    android:lines="2"
+                    android:maxLines="5"
+                    android:minLines="2"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="Goal"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxStrokeColor="#FFF"
+                app:boxStrokeWidth="0dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintVertical_bias="0.15"
+                app:startIconDrawable="@drawable/ic_goal"
+                app:startIconTint="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSprintGoal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#F9F9F9"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:maxLines="5"
+                    android:minLines="4"
+                    android:nextFocusUp="@id/edtSprintName"
+                    android:nextFocusDown="@id/btnCreateSprint" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

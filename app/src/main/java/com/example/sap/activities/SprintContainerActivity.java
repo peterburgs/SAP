@@ -1,6 +1,7 @@
 package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -21,6 +23,7 @@ import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
 import com.example.sap.adapters.PageAdapter;
 import com.example.sap.adapters.SprintPageAdapter;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
 
@@ -38,6 +41,7 @@ public class SprintContainerActivity extends AppCompatActivity {
     private ArrayList<Sprint> futureSprints;
     private ArrayList<Sprint> completedSprints;
     private LoadingDialog loadingDialog;
+    private MaterialToolbar topAppBar;
 
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
@@ -58,6 +62,16 @@ public class SprintContainerActivity extends AppCompatActivity {
         fabSetting = findViewById(R.id.fabSetting);
         fabBoard = findViewById(R.id.fabBoard);
 
+
+        topAppBar = findViewById(R.id.topAppBar);
+        topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(getApplicationContext(), CreateSprintActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
         fabProject.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProjectListActivity.class);
             startActivity(intent);
@@ -133,7 +147,7 @@ public class SprintContainerActivity extends AppCompatActivity {
                     futureSprints.clear();
                     completedSprints.clear();
                     for (Sprint sprint : getProjectRes.getData().getSprints()) {
-                        if(!sprint.getIsBacklog()) {
+                        if (!sprint.getIsBacklog()) {
                             if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
                                 activeSprints.add(sprint);
                             } else if (sprint.getIsStarted() != null && sprint.getIsCompleted()) {
@@ -165,7 +179,7 @@ public class SprintContainerActivity extends AppCompatActivity {
                     futureSprints.clear();
                     completedSprints.clear();
                     for (Sprint sprint : getProjectRes.getData().getSprints()) {
-                        if(!sprint.getIsBacklog()) {
+                        if (!sprint.getIsBacklog()) {
                             if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
                                 activeSprints.add(sprint);
                             } else if (sprint.getIsStarted() != null && sprint.getIsCompleted()) {

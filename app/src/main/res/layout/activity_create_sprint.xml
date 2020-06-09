@@ -1,101 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreateProjectActivity">
+    tools:context=".activities.CreateSprintActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="-200dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginTop="-100dp">
+        android:orientation="vertical">
 
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-
             android:maxWidth="100dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/create_project_bg" />
+            app:srcCompat="@drawable/create_sprint_bg" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="350sp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Project Name"
+            android:hint="Sprint Name"
             app:boxCornerRadiusBottomEnd="25dp"
             app:boxCornerRadiusBottomStart="25dp"
             app:boxCornerRadiusTopEnd="25dp"
             app:boxCornerRadiusTopStart="25dp"
             app:boxStrokeColor="#FFF"
-
             app:boxStrokeWidth="0dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="25"
             app:endIconMode="clear_text"
             app:layout_constraintVertical_bias="0.15"
-            app:startIconDrawable="@drawable/ic_project">
+            app:startIconDrawable="@drawable/ic_sprint"
+            app:startIconTint="@color/colorAccent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_projectName"
+                android:id="@+id/edtSprintName"
                 android:layout_width="350sp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F9F9F9"
-                android:maxLength="25"
+                android:inputType="text"
+                android:nextFocusDown="@+id/edtSprintGoal"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="350sp"
             android:layout_height="wrap_content"
-            android:hint="Project Key"
+            android:layout_marginTop="10dp"
+            android:hint="Goal"
             app:boxCornerRadiusBottomEnd="25dp"
             app:boxCornerRadiusBottomStart="25dp"
             app:boxCornerRadiusTopEnd="25dp"
             app:boxCornerRadiusTopStart="25dp"
             app:boxStrokeColor="#FFF"
             app:boxStrokeWidth="0dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="3"
             app:endIconMode="clear_text"
             app:layout_constraintVertical_bias="0.15"
-            app:startIconDrawable="@drawable/ic_key_24dp">
+            app:startIconDrawable="@drawable/ic_goal"
+            app:startIconTint="@color/colorAccent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_projectKey"
+                android:id="@+id/edtSprintGoal"
                 android:layout_width="350sp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F9F9F9"
-                android:maxLength="3"
-                android:singleLine="true" />
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:maxLines="5"
+                android:minLines="4"
+                android:nextFocusUp="@id/edtSprintName"
+                android:nextFocusDown="@id/btnCreateSprint" />
         </com.google.android.material.textfield.TextInputLayout>
-        <!--Login Button-->
+        <!--        Todo: Handle event "onCreateSprintClick"-->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_createProject"
+            android:id="@+id/btnCreateSprint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="#D6414F"
             android:fontFamily="@font/bold"
-            android:onClick="onCreateProjectClick"
+            android:onClick="onCreateSprintClick"
             android:shadowColor="@color/black_800"
             android:shadowDy="@android:integer/config_longAnimTime"
-            android:text="Create Project"
+            android:text="Create Sprint"
             android:textSize="20sp"
-            app:cornerRadius="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.532"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
-        <!--end of Login Button-->
+            app:cornerRadius="25dp" />
     </LinearLayout>
 
-    <!--end of Edittext: Project Key-->
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -77,6 +77,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:text="Sprint:"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+
+                    android:background="@drawable/gradient">
+
+                    <Spinner
+                        android:id="@+id/spnSprint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:spinnerMode="dialog" />
+                </FrameLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="Status:"
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp"
@@ -91,6 +123,36 @@
 
                     <Spinner
                         android:id="@+id/spnStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:spinnerMode="dialog" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Assignee:"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/gradient">
+
+                    <Spinner
+                        android:id="@+id/spnAssignee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -129,35 +191,6 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Assignee:"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/gradient">
-
-                    <Spinner
-                        android:id="@+id/spnAssignee"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:spinnerMode="dialog" />
-                </FrameLayout>
-            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -189,48 +222,22 @@
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMoveToBacklog"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnMoveToBacklog"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:onClick="onMoveToBacklog"
-                    android:text="To Backlog"
-                    android:textColor="@color/white"
-                    app:cornerRadius="15dp"
-                    app:icon="@drawable/ic_backlog"
-                    app:iconTint="@color/white"
-                    app:strokeColor="@color/colorAccent" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnMoveToFutureSprint"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:onClick="onMoveToBacklog"
-                    android:text="To Future Sprint"
-                    android:textColor="@color/white"
-                    app:cornerRadius="15dp"
-                    app:icon="@drawable/ic_outline_next_week_white_24dp"
-                    app:iconTint="@color/white"
-                    app:strokeColor="@color/colorAccent" />
-
-            </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="@color/colorAccent"
+                android:onClick="onMoveToBacklog"
+                android:text="Move To Backlog"
+                android:textColor="@color/white"
+                app:cornerRadius="15dp"
+                app:icon="@drawable/ic_backlog"
+                app:iconTint="@color/white"
+                app:strokeColor="@color/colorAccent" />
 
 
             <TextView

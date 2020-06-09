@@ -94,6 +94,7 @@ public class ProjectListActivity extends AppCompatActivity {
      * And update recycler view
      * */
     private void projectListQuery() {
+        loadingDialog.startLoadingDialog();
         // Get project list
         Amplify.API.query(
                 ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
@@ -105,6 +106,7 @@ public class ProjectListActivity extends AppCompatActivity {
                         }
 
                         runOnUiThread(() -> {
+                            loadingDialog.dismissDialog();
                             projectListAdapter.notifyDataSetChanged();
                         });
                     }

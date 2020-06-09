@@ -191,7 +191,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
             dialog.show();
         }));
 
-
+        
     }
 
     private void taskQuery() {

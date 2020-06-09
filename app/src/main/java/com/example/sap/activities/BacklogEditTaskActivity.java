@@ -55,9 +55,11 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
     com.google.android.material.textfield.TextInputLayout edtCommentLayout;
     com.google.android.material.textfield.TextInputEditText edtComment;
     Spinner spnAssignee;
-    ArrayAdapter<String> spnAssigneeAdapter;
-    ArrayList<String> assigneeList;
-
+    ArrayAdapter<User> spnAssigneeAdapter;
+    ArrayList<User> assigneeList;
+    Spinner spnSprint;
+    ArrayAdapter<Sprint> spnSprintAdapter;
+    ArrayList<Sprint> sprintList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,6 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
         rcvCommentList = findViewById(R.id.rcvComment);
         rcvCommentList.setHasFixedSize(true);
         commentListAdapter = new CommentListAdapter(commentList);
-
         rcvCommentList.setLayoutManager(new LinearLayoutManager(this));
         rcvCommentList.setAdapter(commentListAdapter);
 
@@ -95,6 +96,13 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
         spnAssigneeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, assigneeList);
         spnAssigneeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnAssignee.setAdapter(spnAssigneeAdapter);
+
+        sprintList = new ArrayList<>();
+        // Spinner
+        spnSprint = findViewById(R.id.spnSprint);
+        spnSprintAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sprintList);
+        spnSprintAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnSprint.setAdapter(spnSprintAdapter);
 
         topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -202,13 +210,22 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                                     edtDescription.setText(task.getDescription());
                                     edtLabel.setText(task.getLabel());
 
+                                    // Data for assignee spinner
                                     assigneeList.clear();
                                     for (ProjectParticipant member : project.getMembers()) {
-                                        assigneeList.add(member.getMember().getUsername());
+                                        assigneeList.add(member.getMember());
                                     }
-
                                     spnAssigneeAdapter.notifyDataSetChanged();
-                                    spnAssignee.setSelection(assigneeList.indexOf(task.getAssignee().getUsername()));
+                                    spnAssignee.setSelection(assigneeList.indexOf(task.getAssignee()));
+
+                                    // Data for sprint spinner
+                                    sprintList.clear();
+                                    for(Sprint sprint: project.getSprints()) {
+                                        if(!sprint.getIsBacklog()) {
+                                            sprintList.add(sprint);
+                                        }
+                                    }
+                                    spnSprintAdapter.notifyDataSetChanged();
 
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
@@ -271,11 +288,18 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
 
     private void onSaveTaskClick() {
         loadingDialog.startLoadingDialog();
-        // Get assignee
+        // Get Project
         Amplify.API.query(
-                ModelQuery.list(User.class, User.USERNAME.contains(spnAssignee.getSelectedItem().toString())),
-                getAssigneeRes -> {
-                    User selectedAssignee = ((ArrayList<User>) getAssigneeRes.getData()).get(0);
+                ModelQuery.get(Project.class, task.getProject().getId()),
+                getProjectRes -> {
+
+                    User selectedAssignee=null;
+                    Sprint selectedSprint = null;
+                    for(ProjectParticipant projectParticipant: getProjectRes.getData().getMembers()) {
+                        if(projectParticipant.getMember().equals(spnAssignee.getSelectedItem())) {
+                            selectedAssignee = projectParticipant.getMember();
+                        }
+                    }
 
                     // Update Task
                     Task taskMutation = Task.builder()
@@ -329,60 +353,6 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
-
-    public void onMoveToActiveSprint(View view) {
-        loadingDialog.startLoadingDialog();
-        Amplify.API.query(
-                ModelQuery.get(Task.class, getTaskID()),
-                getTaskRes -> {
-                    task = getTaskRes.getData();
-
-                    // Get project
-                    Amplify.API.query(
-                            ModelQuery.get(Project.class, task.getProject().getId()),
-                            getProjectRes -> {
-                                loadingDialog.dismissDialog();
-                                Sprint activeSprint = null;
-                                for (Sprint sprint : getProjectRes.getData().getSprints()) {
-                                    if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
-                                        activeSprint = sprint;
-                                    }
-                                }
-
-                                if(activeSprint == null) {
-                                    runOnUiThread(() -> makeAlert("There is no active sprint"));
-                                } else {
-                                    // Update Task
-                                    Task taskMutation = Task.builder()
-                                            .name(task.getName())
-                                            .summary(task.getSummary())
-                                            .project(task.getProject())
-                                            .assignee(task.getAssignee())
-                                            .sprint(activeSprint)
-                                            .description(task.getDescription())
-                                            .label(task.getLabel())
-                                            .status(TaskStatus.TODO)
-                                            .id(task.getId())
-                                            .build();
-
-                                    Amplify.API.mutate(
-                                            ModelMutation.update(taskMutation),
-                                            updateTaskRes -> {
-                                                loadingDialog.dismissDialog();
-                                                runOnUiThread(this::onBackPressed);
-                                            },
-                                            error -> {
-                                                Log.e(TAG, error.toString());
-                                            }
-                                    );
-                                }
-                            },
-                            error -> Log.e(TAG, error.toString())
-                    );
-                },
-                error -> Log.e(TAG, error.toString())
-        );
     }
 
     private void commentCreateSubscribe() {

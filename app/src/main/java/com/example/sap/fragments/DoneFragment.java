@@ -87,6 +87,10 @@ public class DoneFragment extends Fragment {
             mTaskList = gson.fromJson(args.getString(TASK_LIST), founderListType);
             mActiveSprint = gson.fromJson(args.getString(ACTIVE_SPRINT), Sprint.class);
         }
+
+        taskCreateSubscribe();
+        taskUpdateSubscribe();
+        taskDeleteSubscribe();
     }
 
     @Override
@@ -126,10 +130,6 @@ public class DoneFragment extends Fragment {
                 }
             }
         });
-
-        taskCreateSubscribe();
-        taskUpdateSubscribe();
-        taskDeleteSubscribe();
     }
 
     @Override

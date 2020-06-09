@@ -90,6 +90,9 @@ public class ToDoFragment extends Fragment {
             mTaskList = gson.fromJson(args.getString(TASK_LIST), founderListType);
             mActiveSprint = gson.fromJson(args.getString(ACTIVE_SPRINT), Sprint.class);
         }
+        taskCreateSubscribe();
+        taskUpdateSubscribe();
+        taskDeleteSubscribe();
     }
 
     @Override
@@ -129,10 +132,6 @@ public class ToDoFragment extends Fragment {
                 }
             }
         });
-
-        taskCreateSubscribe();
-        taskUpdateSubscribe();
-        taskDeleteSubscribe();
     }
 
     @Override

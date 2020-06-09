@@ -83,6 +83,10 @@ public class BacklogFragment extends Fragment {
             mTaskList = gson.fromJson(args.getString(TASK_LIST), founderListType);
             mBacklog = gson.fromJson(args.getString(BACKLOG), Sprint.class);
         }
+
+        taskCreateSubscribe();
+        taskUpdateSubscribe();
+        taskDeleteSubscribe();
     }
 
     @Override
@@ -131,10 +135,6 @@ public class BacklogFragment extends Fragment {
                 imvBacklogEmpty.setImageResource(R.drawable.img_empty);
             }
         });
-
-        taskCreateSubscribe();
-        taskUpdateSubscribe();
-        taskDeleteSubscribe();
     }
 
     private String getProjectID() {

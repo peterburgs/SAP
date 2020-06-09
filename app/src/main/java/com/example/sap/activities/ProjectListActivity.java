@@ -84,6 +84,9 @@ public class ProjectListActivity extends AppCompatActivity {
         });
 
         projectListQuery();
+        projectCreateSubscribe();
+        projectUpdateSubscribe();
+        projectDeleteSubscribe();
     }
 
     /*
@@ -112,6 +115,96 @@ public class ProjectListActivity extends AppCompatActivity {
                     Log.e(TAG, "Error", error);
                     runOnUiThread(() -> makeAlert(error.getCause().toString()));
                 }
+        );
+    }
+
+    private void projectCreateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onCreate(Project.class),
+                onEstablished -> Log.i("OnCreateProjectSubscribe", "Subscription established"),
+                onCreated -> {
+                    Amplify.API.query(
+                            ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
+                            response -> {
+                                if (response.getData() != null) {
+                                    projectList.clear();
+                                    for (ProjectParticipant p : response.getData().getProjects()) {
+                                        projectList.add(p.getProject());
+                                    }
+
+                                    runOnUiThread(() -> {
+                                        projectListAdapter.notifyDataSetChanged();
+                                    });
+                                }
+                            },
+                            error -> {
+                                Log.e(TAG, "Error", error);
+                                runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                            }
+                    );
+                },
+                onFailure -> Log.e("OnCreateProjectSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnCreateProjectSubscribe", "Subscription completed")
+        );
+    }
+
+    private void projectUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Project.class),
+                onEstablished -> Log.i("OnUpdateProjectSubscribe", "Subscription established"),
+                onCreated -> {
+                    Amplify.API.query(
+                            ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
+                            response -> {
+                                if (response.getData() != null) {
+                                    projectList.clear();
+                                    for (ProjectParticipant p : response.getData().getProjects()) {
+                                        projectList.add(p.getProject());
+                                    }
+
+                                    runOnUiThread(() -> {
+                                        projectListAdapter.notifyDataSetChanged();
+                                    });
+                                }
+                            },
+                            error -> {
+                                Log.e(TAG, "Error", error);
+                                runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                            }
+                    );
+                },
+                onFailure -> Log.e("OnUpdateProjectSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateProjectSubscribe", "Subscription completed")
+        );
+    }
+
+    private void projectDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Project.class),
+                onEstablished -> Log.i("OnDeleteProjectSubscribe", "Subscription established"),
+                onCreated -> {
+                    Amplify.API.query(
+                            ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
+                            response -> {
+                                if (response.getData() != null) {
+                                    projectList.clear();
+                                    for (ProjectParticipant p : response.getData().getProjects()) {
+                                        projectList.add(p.getProject());
+                                    }
+
+                                    runOnUiThread(() -> {
+                                        projectListAdapter.notifyDataSetChanged();
+                                    });
+                                }
+                            },
+                            error -> {
+                                Log.e(TAG, "Error", error);
+                                runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                            }
+                    );
+                },
+                onFailure -> Log.e("OnDeleteProjectSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteProjectSubscribe", "Subscription completed")
         );
     }
 

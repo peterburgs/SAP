@@ -94,8 +94,7 @@ public class CreateProjectActivity extends AppCompatActivity {
                                         ModelMutation.create(projectParticipant),
                                         createProjectParticipantRes -> {
                                             loadingDialog.dismissDialog();
-                                            Intent intent = new Intent(getApplicationContext(), ProjectListActivity.class);
-                                            startActivity(intent);
+                                            runOnUiThread(this::onBackPressed);
                                         },
                                         error -> {
                                             Log.e(TAG, "Error", error);
@@ -114,6 +113,11 @@ public class CreateProjectActivity extends AppCompatActivity {
                     runOnUiThread(() -> makeAlert(error.getCause().toString()));
                 }
         );
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private String getRandomAvatarKey() {

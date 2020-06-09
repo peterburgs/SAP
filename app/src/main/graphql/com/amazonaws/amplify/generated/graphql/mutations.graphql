@@ -58,7 +58,6 @@ mutation CreateUser(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -161,7 +160,6 @@ mutation CreateUser(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -214,7 +212,6 @@ mutation CreateUser(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -351,7 +348,6 @@ mutation UpdateUser(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -454,7 +450,6 @@ mutation UpdateUser(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -507,7 +502,6 @@ mutation UpdateUser(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -644,7 +638,6 @@ mutation DeleteUser(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -747,7 +740,6 @@ mutation DeleteUser(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -800,7 +792,6 @@ mutation DeleteUser(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -938,7 +929,6 @@ mutation CreateProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1041,7 +1031,6 @@ mutation CreateProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1094,7 +1083,6 @@ mutation CreateProject(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -1179,7 +1167,6 @@ mutation CreateProject(
         isStarted
         projectID
         isBacklog
-        label
         project {
           id
           name
@@ -1224,7 +1211,6 @@ mutation CreateProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1269,7 +1255,6 @@ mutation CreateProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1349,7 +1334,6 @@ mutation UpdateProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1452,7 +1436,6 @@ mutation UpdateProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1505,7 +1488,6 @@ mutation UpdateProject(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -1590,7 +1572,6 @@ mutation UpdateProject(
         isStarted
         projectID
         isBacklog
-        label
         project {
           id
           name
@@ -1635,7 +1616,6 @@ mutation UpdateProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1680,7 +1660,6 @@ mutation UpdateProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1760,7 +1739,6 @@ mutation DeleteProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1863,7 +1841,6 @@ mutation DeleteProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -1916,7 +1893,6 @@ mutation DeleteProject(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -2001,7 +1977,6 @@ mutation DeleteProject(
         isStarted
         projectID
         isBacklog
-        label
         project {
           id
           name
@@ -2046,7 +2021,6 @@ mutation DeleteProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -2091,7 +2065,6 @@ mutation DeleteProject(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -2220,7 +2193,6 @@ mutation CreateProjectParticipant(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -2262,7 +2234,6 @@ mutation CreateProjectParticipant(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -2402,7 +2373,6 @@ mutation CreateProjectParticipant(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -2549,7 +2519,6 @@ mutation UpdateProjectParticipant(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -2591,7 +2560,6 @@ mutation UpdateProjectParticipant(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -2731,7 +2699,6 @@ mutation UpdateProjectParticipant(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -2878,7 +2845,6 @@ mutation DeleteProjectParticipant(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -2920,7 +2886,6 @@ mutation DeleteProjectParticipant(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -3060,7 +3025,6 @@ mutation DeleteProjectParticipant(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -3112,7 +3076,6 @@ mutation CreateSprint(
     isStarted
     projectID
     isBacklog
-    label
     project {
       id
       name
@@ -3213,7 +3176,6 @@ mutation CreateSprint(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -3255,7 +3217,6 @@ mutation CreateSprint(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -3351,7 +3312,6 @@ mutation CreateSprint(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -3404,7 +3364,6 @@ mutation CreateSprint(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -3496,7 +3455,6 @@ mutation UpdateSprint(
     isStarted
     projectID
     isBacklog
-    label
     project {
       id
       name
@@ -3597,7 +3555,6 @@ mutation UpdateSprint(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -3639,7 +3596,6 @@ mutation UpdateSprint(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -3735,7 +3691,6 @@ mutation UpdateSprint(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -3788,7 +3743,6 @@ mutation UpdateSprint(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -3880,7 +3834,6 @@ mutation DeleteSprint(
     isStarted
     projectID
     isBacklog
-    label
     project {
       id
       name
@@ -3981,7 +3934,6 @@ mutation DeleteSprint(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -4023,7 +3975,6 @@ mutation DeleteSprint(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -4119,7 +4070,6 @@ mutation DeleteSprint(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -4172,7 +4122,6 @@ mutation DeleteSprint(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -4364,7 +4313,6 @@ mutation CreateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -4406,7 +4354,6 @@ mutation CreateTask(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -4546,7 +4493,6 @@ mutation CreateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -4590,7 +4536,6 @@ mutation CreateTask(
       isStarted
       projectID
       isBacklog
-      label
       project {
         id
         name
@@ -4661,7 +4606,6 @@ mutation CreateTask(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -4684,7 +4628,6 @@ mutation CreateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -4755,7 +4698,6 @@ mutation CreateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -4882,7 +4824,6 @@ mutation CreateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -5033,7 +4974,6 @@ mutation UpdateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -5075,7 +5015,6 @@ mutation UpdateTask(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -5215,7 +5154,6 @@ mutation UpdateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -5259,7 +5197,6 @@ mutation UpdateTask(
       isStarted
       projectID
       isBacklog
-      label
       project {
         id
         name
@@ -5330,7 +5267,6 @@ mutation UpdateTask(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -5353,7 +5289,6 @@ mutation UpdateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -5424,7 +5359,6 @@ mutation UpdateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -5551,7 +5485,6 @@ mutation UpdateTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -5702,7 +5635,6 @@ mutation DeleteTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -5744,7 +5676,6 @@ mutation DeleteTask(
           isStarted
           projectID
           isBacklog
-          label
           project {
             id
             name
@@ -5884,7 +5815,6 @@ mutation DeleteTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -5928,7 +5858,6 @@ mutation DeleteTask(
       isStarted
       projectID
       isBacklog
-      label
       project {
         id
         name
@@ -5999,7 +5928,6 @@ mutation DeleteTask(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -6022,7 +5950,6 @@ mutation DeleteTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -6093,7 +6020,6 @@ mutation DeleteTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -6220,7 +6146,6 @@ mutation DeleteTask(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -6366,7 +6291,6 @@ mutation CreateComment(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -6480,7 +6404,6 @@ mutation CreateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -6503,7 +6426,6 @@ mutation CreateComment(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -6591,7 +6513,6 @@ mutation CreateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -6616,7 +6537,6 @@ mutation CreateComment(
         isStarted
         projectID
         isBacklog
-        label
         project {
           id
           name
@@ -6661,7 +6581,6 @@ mutation CreateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -6706,7 +6625,6 @@ mutation CreateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -6778,7 +6696,6 @@ mutation CreateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -6907,7 +6824,6 @@ mutation UpdateComment(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -7021,7 +6937,6 @@ mutation UpdateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7044,7 +6959,6 @@ mutation UpdateComment(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -7132,7 +7046,6 @@ mutation UpdateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7157,7 +7070,6 @@ mutation UpdateComment(
         isStarted
         projectID
         isBacklog
-        label
         project {
           id
           name
@@ -7202,7 +7114,6 @@ mutation UpdateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7247,7 +7158,6 @@ mutation UpdateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7319,7 +7229,6 @@ mutation UpdateComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7448,7 +7357,6 @@ mutation DeleteComment(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -7562,7 +7470,6 @@ mutation DeleteComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7585,7 +7492,6 @@ mutation DeleteComment(
             isStarted
             projectID
             isBacklog
-            label
             project {
               id
               name
@@ -7673,7 +7579,6 @@ mutation DeleteComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7698,7 +7603,6 @@ mutation DeleteComment(
         isStarted
         projectID
         isBacklog
-        label
         project {
           id
           name
@@ -7743,7 +7647,6 @@ mutation DeleteComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7788,7 +7691,6 @@ mutation DeleteComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }
@@ -7860,7 +7762,6 @@ mutation DeleteComment(
               isStarted
               projectID
               isBacklog
-              label
               createdAt
               updatedAt
             }

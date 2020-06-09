@@ -31,17 +31,15 @@ public final class Sprint implements Model {
   public static final QueryField IS_COMPLETED = field("isCompleted");
   public static final QueryField IS_STARTED = field("isStarted");
   public static final QueryField IS_BACKLOG = field("isBacklog");
-  public static final QueryField LABEL = field("label");
   public static final QueryField PROJECT = field("projectID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="AWSDate") Temporal.Date startDate;
   private final @ModelField(targetType="AWSDate") Temporal.Date endDate;
-  private final @ModelField(targetType="String", isRequired = true) String goal;
+  private final @ModelField(targetType="String") String goal;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="Boolean") Boolean isCompleted;
   private final @ModelField(targetType="Boolean") Boolean isStarted;
   private final @ModelField(targetType="Boolean", isRequired = true) Boolean isBacklog;
-  private final @ModelField(targetType="String") String label;
   private final @ModelField(targetType="Project", isRequired = true) @BelongsTo(targetName = "projectID", type = Project.class) Project project;
   private final @ModelField(targetType="Task") @HasMany(associatedWith = "sprint", type = Task.class) List<Task> tasks = null;
   public String getId() {
@@ -76,10 +74,6 @@ public final class Sprint implements Model {
       return isBacklog;
   }
   
-  public String getLabel() {
-      return label;
-  }
-  
   public Project getProject() {
       return project;
   }
@@ -88,7 +82,7 @@ public final class Sprint implements Model {
       return tasks;
   }
   
-  private Sprint(String id, Temporal.Date startDate, Temporal.Date endDate, String goal, String name, Boolean isCompleted, Boolean isStarted, Boolean isBacklog, String label, Project project) {
+  private Sprint(String id, Temporal.Date startDate, Temporal.Date endDate, String goal, String name, Boolean isCompleted, Boolean isStarted, Boolean isBacklog, Project project) {
     this.id = id;
     this.startDate = startDate;
     this.endDate = endDate;
@@ -97,7 +91,6 @@ public final class Sprint implements Model {
     this.isCompleted = isCompleted;
     this.isStarted = isStarted;
     this.isBacklog = isBacklog;
-    this.label = label;
     this.project = project;
   }
   
@@ -117,7 +110,6 @@ public final class Sprint implements Model {
               ObjectsCompat.equals(getIsCompleted(), sprint.getIsCompleted()) &&
               ObjectsCompat.equals(getIsStarted(), sprint.getIsStarted()) &&
               ObjectsCompat.equals(getIsBacklog(), sprint.getIsBacklog()) &&
-              ObjectsCompat.equals(getLabel(), sprint.getLabel()) &&
               ObjectsCompat.equals(getProject(), sprint.getProject());
       }
   }
@@ -133,37 +125,29 @@ public final class Sprint implements Model {
       .append(getIsCompleted())
       .append(getIsStarted())
       .append(getIsBacklog())
-      .append(getLabel())
       .append(getProject())
       .toString()
       .hashCode();
   }
   
-//  @Override
-//   public String toString() {
-//    return new StringBuilder()
-//      .append("Sprint {")
-//      .append("id=" + String.valueOf(getId()))
-//      .append("startDate=" + String.valueOf(getStartDate()))
-//      .append("endDate=" + String.valueOf(getEndDate()))
-//      .append("goal=" + String.valueOf(getGoal()))
-//      .append("name=" + String.valueOf(getName()))
-//      .append("isCompleted=" + String.valueOf(getIsCompleted()))
-//      .append("isStarted=" + String.valueOf(getIsStarted()))
-//      .append("isBacklog=" + String.valueOf(getIsBacklog()))
-//      .append("label=" + String.valueOf(getLabel()))
-//      .append("project=" + String.valueOf(getProject()))
-//      .append("}")
-//      .toString();
-//  }
-
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public static GoalStep builder() {
+  @Override
+   public String toString() {
+    return new StringBuilder()
+      .append("Sprint {")
+      .append("id=" + String.valueOf(getId()))
+      .append("startDate=" + String.valueOf(getStartDate()))
+      .append("endDate=" + String.valueOf(getEndDate()))
+      .append("goal=" + String.valueOf(getGoal()))
+      .append("name=" + String.valueOf(getName()))
+      .append("isCompleted=" + String.valueOf(getIsCompleted()))
+      .append("isStarted=" + String.valueOf(getIsStarted()))
+      .append("isBacklog=" + String.valueOf(getIsBacklog()))
+      .append("project=" + String.valueOf(getProject()))
+      .append("}")
+      .toString();
+  }
+  
+  public static NameStep builder() {
       return new Builder();
   }
   
@@ -195,7 +179,6 @@ public final class Sprint implements Model {
       null,
       null,
       null,
-      null,
       null
     );
   }
@@ -209,14 +192,8 @@ public final class Sprint implements Model {
       isCompleted,
       isStarted,
       isBacklog,
-      label,
       project);
   }
-  public interface GoalStep {
-    NameStep goal(String goal);
-  }
-  
-
   public interface NameStep {
     IsBacklogStep name(String name);
   }
@@ -237,23 +214,22 @@ public final class Sprint implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep startDate(Temporal.Date startDate);
     BuildStep endDate(Temporal.Date endDate);
+    BuildStep goal(String goal);
     BuildStep isCompleted(Boolean isCompleted);
     BuildStep isStarted(Boolean isStarted);
-    BuildStep label(String label);
   }
   
 
-  public static class Builder implements GoalStep, NameStep, IsBacklogStep, ProjectStep, BuildStep {
+  public static class Builder implements NameStep, IsBacklogStep, ProjectStep, BuildStep {
     private String id;
-    private String goal;
     private String name;
     private Boolean isBacklog;
     private Project project;
     private Temporal.Date startDate;
     private Temporal.Date endDate;
+    private String goal;
     private Boolean isCompleted;
     private Boolean isStarted;
-    private String label;
     @Override
      public Sprint build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -267,15 +243,7 @@ public final class Sprint implements Model {
           isCompleted,
           isStarted,
           isBacklog,
-          label,
           project);
-    }
-    
-    @Override
-     public NameStep goal(String goal) {
-        Objects.requireNonNull(goal);
-        this.goal = goal;
-        return this;
     }
     
     @Override
@@ -312,6 +280,12 @@ public final class Sprint implements Model {
     }
     
     @Override
+     public BuildStep goal(String goal) {
+        this.goal = goal;
+        return this;
+    }
+    
+    @Override
      public BuildStep isCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
         return this;
@@ -320,12 +294,6 @@ public final class Sprint implements Model {
     @Override
      public BuildStep isStarted(Boolean isStarted) {
         this.isStarted = isStarted;
-        return this;
-    }
-    
-    @Override
-     public BuildStep label(String label) {
-        this.label = label;
         return this;
     }
     
@@ -352,22 +320,16 @@ public final class Sprint implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Temporal.Date startDate, Temporal.Date endDate, String goal, String name, Boolean isCompleted, Boolean isStarted, Boolean isBacklog, String label, Project project) {
+    private CopyOfBuilder(String id, Temporal.Date startDate, Temporal.Date endDate, String goal, String name, Boolean isCompleted, Boolean isStarted, Boolean isBacklog, Project project) {
       super.id(id);
-      super.goal(goal)
-        .name(name)
+      super.name(name)
         .isBacklog(isBacklog)
         .project(project)
         .startDate(startDate)
         .endDate(endDate)
+        .goal(goal)
         .isCompleted(isCompleted)
-        .isStarted(isStarted)
-        .label(label);
-    }
-    
-    @Override
-     public CopyOfBuilder goal(String goal) {
-      return (CopyOfBuilder) super.goal(goal);
+        .isStarted(isStarted);
     }
     
     @Override
@@ -396,6 +358,11 @@ public final class Sprint implements Model {
     }
     
     @Override
+     public CopyOfBuilder goal(String goal) {
+      return (CopyOfBuilder) super.goal(goal);
+    }
+    
+    @Override
      public CopyOfBuilder isCompleted(Boolean isCompleted) {
       return (CopyOfBuilder) super.isCompleted(isCompleted);
     }
@@ -403,11 +370,6 @@ public final class Sprint implements Model {
     @Override
      public CopyOfBuilder isStarted(Boolean isStarted) {
       return (CopyOfBuilder) super.isStarted(isStarted);
-    }
-    
-    @Override
-     public CopyOfBuilder label(String label) {
-      return (CopyOfBuilder) super.label(label);
     }
   }
   

@@ -38,6 +38,7 @@ public class SprintContainerActivity extends AppCompatActivity {
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
     com.getbase.floatingactionbutton.FloatingActionButton fabSetting;
+    com.getbase.floatingactionbutton.FloatingActionButton fabBoard;
 
 
     @Override
@@ -54,6 +55,7 @@ public class SprintContainerActivity extends AppCompatActivity {
         fabProject = findViewById(R.id.fabProject);
         fabAccount = findViewById(R.id.fabAccount);
         fabSetting = findViewById(R.id.fabSetting);
+        fabBoard = findViewById(R.id.fabBoard);
 
 
         //todo: Add Adapter to initializeSprintPageAdapter
@@ -69,6 +71,11 @@ public class SprintContainerActivity extends AppCompatActivity {
         });
         fabSetting.setOnClickListener(v -> {
             Toast.makeText(this, "Setting Selected", Toast.LENGTH_SHORT).show();
+        });
+        fabBoard.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
+            intent.putExtra("PROJECT_ID", getProjectID());
+            startActivity(intent);
         });
 
         mHandler = new Handler(Looper.getMainLooper());
@@ -120,5 +127,16 @@ public class SprintContainerActivity extends AppCompatActivity {
         vpgSprint.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tloSprint));
 
         //todo: Hard time for backend
+    }
+
+    private String getProjectID() {
+        String newString;
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            newString = null;
+        } else {
+            newString = extras.getString("PROJECT_ID");
+        }
+        return newString;
     }
 }

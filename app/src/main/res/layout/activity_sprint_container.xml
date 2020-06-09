@@ -97,7 +97,17 @@
             app:fab_colorPressed="@color/black_800"
             app:fab_icon="@drawable/ic_project"
             app:fab_size="mini"
-            app:fab_title="Projects" />
+            app:fab_title="Project List" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/black_800"
+            app:fab_icon="@drawable/ic_board"
+            app:fab_size="mini"
+            app:fab_title="Board" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAccount"

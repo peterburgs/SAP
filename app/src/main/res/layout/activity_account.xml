@@ -134,17 +134,17 @@
             app:fab_colorPressed="@color/black_800"
             app:fab_icon="@drawable/ic_project"
             app:fab_size="mini"
-            app:fab_title="Project" />
+            app:fab_title="Project List" />
 
-        <!--                <com.getbase.floatingactionbutton.FloatingActionButton-->
-        <!--                    android:id="@+id/fabAccount"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    app:fab_colorNormal="@color/colorAccent"-->
-        <!--                    app:fab_colorPressed="@color/black_800"-->
-        <!--                    app:fab_icon="@drawable/ic_account"-->
-        <!--                    app:fab_size="mini"-->
-        <!--                    app:fab_title="Account" />-->
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/black_800"
+            app:fab_icon="@drawable/ic_setting"
+            app:fab_size="mini"
+            app:fab_title="Setting" />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 

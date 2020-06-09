@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/projectListMenu"
             app:menu="@menu/general_menu"
-            app:title="Simple Android Project" />
+ />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tloStatus"
@@ -97,10 +97,10 @@
             app:fab_colorPressed="@color/black_800"
             app:fab_icon="@drawable/ic_project"
             app:fab_size="mini"
-            app:fab_title="Projects" />
+            app:fab_title="Project List" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabSprint"
+            android:id="@+id/fabBoard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorAccent"

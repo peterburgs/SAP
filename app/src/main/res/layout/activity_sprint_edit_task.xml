@@ -70,6 +70,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -85,7 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="12dp"
+
                     android:background="@drawable/gradient">
 
                     <Spinner
@@ -131,6 +132,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -146,7 +148,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="14dp"
                     android:background="@drawable/gradient">
 
                     <Spinner
@@ -188,21 +189,49 @@
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnMoveToBacklog"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/colorAccent"
-                android:onClick="onMoveToBacklog"
-                android:text="Move to Backlog"
-                android:textColor="@color/white"
-                app:cornerRadius="15dp"
-                app:icon="@drawable/ic_backlog"
-                app:iconTint="@color/white"
-                app:strokeColor="@color/colorAccent" />
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnMoveToBacklog"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:onClick="onMoveToBacklog"
+                    android:text="To Backlog"
+                    android:textColor="@color/white"
+                    app:cornerRadius="15dp"
+                    app:icon="@drawable/ic_backlog"
+                    app:iconTint="@color/white"
+                    app:strokeColor="@color/colorAccent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnMoveToFutureSprint"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:onClick="onMoveToBacklog"
+                    android:text="To Future Sprint"
+                    android:textColor="@color/white"
+                    app:cornerRadius="15dp"
+                    app:icon="@drawable/ic_outline_next_week_white_24dp"
+                    app:iconTint="@color/white"
+                    app:strokeColor="@color/colorAccent" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"

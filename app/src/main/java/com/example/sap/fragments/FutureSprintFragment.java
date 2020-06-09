@@ -10,12 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.api.graphql.model.ModelSubscription;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.example.sap.R;
 import com.example.sap.adapters.ActiveSprintAdapter;
@@ -38,7 +43,6 @@ public class FutureSprintFragment extends Fragment {
     RecyclerView rcvFutureSprint;
     private FutureSprintAdapter futureSprintAdapter;
     private Handler mHandler;
-    private TextView tvDayRemaining;
     private ImageView imvFutureSprintEmpty;
 
     public FutureSprintFragment() {
@@ -65,6 +69,9 @@ public class FutureSprintFragment extends Fragment {
             }.getType();
             mSprintList = gson.fromJson(args.getString(SPRINT_LIST), founderListType);
         }
+        sprintCreateSubscribe();
+        sprintUpdateSubscribe();
+        sprintDeleteSubscribe();
     }
 
     @Override
@@ -81,7 +88,6 @@ public class FutureSprintFragment extends Fragment {
         mHandler = new Handler(Looper.getMainLooper());
 
         rcvFutureSprint = getView().findViewById(R.id.rcvFutureSprint);
-        tvDayRemaining = getView().findViewById(R.id.tvFutureSprintRemainingDay);
         imvFutureSprintEmpty = getView().findViewById(R.id.imvFutureSprintEmpty);
         futureSprintAdapter = new FutureSprintAdapter(getContext(), mSprintList);
 
@@ -97,13 +103,77 @@ public class FutureSprintFragment extends Fragment {
             futureSprintAdapter.notifyDataSetChanged();
             if (mSprintList.isEmpty()) {
                 imvFutureSprintEmpty.setImageResource(R.drawable.img_empty);
-            } else {
-                if (!mSprintList.isEmpty()) {
-                    //
-                    //todo: Backend get Remaining days
-                }
             }
         });
-        //todo: Add Subscribers to update data
+    }
+
+    private void sprintQuery() {
+        if (mSprintList != null) {
+            // Get active sprint
+            Amplify.API.query(
+                    ModelQuery.get(Project.class, getProjectID()),
+                    getProjectRes -> {
+                        mSprintList.clear();
+                        for(Sprint sprint : getProjectRes.getData().getSprints()) {
+                            if(!sprint.getIsBacklog()) {
+                                if(sprint.getIsStarted() == null || !sprint.getIsStarted() && !sprint.getIsCompleted()) {
+                                    mSprintList.add(sprint);
+                                }
+                            }
+                        }
+                        mHandler.post(() -> {
+                            futureSprintAdapter.notifyDataSetChanged();
+                        });
+                    },
+                    error -> Log.e("GetProject", error.toString())
+            );
+        }
+    }
+
+    private void sprintCreateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onCreate(Sprint.class),
+                onEstablished -> Log.i("OnCreateSprintSubscribe", "Subscription established"),
+                onUpdated -> {
+                    sprintQuery();
+                },
+                onFailure -> Log.e("OnCreateSprintSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnCreateSprintSubscribe", "Subscription completed")
+        );
+    }
+
+    private void sprintUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Sprint.class),
+                onEstablished -> Log.i("OnUpdateSprintSubscribe", "Subscription established"),
+                onUpdated -> {
+                    sprintQuery();
+                },
+                onFailure -> Log.e("OnUpdateSprintSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateSprintSubscribe", "Subscription completed")
+        );
+    }
+
+    private void sprintDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Sprint.class),
+                onEstablished -> Log.i("OnDeleteSprintSubscribe", "Subscription established"),
+                onUpdated -> {
+                    sprintQuery();
+                },
+                onFailure -> Log.e("OnDeleteSprintSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteSprintSubscribe", "Subscription completed")
+        );
+    }
+
+    private String getProjectID() {
+        String newString;
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras == null) {
+            newString = null;
+        } else {
+            newString = extras.getString("PROJECT_ID");
+        }
+        return newString;
     }
 }

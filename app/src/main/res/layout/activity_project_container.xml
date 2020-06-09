@@ -100,7 +100,7 @@
             app:fab_title="Project List" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabBoard"
+            android:id="@+id/fabSprint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorAccent"

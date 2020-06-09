@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.ProjectParticipant;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.User;
 import com.example.sap.R;
 import com.example.sap.adapters.ProjectListAdapter;
@@ -37,7 +39,6 @@ public class ProjectListActivity extends AppCompatActivity {
 
     RecyclerView rcvProjectList;
     MaterialToolbar topAppBar;
-    //com.getbase.floatingactionbutton.FloatingActionButton fabProject;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
 
     @Override
@@ -69,11 +70,6 @@ public class ProjectListActivity extends AppCompatActivity {
         //fabProject = findViewById(R.id.fabProject);
         fabAccount = findViewById(R.id.fabAccount);
 
-
-        //todo: Handle FAB Menu here
-//        fabProject.setOnClickListener(v -> {
-//            Toast.makeText(this, "Project Selected", Toast.LENGTH_SHORT).show();
-//        });
         fabAccount.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
             startActivity(intent);
@@ -87,24 +83,21 @@ public class ProjectListActivity extends AppCompatActivity {
             }
         });
 
-        projectListQuery(Amplify.Auth.getCurrentUser().getUserId());
-    }
-
-    @Override
-    protected void onRestart() {
-        projectListQuery(Amplify.Auth.getCurrentUser().getUserId());
-        super.onRestart();
+        projectListQuery();
+        projectCreateSubscribe();
+        projectUpdateSubscribe();
+        projectDeleteSubscribe();
     }
 
     /*
      * Get project list from the cloud according to the current user
      * And update recycler view
      * */
-    private void projectListQuery(String userId) {
+    private void projectListQuery() {
         // Get project list
         loadingDialog.startLoadingDialog();
         Amplify.API.query(
-                ModelQuery.get(User.class, userId),
+                ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
                 response -> {
                     loadingDialog.dismissDialog();
                     if (response.getData() != null) {
@@ -122,6 +115,42 @@ public class ProjectListActivity extends AppCompatActivity {
                     Log.e(TAG, "Error", error);
                     runOnUiThread(() -> makeAlert(error.getCause().toString()));
                 }
+        );
+    }
+
+    private void projectCreateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onCreate(Project.class),
+                onEstablished -> Log.i("OnCreateProjectSubscribe", "Subscription established"),
+                onCreated -> {
+                    projectListQuery();
+                },
+                onFailure -> Log.e("OnCreateProjectSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnCreateProjectSubscribe", "Subscription completed")
+        );
+    }
+
+    private void projectUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Project.class),
+                onEstablished -> Log.i("OnUpdateProjectSubscribe", "Subscription established"),
+                onCreated -> {
+                    projectListQuery();
+                },
+                onFailure -> Log.e("OnUpdateProjectSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateProjectSubscribe", "Subscription completed")
+        );
+    }
+
+    private void projectDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Project.class),
+                onEstablished -> Log.i("OnDeleteProjectSubscribe", "Subscription established"),
+                onCreated -> {
+                    projectListQuery();
+                },
+                onFailure -> Log.e("OnDeleteProjectSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteProjectSubscribe", "Subscription completed")
         );
     }
 

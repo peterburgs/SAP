@@ -34,7 +34,6 @@ public class ProjectContainerActivity extends AppCompatActivity {
 
     private TabLayout tloStatus;
     private ViewPager viewPager;
-    private com.google.android.material.tabs.TabItem titToDo, titInProgress, titDone, titBacklog;
     private BadgeDrawable toDoBadge, inProgressBadge, doneBadge, backlogBadge;
     public PageAdapter pagerAdapter;
     private Handler mHandler;
@@ -52,7 +51,6 @@ public class ProjectContainerActivity extends AppCompatActivity {
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
     com.getbase.floatingactionbutton.FloatingActionButton fabSetting;
     com.getbase.floatingactionbutton.FloatingActionButton fabSprint;
-    com.getbase.floatingactionbutton.FloatingActionButton fabBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +59,10 @@ public class ProjectContainerActivity extends AppCompatActivity {
 
         tloStatus = findViewById(R.id.tloStatus);
         viewPager = findViewById(R.id.vpgStatus);
-        titToDo = findViewById(R.id.titToDo);
-        titInProgress = findViewById(R.id.titInProgress);
-        titDone = findViewById(R.id.titDone);
-        titBacklog = findViewById(R.id.titBacklog);
         fabProjectList = findViewById(R.id.fabProject);
         fabAccount = findViewById(R.id.fabAccount);
         fabSetting = findViewById(R.id.fabSetting);
-        fabSprint = findViewById(R.id.fabBoard);
-        fabBoard = findViewById(R.id.fabBoard);
+        fabSprint = findViewById(R.id.fabSprint);
         topAppbar = findViewById(R.id.topAppBar);
 
         fabProjectList.setOnClickListener(v -> {
@@ -87,13 +80,6 @@ public class ProjectContainerActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), SprintContainerActivity.class);
             intent.putExtra("PROJECT_ID", getProjectID());
             startActivity(intent);
-        });
-        fabBoard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SprintContainerActivity.class);
-                startActivity(intent);
-            }
         });
         mHandler = new Handler(Looper.getMainLooper());
 
@@ -120,7 +106,6 @@ public class ProjectContainerActivity extends AppCompatActivity {
 
         notificationManagerCompat = NotificationManagerCompat.from(this);
 
-        taskQuery();
         taskCreateSubscribe();
         taskUpdateSubscribe();
         taskDeleteSubscribe();

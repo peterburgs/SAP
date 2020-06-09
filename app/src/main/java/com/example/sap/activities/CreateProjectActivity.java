@@ -67,8 +67,8 @@ public class CreateProjectActivity extends AppCompatActivity {
                             ModelMutation.create(project),
                             createProjectRes -> {
                                 Sprint sprint = Sprint.builder()
-                                        .goal("No goal for backlog")
-                                        .name("Backlog")
+                                        .goal("")
+                                        .name("None")
                                         .isBacklog(true)
                                         .project(createProjectRes.getData())
                                         .build();

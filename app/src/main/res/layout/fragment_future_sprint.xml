@@ -19,15 +19,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvFutureSprintRemainingDay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:gravity="right"
-                android:textAlignment="gravity"
-                android:textSize="14sp" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvFutureSprint"
                 android:layout_width="match_parent"

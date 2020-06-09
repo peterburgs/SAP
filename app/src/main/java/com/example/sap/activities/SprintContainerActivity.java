@@ -9,8 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.api.graphql.model.ModelSubscription;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
@@ -25,7 +30,6 @@ public class SprintContainerActivity extends AppCompatActivity {
 
     private TabLayout tloSprint;
     private ViewPager vpgSprint;
-    private com.google.android.material.tabs.TabItem titActive, titFuture, titCompleted;
     private BadgeDrawable activeBadge, futureBadge, completedBadge;
     private SprintPageAdapter sprintPageAdapter;
     private Handler mHandler;
@@ -49,17 +53,10 @@ public class SprintContainerActivity extends AppCompatActivity {
         //FindView
         tloSprint = findViewById(R.id.tloSprint);
         vpgSprint = findViewById(R.id.vpgSprint);
-        titActive = findViewById(R.id.titActive);
-        titFuture = findViewById(R.id.titFuture);
-        titCompleted = findViewById(R.id.titCompleted);
         fabProject = findViewById(R.id.fabProject);
         fabAccount = findViewById(R.id.fabAccount);
         fabSetting = findViewById(R.id.fabSetting);
         fabBoard = findViewById(R.id.fabBoard);
-
-
-        //todo: Add Adapter to initializeSprintPageAdapter
-
 
         fabProject.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProjectListActivity.class);
@@ -86,8 +83,7 @@ public class SprintContainerActivity extends AppCompatActivity {
         futureSprints = new ArrayList<>();
         completedSprints = new ArrayList<>();
 
-        sprintPageAdapter = new SprintPageAdapter(getSupportFragmentManager(), tloSprint.getTabCount(), activeSprints, futureSprints, completedSprints);
-        vpgSprint.setAdapter(sprintPageAdapter);
+        initializeSprintPageAdapter();
 
         activeBadge = tloSprint.getTabAt(0).getOrCreateBadge();
         futureBadge = tloSprint.getTabAt(1).getOrCreateBadge();
@@ -99,7 +95,9 @@ public class SprintContainerActivity extends AppCompatActivity {
 
         notificationManagerCompat = NotificationManagerCompat.from(this);
 
-        //todo: Backend handle Subscribes
+        sprintCreateSubscribe();
+        sprintUpdateSubscribe();
+        sprintDeleteSubscribe();
 
         tloSprint.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -125,9 +123,109 @@ public class SprintContainerActivity extends AppCompatActivity {
             }
         });
         vpgSprint.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tloSprint));
-
-        //todo: Hard time for backend
     }
+
+    private void sprintQuery() {
+        Amplify.API.query(
+                ModelQuery.get(Project.class, getProjectID()),
+                getProjectRes -> {
+                    activeSprints.clear();
+                    futureSprints.clear();
+                    completedSprints.clear();
+                    for (Sprint sprint : getProjectRes.getData().getSprints()) {
+                        if(!sprint.getIsBacklog()) {
+                            if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                                activeSprints.add(sprint);
+                            } else if (sprint.getIsStarted() != null && sprint.getIsCompleted()) {
+                                completedSprints.add(sprint);
+                            } else {
+                                futureSprints.add(sprint);
+                            }
+                        }
+                    }
+                    mHandler.post(() -> {
+                        activeBadge.setNumber(activeSprints.size());
+                        futureBadge.setNumber(futureSprints.size());
+                        completedBadge.setNumber(completedSprints.size());
+                    });
+                },
+                error -> {
+                    Log.e("Error", error.toString());
+                }
+        );
+    }
+
+    private void initializeSprintPageAdapter() {
+        loadingDialog.startLoadingDialog();
+        // Get project by id
+        Amplify.API.query(
+                ModelQuery.get(Project.class, getProjectID()),
+                getProjectRes -> {
+                    activeSprints.clear();
+                    futureSprints.clear();
+                    completedSprints.clear();
+                    for (Sprint sprint : getProjectRes.getData().getSprints()) {
+                        if(!sprint.getIsBacklog()) {
+                            if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                                activeSprints.add(sprint);
+                            } else if (sprint.getIsStarted() != null && sprint.getIsCompleted()) {
+                                completedSprints.add(sprint);
+                            } else {
+                                futureSprints.add(sprint);
+                            }
+                        }
+                    }
+                    mHandler.post(() -> {
+                        loadingDialog.dismissDialog();
+                        activeBadge.setNumber(activeSprints.size());
+                        futureBadge.setNumber(futureSprints.size());
+                        completedBadge.setNumber(completedSprints.size());
+                        sprintPageAdapter = new SprintPageAdapter(getSupportFragmentManager(), tloSprint.getTabCount(), activeSprints, futureSprints, completedSprints);
+                        vpgSprint.setAdapter(sprintPageAdapter);
+                    });
+                },
+                error -> {
+                    Log.e("Error", error.toString());
+                }
+        );
+    }
+
+    private void sprintCreateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onCreate(Sprint.class),
+                onEstablished -> Log.i("OnCreateSprintSubscribe", "Subscription established"),
+                onUpdated -> {
+                    sprintQuery();
+                },
+                onFailure -> Log.e("OnCreateSprintSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnCreateSprintSubscribe", "Subscription completed")
+        );
+    }
+
+    private void sprintUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Sprint.class),
+                onEstablished -> Log.i("OnUpdateSprintSubscribe", "Subscription established"),
+                onUpdated -> {
+                    sprintQuery();
+                },
+                onFailure -> Log.e("OnUpdateSprintSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateSprintSubscribe", "Subscription completed")
+        );
+    }
+
+    private void sprintDeleteSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onDelete(Sprint.class),
+                onEstablished -> Log.i("OnDeleteSprintSubscribe", "Subscription established"),
+                onUpdated -> {
+                    sprintQuery();
+                },
+                onFailure -> Log.e("OnDeleteSprintSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnDeleteSprintSubscribe", "Subscription completed")
+        );
+    }
+
 
     private String getProjectID() {
         String newString;

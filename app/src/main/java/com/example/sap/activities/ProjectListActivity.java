@@ -95,11 +95,9 @@ public class ProjectListActivity extends AppCompatActivity {
      * */
     private void projectListQuery() {
         // Get project list
-        loadingDialog.startLoadingDialog();
         Amplify.API.query(
                 ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
                 response -> {
-                    loadingDialog.dismissDialog();
                     if (response.getData() != null) {
                         projectList.clear();
                         for (ProjectParticipant p : response.getData().getProjects()) {

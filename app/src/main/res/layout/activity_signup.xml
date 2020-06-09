@@ -14,6 +14,10 @@
         android:layout_marginTop="44dp"
         android:fontFamily="@font/bold"
         android:text="Create new Account "
+        app:boxCornerRadiusBottomEnd="25dp"
+        app:boxCornerRadiusBottomStart="25dp"
+        app:boxStrokeColor="#FFF"
+        app:boxStrokeWidth="0dp"
         android:textColor="@color/colorAccent"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,13 +36,18 @@
         app:boxCornerRadiusTopStart="25dp"
         app:counterEnabled="true"
         app:counterMaxLength="20"
+        app:boxCornerRadiusBottomEnd="25dp"
+        app:boxCornerRadiusBottomStart="25dp"
+        app:boxStrokeColor="#FFF"
+        app:boxStrokeWidth="0dp"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView"
-        app:startIconDrawable="@drawable/ic_person">
+        app:startIconDrawable="@drawable/ic_person"
+        app:startIconTint="@color/colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_username"
@@ -61,12 +70,17 @@
         app:boxCornerRadiusTopEnd="25dp"
         app:boxCornerRadiusTopStart="25dp"
         app:endIconMode="clear_text"
+        app:startIconTint="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:startIconDrawable="@drawable/ic_mail">
+        app:startIconDrawable="@drawable/ic_mail"
+        app:boxCornerRadiusBottomEnd="25dp"
+        app:boxCornerRadiusBottomStart="25dp"
+        app:boxStrokeColor="#FFF"
+        app:boxStrokeWidth="0dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_email"
@@ -97,7 +111,12 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-        app:startIconDrawable="@drawable/password">
+        app:startIconDrawable="@drawable/password"
+        app:boxCornerRadiusBottomEnd="25dp"
+        app:boxCornerRadiusBottomStart="25dp"
+        app:boxStrokeColor="#FFF"
+        app:boxStrokeWidth="0dp"
+        app:startIconTint="@color/colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_password"
@@ -129,7 +148,12 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-        app:startIconDrawable="@drawable/ic_security">
+        app:startIconDrawable="@drawable/ic_security"
+        app:boxCornerRadiusBottomEnd="25dp"
+        app:boxCornerRadiusBottomStart="25dp"
+        app:boxStrokeColor="#FFF"
+        app:boxStrokeWidth="0dp"
+        app:startIconTint="@color/colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_confirmPassword"

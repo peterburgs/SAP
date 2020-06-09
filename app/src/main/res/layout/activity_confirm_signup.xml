@@ -27,8 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="420dp"
         android:hint="Verification Code"
+        app:boxCornerRadiusBottomEnd="25dp"
+        app:boxCornerRadiusBottomStart="25dp"
         app:boxCornerRadiusTopEnd="25dp"
         app:boxCornerRadiusTopStart="25dp"
+        app:boxStrokeColor="#FFF"
+        app:boxStrokeWidth="0dp"
         app:counterEnabled="true"
         app:counterMaxLength="6"
         app:endIconMode="clear_text"
@@ -36,7 +40,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_touch_id">
+        app:startIconDrawable="@drawable/ic_touch_id"
+        app:startIconTint="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_verificationCode"

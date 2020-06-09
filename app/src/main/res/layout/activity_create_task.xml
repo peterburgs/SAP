@@ -37,9 +37,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="Summary"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
                 app:boxCornerRadiusTopEnd="25dp"
                 app:boxCornerRadiusTopStart="25dp"
-
+                app:boxStrokeColor="#FFF"
+                app:boxStrokeWidth="0dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintVertical_bias="0.15"
                 app:startIconDrawable="@drawable/ic_task">
@@ -49,8 +52,8 @@
                     android:layout_width="350sp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#F9F9F9"
-                   android:maxLines="1"
                     android:inputType="text"
+                    android:maxLines="1"
                     android:nextFocusDown="@id/edtDescription"
                     android:scrollbars="vertical"
                     android:singleLine="true" />
@@ -65,7 +68,11 @@
                 app:boxCornerRadiusTopStart="25dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintVertical_bias="0.15"
-                app:startIconDrawable="@drawable/ic_des">
+                app:startIconDrawable="@drawable/ic_des"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxStrokeColor="#FFF"
+                app:boxStrokeWidth="0dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtDescription"

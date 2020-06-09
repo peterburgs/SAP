@@ -68,6 +68,7 @@ public class SprintContainerActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent = new Intent(getApplicationContext(), CreateSprintActivity.class);
+                intent.putExtra("PROJECT_ID", getProjectID());
                 startActivity(intent);
                 return true;
             }

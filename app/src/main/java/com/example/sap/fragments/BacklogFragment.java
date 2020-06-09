@@ -115,8 +115,8 @@ public class BacklogFragment extends Fragment {
 
             }
         });
-        backlogAdapter = new BacklogAdapter(getContext(), mTaskList);
 
+        backlogAdapter = new BacklogAdapter(getContext(), mTaskList);
         rcvBacklog.setAdapter(backlogAdapter);
         rcvBacklog.setLayoutManager(new LinearLayoutManager(getContext()));
         backlogAdapter.setOnItemClickListener(new BacklogAdapter.OnItemClickListener() {
@@ -150,7 +150,7 @@ public class BacklogFragment extends Fragment {
 
     private void taskQuery() {
         if (mBacklog != null) {
-            // Get tasks of the activated sprint
+            // Get tasks of the backlog
             Amplify.API.query(
                     ModelQuery.get(Sprint.class, mBacklog.getId()),
                     getSprintRes -> {

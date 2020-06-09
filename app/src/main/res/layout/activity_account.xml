@@ -81,33 +81,35 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resetPassword"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="70sp"
             android:layout_marginTop="76dp"
             android:backgroundTint="#D6414F"
             android:fontFamily="@font/bold"
             android:onClick="onResetPassword"
             android:text="Reset Password"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:cornerRadius="25dp"
             app:layout_anchor="@+id/constraintLayout"
             app:layout_anchorGravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/tv_email"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="70sp"
-            android:layout_marginTop="188dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="196dp"
+            android:layout_marginRight="10dp"
             android:backgroundTint="#D6414F"
             android:fontFamily="@font/bold"
             android:onClick="onLogoutClick"
             android:text="Log out"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:cornerRadius="25dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -132,17 +134,17 @@
             app:fab_colorPressed="@color/black_800"
             app:fab_icon="@drawable/ic_project"
             app:fab_size="mini"
-            app:fab_title="Project" />
+            app:fab_title="Project List" />
 
-        <!--                <com.getbase.floatingactionbutton.FloatingActionButton-->
-        <!--                    android:id="@+id/fabAccount"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    app:fab_colorNormal="@color/colorAccent"-->
-        <!--                    app:fab_colorPressed="@color/black_800"-->
-        <!--                    app:fab_icon="@drawable/ic_account"-->
-        <!--                    app:fab_size="mini"-->
-        <!--                    app:fab_title="Account" />-->
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/black_800"
+            app:fab_icon="@drawable/ic_setting"
+            app:fab_size="mini"
+            app:fab_title="Setting" />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 

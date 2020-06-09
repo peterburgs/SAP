@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SprintListActivity">
+    android:orientation="vertical"
+    tools:context=".activities.SprintContainerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,39 +39,34 @@
             app:tabIndicatorHeight="5dp">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/titToDo"
+                android:id="@+id/titActive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_todo"
-                android:text="ToDo" />
+                android:icon="@drawable/ic_outline_favorite_border_white_24dp"
+                android:text="Active" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/titInProgress"
+                android:id="@+id/titFuture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_inprogress"
-                android:text="InProgress" />
+                android:icon="@drawable/ic_outline_next_week_white_24dp"
+                android:text="Future" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/titDone"
+                android:id="@+id/titCompleted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_done"
-                android:text="Done" />
+                android:text="Completed" />
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/titBacklog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_backlog"
-                android:text="Backlog" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
+            android:id="@+id/vpgSprint"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:layout_width="wrap_content"
@@ -82,7 +78,6 @@
         app:fab_addButtonColorNormal="@color/colorAccent"
         app:fab_addButtonColorPressed="@color/black_800"
         app:fab_labelStyle="@style/custom_fab">
-
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabSetting"
@@ -102,7 +97,17 @@
             app:fab_colorPressed="@color/black_800"
             app:fab_icon="@drawable/ic_project"
             app:fab_size="mini"
-            app:fab_title="Project" />
+            app:fab_title="Project List" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/black_800"
+            app:fab_icon="@drawable/ic_board"
+            app:fab_size="mini"
+            app:fab_title="Board" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAccount"
@@ -114,4 +119,5 @@
             app:fab_size="mini"
             app:fab_title="Account" />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

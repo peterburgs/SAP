@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -45,11 +46,13 @@ public class ProjectContainerActivity extends AppCompatActivity {
     private Sprint activeSprint;
     private Sprint backlog;
     private LoadingDialog loadingDialog;
+    private com.google.android.material.appbar.MaterialToolbar topAppbar;
 
-    com.getbase.floatingactionbutton.FloatingActionButton fabProject;
+    com.getbase.floatingactionbutton.FloatingActionButton fabProjectList;
     com.getbase.floatingactionbutton.FloatingActionButton fabAccount;
     com.getbase.floatingactionbutton.FloatingActionButton fabSetting;
     com.getbase.floatingactionbutton.FloatingActionButton fabSprint;
+    com.getbase.floatingactionbutton.FloatingActionButton fabBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +65,14 @@ public class ProjectContainerActivity extends AppCompatActivity {
         titInProgress = findViewById(R.id.titInProgress);
         titDone = findViewById(R.id.titDone);
         titBacklog = findViewById(R.id.titBacklog);
-        fabProject = findViewById(R.id.fabProject);
+        fabProjectList = findViewById(R.id.fabProject);
         fabAccount = findViewById(R.id.fabAccount);
         fabSetting = findViewById(R.id.fabSetting);
-        fabSprint = findViewById(R.id.fabSprint);
+        fabSprint = findViewById(R.id.fabBoard);
+        fabBoard = findViewById(R.id.fabBoard);
+        topAppbar = findViewById(R.id.topAppBar);
 
-        fabProject.setOnClickListener(v -> {
+        fabProjectList.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProjectListActivity.class);
             startActivity(intent);
         });
@@ -79,8 +84,16 @@ public class ProjectContainerActivity extends AppCompatActivity {
             Toast.makeText(this, "Setting Selected", Toast.LENGTH_SHORT).show();
         });
         fabSprint.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), SprintListActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SprintContainerActivity.class);
+            intent.putExtra("PROJECT_ID", getProjectID());
             startActivity(intent);
+        });
+        fabBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SprintContainerActivity.class);
+                startActivity(intent);
+            }
         });
         mHandler = new Handler(Looper.getMainLooper());
 
@@ -222,6 +235,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                                         toDoBadge.setNumber(todoTasks.size());
                                         inProgressBadge.setNumber(inProgressTasks.size());
                                         doneBadge.setNumber(doneTasks.size());
+                                        topAppbar.setTitle(getProjectRes.getData().getKey() + " Board");
                                     });
 
                                     if (backlog != null) {

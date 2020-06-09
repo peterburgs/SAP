@@ -239,7 +239,6 @@ public class ProjectContainerActivity extends AppCompatActivity {
                                     });
 
                                     if (backlog != null) {
-                                        loadingDialog.dismissDialog();
                                         // Get tasks of the backlog
                                         Amplify.API.query(
                                                 ModelQuery.get(Sprint.class, backlog.getId()),
@@ -247,6 +246,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                                                     backlogTasks.clear();
                                                     backlogTasks.addAll(getBacklogRes.getData().getTasks());
                                                     mHandler.post(() -> {
+                                                        loadingDialog.dismissDialog();
                                                         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tloStatus.getTabCount(), todoTasks, inProgressTasks, doneTasks, activeSprint, backlogTasks, backlog);
                                                         viewPager.setAdapter(pagerAdapter);
                                                         backlogBadge.setNumber(getBacklogRes.getData().getTasks().size());

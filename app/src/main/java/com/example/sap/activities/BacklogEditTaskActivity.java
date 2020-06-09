@@ -151,7 +151,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                     Amplify.API.query(
                             ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
                             getCurrentUserRes -> {
-                                if(!getCurrentUserRes.getData().equals(commentList.get(position).getAuthor())) {
+                                if (!getCurrentUserRes.getData().equals(commentList.get(position).getAuthor())) {
                                     AlertDialog.Builder builder2 = new AlertDialog.Builder(BacklogEditTaskActivity.this);
                                     builder2.setMessage("You are not allowed to delete this comment");
                                     builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -220,12 +220,9 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
 
                                     // Data for sprint spinner
                                     sprintList.clear();
-                                    for(Sprint sprint: project.getSprints()) {
-                                        if(!sprint.getIsBacklog()) {
-                                            sprintList.add(sprint);
-                                        }
-                                    }
+                                    sprintList.addAll(project.getSprints());
                                     spnSprintAdapter.notifyDataSetChanged();
+                                    spnSprint.setSelection(sprintList.indexOf(task.getSprint()));
 
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
@@ -244,6 +241,10 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
 
     private void commentMutation(String content) {
         loadingDialog.startLoadingDialog();
+        if(content.equals("")) {
+            makeAlert("Please type something!");
+            return;
+        }
         // Get User
         Amplify.API.mutate(
                 ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
@@ -293,12 +294,11 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                 ModelQuery.get(Project.class, task.getProject().getId()),
                 getProjectRes -> {
 
-                    User selectedAssignee=null;
-                    Sprint selectedSprint = null;
-                    for(ProjectParticipant projectParticipant: getProjectRes.getData().getMembers()) {
-                        if(projectParticipant.getMember().equals(spnAssignee.getSelectedItem())) {
-                            selectedAssignee = projectParticipant.getMember();
-                        }
+                    User selectedAssignee = (User) spnAssignee.getSelectedItem();
+                    Sprint selectedSprint = (Sprint) spnSprint.getSelectedItem();
+                    TaskStatus taskStatus = null;
+                    if(!selectedSprint.getIsBacklog()) {
+                        taskStatus = TaskStatus.TODO;
                     }
 
                     // Update Task
@@ -307,10 +307,11 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                             .summary(edtSummary.getText().toString())
                             .project(task.getProject())
                             .assignee(selectedAssignee)
-                            .sprint(task.getSprint())
+                            .sprint(selectedSprint)
                             .description(edtDescription.getText().toString())
                             .label(edtLabel.getText().toString())
                             .id(task.getId())
+                            .status(taskStatus)
                             .build();
 
                     Amplify.API.mutate(

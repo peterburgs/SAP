@@ -190,6 +190,8 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }));
+
+
     }
 
     private void taskQuery() {

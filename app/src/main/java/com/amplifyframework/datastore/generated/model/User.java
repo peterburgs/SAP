@@ -87,25 +87,19 @@ public final class User implements Model {
       .hashCode();
   }
   
-//  @Override
-//   public String toString() {
-//    return new StringBuilder()
-//      .append("User {")
-//      .append("id=" + String.valueOf(getId()))
-//      .append("email=" + String.valueOf(getEmail()))
-//      .append("username=" + String.valueOf(getUsername()))
-//      .append("avatarKey=" + String.valueOf(getAvatarKey()))
-//      .append("}")
-//      .toString();
-//  }
-
-
-    @Override
-    public String toString() {
-        return username;
-    }
-
-    public static EmailStep builder() {
+  @Override
+   public String toString() {
+    return new StringBuilder()
+      .append("User {")
+      .append("id=" + String.valueOf(getId()))
+      .append("email=" + String.valueOf(getEmail()))
+      .append("username=" + String.valueOf(getUsername()))
+      .append("avatarKey=" + String.valueOf(getAvatarKey()))
+      .append("}")
+      .toString();
+  }
+  
+  public static EmailStep builder() {
       return new Builder();
   }
   

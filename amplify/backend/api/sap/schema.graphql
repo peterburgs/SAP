@@ -47,13 +47,12 @@ type Sprint
   id: ID!
   startDate: AWSDate
   endDate: AWSDate
-  goal: String!
+  goal: String
   name: String!
   isCompleted: Boolean
   isStarted: Boolean
   projectID: ID!
   isBacklog: Boolean!
-  label: String
   project: Project! @connection(fields: ["projectID"])
   tasks: [Task] @connection(keyName: "bySprint", fields: ["id"])
 }

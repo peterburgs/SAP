@@ -74,7 +74,9 @@ public class ProjectContainerActivity extends AppCompatActivity {
             startActivity(intent);
         });
         fabSetting.setOnClickListener(v -> {
-            Toast.makeText(this, "Setting Selected", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+            intent.putExtra("PROJECT_ID", getProjectID());
+            startActivity(intent);
         });
         fabSprint.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), SprintContainerActivity.class);

@@ -10,7 +10,6 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <!--Todo: Set the name of the sprint to the Toolbar-->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -129,7 +128,6 @@
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--Todo: Backend Handle the event "onCompleteSprintClick"-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCompleteSprint"
                     android:layout_width="wrap_content"

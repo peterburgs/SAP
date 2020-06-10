@@ -36,6 +36,7 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -118,11 +119,7 @@ public class ToDoFragment extends Fragment {
         mHandler.post(() -> {
             toDoAdapter.notifyDataSetChanged();
             if (mActiveSprint != null) {
-                try {
-                    getDayRemaining(mActiveSprint);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                getDayRemaining(mActiveSprint);
                 if (mTaskList.isEmpty()) {
                     imvTodoEmpty.setVisibility(View.VISIBLE);
                     imvTodoEmpty.setImageResource(R.drawable.img_empty);
@@ -143,16 +140,13 @@ public class ToDoFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_to_do, container, false);
     }
 
-    private void getDayRemaining(Sprint activeSprint) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date firstDate = sdf.parse(LocalDate.now().toString());
-        String end = activeSprint.getEndDate().format();
-        Date secondDate = sdf.parse(end.substring(0, end.length() - 1));
-
-        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
-        tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
+    private void getDayRemaining(Sprint activeSprint) {
+        long diffInMillies = mActiveSprint.getEndDate().toDate().getTime() - System.currentTimeMillis();
+        long diff = 0;
+        if (diffInMillies >= 0) {
+            diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        }
+        tvDayRemaining.setText(diff + " remaining days");
     }
 
     private void query() {
@@ -170,11 +164,7 @@ public class ToDoFragment extends Fragment {
                         mHandler.post(() -> {
                             toDoAdapter.notifyDataSetChanged();
                             if (mActiveSprint != null) {
-                                try {
-                                    getDayRemaining(mActiveSprint);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
+                                getDayRemaining(mActiveSprint);
                                 if (mTaskList.isEmpty()) {
                                     imvTodoEmpty.setVisibility(View.VISIBLE);
                                     imvTodoEmpty.setImageResource(R.drawable.img_empty);
@@ -193,11 +183,7 @@ public class ToDoFragment extends Fragment {
             mHandler.post(() -> {
                 toDoAdapter.notifyDataSetChanged();
                 if (mActiveSprint != null) {
-                    try {
-                        getDayRemaining(mActiveSprint);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    getDayRemaining(mActiveSprint);
                     if (mTaskList.isEmpty()) {
                         imvTodoEmpty.setVisibility(View.VISIBLE);
                         imvTodoEmpty.setImageResource(R.drawable.img_empty);

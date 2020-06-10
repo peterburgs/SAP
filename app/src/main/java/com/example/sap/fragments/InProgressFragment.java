@@ -120,11 +120,7 @@ public class InProgressFragment extends Fragment {
         mHandler.post(() -> {
             inProgressAdapter.notifyDataSetChanged();
             if (mActiveSprint != null) {
-                try {
-                    getDayRemaining(mActiveSprint);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                getDayRemaining(mActiveSprint);
                 if (mTaskList.isEmpty()) {
                     imvInProgressEmpty.setVisibility(View.VISIBLE);
                     imvInProgressEmpty.setImageResource(R.drawable.img_empty);
@@ -145,17 +141,15 @@ public class InProgressFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_in_progress, container, false);
     }
 
-    private void getDayRemaining(Sprint activeSprint) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date firstDate = sdf.parse(LocalDate.now().toString());
-        String end = activeSprint.getEndDate().format();
-        Date secondDate = sdf.parse(end.substring(0, end.length() - 1));
-
-        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
-        tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
+    private void getDayRemaining(Sprint activeSprint) {
+        long diffInMillies = mActiveSprint.getEndDate().toDate().getTime() - System.currentTimeMillis();
+        long diff = 0;
+        if (diffInMillies >= 0) {
+            diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        }
+        tvDayRemaining.setText(diff + " remaining days");
     }
+
     private void query() {
         mTaskList.clear();
         if (mActiveSprint != null) {
@@ -171,11 +165,7 @@ public class InProgressFragment extends Fragment {
                         mHandler.post(() -> {
                             inProgressAdapter.notifyDataSetChanged();
                             if (mActiveSprint != null) {
-                                try {
-                                    getDayRemaining(mActiveSprint);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
+                                getDayRemaining(mActiveSprint);
                                 if (mTaskList.isEmpty()) {
                                     imvInProgressEmpty.setVisibility(View.VISIBLE);
                                     imvInProgressEmpty.setImageResource(R.drawable.img_empty);
@@ -194,11 +184,7 @@ public class InProgressFragment extends Fragment {
             mHandler.post(() -> {
                 inProgressAdapter.notifyDataSetChanged();
                 if (mActiveSprint != null) {
-                    try {
-                        getDayRemaining(mActiveSprint);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    getDayRemaining(mActiveSprint);
                     if (mTaskList.isEmpty()) {
                         imvInProgressEmpty.setVisibility(View.VISIBLE);
                         imvInProgressEmpty.setImageResource(R.drawable.img_empty);

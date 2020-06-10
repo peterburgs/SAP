@@ -431,6 +431,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                                         }
                                     });
                                     commentListAdapter.notifyDataSetChanged();
+
                                 });
                             },
                             error -> Log.e(TAG, error.toString())

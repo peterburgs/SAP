@@ -1,5 +1,6 @@
 package com.example.sap.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.example.sap.R;
+import com.example.sap.activities.SprintDetailActivity;
 import com.example.sap.adapters.ActiveSprintAdapter;
 import com.example.sap.adapters.CompletedSprintAdapter;
 import com.example.sap.adapters.FutureSprintAdapter;
@@ -90,7 +92,9 @@ public class CompletedSprintFragment extends Fragment {
         completedSprintAdapter.setOnItemClickListener(new CompletedSprintAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //todo: Open  Sprint Detail Activity
+                Intent intent = new Intent(getContext(), SprintDetailActivity.class);
+                intent.putExtra("LABEL", "COMPLETED");
+                startActivity(intent);
             }
         });
         mHandler.post(() -> {

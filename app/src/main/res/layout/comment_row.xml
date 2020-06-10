@@ -7,9 +7,6 @@
     android:layout_margin="5dp">
 
     <com.google.android.material.card.MaterialCardView
-        app:strokeWidth="2dp"
-        app:strokeColor="@drawable/stroke_color"
-        app:cardElevation="5dp"
         android:id="@+id/cvComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +18,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@drawable/stroke_color"
+        app:strokeWidth="2dp">
 
         <FrameLayout
             android:layout_width="match_parent"

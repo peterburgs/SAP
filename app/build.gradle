@@ -64,5 +64,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
+    //Gif Library
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 
 }

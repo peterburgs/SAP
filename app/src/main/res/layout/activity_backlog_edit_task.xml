@@ -50,7 +50,8 @@
                 app:boxStrokeWidth="0dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintVertical_bias="0.15"
-                app:startIconDrawable="@drawable/ic_task">
+                app:startIconDrawable="@drawable/ic_task"
+                app:startIconTint="@color/colorAccent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtSummary"
@@ -58,9 +59,9 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="#F9F9F9"
                     android:inputType="textMultiLine"
-                    android:lines="1"
+                    android:lines="2"
                     android:maxLines="5"
-                    android:minLines="1"
+                    android:minLines="2"
                     android:scrollbars="vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="22sp" />
@@ -140,7 +141,8 @@
                 app:boxStrokeWidth="0dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintVertical_bias="0.15"
-                app:startIconDrawable="@drawable/ic_des">
+                app:startIconDrawable="@drawable/ic_des"
+                app:startIconTint="@color/colorAccent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtDescription"
@@ -171,7 +173,8 @@
                 app:boxStrokeWidth="0dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintVertical_bias="0.15"
-                app:startIconDrawable="@drawable/ic_label">
+                app:startIconDrawable="@drawable/ic_label"
+                app:startIconTint="@color/colorAccent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtLabel"

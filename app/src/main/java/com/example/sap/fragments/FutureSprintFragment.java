@@ -1,5 +1,6 @@
 package com.example.sap.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.example.sap.R;
+import com.example.sap.activities.SprintDetailActivity;
 import com.example.sap.adapters.ActiveSprintAdapter;
 import com.example.sap.adapters.FutureSprintAdapter;
 import com.google.gson.Gson;
@@ -96,7 +98,9 @@ public class FutureSprintFragment extends Fragment {
         futureSprintAdapter.setOnItemClickListener(new FutureSprintAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //todo: Open  Sprint Detail Activity
+                Intent intent = new Intent(getContext(), SprintDetailActivity.class);
+                intent.putExtra("LABEL", "FUTURE");
+                startActivity(intent);
             }
         });
         mHandler.post(() -> {

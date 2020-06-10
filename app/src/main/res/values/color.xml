@@ -40,6 +40,7 @@
     <!--theme attributes, see https://www.youtube.com/watch?v=Owkf8DhAOSo-->
 
     <!--Color palette-->
+
     <color name="projectListMenu">#F23A5F</color>
     <color name="accountMenu">#F23A5F</color>
     <color name="purple_200">#bb86fc</color> <!--Color primary (dark)-->

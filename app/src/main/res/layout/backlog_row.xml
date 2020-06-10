@@ -7,6 +7,9 @@
     android:layout_margin="5dp">
 
     <com.google.android.material.card.MaterialCardView
+        app:strokeWidth="2dp"
+        app:strokeColor="@drawable/stroke_color"
+        app:cardElevation="5dp"
         android:id="@+id/cvBacklog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

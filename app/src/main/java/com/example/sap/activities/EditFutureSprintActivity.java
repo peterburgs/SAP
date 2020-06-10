@@ -1,10 +1,12 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class EditFutureActivity extends AppCompatActivity {
+import com.example.sap.R;
+
+public class EditFutureSprintActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

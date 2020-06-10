@@ -1,8 +1,10 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.sap.R;
 
 public class EditActiveSprintActivity extends AppCompatActivity {
 

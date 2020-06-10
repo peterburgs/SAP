@@ -137,7 +137,7 @@ public class ActiveSprintFragment extends Fragment {
         Amplify.API.subscribe(
                 ModelSubscription.onCreate(Sprint.class),
                 onEstablished -> Log.i("OnCreateSprintSubscribe", "Subscription established"),
-                onUpdated -> {
+                onCreated -> {
                     sprintQuery();
                 },
                 onFailure -> Log.e("OnCreateSprintSubscribe", "Subscription failed", onFailure),
@@ -161,7 +161,7 @@ public class ActiveSprintFragment extends Fragment {
         Amplify.API.subscribe(
                 ModelSubscription.onDelete(Sprint.class),
                 onEstablished -> Log.i("OnDeleteSprintSubscribe", "Subscription established"),
-                onUpdated -> {
+                onDeleted -> {
                     sprintQuery();
                 },
                 onFailure -> Log.e("OnDeleteSprintSubscribe", "Subscription failed", onFailure),

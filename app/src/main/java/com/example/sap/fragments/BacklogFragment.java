@@ -148,7 +148,7 @@ public class BacklogFragment extends Fragment {
         return newString;
     }
 
-    private void taskQuery() {
+    private void query() {
         if (mBacklog != null) {
             // Get tasks of the backlog
             Amplify.API.query(
@@ -170,7 +170,7 @@ public class BacklogFragment extends Fragment {
                 ModelSubscription.onCreate(Task.class),
                 onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
                 onCreated -> {
-                    taskQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
@@ -182,7 +182,7 @@ public class BacklogFragment extends Fragment {
                 ModelSubscription.onUpdate(Task.class),
                 onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
                 onUpdated -> {
-                    taskQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
@@ -194,7 +194,7 @@ public class BacklogFragment extends Fragment {
                 ModelSubscription.onDelete(Task.class),
                 onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
                 onDeleted -> {
-                    taskQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")

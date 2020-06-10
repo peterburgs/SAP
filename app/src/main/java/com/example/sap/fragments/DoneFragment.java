@@ -91,6 +91,7 @@ public class DoneFragment extends Fragment {
         taskCreateSubscribe();
         taskUpdateSubscribe();
         taskDeleteSubscribe();
+        sprintUpdateSubscribe();
     }
 
     @Override
@@ -151,13 +152,13 @@ public class DoneFragment extends Fragment {
         tvDayRemaining.setText(String.valueOf(diff) + " remaining days");
     }
 
-    private void taskQuery() {
+    private void query() {
+        mTaskList.clear();
         if (mActiveSprint != null) {
             // Get tasks of the activated sprint
             Amplify.API.query(
                     ModelQuery.get(Sprint.class, mActiveSprint.getId()),
                     getSprintRes -> {
-                        mTaskList.clear();
                         for (Task task : getSprintRes.getData().getTasks()) {
                             if (task.getStatus().equals(TaskStatus.DONE)) {
                                 mTaskList.add(task);
@@ -165,10 +166,32 @@ public class DoneFragment extends Fragment {
                         }
                         mHandler.post(() -> {
                             doneAdapter.notifyDataSetChanged();
+                            if (mTaskList.isEmpty()) {
+                                imvDoneEmpty.setImageResource(R.drawable.img_empty);
+                            } else {
+                                try {
+                                    getDayRemaining(mActiveSprint);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         });
                     },
                     error -> Log.e("GetSprintError", error.toString())
             );
+        } else {
+            mHandler.post(() -> {
+                doneAdapter.notifyDataSetChanged();
+                if (mTaskList.isEmpty()) {
+                    imvDoneEmpty.setImageResource(R.drawable.img_empty);
+                } else {
+                    try {
+                        getDayRemaining(mActiveSprint);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
     }
 
@@ -177,7 +200,7 @@ public class DoneFragment extends Fragment {
                 ModelSubscription.onCreate(Task.class),
                 onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
                 onCreated -> {
-                    taskQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
@@ -189,7 +212,7 @@ public class DoneFragment extends Fragment {
                 ModelSubscription.onUpdate(Task.class),
                 onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
                 onUpdated -> {
-                    taskQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
@@ -201,10 +224,48 @@ public class DoneFragment extends Fragment {
                 ModelSubscription.onDelete(Task.class),
                 onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
                 onDeleted -> {
-                    taskQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
         );
+    }
+
+    private void sprintUpdateSubscribe() {
+        Amplify.API.subscribe(
+                ModelSubscription.onUpdate(Sprint.class),
+                onEstablished -> Log.i("OnUpdateSprintSubscribe", "Subscription established"),
+                onUpdated -> {
+                    mActiveSprint = null;
+                    // Get project by id
+                    Amplify.API.query(
+                            ModelQuery.get(Project.class, getProjectID()),
+                            getProjectRes -> {
+                                for (Sprint sprint : getProjectRes.getData().getSprints()) {
+                                    if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                                        mActiveSprint = sprint;
+                                    }
+                                }
+                                query();
+                            },
+                            error -> {
+                                Log.e("Error", error.toString());
+                            }
+                    );
+                },
+                onFailure -> Log.e("OnUpdateSprintSubscribe", "Subscription failed", onFailure),
+                () -> Log.i("OnUpdateSprintSubscribe", "Subscription completed")
+        );
+    }
+
+    private String getProjectID() {
+        String newString;
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras == null) {
+            newString = null;
+        } else {
+            newString = extras.getString("PROJECT_ID");
+        }
+        return newString;
     }
 }

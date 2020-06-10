@@ -26,6 +26,7 @@ import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
+import com.example.sap.activities.EditActiveSprintActivity;
 import com.example.sap.activities.SprintDetailActivity;
 import com.example.sap.adapters.ActiveSprintAdapter;
 import com.google.gson.Gson;
@@ -94,8 +95,7 @@ public class ActiveSprintFragment extends Fragment {
         activeSprintAdapter.setOnItemClickListener(new ActiveSprintAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getContext(), SprintDetailActivity.class);
-                intent.putExtra("LABEL", "ACTIVE");
+                Intent intent = new Intent(getContext(), EditActiveSprintActivity.class);
                 startActivity(intent);
             }
         });
@@ -121,9 +121,9 @@ public class ActiveSprintFragment extends Fragment {
                     ModelQuery.get(Project.class, getProjectID()),
                     getProjectRes -> {
                         mSprintList.clear();
-                        for(Sprint sprint : getProjectRes.getData().getSprints()) {
-                            if(!sprint.getIsBacklog()) {
-                                if(sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                        for (Sprint sprint : getProjectRes.getData().getSprints()) {
+                            if (!sprint.getIsBacklog()) {
+                                if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
                                     mSprintList.add(sprint);
                                 }
                             }

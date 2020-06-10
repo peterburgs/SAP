@@ -24,6 +24,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.example.sap.R;
+import com.example.sap.activities.EditFutureSprintActivity;
 import com.example.sap.activities.SprintDetailActivity;
 import com.example.sap.adapters.ActiveSprintAdapter;
 import com.example.sap.adapters.FutureSprintAdapter;
@@ -98,8 +99,7 @@ public class FutureSprintFragment extends Fragment {
         futureSprintAdapter.setOnItemClickListener(new FutureSprintAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getContext(), SprintDetailActivity.class);
-                intent.putExtra("LABEL", "FUTURE");
+                Intent intent = new Intent(getContext(), EditFutureSprintActivity.class);
                 startActivity(intent);
             }
         });

@@ -37,6 +37,8 @@ import com.example.sap.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SprintEditTaskActivity extends AppCompatActivity {
 
@@ -177,8 +179,11 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                                         }
                                     });
 
-                                    AlertDialog dialog2 = builder2.create();
-                                    dialog2.show();
+                                    runOnUiThread(() -> {
+                                        loadingDialog.dismissDialog();
+                                        AlertDialog dialog2 = builder2.create();
+                                        dialog2.show();
+                                    });
                                 } else {
                                     Amplify.API.mutate(
                                             ModelMutation.delete(commentList.get(position)),
@@ -283,6 +288,12 @@ public class SprintEditTaskActivity extends AppCompatActivity {
 
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
+                                    Collections.sort(commentList, new Comparator<Comment>() {
+                                        @Override
+                                        public int compare(Comment o1, Comment o2) {
+                                            return o1.getCreatedAt().toDate().compareTo(o2.getCreatedAt().toDate());
+                                        }
+                                    });
                                     commentListAdapter.notifyDataSetChanged();
                                     spnStatus.setSelection(statusList.indexOf(task.getStatus()));
 
@@ -466,6 +477,12 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                                 runOnUiThread(() -> {
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
+                                    Collections.sort(commentList, new Comparator<Comment>() {
+                                        @Override
+                                        public int compare(Comment o1, Comment o2) {
+                                            return o1.getCreatedAt().toDate().compareTo(o2.getCreatedAt().toDate());
+                                        }
+                                    });
                                     commentListAdapter.notifyDataSetChanged();
                                 });
                             },
@@ -490,6 +507,12 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                                 runOnUiThread(() -> {
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
+                                    Collections.sort(commentList, new Comparator<Comment>() {
+                                        @Override
+                                        public int compare(Comment o1, Comment o2) {
+                                            return o1.getCreatedAt().toDate().compareTo(o2.getCreatedAt().toDate());
+                                        }
+                                    });
                                     commentListAdapter.notifyDataSetChanged();
                                 });
                             },

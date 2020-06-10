@@ -33,6 +33,11 @@ import com.example.sap.activities.SignupActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.ViewHolder> {
@@ -49,6 +54,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
+
     //Constructor
     public CommentListAdapter(List<Comment> commentList) {
         this.commentList = commentList;
@@ -67,6 +73,23 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvUserName.setText(commentList.get(position).getAuthor().getUsername());
         holder.tvCommentContent.setText(commentList.get(position).getContent());
+
+        // Get minutes diff
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime commentCreatedAt = Instant.ofEpochMilli(commentList.get(position).getCreatedAt().toDate().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();;
+
+                Duration duration = Duration.between(now, commentCreatedAt);
+        long diff = Math.abs(duration.toMinutes());
+        if(diff >= 60) {
+            diff = diff / 60;
+            holder.tvCreatedAt.setText(diff + " hours ago");
+        } else if(diff < 1) {
+            holder.tvCreatedAt.setText("Just now");
+        } else {
+            holder.tvCreatedAt.setText(diff + " minutes ago");
+        }
 
         Amplify.Storage.getUrl(
                 commentList.get(position).getAuthor().getAvatarKey(),
@@ -91,8 +114,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
         return commentList.size();
     }
-
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

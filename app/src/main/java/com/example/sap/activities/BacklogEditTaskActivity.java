@@ -267,7 +267,11 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
 
                                     // Data for sprint spinner
                                     sprintList.clear();
-                                    sprintList.addAll(project.getSprints());
+                                    for(Sprint sprint : project.getSprints()) {
+                                        if(sprint.getIsCompleted() == null || !sprint.getIsCompleted()) {
+                                            sprintList.add(sprint);
+                                        }
+                                    }
                                     spnSprintAdapter.notifyDataSetChanged();
                                     spnSprint.setSelection(sprintList.indexOf(task.getSprint()));
 

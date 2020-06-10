@@ -1,9 +1,12 @@
 package com.example.sap.adapters;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
@@ -16,16 +19,16 @@ import com.example.sap.fragments.ToDoFragment;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PageAdapter extends FragmentPagerAdapter {
+public class PageAdapter extends FragmentStatePagerAdapter {
     private int tabNumber;
     private ArrayList<Task> todoTasks;
     private ArrayList<Task> inProgressTasks;
     private ArrayList<Task> doneTasks;
     private ArrayList<Task> backlogTasks;
-    private Sprint activeSprint;
-    private Sprint backlog;
+    private ArrayList<Sprint> activeSprint;
+    private ArrayList<Sprint> backlog;
 
-    public PageAdapter(@NonNull FragmentManager fm, int tabNumber, ArrayList<Task> todoTasks, ArrayList<Task> inProgressTasks, ArrayList<Task> doneTasks, Sprint activeSprint, ArrayList<Task> backlogTasks, Sprint backlog) {
+    public PageAdapter(@NonNull FragmentManager fm, int tabNumber, ArrayList<Task> todoTasks, ArrayList<Task> inProgressTasks, ArrayList<Task> doneTasks, ArrayList<Sprint> activeSprint, ArrayList<Task> backlogTasks, ArrayList<Sprint> backlog) {
         super(fm);
         this.tabNumber = tabNumber;
         this.todoTasks = todoTasks;

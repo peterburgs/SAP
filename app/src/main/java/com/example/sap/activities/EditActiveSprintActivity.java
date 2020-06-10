@@ -264,7 +264,9 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                                             ModelMutation.update(task1),
                                                             updateTaskRes -> {
                                                                 loadingDialog.dismissDialog();
-                                                                runOnUiThread(this::onBackPressed);
+                                                                Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
+                                                                intent.putExtra("PROJECT_ID", getProjectRes.getData().getId());
+                                                                startActivity(intent);
                                                             },
                                                             error -> {
                                                                 loadingDialog.dismissDialog();
@@ -276,7 +278,9 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                             }
                                             if(isAllTasksDone) {
                                                 loadingDialog.dismissDialog();
-                                                runOnUiThread(this::onBackPressed);
+                                                Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
+                                                intent.putExtra("PROJECT_ID", getProjectRes.getData().getId());
+                                                startActivity(intent);
                                             }
                                         },
                                         error -> {

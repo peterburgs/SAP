@@ -51,21 +51,24 @@
                     android:layout_weight="5"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tvUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
+                        android:layout_marginTop="5dp"
+                        android:text="Username"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold"/>
                         <TextView
-                            android:id="@+id/tvUserName"
+                            android:id="@+id/tvRole"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:background="@drawable/comment_username"
-                            android:text="Peter Burgs"
+                            android:text="Project Manager"
                             android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                            android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvEmail"
@@ -73,9 +76,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="16dp"
-                        android:text="This is my comment"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:text="email"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/accountMenu"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <ImageButton

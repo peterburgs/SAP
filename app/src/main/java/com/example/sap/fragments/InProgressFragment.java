@@ -52,8 +52,7 @@ public class InProgressFragment extends Fragment {
     private static final String ACTIVE_SPRINT = "activeSprint";
 
     private ArrayList<Task> mTaskList;
-    private Sprint mActiveSprint;
-
+    private ArrayList<Sprint> mActiveSprint;
 
     RecyclerView rcvInProgress;
     private InProgressAdapter inProgressAdapter;
@@ -66,7 +65,7 @@ public class InProgressFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static InProgressFragment newInstance(ArrayList<Task> taskList, Sprint activeSprint) {
+    public static InProgressFragment newInstance(ArrayList<Task> taskList, ArrayList<Sprint> activeSprint) {
         InProgressFragment fragment = new InProgressFragment();
         Bundle args = new Bundle();
         Gson gson = new Gson();
@@ -82,16 +81,13 @@ public class InProgressFragment extends Fragment {
         if (getArguments() != null) {
             Gson gson = new Gson();
             Bundle args = getArguments();
-            Type founderListType = new TypeToken<ArrayList<Task>>() {
+            Type taskListType = new TypeToken<ArrayList<Task>>() {
             }.getType();
-            mTaskList = gson.fromJson(args.getString(TASK_LIST), founderListType);
-            mActiveSprint = gson.fromJson(args.getString(ACTIVE_SPRINT), Sprint.class);
+            Type activeSprintType = new TypeToken<ArrayList<Sprint>>() {
+            }.getType();
+            mTaskList = gson.fromJson(args.getString(TASK_LIST), taskListType);
+            mActiveSprint = gson.fromJson(args.getString(ACTIVE_SPRINT), activeSprintType);
         }
-
-        taskCreateSubscribe();
-        taskUpdateSubscribe();
-        taskDeleteSubscribe();
-        sprintUpdateSubscribe();
     }
 
     @Override
@@ -118,9 +114,8 @@ public class InProgressFragment extends Fragment {
         });
 
         mHandler.post(() -> {
-            inProgressAdapter.notifyDataSetChanged();
-            if (mActiveSprint != null) {
-                getDayRemaining(mActiveSprint);
+            if (!mActiveSprint.isEmpty()) {
+                getDayRemaining();
                 if (mTaskList.isEmpty()) {
                     imvInProgressEmpty.setVisibility(View.VISIBLE);
                     imvInProgressEmpty.setImageResource(R.drawable.img_empty);
@@ -141,135 +136,12 @@ public class InProgressFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_in_progress, container, false);
     }
 
-    private void getDayRemaining(Sprint activeSprint) {
-        long diffInMillies = mActiveSprint.getEndDate().toDate().getTime() - System.currentTimeMillis();
+    private void getDayRemaining() {
+        long diffInMillies = mActiveSprint.get(0).getEndDate().toDate().getTime() - System.currentTimeMillis();
         long diff = 0;
         if (diffInMillies >= 0) {
             diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         }
         tvDayRemaining.setText(diff + " remaining days");
-    }
-
-    private void query() {
-        mTaskList.clear();
-        if (mActiveSprint != null) {
-            // Get tasks of the activated sprint
-            Amplify.API.query(
-                    ModelQuery.get(Sprint.class, mActiveSprint.getId()),
-                    getSprintRes -> {
-                        for (Task task : getSprintRes.getData().getTasks()) {
-                            if (task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
-                                mTaskList.add(task);
-                            }
-                        }
-                        mHandler.post(() -> {
-                            inProgressAdapter.notifyDataSetChanged();
-                            if (mActiveSprint != null) {
-                                getDayRemaining(mActiveSprint);
-                                if (mTaskList.isEmpty()) {
-                                    imvInProgressEmpty.setVisibility(View.VISIBLE);
-                                    imvInProgressEmpty.setImageResource(R.drawable.img_empty);
-                                } else {
-                                    imvInProgressEmpty.setVisibility(View.GONE);
-                                }
-                            } else {
-                                imvInProgressEmpty.setVisibility(View.VISIBLE);
-                                imvInProgressEmpty.setImageResource(R.drawable.img_empty);
-                            }
-                        });
-                    },
-                    error -> Log.e("GetSprintError", error.toString())
-            );
-        } else {
-            mHandler.post(() -> {
-                inProgressAdapter.notifyDataSetChanged();
-                if (mActiveSprint != null) {
-                    getDayRemaining(mActiveSprint);
-                    if (mTaskList.isEmpty()) {
-                        imvInProgressEmpty.setVisibility(View.VISIBLE);
-                        imvInProgressEmpty.setImageResource(R.drawable.img_empty);
-                    } else {
-                        imvInProgressEmpty.setVisibility(View.GONE);
-                    }
-                } else {
-                    imvInProgressEmpty.setVisibility(View.VISIBLE);
-                    imvInProgressEmpty.setImageResource(R.drawable.img_empty);
-                }
-            });
-        }
-    }
-
-    private void taskCreateSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onCreate(Task.class),
-                onEstablished -> Log.i("OnCreateTaskSubscribe", "Subscription established"),
-                onCreated -> {
-                    query();
-                },
-                onFailure -> Log.e("OnCreateTaskSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnCreateTaskSubscribe", "Subscription completed")
-        );
-    }
-
-    private void taskUpdateSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onUpdate(Task.class),
-                onEstablished -> Log.i("OnUpdateTaskSubscribe", "Subscription established"),
-                onUpdated -> {
-                    query();
-                },
-                onFailure -> Log.e("OnUpdateTaskSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnUpdateTaskSubscribe", "Subscription completed")
-        );
-    }
-
-    private void taskDeleteSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onDelete(Task.class),
-                onEstablished -> Log.i("OnDeleteTaskSubscribe", "Subscription established"),
-                onDeleted -> {
-                    query();
-                },
-                onFailure -> Log.e("OnDeleteTaskSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnDeleteTaskSubscribe", "Subscription completed")
-        );
-    }
-
-    private void sprintUpdateSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onUpdate(Sprint.class),
-                onEstablished -> Log.i("OnUpdateSprintSubscribe", "Subscription established"),
-                onUpdated -> {
-                    mActiveSprint = null;
-                    // Get project by id
-                    Amplify.API.query(
-                            ModelQuery.get(Project.class, getProjectID()),
-                            getProjectRes -> {
-                                for (Sprint sprint : getProjectRes.getData().getSprints()) {
-                                    if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
-                                        mActiveSprint = sprint;
-                                    }
-                                }
-                                query();
-                            },
-                            error -> {
-                                Log.e("Error", error.toString());
-                            }
-                    );
-                },
-                onFailure -> Log.e("OnUpdateSprintSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnUpdateSprintSubscribe", "Subscription completed")
-        );
-    }
-
-    private String getProjectID() {
-        String newString;
-        Bundle extras = getActivity().getIntent().getExtras();
-        if (extras == null) {
-            newString = null;
-        } else {
-            newString = extras.getString("PROJECT_ID");
-        }
-        return newString;
     }
 }

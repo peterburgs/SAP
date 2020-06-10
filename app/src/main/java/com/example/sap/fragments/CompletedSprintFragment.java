@@ -95,7 +95,10 @@ public class CompletedSprintFragment extends Fragment {
         mHandler.post(() -> {
             completedSprintAdapter.notifyDataSetChanged();
             if (mSprintList.isEmpty()) {
+                imvCompletedSprintEmpty.setVisibility(View.VISIBLE);
                 imvCompletedSprintEmpty.setImageResource(R.drawable.img_empty);
+            } else {
+                imvCompletedSprintEmpty.setVisibility(View.GONE);
             }
         });
     }
@@ -123,6 +126,12 @@ public class CompletedSprintFragment extends Fragment {
                         }
                         mHandler.post(() -> {
                             completedSprintAdapter.notifyDataSetChanged();
+                            if (mSprintList.isEmpty()) {
+                                imvCompletedSprintEmpty.setVisibility(View.VISIBLE);
+                                imvCompletedSprintEmpty.setImageResource(R.drawable.img_empty);
+                            } else {
+                                imvCompletedSprintEmpty.setVisibility(View.GONE);
+                            }
                         });
                     },
                     error -> Log.e("GetProject", error.toString())

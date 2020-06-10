@@ -154,7 +154,7 @@ public class SprintEditTaskActivity extends AppCompatActivity {
             }
         });
 
-        taskQuery();
+        query();
         commentCreateSubscribe();
         commentDeleteSubscribe();
 
@@ -252,7 +252,7 @@ public class SprintEditTaskActivity extends AppCompatActivity {
 
     }
 
-    private void taskQuery() {
+    private void query() {
         loadingDialog.startLoadingDialog();
         Amplify.API.query(
                 ModelQuery.get(Task.class, getTaskID()),
@@ -280,7 +280,9 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                                     sprintList.clear();
                                     for(Sprint sprint : project.getSprints()) {
                                         if(!sprint.getIsBacklog()) {
-                                            sprintList.add(sprint);
+                                            if(sprint.getIsCompleted() == null || !sprint.getIsCompleted()) {
+                                                sprintList.add(sprint);
+                                            }
                                         }
                                     }
                                     spnSprintAdapter.notifyDataSetChanged();

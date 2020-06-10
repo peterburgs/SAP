@@ -98,7 +98,10 @@ public class ActiveSprintFragment extends Fragment {
         mHandler.post(() -> {
             activeSprintAdapter.notifyDataSetChanged();
             if (mSprintList.isEmpty()) {
+                imvActiveSprintEmpty.setVisibility(View.VISIBLE);
                 imvActiveSprintEmpty.setImageResource(R.drawable.img_empty);
+            } else {
+                imvActiveSprintEmpty.setVisibility(View.GONE);
             }
         });
     }
@@ -126,6 +129,12 @@ public class ActiveSprintFragment extends Fragment {
                         }
                         mHandler.post(() -> {
                             activeSprintAdapter.notifyDataSetChanged();
+                            if (mSprintList.isEmpty()) {
+                                imvActiveSprintEmpty.setVisibility(View.VISIBLE);
+                                imvActiveSprintEmpty.setImageResource(R.drawable.img_empty);
+                            } else {
+                                imvActiveSprintEmpty.setVisibility(View.GONE);
+                            }
                         });
                     },
                     error -> Log.e("GetProject", error.toString())

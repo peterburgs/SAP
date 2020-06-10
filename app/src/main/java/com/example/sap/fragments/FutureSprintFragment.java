@@ -104,7 +104,10 @@ public class FutureSprintFragment extends Fragment {
         mHandler.post(() -> {
             futureSprintAdapter.notifyDataSetChanged();
             if (mSprintList.isEmpty()) {
+                imvFutureSprintEmpty.setVisibility(View.VISIBLE);
                 imvFutureSprintEmpty.setImageResource(R.drawable.img_empty);
+            } else {
+                imvFutureSprintEmpty.setVisibility(View.GONE);
             }
         });
     }
@@ -125,6 +128,12 @@ public class FutureSprintFragment extends Fragment {
                         }
                         mHandler.post(() -> {
                             futureSprintAdapter.notifyDataSetChanged();
+                            if (mSprintList.isEmpty()) {
+                                imvFutureSprintEmpty.setVisibility(View.VISIBLE);
+                                imvFutureSprintEmpty.setImageResource(R.drawable.img_empty);
+                            } else {
+                                imvFutureSprintEmpty.setVisibility(View.GONE);
+                            }
                         });
                     },
                     error -> Log.e("GetProject", error.toString())

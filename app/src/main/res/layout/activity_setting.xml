@@ -40,51 +40,45 @@
                 android:gravity="center|top"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout"
+
+                <ImageView
+                    android:id="@+id/imvProjectAvatar"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/project_img1"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Project Name"
+                    app:boxCornerRadiusBottomEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusTopStart="25dp"
+                    app:boxStrokeColor="#FFF"
+                    app:boxStrokeWidth="0dp">
 
-                    <ImageView
-                        android:id="@+id/imvProjectAvatar"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="16dp"
-                        android:src="@drawable/project_img1"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                    <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtProjectName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:hint="Project Name"
-                        app:boxCornerRadiusBottomEnd="25dp"
-                        app:boxCornerRadiusBottomStart="25dp"
-                        app:boxCornerRadiusTopEnd="25dp"
-                        app:boxCornerRadiusTopStart="25dp"
-                        app:boxStrokeColor="#FFF"
-                        app:boxStrokeWidth="0dp"
-                        app:endIconMode="clear_text">
+                        android:backgroundTint="#F9F9F9"
+                        android:inputType="textMultiLine"
+                        android:lines="2"
+                        android:maxLines="5"
+                        android:minLines="2"
+                        android:text="Simple Android Project  Simple Simple Simple  Simple Simple Simple  Simple Simple Simple"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtProjectName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="#F9F9F9"
-                            android:inputType="textMultiLine"
-                            android:lines="2"
-                            android:maxLines="5"
-                            android:minLines="2"
-                            android:scrollbars="vertical"
-                            android:text="Simple Android Project Simple Simple Simple"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -142,7 +136,8 @@
                     android:id="@+id/rcvProjectParticipant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRemoveProject"

@@ -243,15 +243,13 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                         ModelQuery.get(Project.class, getSprintRes.getData().getProject().getId()),
                                         getProjectRes -> {
                                             Sprint backlog = null;
-                                            for(Sprint sprint1 : getProjectRes.getData().getSprints()) {
-                                                if(sprint1.getIsBacklog()) {
+                                            for (Sprint sprint1 : getProjectRes.getData().getSprints()) {
+                                                if (sprint1.getIsBacklog()) {
                                                     backlog = sprint1;
                                                 }
                                             }
-                                            AtomicInteger count = new AtomicInteger(0);
-                                            final int taskSize = getSprintRes.getData().getTasks().size();
-                                            for(Task task : getSprintRes.getData().getTasks()) {
-                                                if(task.getStatus().equals(TaskStatus.TODO) || task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                                            for (Task task : getSprintRes.getData().getTasks()) {
+                                                if (task.getStatus().equals(TaskStatus.TODO) || task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
                                                     Task task1 = Task.builder()
                                                             .name(task.getName())
                                                             .summary(task.getSummary())
@@ -263,11 +261,8 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                                     Amplify.API.mutate(
                                                             ModelMutation.update(task1),
                                                             updateTaskRes -> {
-                                                                count.getAndIncrement();
-                                                                if(count.get() == taskSize) {
-                                                                    loadingDialog.dismissDialog();
-                                                                    runOnUiThread(this::onBackPressed);
-                                                                }
+                                                                loadingDialog.dismissDialog();
+                                                                runOnUiThread(this::onBackPressed);
                                                             },
                                                             error -> {
                                                                 loadingDialog.dismissDialog();

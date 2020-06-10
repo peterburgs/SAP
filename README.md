@@ -44,11 +44,15 @@
     II- Technology description
   </h1>
 <hr>
-<li>UI Component: Material Design version 1.2.0-alpha06 
+<li>UI Component: Material Design version 1.2.0-beta01 
 <br>
 <li>Virtual Device: Google Pixel 3A
 <br>
-<li>API: 29
+<li>API: R
 <br>
-<li>Android version: 10 (Q)
+<li>Android version: 10.0+ (Q)
+<br>
+<li>Resolution: 1080 x 2220: 440dpi
+  <br>
+<li>CPU/ABI: x86_64
 

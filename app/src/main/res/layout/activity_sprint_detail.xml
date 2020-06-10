@@ -50,7 +50,7 @@
                     app:boxStrokeWidth="0dp"
                     app:endIconMode="clear_text"
                     app:layout_constraintVertical_bias="0.15"
-                    app:startIconDrawable="@drawable/ic_sprint"
+                    app:startIconDrawable="@drawable/ic_loyalty"
                     app:startIconTint="@color/colorAccent">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -66,6 +66,61 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="22sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Start date"
+                    app:boxCornerRadiusBottomEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusTopStart="25dp"
+                    app:boxStrokeColor="#FFF"
+                    app:boxStrokeWidth="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtStartDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#F9F9F9"
+                        android:inputType="text"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="End date"
+                    app:boxCornerRadiusBottomEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusTopStart="25dp"
+                    app:boxStrokeColor="#FFF"
+                    app:boxStrokeWidth="0dp"
+                    app:endIconDrawable="@drawable/ic_event_note"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/colorAccent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtEndDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#F9F9F9"
+                        android:inputType="text"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -94,11 +149,62 @@
                         android:lines="4"
                         android:maxLines="5"
                         android:minLines="4"
-                        android:textSize="16sp"
-                        android:textColor="@color/gray"
                         android:nextFocusUp="@id/edtSprintName"
-                        android:nextFocusDown="@id/btnCreateSprint" />
+                        android:nextFocusDown="@id/btnCreateSprint"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Todo: Backend Handle the event "onCompleteSprintClick"-->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCompleteSprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#D6414F"
+                    android:fontFamily="@font/bold"
+                    android:onClick="onCompleteSprintClick"
+                    android:text="Complete Sprint"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp"
+                    app:icon="@drawable/ic_done" />
+                <!--Todo: Backend Handle the event "onStartSprintClick"-->
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStartSprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#D6414F"
+                    android:fontFamily="@font/bold"
+                    android:onClick="onStartSprintClick"
+                    android:text="Start Sprint"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp"
+                    app:icon="@drawable/ic_start" />
+
+
+                <!--Todo: Backend Handle the event "onRemoveSprintClick"-->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRemoveSprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#D6414F"
+                    android:fontFamily="@font/bold"
+                    android:onClick="onRemoveSprintClick"
+                    android:text="Remove Sprint"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp"
+                    app:icon="@drawable/ic_remove" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvTaskList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </ScrollView>
     </androidx.core.widget.NestedScrollView>

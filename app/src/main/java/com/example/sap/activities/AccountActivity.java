@@ -24,9 +24,9 @@ public class AccountActivity extends AppCompatActivity {
     private static final String TAG = AccountActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
 
-    TextView tv_username;
-    TextView tv_email;
-    ImageView imv_avatar;
+    TextView tvUsername;
+    TextView tvEmail;
+    ImageView imvAvatar;
 
     com.getbase.floatingactionbutton.FloatingActionButton fabProject;
 
@@ -35,9 +35,9 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        tv_username = findViewById(R.id.tv_username);
-        tv_email = findViewById(R.id.tv_email);
-        imv_avatar = findViewById(R.id.imv_avatar);
+        tvUsername = findViewById(R.id.tvUsername);
+        tvEmail = findViewById(R.id.tvEmail);
+        imvAvatar = findViewById(R.id.imvAvatar);
         fabProject = findViewById(R.id.fabProject);
         loadingDialog = new LoadingDialog(AccountActivity.this);
 
@@ -87,15 +87,15 @@ public class AccountActivity extends AppCompatActivity {
                 ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
                 userQueryRes -> {
                     runOnUiThread(() -> {
-                        tv_username.setText(userQueryRes.getData().getUsername());
-                        tv_email.setText(userQueryRes.getData().getEmail());
+                        tvUsername.setText(userQueryRes.getData().getUsername());
+                        tvEmail.setText(userQueryRes.getData().getEmail());
                     });
 
                     Amplify.Storage.getUrl(
                             userQueryRes.getData().getAvatarKey(),
                             userAvatarUrlRes -> {
                                 loadingDialog.dismissDialog();
-                                runOnUiThread(() -> Picasso.get().load(userAvatarUrlRes.getUrl().toString()).into(imv_avatar));
+                                runOnUiThread(() -> Picasso.get().load(userAvatarUrlRes.getUrl().toString()).into(imvAvatar));
                             },
                             error -> Log.e(TAG, "Error", error)
                     );

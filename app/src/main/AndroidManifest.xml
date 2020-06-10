@@ -22,7 +22,6 @@
         <activity android:name=".ViewCompletedSprintActivity"></activity>
         <activity android:name=".EditFutureActivity" />
         <activity android:name=".EditActiveSprintActivity" />
-        <activity android:name=".activities.SprintDetailActivity" />
         <activity android:name=".activities.CreateSprintActivity" />
         <activity android:name=".activities.BacklogEditTaskActivity" />
         <activity android:name=".activities.SprintEditTaskActivity" />

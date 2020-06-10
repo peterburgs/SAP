@@ -49,7 +49,6 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         holder.tvTaskName.setText(taskList.get(position).getName());
         holder.tvTaskSummary.setText(taskList.get(position).getSummary());
         holder.tvTaskLabel.setText(taskList.get(position).getLabel());

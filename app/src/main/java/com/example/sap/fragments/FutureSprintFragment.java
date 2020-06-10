@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.api.graphql.model.ModelSubscription;
@@ -25,8 +24,6 @@ import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.example.sap.R;
 import com.example.sap.activities.EditFutureSprintActivity;
-import com.example.sap.activities.SprintDetailActivity;
-import com.example.sap.adapters.ActiveSprintAdapter;
 import com.example.sap.adapters.FutureSprintAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

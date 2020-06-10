@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class BacklogAdapter extends RecyclerView.Adapter<BacklogAdapter.ViewHolder> {
 
-    //    private String taskName[], taskSummary[], taskLabel[], assignee[];
     private ArrayList<Task> taskList;
     private Context context;
     private OnItemClickListener mListener;

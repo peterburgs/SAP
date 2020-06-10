@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
-
+public class SprintTaskAdapter extends RecyclerView.Adapter<SprintTaskAdapter.ViewHolder> {
     private ArrayList<Task> taskList;
     private Context context;
     private OnItemClickListener mListener;
@@ -32,7 +29,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     }
 
     //Constructor
-    public ToDoAdapter(Context context, ArrayList<Task> taskList) {
+    public SprintTaskAdapter(Context context, ArrayList<Task> taskList) {
         this.context = context;
         this.taskList = taskList;
     }
@@ -42,7 +39,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.todo_row, parent, false);
+        View view = inflater.inflate(R.layout.sprint_task_row, parent, false);
 
         return new ViewHolder(view, mListener);
     }
@@ -63,7 +60,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTaskName, tvTaskSummary, tvTaskLabel, tvAssignee;
-        protected CardView cvTodo;
+        protected CardView cvSprintTask;
 
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
@@ -72,9 +69,9 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
             tvTaskSummary = itemView.findViewById(R.id.tvTaskSummary);
             tvTaskLabel = itemView.findViewById(R.id.tvTaskLabel);
             tvAssignee = itemView.findViewById(R.id.tvAssignee);
-            cvTodo = itemView.findViewById(R.id.cvToDo);
+            cvSprintTask = itemView.findViewById(R.id.cvSprintTask);
 
-            cvTodo.setOnClickListener(new View.OnClickListener() {
+            cvSprintTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {

@@ -11,6 +11,6 @@ public class EditFutureSprintActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_future);
+        setContentView(R.layout.activity_edit_future_sprint);
     }
 }

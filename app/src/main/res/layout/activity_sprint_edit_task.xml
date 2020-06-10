@@ -251,6 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <!-- Scrollable content -->
@@ -271,7 +272,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
         android:hint="Write a comment"
         app:boxBackgroundColor="#FFF"
         app:boxCornerRadiusBottomEnd="25dp"
@@ -289,10 +289,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:backgroundTint="#F9F9F9"
+            android:backgroundTint="#DFE9F9"
             android:inputType="text"
             android:maxLines="1"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/gray"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 

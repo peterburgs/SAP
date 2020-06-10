@@ -1,5 +1,6 @@
 package com.example.sap.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
+import com.example.sap.activities.SprintDetailActivity;
 import com.example.sap.adapters.ActiveSprintAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -92,7 +94,9 @@ public class ActiveSprintFragment extends Fragment {
         activeSprintAdapter.setOnItemClickListener(new ActiveSprintAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //todo: Open  Sprint Detail Activity
+                Intent intent = new Intent(getContext(), SprintDetailActivity.class);
+                intent.putExtra("LABEL", "ACTIVE");
+                startActivity(intent);
             }
         });
         mHandler.post(() -> {

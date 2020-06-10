@@ -1,30 +1,126 @@
 package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Sprint;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
+import com.example.sap.adapters.SprintTaskAdapter;
+import com.example.sap.adapters.ToDoAdapter;
+
+import java.util.ArrayList;
 
 public class EditActiveSprintActivity extends AppCompatActivity {
+
+    private static final String TAG = EditActiveSprintActivity.class.getSimpleName();
+    private LoadingDialog loadingDialog;
+
     com.google.android.material.textfield.TextInputLayout edtEndDateLayout;
     com.google.android.material.textfield.TextInputEditText edtEndDate;
+    com.google.android.material.textfield.TextInputEditText edtStartDate;
+
+    private EditText edtSprintName;
+    private EditText edtSprintGoal;
+    private ArrayList<Task> taskList;
+    private RecyclerView rcvTaskList;
+    private SprintTaskAdapter sprintTaskAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_active_sprint);
-        
-        edtEndDate=findViewById(R.id.edtEndDate);
-        edtEndDateLayout=findViewById(R.id.edtEndDateLayout);
+
+        edtStartDate = findViewById(R.id.edtStartDate);
+        edtEndDate = findViewById(R.id.edtEndDate);
+        edtEndDateLayout = findViewById(R.id.edtEndDateLayout);
         edtEndDateLayout.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(EditActiveSprintActivity.this, "Calendar Clicked", Toast.LENGTH_SHORT).show();
             }
         });
-        
-        
+        edtSprintName = findViewById(R.id.edtSprintName);
+        edtSprintGoal = findViewById(R.id.edtSprintGoal);
+        rcvTaskList = findViewById(R.id.rcvTaskList);
+
+        loadingDialog = new LoadingDialog(this);
+        taskList = new ArrayList<>();
+        sprintTaskAdapter = new SprintTaskAdapter(getApplicationContext(), taskList);
+        rcvTaskList.setAdapter(sprintTaskAdapter);
+        rcvTaskList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        sprintTaskAdapter.setOnItemClickListener(new SprintTaskAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getApplicationContext(), SprintEditTaskActivity.class);
+                intent.putExtra("TASK_ID", taskList.get(position).getId());
+                startActivity(intent);
+            }
+        });
+
+        query();
+    }
+
+    private void query() {
+        loadingDialog.startLoadingDialog();
+        // Get sprint
+        Amplify.API.query(
+                ModelQuery.get(Sprint.class, getSprintID()),
+                getSprintRes -> {
+                    taskList.clear();
+                    taskList.addAll(getSprintRes.getData().getTasks());
+
+                    runOnUiThread(() -> {
+                        loadingDialog.dismissDialog();
+                        edtSprintName.setText(getSprintRes.getData().getName());
+                        edtSprintGoal.setText(getSprintRes.getData().getGoal());
+                        edtStartDate.setText(getSprintRes.getData().getStartDate().toDate().toString());
+                        sprintTaskAdapter = new SprintTaskAdapter(getApplicationContext(), taskList);
+                        rcvTaskList.setAdapter(sprintTaskAdapter);
+                    });
+                },
+                error -> {
+                    loadingDialog.dismissDialog();
+                    Log.e(TAG, "Error", error);
+                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                }
+        );
+    }
+
+    private String getSprintID() {
+        String newString;
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            newString = null;
+        } else {
+            newString = extras.getString("SPRINT_ID");
+        }
+        return newString;
+    }
+
+    private void makeAlert(String content) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditActiveSprintActivity.this);
+        builder.setMessage(content);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

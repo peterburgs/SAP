@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,14 +17,14 @@ import java.util.ArrayList;
 public class SprintTaskAdapter extends RecyclerView.Adapter<SprintTaskAdapter.ViewHolder> {
     private ArrayList<Task> taskList;
     private Context context;
-    private ToDoAdapter.OnItemClickListener mListener;
+    private OnItemClickListener mListener;
 
     //Interface to Handle Clicking a specific item
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(ToDoAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
@@ -63,7 +62,7 @@ public class SprintTaskAdapter extends RecyclerView.Adapter<SprintTaskAdapter.Vi
         TextView tvTaskName, tvTaskSummary, tvTaskLabel, tvAssignee;
         protected CardView cvSprintTask;
 
-        public ViewHolder(@NonNull View itemView, ToDoAdapter.OnItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             tvTaskName = itemView.findViewById(R.id.tvTaskName);

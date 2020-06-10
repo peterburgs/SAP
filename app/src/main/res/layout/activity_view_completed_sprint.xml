@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:theme="@style/Theme.AppCompat"
-    tools:context=".activities.SprintDetailActivity">
+    tools:context=".ViewCompletedSprintActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -154,58 +153,24 @@
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--Todo: Backend Handle the event "onCompleteSprintClick"-->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCompleteSprint"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:backgroundTint="#D6414F"
-                    android:fontFamily="@font/bold"
-                    android:onClick="onCompleteSprintClick"
-                    android:text="Complete Sprint"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Tasks"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    app:icon="@drawable/ic_done" />
-                <!--Todo: Backend Handle the event "onStartSprintClick"-->
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnStartSprint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:backgroundTint="#D6414F"
-                    android:fontFamily="@font/bold"
-                    android:onClick="onStartSprintClick"
-                    android:text="Start Sprint"
-                    android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    app:icon="@drawable/ic_start" />
-
-
-                <!--Todo: Backend Handle the event "onRemoveSprintClick"-->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnRemoveSprint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:backgroundTint="#D6414F"
-                    android:fontFamily="@font/bold"
-                    android:onClick="onRemoveSprintClick"
-                    android:text="Remove Sprint"
-                    android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    app:icon="@drawable/ic_remove" />
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcvTaskList"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
             </LinearLayout>
         </ScrollView>
     </androidx.core.widget.NestedScrollView>
-
 </LinearLayout>

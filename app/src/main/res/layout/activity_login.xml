@@ -53,7 +53,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_username"
-            android:layout_width="350sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#F9F9F9"
             android:maxLength="20"
@@ -93,7 +93,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_password"
-            android:layout_width="350sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#F9F9F9"
             android:inputType="textPassword"

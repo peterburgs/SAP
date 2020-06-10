@@ -2,6 +2,7 @@ package com.example.sap.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
@@ -33,6 +34,7 @@ public class SettingActivity extends AppCompatActivity {
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                //todo: Backend Update Project
                 Toast.makeText(SettingActivity.this, "Updated project!", Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -48,6 +50,8 @@ public class SettingActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //todo: Backend handles Remove Project
+
                 dialog.cancel();
             }
         });
@@ -61,4 +65,10 @@ public class SettingActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void onInviteParticipant(View view) {
+        Intent intent = new Intent(getApplicationContext(), InviteParticipantActivity.class);
+        startActivity(intent);
+    }
+
 }

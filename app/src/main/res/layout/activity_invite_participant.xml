@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.InviteParticipantActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-200dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:maxWidth="100dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/invite_participant_bg" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="350sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Username"
+            app:boxCornerRadiusBottomEnd="25dp"
+            app:boxCornerRadiusBottomStart="25dp"
+            app:boxCornerRadiusTopEnd="25dp"
+            app:boxCornerRadiusTopStart="25dp"
+            app:boxStrokeColor="#FFF"
+            app:boxStrokeWidth="0dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintVertical_bias="0.15"
+            app:startIconDrawable="@drawable/ic_account"
+            app:startIconTint="@color/colorAccent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtUsername"
+                android:layout_width="350sp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F9F9F9"
+                android:inputType="text"
+                android:nextFocusDown="@+id/btnInvite"
+                android:singleLine="true"
+                android:text="" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!--        Todo: Handle event "onCreateSprintClick"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#D6414F"
+            android:fontFamily="@font/bold"
+            android:onClick="onInviteParticipant"
+            android:shadowColor="@color/black_800"
+            android:shadowDy="@android:integer/config_longAnimTime"
+            android:text="Invite"
+            android:textSize="20sp"
+            app:cornerRadius="25dp"
+            app:icon="@drawable/ic_email" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

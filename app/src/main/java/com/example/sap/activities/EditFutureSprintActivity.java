@@ -206,7 +206,7 @@ public class EditFutureSprintActivity extends AppCompatActivity {
                                 }
                                 if(isAnyActiveSprint) {
                                     loadingDialog.dismissDialog();
-                                    makeAlert("You have to complete the current active sprint first");
+                                    runOnUiThread(() -> makeAlert("You have to complete the current active sprint first"));
                                 } else {
                                     Sprint sprint = Sprint.builder()
                                             .name(edtSprintName.getText().toString())

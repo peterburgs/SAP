@@ -26,22 +26,15 @@ import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.TimeZone;
 
 import com.example.sap.adapters.SprintTaskAdapter;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class EditActiveSprintActivity extends AppCompatActivity {
@@ -255,6 +248,8 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                                     backlog = sprint1;
                                                 }
                                             }
+                                            AtomicInteger count = new AtomicInteger(0);
+                                            final int taskSize = getSprintRes.getData().getTasks().size();
                                             for(Task task : getSprintRes.getData().getTasks()) {
                                                 if(task.getStatus().equals(TaskStatus.TODO) || task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
                                                     Task task1 = Task.builder()
@@ -268,8 +263,11 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                                     Amplify.API.mutate(
                                                             ModelMutation.update(task1),
                                                             updateTaskRes -> {
-                                                                loadingDialog.dismissDialog();
-                                                                runOnUiThread(this::onBackPressed);
+                                                                count.getAndIncrement();
+                                                                if(count.get() == taskSize) {
+                                                                    loadingDialog.dismissDialog();
+                                                                    runOnUiThread(this::onBackPressed);
+                                                                }
                                                             },
                                                             error -> {
                                                                 loadingDialog.dismissDialog();

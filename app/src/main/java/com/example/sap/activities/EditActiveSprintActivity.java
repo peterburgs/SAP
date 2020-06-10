@@ -20,7 +20,6 @@ import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
 import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -28,25 +27,17 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class EditActiveSprintActivity extends AppCompatActivity {
-
-
-    com.google.android.material.textfield.TextInputLayout edtEndDateLayout;
-    com.google.android.material.textfield.TextInputEditText edtEndDate;
-
 import com.example.sap.adapters.SprintTaskAdapter;
-import com.example.sap.adapters.ToDoAdapter;
 
 import java.util.ArrayList;
 
-public class EditActiveSprintActivity extends AppCompatActivity {
 
+public class EditActiveSprintActivity extends AppCompatActivity {
+    com.google.android.material.textfield.TextInputLayout edtDurationLayout;
+    com.google.android.material.textfield.TextInputEditText edtDuration;
     private static final String TAG = EditActiveSprintActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
 
-    com.google.android.material.textfield.TextInputLayout edtEndDateLayout;
-    com.google.android.material.textfield.TextInputEditText edtEndDate;
-    com.google.android.material.textfield.TextInputEditText edtStartDate;
 
     private EditText edtSprintName;
     private EditText edtSprintGoal;
@@ -67,21 +58,20 @@ public class EditActiveSprintActivity extends AppCompatActivity {
         calendar.setTimeInMillis(today);
 
         //Calendar Constraint
-        CalendarConstraints.Builder constraintBuilder = new CalendarConstraints.Builder();
-        CalendarConstraints.DateValidator dateValidator = DateValidatorPointForward.now();
-        constraintBuilder.setValidator(dateValidator);
+       // CalendarConstraints.Builder constraintBuilder = new CalendarConstraints.Builder();
+        //CalendarConstraints.DateValidator dateValidator = DateValidatorPointForward.now();
+        //constraintBuilder.setValidator(dateValidator);
         //DatePicker
         MaterialDatePicker.Builder<Pair<Long, Long>> dateBuilder = MaterialDatePicker.Builder.dateRangePicker();
         dateBuilder.setTitleText("Choose Time Range For Sprint");
-        dateBuilder.setCalendarConstraints(constraintBuilder.build());
+        //dateBuilder.setCalendarConstraints(constraintBuilder.build());
         dateBuilder.setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR);
 
         final MaterialDatePicker materialDatePicker = dateBuilder.build();
 
-        edtStartDate = findViewById(R.id.edtStartDate);
-        edtEndDate = findViewById(R.id.edtEndDate);
-        edtEndDateLayout = findViewById(R.id.edtEndDateLayout);
-        edtEndDateLayout.setEndIconOnClickListener(new View.OnClickListener() {
+        edtDuration = findViewById(R.id.edtDuration);
+        edtDurationLayout = findViewById(R.id.edtDurationLayout);
+        edtDurationLayout.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -90,7 +80,9 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                 materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
                     @Override
                     public void onPositiveButtonClick(Object selection) {
-                        Toast.makeText(EditActiveSprintActivity.this, materialDatePicker.getHeaderText(), Toast.LENGTH_SHORT).show();
+                        //todo: Get DatePicker values
+                        edtDuration.setText(materialDatePicker.getHeaderText());
+                        //Toast.makeText(EditActiveSprintActivity.this, materialDatePicker.getHeaderText(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -133,8 +125,7 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                         loadingDialog.dismissDialog();
                         edtSprintName.setText(getSprintRes.getData().getName());
                         edtSprintGoal.setText(getSprintRes.getData().getGoal());
-                        edtStartDate.setText(getSprintRes.getData().getStartDate().toDate().toString());
-                        sprintTaskAdapter = new SprintTaskAdapter(getApplicationContext(), taskList);
+                        sprintTaskAdapter = new SprintTaskAdapter(this, taskList);
                         rcvTaskList.setAdapter(sprintTaskAdapter);
                     });
                 },

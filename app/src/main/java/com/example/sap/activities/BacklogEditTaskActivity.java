@@ -37,6 +37,9 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class BacklogEditTaskActivity extends AppCompatActivity {
 
@@ -164,8 +167,11 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                                         }
                                     });
 
-                                    AlertDialog dialog2 = builder2.create();
-                                    dialog2.show();
+                                    runOnUiThread(() -> {
+                                        loadingDialog.dismissDialog();
+                                        AlertDialog dialog2 = builder2.create();
+                                        dialog2.show();
+                                    });
                                 } else {
                                     Amplify.API.mutate(
                                             ModelMutation.delete(commentList.get(position)),
@@ -267,6 +273,12 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
 
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
+                                    Collections.sort(commentList, new Comparator<Comment>() {
+                                        @Override
+                                        public int compare(Comment o1, Comment o2) {
+                                            return o1.getCreatedAt().toDate().compareTo(o2.getCreatedAt().toDate());
+                                        }
+                                    });
                                     commentListAdapter.notifyDataSetChanged();
 
                                     topAppBar.setTitle(getTaskRes.getData().getName());
@@ -281,11 +293,13 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
     }
 
     private void commentMutation(String content) {
-        loadingDialog.startLoadingDialog();
         if(content.equals("")) {
             makeAlert("Please type something!");
+            loadingDialog.dismissDialog();
             return;
         }
+
+        loadingDialog.startLoadingDialog();
         // Get User
         Amplify.API.mutate(
                 ModelQuery.get(User.class, Amplify.Auth.getCurrentUser().getUserId()),
@@ -410,6 +424,12 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                                 runOnUiThread(() -> {
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
+                                    Collections.sort(commentList, new Comparator<Comment>() {
+                                        @Override
+                                        public int compare(Comment o1, Comment o2) {
+                                            return o1.getCreatedAt().toDate().compareTo(o2.getCreatedAt().toDate());
+                                        }
+                                    });
                                     commentListAdapter.notifyDataSetChanged();
                                 });
                             },
@@ -434,6 +454,12 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                                 runOnUiThread(() -> {
                                     commentList.clear();
                                     commentList.addAll(task.getComments());
+                                    Collections.sort(commentList, new Comparator<Comment>() {
+                                        @Override
+                                        public int compare(Comment o1, Comment o2) {
+                                            return o1.getCreatedAt().toDate().compareTo(o2.getCreatedAt().toDate());
+                                        }
+                                    });
                                     commentListAdapter.notifyDataSetChanged();
                                 });
                             },

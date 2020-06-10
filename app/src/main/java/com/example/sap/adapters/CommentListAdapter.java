@@ -67,6 +67,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvUserName.setText(commentList.get(position).getAuthor().getUsername());
         holder.tvCommentContent.setText(commentList.get(position).getContent());
+
         Amplify.Storage.getUrl(
                 commentList.get(position).getAuthor().getAvatarKey(),
                 result -> {
@@ -91,10 +92,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         return commentList.size();
     }
 
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imvAvatar;
         TextView tvUserName;
+        TextView tvCreatedAt;
         TextView tvCommentContent;
         ImageButton imbRemoveComment;
         protected CardView cvComment;
@@ -104,6 +108,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             cvComment = itemView.findViewById(R.id.cvComment);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvCommentContent = itemView.findViewById(R.id.tvCommentContent);
+            tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             imvAvatar = itemView.findViewById(R.id.imvAvatar);
             imbRemoveComment = itemView.findViewById(R.id.imbRemoveComment);
 

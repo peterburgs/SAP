@@ -69,9 +69,6 @@ public class FutureSprintFragment extends Fragment {
             }.getType();
             mSprintList = gson.fromJson(args.getString(SPRINT_LIST), founderListType);
         }
-        sprintCreateSubscribe();
-        sprintUpdateSubscribe();
-        sprintDeleteSubscribe();
     }
 
     @Override
@@ -102,7 +99,6 @@ public class FutureSprintFragment extends Fragment {
             }
         });
         mHandler.post(() -> {
-            futureSprintAdapter.notifyDataSetChanged();
             if (mSprintList.isEmpty()) {
                 imvFutureSprintEmpty.setVisibility(View.VISIBLE);
                 imvFutureSprintEmpty.setImageResource(R.drawable.img_empty);
@@ -110,81 +106,5 @@ public class FutureSprintFragment extends Fragment {
                 imvFutureSprintEmpty.setVisibility(View.GONE);
             }
         });
-    }
-
-    private void sprintQuery() {
-        if (mSprintList != null) {
-            // Get active sprint
-            Amplify.API.query(
-                    ModelQuery.get(Project.class, getProjectID()),
-                    getProjectRes -> {
-                        mSprintList.clear();
-                        for(Sprint sprint : getProjectRes.getData().getSprints()) {
-                            if(!sprint.getIsBacklog()) {
-                                if(sprint.getIsStarted() == null || !sprint.getIsStarted() && !sprint.getIsCompleted()) {
-                                    mSprintList.add(sprint);
-                                }
-                            }
-                        }
-                        mHandler.post(() -> {
-                            futureSprintAdapter.notifyDataSetChanged();
-                            if (mSprintList.isEmpty()) {
-                                imvFutureSprintEmpty.setVisibility(View.VISIBLE);
-                                imvFutureSprintEmpty.setImageResource(R.drawable.img_empty);
-                            } else {
-                                imvFutureSprintEmpty.setVisibility(View.GONE);
-                            }
-                        });
-                    },
-                    error -> Log.e("GetProject", error.toString())
-            );
-        }
-    }
-
-    private void sprintCreateSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onCreate(Sprint.class),
-                onEstablished -> Log.i("OnCreateSprintSubscribe", "Subscription established"),
-                onCreated -> {
-                    sprintQuery();
-                },
-                onFailure -> Log.e("OnCreateSprintSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnCreateSprintSubscribe", "Subscription completed")
-        );
-    }
-
-    private void sprintUpdateSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onUpdate(Sprint.class),
-                onEstablished -> Log.i("OnUpdateSprintSubscribe", "Subscription established"),
-                onUpdated -> {
-                    sprintQuery();
-                },
-                onFailure -> Log.e("OnUpdateSprintSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnUpdateSprintSubscribe", "Subscription completed")
-        );
-    }
-
-    private void sprintDeleteSubscribe() {
-        Amplify.API.subscribe(
-                ModelSubscription.onDelete(Sprint.class),
-                onEstablished -> Log.i("OnDeleteSprintSubscribe", "Subscription established"),
-                onDeleted -> {
-                    sprintQuery();
-                },
-                onFailure -> Log.e("OnDeleteSprintSubscribe", "Subscription failed", onFailure),
-                () -> Log.i("OnDeleteSprintSubscribe", "Subscription completed")
-        );
-    }
-
-    private String getProjectID() {
-        String newString;
-        Bundle extras = getActivity().getIntent().getExtras();
-        if (extras == null) {
-            newString = null;
-        } else {
-            newString = extras.getString("PROJECT_ID");
-        }
-        return newString;
     }
 }

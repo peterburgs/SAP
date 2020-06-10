@@ -172,7 +172,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                             getBacklogRes -> {
                                 backlogTasks.addAll(getBacklogRes.getData().getTasks());
 
-                                if (activeSprint != null) {
+                                if (!activeSprint.isEmpty()) {
                                     // Get tasks of the active sprint
                                     Amplify.API.query(
                                             ModelQuery.get(Sprint.class, activeSprint.get(0).getId()),

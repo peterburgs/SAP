@@ -250,6 +250,52 @@ public class EditFutureSprintActivity extends AppCompatActivity {
         );
     }
 
+    public void onRemoveSprintClick(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditFutureSprintActivity.this);
+        builder.setMessage("Do you want to remove this sprint?");
+        builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                loadingDialog.startLoadingDialog();
+
+                // Get Sprint
+                Amplify.API.query(
+                        ModelQuery.get(Sprint.class, getSprintID()),
+                        getSprintRes -> {
+
+                            // Delete sprint
+                            Amplify.API.mutate(
+                                    ModelMutation.delete(getSprintRes.getData()),
+                                    deleteSprintRes -> {
+                                        loadingDialog.dismissDialog();
+                                        runOnUiThread(() -> onBackPressed());
+                                    },
+                                    error -> {
+                                        loadingDialog.dismissDialog();
+                                        Log.e(TAG, "Error", error);
+                                        runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                                    }
+                            );
+                        },
+                        error -> {
+                            loadingDialog.dismissDialog();
+                            Log.e(TAG, "Error", error);
+                            runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                        }
+                );
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private String getSprintID() {
         String newString;
         Bundle extras = getIntent().getExtras();

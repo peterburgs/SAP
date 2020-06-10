@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
@@ -17,7 +18,7 @@ import com.example.sap.fragments.ToDoFragment;
 
 import java.util.ArrayList;
 
-public class SprintPageAdapter extends FragmentPagerAdapter {
+public class SprintPageAdapter extends FragmentStatePagerAdapter {
 
     private int tabNumber;
     private ArrayList<Sprint> activeSprints;

@@ -62,7 +62,6 @@ public class SprintContainerActivity extends AppCompatActivity {
         fabSetting = findViewById(R.id.fabSetting);
         fabBoard = findViewById(R.id.fabBoard);
 
-
         topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -97,8 +96,8 @@ public class SprintContainerActivity extends AppCompatActivity {
         activeSprints = new ArrayList<>();
         futureSprints = new ArrayList<>();
         completedSprints = new ArrayList<>();
-
-        initializeSprintPageAdapter();
+        sprintPageAdapter = new SprintPageAdapter(getSupportFragmentManager(), tloSprint.getTabCount(), activeSprints, futureSprints, completedSprints);
+        vpgSprint.setAdapter(sprintPageAdapter);
 
         activeBadge = tloSprint.getTabAt(0).getOrCreateBadge();
         futureBadge = tloSprint.getTabAt(1).getOrCreateBadge();
@@ -110,6 +109,7 @@ public class SprintContainerActivity extends AppCompatActivity {
 
         notificationManagerCompat = NotificationManagerCompat.from(this);
 
+        query();
         sprintCreateSubscribe();
         sprintUpdateSubscribe();
         sprintDeleteSubscribe();
@@ -140,7 +140,7 @@ public class SprintContainerActivity extends AppCompatActivity {
         vpgSprint.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tloSprint));
     }
 
-    private void sprintQuery() {
+    private void query() {
         Amplify.API.query(
                 ModelQuery.get(Project.class, getProjectID()),
                 getProjectRes -> {
@@ -162,41 +162,8 @@ public class SprintContainerActivity extends AppCompatActivity {
                         activeBadge.setNumber(activeSprints.size());
                         futureBadge.setNumber(futureSprints.size());
                         completedBadge.setNumber(completedSprints.size());
-                    });
-                },
-                error -> {
-                    Log.e("Error", error.toString());
-                }
-        );
-    }
 
-    private void initializeSprintPageAdapter() {
-        loadingDialog.startLoadingDialog();
-        // Get project by id
-        Amplify.API.query(
-                ModelQuery.get(Project.class, getProjectID()),
-                getProjectRes -> {
-                    activeSprints.clear();
-                    futureSprints.clear();
-                    completedSprints.clear();
-                    for (Sprint sprint : getProjectRes.getData().getSprints()) {
-                        if (!sprint.getIsBacklog()) {
-                            if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
-                                activeSprints.add(sprint);
-                            } else if (sprint.getIsStarted() != null && sprint.getIsCompleted()) {
-                                completedSprints.add(sprint);
-                            } else {
-                                futureSprints.add(sprint);
-                            }
-                        }
-                    }
-                    mHandler.post(() -> {
-                        loadingDialog.dismissDialog();
-                        activeBadge.setNumber(activeSprints.size());
-                        futureBadge.setNumber(futureSprints.size());
-                        completedBadge.setNumber(completedSprints.size());
-                        sprintPageAdapter = new SprintPageAdapter(getSupportFragmentManager(), tloSprint.getTabCount(), activeSprints, futureSprints, completedSprints);
-                        vpgSprint.setAdapter(sprintPageAdapter);
+                        sprintPageAdapter.notifyDataSetChanged();
                     });
                 },
                 error -> {
@@ -210,7 +177,7 @@ public class SprintContainerActivity extends AppCompatActivity {
                 ModelSubscription.onCreate(Sprint.class),
                 onEstablished -> Log.i("OnCreateSprintSubscribe", "Subscription established"),
                 onCreated -> {
-                    sprintQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnCreateSprintSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnCreateSprintSubscribe", "Subscription completed")
@@ -222,7 +189,7 @@ public class SprintContainerActivity extends AppCompatActivity {
                 ModelSubscription.onUpdate(Sprint.class),
                 onEstablished -> Log.i("OnUpdateSprintSubscribe", "Subscription established"),
                 onUpdated -> {
-                    sprintQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnUpdateSprintSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnUpdateSprintSubscribe", "Subscription completed")
@@ -234,7 +201,7 @@ public class SprintContainerActivity extends AppCompatActivity {
                 ModelSubscription.onDelete(Sprint.class),
                 onEstablished -> Log.i("OnDeleteSprintSubscribe", "Subscription established"),
                 onDeleted -> {
-                    sprintQuery();
+                    query();
                 },
                 onFailure -> Log.e("OnDeleteSprintSubscribe", "Subscription failed", onFailure),
                 () -> Log.i("OnDeleteSprintSubscribe", "Subscription completed")

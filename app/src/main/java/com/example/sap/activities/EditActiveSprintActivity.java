@@ -248,8 +248,10 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                                     backlog = sprint1;
                                                 }
                                             }
+                                            boolean isAllTasksDone = true;
                                             for (Task task : getSprintRes.getData().getTasks()) {
                                                 if (task.getStatus().equals(TaskStatus.TODO) || task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                                                    isAllTasksDone = false;
                                                     Task task1 = Task.builder()
                                                             .name(task.getName())
                                                             .summary(task.getSummary())
@@ -271,6 +273,10 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                                             }
                                                     );
                                                 }
+                                            }
+                                            if(isAllTasksDone) {
+                                                loadingDialog.dismissDialog();
+                                                runOnUiThread(this::onBackPressed);
                                             }
                                         },
                                         error -> {

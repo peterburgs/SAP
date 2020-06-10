@@ -37,25 +37,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.091"
-            tools:layout_editor_absoluteX="-16dp">
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imv_avatar"
+                android:id="@+id/imvAvatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                app:layout_constraintBottom_toTopOf="@+id/btn_login"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_username"
+                android:id="@+id/tvUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -64,26 +57,22 @@
                 android:fontFamily="@font/bold"
                 android:text="Username"
                 android:textColor="#E91E63"
-                android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/imv_avatar"
-                app:layout_constraintTop_toTopOf="@+id/imv_avatar" />
+                android:textSize="30sp" />
         </LinearLayout>
 
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_email"
+            android:id="@+id/tvEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Email"
             android:textAlignment="gravity"
-            android:textSize="22sp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            tools:layout_editor_absoluteX="64dp" />
+            android:textSize="22sp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_resetPassword"
+            android:id="@+id/btnResetPassword"
             android:layout_width="wrap_content"
             android:layout_height="70sp"
             android:layout_marginTop="24dp"
@@ -93,15 +82,10 @@
             android:text="Reset Password"
             android:textSize="20sp"
             app:cornerRadius="25dp"
-            app:icon="@drawable/ic_lock"
-            app:layout_anchor="@+id/constraintLayout"
-            app:layout_anchorGravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+            app:icon="@drawable/ic_lock" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="70sp"
             android:layout_marginLeft="10dp"
@@ -112,10 +96,7 @@
             android:text="Log out"
             android:textSize="20sp"
             app:cornerRadius="25dp"
-            app:icon="@drawable/ic_logout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:icon="@drawable/ic_logout" />
 
     </LinearLayout>
 

@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,10 +45,11 @@ import java.util.ArrayList;
 
 
 public class EditActiveSprintActivity extends AppCompatActivity {
-    com.google.android.material.textfield.TextInputLayout edtDurationLayout;
-    com.google.android.material.textfield.TextInputEditText edtDuration;
+
     private static final String TAG = EditActiveSprintActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
+    com.google.android.material.textfield.TextInputLayout edtDurationLayout;
+    com.google.android.material.textfield.TextInputEditText edtDuration;
 
     private EditText edtSprintName;
     private EditText edtSprintGoal;
@@ -63,13 +65,15 @@ public class EditActiveSprintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_active_sprint);
 
-           //DatePicker
+        //DatePicker
         dateBuilder = MaterialDatePicker.Builder.dateRangePicker();
         dateBuilder.setTitleText("Choose Time Range For Sprint");
 
         dateBuilder.setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR);
 
         edtDuration = findViewById(R.id.edtDuration);
+        edtDuration.setInputType(InputType.TYPE_NULL);
+        edtDuration.setTextIsSelectable(true);
         edtDurationLayout = findViewById(R.id.edtDurationLayout);
         edtDurationLayout.setEndIconOnClickListener(new View.OnClickListener() {
             @Override

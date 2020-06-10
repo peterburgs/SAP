@@ -97,6 +97,7 @@ public class FutureSprintFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), EditFutureSprintActivity.class);
+                intent.putExtra("SPRINT_ID", mSprintList.get(position).getId());
                 startActivity(intent);
             }
         });

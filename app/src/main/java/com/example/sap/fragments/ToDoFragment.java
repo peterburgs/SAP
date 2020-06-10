@@ -54,7 +54,6 @@ public class ToDoFragment extends Fragment {
     private ArrayList<Task> mTaskList;
     private Sprint mActiveSprint;
 
-
     RecyclerView rcvToDo;
     private ToDoAdapter toDoAdapter;
     private Handler mHandler;
@@ -118,16 +117,21 @@ public class ToDoFragment extends Fragment {
 
         mHandler.post(() -> {
             toDoAdapter.notifyDataSetChanged();
-            if (mTaskList.isEmpty()) {
-                imvTodoEmpty.setImageResource(R.drawable.img_empty);
-            } else {
+            if (mActiveSprint != null) {
                 try {
-                    if (mActiveSprint != null) {
-                        getDayRemaining(mActiveSprint);
-                    }
+                    getDayRemaining(mActiveSprint);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                if (mTaskList.isEmpty()) {
+                    imvTodoEmpty.setVisibility(View.VISIBLE);
+                    imvTodoEmpty.setImageResource(R.drawable.img_empty);
+                } else {
+                    imvTodoEmpty.setVisibility(View.GONE);
+                }
+            } else {
+                imvTodoEmpty.setVisibility(View.VISIBLE);
+                imvTodoEmpty.setImageResource(R.drawable.img_empty);
             }
         });
     }
@@ -165,14 +169,21 @@ public class ToDoFragment extends Fragment {
                         }
                         mHandler.post(() -> {
                             toDoAdapter.notifyDataSetChanged();
-                            if (mTaskList.isEmpty()) {
-                                imvTodoEmpty.setImageResource(R.drawable.img_empty);
-                            } else {
+                            if (mActiveSprint != null) {
                                 try {
                                     getDayRemaining(mActiveSprint);
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
+                                if (mTaskList.isEmpty()) {
+                                    imvTodoEmpty.setVisibility(View.VISIBLE);
+                                    imvTodoEmpty.setImageResource(R.drawable.img_empty);
+                                } else {
+                                    imvTodoEmpty.setVisibility(View.GONE);
+                                }
+                            } else {
+                                imvTodoEmpty.setVisibility(View.VISIBLE);
+                                imvTodoEmpty.setImageResource(R.drawable.img_empty);
                             }
                         });
                     },
@@ -181,14 +192,21 @@ public class ToDoFragment extends Fragment {
         } else {
             mHandler.post(() -> {
                 toDoAdapter.notifyDataSetChanged();
-                if (mTaskList.isEmpty()) {
-                    imvTodoEmpty.setImageResource(R.drawable.img_empty);
-                } else {
+                if (mActiveSprint != null) {
                     try {
                         getDayRemaining(mActiveSprint);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                    if (mTaskList.isEmpty()) {
+                        imvTodoEmpty.setVisibility(View.VISIBLE);
+                        imvTodoEmpty.setImageResource(R.drawable.img_empty);
+                    } else {
+                        imvTodoEmpty.setVisibility(View.GONE);
+                    }
+                } else {
+                    imvTodoEmpty.setVisibility(View.VISIBLE);
+                    imvTodoEmpty.setImageResource(R.drawable.img_empty);
                 }
             });
         }

@@ -119,16 +119,21 @@ public class InProgressFragment extends Fragment {
 
         mHandler.post(() -> {
             inProgressAdapter.notifyDataSetChanged();
-            if (mTaskList.isEmpty()) {
-                imvInProgressEmpty.setImageResource(R.drawable.img_empty);
-            } else {
+            if (mActiveSprint != null) {
                 try {
-                    if (mActiveSprint != null) {
-                        getDayRemaining(mActiveSprint);
-                    }
+                    getDayRemaining(mActiveSprint);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                if (mTaskList.isEmpty()) {
+                    imvInProgressEmpty.setVisibility(View.VISIBLE);
+                    imvInProgressEmpty.setImageResource(R.drawable.img_empty);
+                } else {
+                    imvInProgressEmpty.setVisibility(View.GONE);
+                }
+            } else {
+                imvInProgressEmpty.setVisibility(View.VISIBLE);
+                imvInProgressEmpty.setImageResource(R.drawable.img_empty);
             }
         });
     }
@@ -165,14 +170,21 @@ public class InProgressFragment extends Fragment {
                         }
                         mHandler.post(() -> {
                             inProgressAdapter.notifyDataSetChanged();
-                            if (mTaskList.isEmpty()) {
-                                imvInProgressEmpty.setImageResource(R.drawable.img_empty);
-                            } else {
+                            if (mActiveSprint != null) {
                                 try {
                                     getDayRemaining(mActiveSprint);
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
+                                if (mTaskList.isEmpty()) {
+                                    imvInProgressEmpty.setVisibility(View.VISIBLE);
+                                    imvInProgressEmpty.setImageResource(R.drawable.img_empty);
+                                } else {
+                                    imvInProgressEmpty.setVisibility(View.GONE);
+                                }
+                            } else {
+                                imvInProgressEmpty.setVisibility(View.VISIBLE);
+                                imvInProgressEmpty.setImageResource(R.drawable.img_empty);
                             }
                         });
                     },
@@ -181,14 +193,21 @@ public class InProgressFragment extends Fragment {
         } else {
             mHandler.post(() -> {
                 inProgressAdapter.notifyDataSetChanged();
-                if (mTaskList.isEmpty()) {
-                    imvInProgressEmpty.setImageResource(R.drawable.img_empty);
-                } else {
+                if (mActiveSprint != null) {
                     try {
                         getDayRemaining(mActiveSprint);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                    if (mTaskList.isEmpty()) {
+                        imvInProgressEmpty.setVisibility(View.VISIBLE);
+                        imvInProgressEmpty.setImageResource(R.drawable.img_empty);
+                    } else {
+                        imvInProgressEmpty.setVisibility(View.GONE);
+                    }
+                } else {
+                    imvInProgressEmpty.setVisibility(View.VISIBLE);
+                    imvInProgressEmpty.setImageResource(R.drawable.img_empty);
                 }
             });
         }

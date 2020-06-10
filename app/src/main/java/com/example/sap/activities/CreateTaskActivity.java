@@ -41,7 +41,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         // Validation
         if(edtSummary.getText().toString().equals("")) {
-            makeAlert("Summary or description cannot be empty");
+            makeAlert("Summary cannot be empty");
             return;
         }
 

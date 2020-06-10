@@ -66,38 +66,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtDurationLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:hint="Start date"
-                    app:boxCornerRadiusBottomEnd="25dp"
-                    app:boxCornerRadiusBottomStart="25dp"
-                    app:boxCornerRadiusTopEnd="25dp"
-                    app:boxCornerRadiusTopStart="25dp"
-                    app:boxStrokeColor="#FFF"
-                    app:boxStrokeWidth="0dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtStartDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#F9F9F9"
-                        android:inputType="text"
-                        android:scrollbars="vertical"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:hint="End date"
+                    android:hint="Duration"
                     app:boxCornerRadiusBottomEnd="25dp"
                     app:boxCornerRadiusBottomStart="25dp"
                     app:boxCornerRadiusTopEnd="25dp"
@@ -109,7 +84,7 @@
                     app:endIconTint="@color/colorAccent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtEndDate"
+                        android:id="@+id/edtDuration"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#F9F9F9"
@@ -118,7 +93,6 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -162,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:backgroundTint="#D6414F"
+                    android:backgroundTint="#00b300"
                     android:fontFamily="@font/bold"
                     android:onClick="onStartSprintClick"
                     android:text="Start Sprint"

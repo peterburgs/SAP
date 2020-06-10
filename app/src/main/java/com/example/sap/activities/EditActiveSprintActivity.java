@@ -63,21 +63,10 @@ public class EditActiveSprintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_active_sprint);
 
-        //Calendar
-//        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC+7"));
-//        calendar.clear();
-//        long today = MaterialDatePicker.todayInUtcMilliseconds();
-//        calendar.setTimeInMillis(today);
-//
-//        Calendar Constraint
-//        CalendarConstraints.Builder constraintBuilder = new CalendarConstraints.Builder();
-//        CalendarConstraints.DateValidator dateValidator = DateValidatorPointForward.now();
-//        constraintBuilder.setValidator(dateValidator);
-
-        //DatePicker
+           //DatePicker
         dateBuilder = MaterialDatePicker.Builder.dateRangePicker();
         dateBuilder.setTitleText("Choose Time Range For Sprint");
-        //dateBuilder.setCalendarConstraints(constraintBuilder.build());
+
         dateBuilder.setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR);
 
         edtDuration = findViewById(R.id.edtDuration);
@@ -187,7 +176,47 @@ public class EditActiveSprintActivity extends AppCompatActivity {
     }
 
     private void onSaveSprintClick() {
+        loadingDialog.startLoadingDialog();
+        // Get sprint
+        Amplify.API.query(
+                ModelQuery.get(Sprint.class, getSprintID()),
+                getSprintRes -> {
+                    Temporal.Date startDate = new Temporal.Date(new Date(materialDatePicker.getSelection().first));
+                    Temporal.Date endDate = new Temporal.Date(new Date(materialDatePicker.getSelection().second));
 
+                    Sprint sprint = Sprint.builder()
+                            .name(edtSprintName.getText().toString())
+                            .isBacklog(false)
+                            .project(getSprintRes.getData().getProject())
+                            .goal(edtSprintGoal.getText().toString())
+                            .startDate(startDate)
+                            .endDate(endDate)
+                            .id(getSprintRes.getData().getId())
+                            .build();
+
+                    // Save Sprint
+                    Amplify.API.mutate(
+                            ModelMutation.update(sprint),
+                            updateSprintRes -> {
+                                loadingDialog.dismissDialog();
+                                runOnUiThread(this::onBackPressed);
+                            },
+                            error -> {
+                                loadingDialog.dismissDialog();
+                                Log.e(TAG, "Error", error);
+                                runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                            }
+                    );
+                },
+                error -> {
+                    loadingDialog.dismissDialog();
+                    Log.e(TAG, "Error", error);
+                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                }
+        );
+    }
+
+    public void onCompleteSprintClick(View view) {
         Temporal.Date startDate = new Temporal.Date(new Date(materialDatePicker.getSelection().first));
         Temporal.Date endDate = new Temporal.Date(new Date(materialDatePicker.getSelection().second));
 
@@ -203,6 +232,8 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                             .goal(edtSprintGoal.getText().toString())
                             .startDate(startDate)
                             .endDate(endDate)
+                            .isStarted(false)
+                            .isCompleted(true)
                             .id(getSprintRes.getData().getId())
                             .build();
 
@@ -251,49 +282,6 @@ public class EditActiveSprintActivity extends AppCompatActivity {
                                             runOnUiThread(() -> makeAlert(error.getCause().toString()));
                                         }
                                 );
-                            },
-                            error -> {
-                                loadingDialog.dismissDialog();
-                                Log.e(TAG, "Error", error);
-                                runOnUiThread(() -> makeAlert(error.getCause().toString()));
-                            }
-                    );
-                },
-                error -> {
-                    loadingDialog.dismissDialog();
-                    Log.e(TAG, "Error", error);
-                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
-                }
-        );
-    }
-
-    public void onCompleteSprintClick(View view) {
-        loadingDialog.startLoadingDialog();
-        // Get sprint
-        Amplify.API.query(
-                ModelQuery.get(Sprint.class, getSprintID()),
-                getSprintRes -> {
-                    Temporal.Date startDate = new Temporal.Date(new Date(materialDatePicker.getSelection().first));
-                    Temporal.Date endDate = new Temporal.Date(new Date(materialDatePicker.getSelection().second));
-
-                    Sprint sprint = Sprint.builder()
-                            .name(edtSprintName.getText().toString())
-                            .isBacklog(false)
-                            .project(getSprintRes.getData().getProject())
-                            .goal(edtSprintGoal.getText().toString())
-                            .startDate(startDate)
-                            .endDate(endDate)
-                            .isStarted(false)
-                            .isCompleted(true)
-                            .id(getSprintRes.getData().getId())
-                            .build();
-
-                    // Save Sprint
-                    Amplify.API.mutate(
-                            ModelMutation.update(sprint),
-                            updateSprintRes -> {
-                                loadingDialog.dismissDialog();
-                                runOnUiThread(this::onBackPressed);
                             },
                             error -> {
                                 loadingDialog.dismissDialog();

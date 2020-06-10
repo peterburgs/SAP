@@ -23,7 +23,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class CreateSprintActivity extends AppCompatActivity {
-    private TextInputEditText edtSprintGoal, edtSprintName;
+
+    private com.google.android.material.textfield.TextInputEditText edtSprintGoal, edtSprintName;
     private static final String TAG = CreateTaskActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
 
@@ -34,18 +35,17 @@ public class CreateSprintActivity extends AppCompatActivity {
 
         edtSprintGoal = findViewById(R.id.edtSprintGoal);
         edtSprintName = findViewById(R.id.edtSprintName);
-
         loadingDialog = new LoadingDialog(this);
 
     }
 
     public void onCreateSprintClick(View view) {
-        if(edtSprintName.getText().equals("")) {
-            makeAlert("Name can not be empty");
+        if (edtSprintName.getText().toString().equals("") || edtSprintName.getText().toString() == null) {
+            makeAlert("Sprint name cannot be empty!");
             return;
         }
-        if(edtSprintName.getText().toString().toLowerCase().equals("none")) {
-            makeAlert("Sorry, you can not use this name");
+        if (edtSprintName.getText().toString().toLowerCase().equals("none")) {
+            makeAlert("Sorry, you cannot use this name!");
             return;
         }
         loadingDialog.startLoadingDialog();

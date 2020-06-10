@@ -46,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F9F9F9"
                 android:inputType="text"
+                android:text=""
                 android:nextFocusDown="@+id/edtSprintGoal"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -73,6 +74,7 @@
                 android:backgroundTint="#F9F9F9"
                 android:inputType="textMultiLine"
                 android:lines="4"
+                android:text=""
                 android:maxLines="5"
                 android:minLines="4"
                 android:nextFocusUp="@id/edtSprintName"

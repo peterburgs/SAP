@@ -1,14 +1,16 @@
-package com.example.sap;
+package com.example.sap.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class EditActiveSprintActivity extends AppCompatActivity {
+import com.example.sap.R;
+
+public class EditFutureSprintActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_active_sprint);
+        setContentView(R.layout.activity_edit_future);
     }
 }

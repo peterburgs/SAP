@@ -92,8 +92,7 @@ public class CompletedSprintFragment extends Fragment {
         completedSprintAdapter.setOnItemClickListener(new CompletedSprintAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getContext(), SprintDetailActivity.class);
-                intent.putExtra("LABEL", "COMPLETED");
+                Intent intent = new Intent(getContext(), CompletedSprintFragment.class);
                 startActivity(intent);
             }
         });
@@ -119,9 +118,9 @@ public class CompletedSprintFragment extends Fragment {
                     ModelQuery.get(Project.class, getProjectID()),
                     getProjectRes -> {
                         mSprintList.clear();
-                        for(Sprint sprint : getProjectRes.getData().getSprints()) {
-                            if(!sprint.getIsBacklog()) {
-                                if(sprint.getIsCompleted() != null && sprint.getIsCompleted()) {
+                        for (Sprint sprint : getProjectRes.getData().getSprints()) {
+                            if (!sprint.getIsBacklog()) {
+                                if (sprint.getIsCompleted() != null && sprint.getIsCompleted()) {
                                     mSprintList.add(sprint);
                                 }
                             }

@@ -7,8 +7,6 @@
     android:layout_margin="5dp">
 
     <com.google.android.material.card.MaterialCardView
-        app:strokeWidth="2dp"
-        app:strokeColor="@drawable/stroke_color"
         android:id="@+id/cvProjectList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +18,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@drawable/stroke_color"
+        app:strokeWidth="2dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -36,7 +36,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="TextView"
                     android:textColor="@color/colorPrimary"
                     android:textSize="26sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -46,13 +45,12 @@
 
                 <TextView
                     android:id="@+id/tvProjectKey"
+                    style="@android:style/Theme.Panel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginTop="5dp"
-                    android:text="TextView"
+                    android:layout_marginBottom="16dp"
                     android:background="@drawable/rounded_corner"
-                    style="@android:style/Theme.Panel"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -67,8 +65,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/project_img1" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
 

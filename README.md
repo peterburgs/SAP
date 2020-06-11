@@ -44,7 +44,7 @@
     II- Technology description
   </h1>
 <hr>
-<li>UI Component: Material Design version 1.2.0-beta01 
+<li>UI Component: Material Design version 1.3.0-alpha01
 <br>
 <li>Virtual Device: Google Pixel 3A
 <br>

@@ -213,93 +213,112 @@ public class EditActiveSprintActivity extends AppCompatActivity {
     public void onCompleteSprintClick(View view) {
         Temporal.Date startDate = new Temporal.Date(new Date(materialDatePicker.getSelection().first));
         Temporal.Date endDate = new Temporal.Date(new Date(materialDatePicker.getSelection().second));
+        //Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditActiveSprintActivity.this);
+        builder.setMessage("Do you want to complete this sprint?");
+        builder.setTitle("Confirm");
+        builder.setIcon(R.drawable.ic_warning);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                loadingDialog.startLoadingDialog();
+                // Get sprint
+                Amplify.API.query(
+                        ModelQuery.get(Sprint.class, getSprintID()),
+                        getSprintRes -> {
+                            Sprint sprint = Sprint.builder()
+                                    .name(edtSprintName.getText().toString())
+                                    .isBacklog(false)
+                                    .project(getSprintRes.getData().getProject())
+                                    .goal(edtSprintGoal.getText().toString())
+                                    .startDate(startDate)
+                                    .endDate(endDate)
+                                    .isStarted(false)
+                                    .isCompleted(true)
+                                    .id(getSprintRes.getData().getId())
+                                    .build();
 
-        loadingDialog.startLoadingDialog();
-        // Get sprint
-        Amplify.API.query(
-                ModelQuery.get(Sprint.class, getSprintID()),
-                getSprintRes -> {
-                    Sprint sprint = Sprint.builder()
-                            .name(edtSprintName.getText().toString())
-                            .isBacklog(false)
-                            .project(getSprintRes.getData().getProject())
-                            .goal(edtSprintGoal.getText().toString())
-                            .startDate(startDate)
-                            .endDate(endDate)
-                            .isStarted(false)
-                            .isCompleted(true)
-                            .id(getSprintRes.getData().getId())
-                            .build();
+                            // Save Sprint
+                            Amplify.API.mutate(
+                                    ModelMutation.update(sprint),
+                                    updateSprintRes -> {
+                                        // Put tasks in to-do, in-progress back to backlog
+                                        Amplify.API.query(
+                                                ModelQuery.get(Project.class, getSprintRes.getData().getProject().getId()),
+                                                getProjectRes -> {
+                                                    Sprint backlog = null;
+                                                    for (Sprint sprint1 : getProjectRes.getData().getSprints()) {
+                                                        if (sprint1.getIsBacklog()) {
+                                                            backlog = sprint1;
+                                                        }
+                                                    }
+                                                    boolean isAllTasksDone = true;
+                                                    for (Task task : getSprintRes.getData().getTasks()) {
+                                                        if (task.getStatus().equals(TaskStatus.TODO) || task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                                                            isAllTasksDone = false;
+                                                            Task task1 = Task.builder()
+                                                                    .name(task.getName())
+                                                                    .summary(task.getSummary())
+                                                                    .project(task.getProject())
+                                                                    .assignee(task.getAssignee())
+                                                                    .sprint(backlog)
+                                                                    .id(task.getId())
+                                                                    .build();
+                                                            Amplify.API.mutate(
+                                                                    ModelMutation.update(task1),
+                                                                    updateTaskRes -> {
+                                                                        loadingDialog.dismissDialog();
+                                                                        Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
+                                                                        intent.putExtra("PROJECT_ID", getProjectRes.getData().getId());
+                                                                        startActivity(intent);
+                                                                    },
+                                                                    error -> {
+                                                                        loadingDialog.dismissDialog();
+                                                                        Log.e(TAG, "Error", error);
+                                                                        runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                                                                    }
+                                                            );
+                                                        }
+                                                    }
+                                                    if (isAllTasksDone) {
+                                                        loadingDialog.dismissDialog();
+                                                        Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
+                                                        intent.putExtra("PROJECT_ID", getProjectRes.getData().getId());
+                                                        startActivity(intent);
+                                                    }
+                                                },
+                                                error -> {
+                                                    loadingDialog.dismissDialog();
+                                                    Log.e(TAG, "Error", error);
+                                                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                                                }
+                                        );
+                                    },
+                                    error -> {
+                                        loadingDialog.dismissDialog();
+                                        Log.e(TAG, "Error", error);
+                                        runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                                    }
+                            );
+                        },
+                        error -> {
+                            loadingDialog.dismissDialog();
+                            Log.e(TAG, "Error", error);
+                            runOnUiThread(() -> makeAlert(error.getCause().toString()));
+                        }
+                );
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
-                    // Save Sprint
-                    Amplify.API.mutate(
-                            ModelMutation.update(sprint),
-                            updateSprintRes -> {
-                                // Put tasks in to-do, in-progress back to backlog
-                                Amplify.API.query(
-                                        ModelQuery.get(Project.class, getSprintRes.getData().getProject().getId()),
-                                        getProjectRes -> {
-                                            Sprint backlog = null;
-                                            for (Sprint sprint1 : getProjectRes.getData().getSprints()) {
-                                                if (sprint1.getIsBacklog()) {
-                                                    backlog = sprint1;
-                                                }
-                                            }
-                                            boolean isAllTasksDone = true;
-                                            for (Task task : getSprintRes.getData().getTasks()) {
-                                                if (task.getStatus().equals(TaskStatus.TODO) || task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
-                                                    isAllTasksDone = false;
-                                                    Task task1 = Task.builder()
-                                                            .name(task.getName())
-                                                            .summary(task.getSummary())
-                                                            .project(task.getProject())
-                                                            .assignee(task.getAssignee())
-                                                            .sprint(backlog)
-                                                            .id(task.getId())
-                                                            .build();
-                                                    Amplify.API.mutate(
-                                                            ModelMutation.update(task1),
-                                                            updateTaskRes -> {
-                                                                loadingDialog.dismissDialog();
-                                                                Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
-                                                                intent.putExtra("PROJECT_ID", getProjectRes.getData().getId());
-                                                                startActivity(intent);
-                                                            },
-                                                            error -> {
-                                                                loadingDialog.dismissDialog();
-                                                                Log.e(TAG, "Error", error);
-                                                                runOnUiThread(() -> makeAlert(error.getCause().toString()));
-                                                            }
-                                                    );
-                                                }
-                                            }
-                                            if(isAllTasksDone) {
-                                                loadingDialog.dismissDialog();
-                                                Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);
-                                                intent.putExtra("PROJECT_ID", getProjectRes.getData().getId());
-                                                startActivity(intent);
-                                            }
-                                        },
-                                        error -> {
-                                            loadingDialog.dismissDialog();
-                                            Log.e(TAG, "Error", error);
-                                            runOnUiThread(() -> makeAlert(error.getCause().toString()));
-                                        }
-                                );
-                            },
-                            error -> {
-                                loadingDialog.dismissDialog();
-                                Log.e(TAG, "Error", error);
-                                runOnUiThread(() -> makeAlert(error.getCause().toString()));
-                            }
-                    );
-                },
-                error -> {
-                    loadingDialog.dismissDialog();
-                    Log.e(TAG, "Error", error);
-                    runOnUiThread(() -> makeAlert(error.getCause().toString()));
-                }
-        );
+
     }
 
     @Override

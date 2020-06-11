@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/invite_participant_bg" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="350sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="Username"
@@ -42,7 +42,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtUsername"
-                android:layout_width="350sp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F9F9F9"
                 android:inputType="text"

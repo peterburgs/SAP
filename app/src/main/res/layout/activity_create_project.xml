@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="-100dp">
+        android:layout_marginTop="-150dp">
 
 
         <ImageView
@@ -20,13 +20,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-
-            android:maxWidth="100dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/create_project_bg" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="350sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="Project Name"
@@ -35,7 +33,6 @@
             app:boxCornerRadiusTopEnd="25dp"
             app:boxCornerRadiusTopStart="25dp"
             app:boxStrokeColor="#FFF"
-
             app:boxStrokeWidth="0dp"
             app:counterEnabled="true"
             app:counterMaxLength="25"
@@ -45,7 +42,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_projectName"
-                android:layout_width="350sp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F9F9F9"
                 android:maxLength="25"
@@ -53,7 +52,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="350sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Project Key"
             app:boxCornerRadiusBottomEnd="25dp"
@@ -70,7 +69,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_projectKey"
-                android:layout_width="350sp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F9F9F9"
                 android:maxLength="3"

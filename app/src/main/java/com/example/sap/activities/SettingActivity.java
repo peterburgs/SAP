@@ -174,9 +174,9 @@ public class SettingActivity extends AppCompatActivity {
                                 Log.e("GetProjectImageError", "Error", error);
                             }
                     );
-                    for(ProjectParticipant projectParticipant : getProjectRes.getData().getMembers()) {
-                        if(projectParticipant.getRole().equals(Role.PROJECT_LEADER)) {
-                            if(!Amplify.Auth.getCurrentUser().getUsername().equals(projectParticipant.getMember().getUsername())) {
+                    for (ProjectParticipant projectParticipant : getProjectRes.getData().getMembers()) {
+                        if (projectParticipant.getRole().equals(Role.PROJECT_LEADER)) {
+                            if (!Amplify.Auth.getCurrentUser().getUsername().equals(projectParticipant.getMember().getUsername())) {
                                 btnInviteParticipant.setClickable(false);
                                 btnInviteParticipant.setBackgroundColor(Color.GRAY);
                                 btnRemoveProject.setClickable(false);
@@ -184,7 +184,7 @@ public class SettingActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    topAppBar.setTitle(getProjectRes.getData().getKey() + " Setting");
+                    runOnUiThread(() -> topAppBar.setTitle(getProjectRes.getData().getKey() + " Setting"));
                 },
                 error -> {
                     loadingDialog.dismissDialog();

@@ -51,8 +51,6 @@
                 android:text="" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <!--        Todo: Handle event "onCreateSprintClick"-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnInvite"
             android:layout_width="wrap_content"
@@ -60,7 +58,7 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="#D6414F"
             android:fontFamily="@font/bold"
-            android:onClick="onInviteParticipant"
+            android:onClick="onInviteParticipantClick"
             android:shadowColor="@color/black_800"
             android:shadowDy="@android:integer/config_longAnimTime"
             android:text="Invite"

@@ -90,23 +90,6 @@ public class LoginActivity extends AppCompatActivity {
                     runOnUiThread(() -> makeAlert(error.getCause().toString()));
                 }
         );
-
-//        AWSMobileClient.getInstance().signIn(username, password, null, new Callback<SignInResult>() {
-//            @Override
-//            public void onResult(SignInResult result) {
-//                loadingDialog.dismissDialog();
-//                //Navigate to project dashboard activity
-//                Intent intent = new Intent(LoginActivity.this, ProjectDashboardActivity.class);
-//                startActivity(intent);
-//            }
-//
-//            @Override
-//            public void onError(Exception e) {
-//                loadingDialog.dismissDialog();
-//                Log.e(TAG, "Error", e);
-//                runOnUiThread(() -> makeAlert(e.getMessage().split("\\(")[0]));
-//            }
-//        });
     }
 
     private void makeToast(Toast toast, String message) {

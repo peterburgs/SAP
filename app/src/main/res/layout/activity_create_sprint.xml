@@ -80,7 +80,6 @@
                 android:nextFocusUp="@id/edtSprintName"
                 android:nextFocusDown="@id/btnCreateSprint" />
         </com.google.android.material.textfield.TextInputLayout>
-        <!--        Todo: Handle event "onCreateSprintClick"-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCreateSprint"
             android:layout_width="wrap_content"

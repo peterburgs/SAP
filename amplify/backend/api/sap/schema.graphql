@@ -96,3 +96,6 @@ type Comment
   author: User! @connection(fields: ["authorID"])
   task: Task! @connection(fields: ["taskID"])
 }
+
+
+

@@ -10,7 +10,6 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <!--Todo: Set the name of the sprint to the Toolbar-->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -127,9 +126,6 @@
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-
-                <!--Todo: Backend Handle the event "onStartSprintClick"-->
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnStartSprint"
                     android:layout_width="wrap_content"
@@ -144,8 +140,6 @@
                     app:cornerRadius="20dp"
                     app:icon="@drawable/ic_start" />
 
-
-                <!--Todo: Backend Handle the event "onRemoveSprintClick"-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRemoveSprint"
                     android:layout_width="wrap_content"

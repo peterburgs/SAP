@@ -102,7 +102,9 @@ public class ProjectListActivity extends AppCompatActivity {
                     if (response.getData() != null) {
                         projectList.clear();
                         for (ProjectParticipant p : response.getData().getProjects()) {
-                            projectList.add(p.getProject());
+                            if(p != null) {
+                                projectList.add(p.getProject());
+                            }
                         }
 
                         runOnUiThread(() -> {
@@ -129,7 +131,9 @@ public class ProjectListActivity extends AppCompatActivity {
                                 if (response.getData() != null) {
                                     projectList.clear();
                                     for (ProjectParticipant p : response.getData().getProjects()) {
-                                        projectList.add(p.getProject());
+                                        if(p != null) {
+                                            projectList.add(p.getProject());
+                                        }
                                     }
 
                                     runOnUiThread(() -> {
@@ -159,7 +163,9 @@ public class ProjectListActivity extends AppCompatActivity {
                                 if (response.getData() != null) {
                                     projectList.clear();
                                     for (ProjectParticipant p : response.getData().getProjects()) {
-                                        projectList.add(p.getProject());
+                                        if(p != null) {
+                                            projectList.add(p.getProject());
+                                        }
                                     }
 
                                     runOnUiThread(() -> {
@@ -189,7 +195,9 @@ public class ProjectListActivity extends AppCompatActivity {
                                 if (response.getData() != null) {
                                     projectList.clear();
                                     for (ProjectParticipant p : response.getData().getProjects()) {
-                                        projectList.add(p.getProject());
+                                        if(p != null) {
+                                            projectList.add(p.getProject());
+                                        }
                                     }
 
                                     runOnUiThread(() -> {

@@ -1,18 +1,15 @@
 package com.example.sap.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Pair;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -21,10 +18,7 @@ import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
 import com.example.sap.adapters.SprintTaskAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ViewCompletedSprintActivity extends AppCompatActivity {
@@ -61,14 +55,18 @@ public class ViewCompletedSprintActivity extends AppCompatActivity {
         sprintTaskAdapter = new SprintTaskAdapter(this, taskList);
         rcvTaskList.setAdapter(sprintTaskAdapter);
         rcvTaskList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        sprintTaskAdapter.setOnItemClickListener(new SprintTaskAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Intent intent = new Intent(getApplicationContext(), SprintEditTaskActivity.class);
-                intent.putExtra("TASK_ID", taskList.get(position).getId());
-                startActivity(intent);
-            }
-        });
+
+
+        //Enable Click Tasks
+        
+//        sprintTaskAdapter.setOnItemClickListener(new SprintTaskAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+//                Intent intent = new Intent(getApplicationContext(), SprintEditTaskActivity.class);
+//                intent.putExtra("TASK_ID", taskList.get(position).getId());
+//                startActivity(intent);
+//            }
+//        });
 
         query();
     }

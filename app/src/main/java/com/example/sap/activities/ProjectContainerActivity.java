@@ -1,18 +1,16 @@
 package com.example.sap.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.viewpager.widget.ViewPager;
-
 import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.api.graphql.model.ModelSubscription;
@@ -154,7 +152,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                     activeSprint.clear();
                     backlog.clear();
                     for (Sprint sprint : getProjectRes.getData().getSprints()) {
-                        if (sprint.getIsStarted() != null && sprint.getIsStarted()) {
+                        if (sprint != null && sprint.getIsStarted() != null && sprint.getIsStarted()) {
                             activeSprint.add(sprint);
                         } else if (sprint.getIsBacklog()) {
                             backlog.add(sprint);

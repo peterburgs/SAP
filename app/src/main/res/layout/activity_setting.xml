@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/projectListMenu"
             app:menu="@menu/edit_sprint_menu"
-            app:title="SAP Setting"
+            app:title="Setting"
             app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -73,7 +73,7 @@
                         android:lines="2"
                         android:maxLines="5"
                         android:minLines="2"
-                        android:text="Simple Android Project  Simple Simple Simple  Simple Simple Simple  Simple Simple Simple"
+                        android:text=""
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -102,7 +102,7 @@
                         android:backgroundTint="#F9F9F9"
                         android:enabled="false"
                         android:inputType="none"
-                        android:text="SAP"
+                        android:text=""
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold" />

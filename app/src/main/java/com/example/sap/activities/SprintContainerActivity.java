@@ -1,27 +1,23 @@
 package com.example.sap.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.Sprint;
-import com.amplifyframework.datastore.generated.model.Task;
 import com.example.sap.R;
-import com.example.sap.adapters.PageAdapter;
 import com.example.sap.adapters.SprintPageAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.badge.BadgeDrawable;
@@ -81,7 +77,9 @@ public class SprintContainerActivity extends AppCompatActivity {
             startActivity(intent);
         });
         fabSetting.setOnClickListener(v -> {
-            Toast.makeText(this, "Setting Selected", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+            intent.putExtra("PROJECT_ID", getProjectID());
+            startActivity(intent);
         });
         fabBoard.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProjectContainerActivity.class);

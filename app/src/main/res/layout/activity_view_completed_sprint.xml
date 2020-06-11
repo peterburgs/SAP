@@ -45,7 +45,6 @@
                     app:boxCornerRadiusTopStart="25dp"
                     app:boxStrokeColor="#FFF"
                     app:boxStrokeWidth="0dp"
-                    app:endIconMode="clear_text"
                     app:layout_constraintVertical_bias="0.15"
                     app:startIconDrawable="@drawable/ic_loyalty"
                     app:startIconTint="@color/colorAccent">
@@ -56,6 +55,8 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="#F9F9F9"
                         android:inputType="textMultiLine"
+                        android:enabled="false"
+                        android:focusable="false"
                         android:lines="2"
                         android:maxLines="5"
                         android:minLines="2"
@@ -78,7 +79,9 @@
                     app:boxCornerRadiusTopEnd="25dp"
                     app:boxCornerRadiusTopStart="25dp"
                     app:boxStrokeColor="#FFF"
-                    app:boxStrokeWidth="0dp">
+                    app:boxStrokeWidth="0dp"
+                    app:startIconDrawable="@drawable/ic_event_note"
+                    app:startIconTint="@color/colorAccent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtDuration"
@@ -86,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="#F9F9F9"
                         android:inputType="text"
+                        android:enabled="false"
                         android:scrollbars="vertical"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp" />
@@ -113,6 +117,7 @@
                         android:id="@+id/edtSprintGoal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:backgroundTint="#F9F9F9"
                         android:inputType="textMultiLine"
                         android:lines="4"

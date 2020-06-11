@@ -1,11 +1,5 @@
 package com.example.sap.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.util.Pair;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.util.Pair;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -25,16 +25,13 @@ import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
 import com.example.sap.R;
+import com.example.sap.adapters.SprintTaskAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-import java.util.Date;
-
-import com.example.sap.adapters.SprintTaskAdapter;
-
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Date;
 
 
 public class EditActiveSprintActivity extends AppCompatActivity {
@@ -58,11 +55,11 @@ public class EditActiveSprintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_active_sprint);
 
+
         //DatePicker
         dateBuilder = MaterialDatePicker.Builder.dateRangePicker();
         dateBuilder.setTitleText("Choose Time Range For Sprint");
 
-        dateBuilder.setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR);
 
         edtDuration = findViewById(R.id.edtDuration);
         edtDuration.setInputType(InputType.TYPE_NULL);

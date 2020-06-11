@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MenuItem;
@@ -186,6 +184,7 @@ public class SettingActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    topAppBar.setTitle(getProjectRes.getData().getKey() + " Setting");
                 },
                 error -> {
                     loadingDialog.dismissDialog();

@@ -157,7 +157,6 @@
         android:text="Forgot password?"
         android:textSize="16sp"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/tv_signin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"

@@ -145,6 +145,8 @@ public class ProjectContainerActivity extends AppCompatActivity {
     }
 
     private void query() {
+
+        loadingDialog.startLoadingDialog();
         // Get project by id
         Amplify.API.query(
                 ModelQuery.get(Project.class, getProjectID()),
@@ -194,6 +196,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                                                     backlogBadge.setNumber(getBacklogRes.getData().getTasks().size());
 
                                                     pagerAdapter.notifyDataSetChanged();
+                                                    loadingDialog.dismissDialog();
 
                                                 });
                                             },
@@ -208,6 +211,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                                         backlogBadge.setNumber(getBacklogRes.getData().getTasks().size());
 
                                         pagerAdapter.notifyDataSetChanged();
+                                        loadingDialog.dismissDialog();
                                     });
                                 }
                             },
@@ -216,6 +220,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                 },
                 error -> Log.e("GetSprintError", error.toString())
         );
+
     }
 
     private void taskCreateSubscribe() {

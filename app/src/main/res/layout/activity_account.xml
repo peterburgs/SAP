@@ -45,7 +45,7 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                tools:srcCompat="@tools:sample/avatars" />
+                />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvUsername"
@@ -55,7 +55,7 @@
                 android:layout_marginTop="28dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/bold"
-                android:text="Username"
+
                 android:textColor="#E91E63"
                 android:textSize="30sp" />
         </LinearLayout>
@@ -67,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Email"
             android:textAlignment="gravity"
             android:textSize="22sp" />
 

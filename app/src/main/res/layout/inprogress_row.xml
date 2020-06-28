@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
 
     <com.google.android.material.card.MaterialCardView
-        app:strokeWidth="2dp"
-        app:strokeColor="@drawable/stroke_color"
+
         android:id="@+id/cvInProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#EAECF7"
+        android:backgroundTint="#F0F2F5"
         android:clickable="true"
         android:focusable="true"
         android:outlineAmbientShadowColor="@color/black_800"
@@ -20,12 +18,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_1">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#eeeeee"
+        app:strokeWidth="3dp">
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +41,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Task Summary"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -57,7 +54,6 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/rounded_corner"
-                        android:text="Label"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,7 +78,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:text="Task Name"
 
                         android:textColor="@color/colorAccent"
                         android:textSize="20sp"
@@ -100,7 +95,6 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="PeterBurgs"
                         android:textAlignment="gravity"
                         android:textColor="@color/cardview_dark_background"
                         android:textSize="14sp"
@@ -114,6 +108,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </FrameLayout>
+
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

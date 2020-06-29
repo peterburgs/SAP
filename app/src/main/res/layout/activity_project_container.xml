@@ -87,7 +87,7 @@
             app:fab_colorPressed="@color/black_800"
             app:fab_icon="@drawable/ic_setting"
             app:fab_size="mini"
-            app:fab_title="Setting" />
+            app:fab_title="Project Information" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabProject"

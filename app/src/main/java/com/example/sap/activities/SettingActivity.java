@@ -24,6 +24,13 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
 import com.amplifyframework.datastore.generated.model.ProjectParticipant;
 import com.amplifyframework.datastore.generated.model.Role;
+import com.amplifyframework.datastore.generated.model.Sprint;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStatus;
+import com.anychart.AnyChart;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
 import com.example.sap.R;
 import com.example.sap.adapters.ParticipantListAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -31,6 +38,7 @@ import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -45,6 +53,7 @@ public class SettingActivity extends AppCompatActivity {
     MaterialButton btnRemoveProject;
     private ArrayList<ProjectParticipant> participantList;
     private ParticipantListAdapter participantListAdapter;
+    private com.anychart.AnyChartView pcProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +68,7 @@ public class SettingActivity extends AppCompatActivity {
         btnRemoveProject = findViewById(R.id.btnRemoveProject);
         rcvProjectParticipant = findViewById(R.id.rcvProjectParticipant);
         topAppBar = findViewById(R.id.topAppBar);
-
+        pcProgress = findViewById(R.id.pcProgress);
         loadingDialog = new LoadingDialog(this);
         participantList = new ArrayList<>();
         participantListAdapter = new ParticipantListAdapter(this, participantList);
@@ -184,7 +193,18 @@ public class SettingActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    runOnUiThread(() -> topAppBar.setTitle(getProjectRes.getData().getKey() + " Setting"));
+
+                    //Get All Tasks of the active sprint
+                    ArrayList<Task> taskList = new ArrayList<Task>();
+                    for (Sprint s : getProjectRes.getData().getSprints()) {
+                        if (s.getIsCompleted() != null && s.getIsStarted() != null && !s.getIsCompleted() && s.getIsStarted()) {
+                            taskList.addAll(s.getTasks());
+                        }
+                    }
+                    runOnUiThread(() -> {
+                        topAppBar.setTitle(getProjectRes.getData().getKey() + " Information");
+                        setupPieChart(taskList);
+                    });
                 },
                 error -> {
                     loadingDialog.dismissDialog();
@@ -273,6 +293,32 @@ public class SettingActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void setupPieChart(ArrayList<Task> taskList) {
+        Pie pie = AnyChart.pie();
+        List<DataEntry> dataEntryList = new ArrayList<>();
+
+        //Count To_do Task
+        int todoNum = 0;
+        int inProgressNum = 0;
+        int doneNum = 0;
+        for (Task t : taskList) {
+            if (t.getStatus().equals(TaskStatus.TODO)) {
+                todoNum++;
+            }
+            if (t.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                inProgressNum++;
+            }
+            if (t.getStatus().equals(TaskStatus.DONE)) {
+                doneNum++;
+            }
+        }
+        dataEntryList.add(new ValueDataEntry("Todo", todoNum));
+        dataEntryList.add(new ValueDataEntry("In Progress", inProgressNum));
+        dataEntryList.add(new ValueDataEntry("Done", doneNum));
+        pie.data(dataEntryList);
+        pcProgress.setChart(pie);
     }
 
 }

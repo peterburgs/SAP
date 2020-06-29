@@ -9,18 +9,15 @@
         android:id="@+id/cvDone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#EAECF7"
         android:clickable="true"
         android:focusable="true"
-        android:outlineAmbientShadowColor="@color/black_800"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
+        android:backgroundTint="#F0F2F5"
         app:strokeColor="#eeeeee"
-
         app:strokeWidth="3dp">
 
 

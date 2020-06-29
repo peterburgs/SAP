@@ -16,6 +16,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.api.graphql.model.ModelSubscription;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Project;
+import com.amplifyframework.datastore.generated.model.ProjectParticipant;
 import com.amplifyframework.datastore.generated.model.Sprint;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStatus;
@@ -42,6 +43,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
     private ArrayList<Task> backlogTasks;
     private ArrayList<Sprint> activeSprint;
     private ArrayList<Sprint> backlog;
+    private ArrayList<String> assigneeList;
     private LoadingDialog loadingDialog;
     private com.google.android.material.appbar.MaterialToolbar topAppbar;
 
@@ -93,7 +95,8 @@ public class ProjectContainerActivity extends AppCompatActivity {
         backlogTasks = new ArrayList<>();
         backlog = new ArrayList<>();
         activeSprint = new ArrayList<>();
-        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tloStatus.getTabCount(), todoTasks, inProgressTasks, doneTasks, activeSprint, backlogTasks, backlog);
+        assigneeList = new ArrayList<>();
+        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tloStatus.getTabCount(), todoTasks, inProgressTasks, doneTasks, activeSprint, backlogTasks, backlog, assigneeList);
         viewPager.setAdapter(pagerAdapter);
 
         toDoBadge = tloStatus.getTabAt(0).getOrCreateBadge();
@@ -146,7 +149,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
 
     private void query() {
 
-        loadingDialog.startLoadingDialog();
+       // loadingDialog.startLoadingDialog();
         // Get project by id
         Amplify.API.query(
                 ModelQuery.get(Project.class, getProjectID()),
@@ -165,6 +168,13 @@ public class ProjectContainerActivity extends AppCompatActivity {
                     todoTasks.clear();
                     inProgressTasks.clear();
                     doneTasks.clear();
+                    assigneeList.clear();
+
+                    //Get members
+                    assigneeList.add("All");
+                    for (ProjectParticipant p : getProjectRes.getData().getMembers()) {
+                        assigneeList.add(p.getMember().getUsername());
+                    }
 
                     // Get tasks of the backlog
                     Amplify.API.query(
@@ -196,7 +206,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                                                     backlogBadge.setNumber(getBacklogRes.getData().getTasks().size());
 
                                                     pagerAdapter.notifyDataSetChanged();
-                                                    loadingDialog.dismissDialog();
+                                                    //loadingDialog.dismissDialog();
 
                                                 });
                                             },
@@ -211,7 +221,7 @@ public class ProjectContainerActivity extends AppCompatActivity {
                                         backlogBadge.setNumber(getBacklogRes.getData().getTasks().size());
 
                                         pagerAdapter.notifyDataSetChanged();
-                                        loadingDialog.dismissDialog();
+                                        //loadingDialog.dismissDialog();
                                     });
                                 }
                             },

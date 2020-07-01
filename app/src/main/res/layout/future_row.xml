@@ -43,7 +43,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Sprint Name"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -60,7 +59,6 @@
                     android:lines="2"
                     android:maxLines="5"
                     android:minLines="1"
-                    android:text="This is the goal of the sprint"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 

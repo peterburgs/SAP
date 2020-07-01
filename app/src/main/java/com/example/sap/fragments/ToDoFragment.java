@@ -1,5 +1,7 @@
 package com.example.sap.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +9,8 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,27 +41,34 @@ public class ToDoFragment extends Fragment {
 
     private static final String TASK_LIST = "taskList";
     private static final String ACTIVE_SPRINT = "activeSprint";
+    private static final String ASSIGNEE_LIST = "assigneeList";
+
 
     private ArrayList<Task> mTaskList;
     private ArrayList<Sprint> mActiveSprint;
-
+    private ArrayList<String> mAssigneeList;
+    ArrayList<Task> mTaskByParticipant;
     RecyclerView rcvToDo;
     private ToDoAdapter toDoAdapter;
     private Handler mHandler;
     private TextView tvDayRemaining;
     private ImageView imvTodoEmpty;
+    androidx.appcompat.widget.AppCompatSpinner spnTodoFilter;
+    ArrayAdapter spnTodoFilterAdapter;
+
 
     //
     public ToDoFragment() {
         // Required empty public constructor
     }
 
-    public static ToDoFragment newInstance(ArrayList<Task> taskList, ArrayList<Sprint> activeSprint) {
+    public static ToDoFragment newInstance(ArrayList<Task> taskList, ArrayList<Sprint> activeSprint, ArrayList<String> assigneeList) {
         ToDoFragment fragment = new ToDoFragment();
         Bundle args = new Bundle();
         Gson gson = new Gson();
         args.putString(TASK_LIST, gson.toJson(taskList));
         args.putString(ACTIVE_SPRINT, gson.toJson(activeSprint));
+        args.putString(ASSIGNEE_LIST, gson.toJson(assigneeList));
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,8 +83,11 @@ public class ToDoFragment extends Fragment {
             }.getType();
             Type activeSprintType = new TypeToken<ArrayList<Sprint>>() {
             }.getType();
+            Type assigneeListType = new TypeToken<ArrayList<String>>() {
+            }.getType();
             mTaskList = gson.fromJson(args.getString(TASK_LIST), taskListType);
             mActiveSprint = gson.fromJson(args.getString(ACTIVE_SPRINT), activeSprintType);
+            mAssigneeList = gson.fromJson(args.getString(ASSIGNEE_LIST), assigneeListType);
         }
     }
 
@@ -86,8 +100,56 @@ public class ToDoFragment extends Fragment {
         rcvToDo = getView().findViewById(R.id.rcvToDo);
         tvDayRemaining = getView().findViewById(R.id.tvTodoDayRemaining);
         imvTodoEmpty = getView().findViewById(R.id.imvTodoEmpty);
+        spnTodoFilter = getView().findViewById(R.id.spnTodoFilter);
 
-        toDoAdapter = new ToDoAdapter(getContext(), mTaskList);
+        spnTodoFilterAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, mAssigneeList);
+        spnTodoFilterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnTodoFilter.setAdapter(spnTodoFilterAdapter);
+        mTaskByParticipant = new ArrayList<>();
+
+        spnTodoFilter.setSelection(mAssigneeList.indexOf("All"));
+        spnTodoFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mTaskByParticipant.clear();
+                if (mAssigneeList.get(position).equals("All")) {
+
+                    mTaskByParticipant.addAll(mTaskList);
+                    toDoAdapter.notifyDataSetChanged();
+                } else {
+                    for (Task t : mTaskList) {
+                        if (t.getAssignee().getUsername().equals(mAssigneeList.get(position))) {
+                            mTaskByParticipant.add(t);
+                            toDoAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+                    if(mTaskByParticipant.isEmpty()){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage("Cannot find task by this participant!");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                spnTodoFilter.setSelection(mAssigneeList.indexOf("All"));
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        toDoAdapter = new ToDoAdapter(getContext(), mTaskByParticipant);
 
         rcvToDo.setAdapter(toDoAdapter);
         rcvToDo.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -95,7 +157,7 @@ public class ToDoFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), SprintEditTaskActivity.class);
-                intent.putExtra("TASK_ID", mTaskList.get(position).getId());
+                intent.putExtra("TASK_ID", mTaskByParticipant.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -103,7 +165,7 @@ public class ToDoFragment extends Fragment {
         mHandler.post(() -> {
             if (!mActiveSprint.isEmpty()) {
                 getDayRemaining();
-                if (mTaskList.isEmpty()) {
+                if (mTaskByParticipant.isEmpty()) {
                     imvTodoEmpty.setVisibility(View.VISIBLE);
                     imvTodoEmpty.setImageResource(R.drawable.img_empty);
                 } else {

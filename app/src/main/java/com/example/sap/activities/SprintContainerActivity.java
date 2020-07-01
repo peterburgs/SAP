@@ -139,6 +139,9 @@ public class SprintContainerActivity extends AppCompatActivity {
     }
 
     private void query() {
+
+        loadingDialog.startLoadingDialog();
+
         Amplify.API.query(
                 ModelQuery.get(Project.class, getProjectID()),
                 getProjectRes -> {
@@ -162,6 +165,7 @@ public class SprintContainerActivity extends AppCompatActivity {
                         completedBadge.setNumber(completedSprints.size());
 
                         sprintPageAdapter.notifyDataSetChanged();
+                        loadingDialog.dismissDialog();
                     });
                 },
                 error -> {

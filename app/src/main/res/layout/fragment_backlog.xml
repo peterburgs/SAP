@@ -24,11 +24,13 @@
                 android:layout_marginLeft="5dp"
                 android:text="Create Task" />
 
-            <ImageView
-                android:id="@+id/imvBacklogEmpty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imvBacklogEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <ScrollView
             android:layout_width="match_parent"

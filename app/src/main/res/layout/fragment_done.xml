@@ -21,14 +21,28 @@
             android:gravity="top">
 
 
-            <TextView
-                android:id="@+id/tvDoneDayRemaining"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:gravity="right"
-                android:textAlignment="gravity"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spnDoneFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:gravity="left" />
+
+                <TextView
+                    android:id="@+id/tvDoneDayRemaining"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:gravity="right"
+                    android:textAlignment="gravity"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvDone"

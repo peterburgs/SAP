@@ -18,7 +18,9 @@
         android:roundIcon="@drawable/ic_touch_id"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:label">
+
         <activity android:name=".activities.InviteParticipantActivity"></activity>
         <activity android:name=".activities.SettingActivity" />
         <activity android:name=".activities.ViewCompletedSprintActivity" />

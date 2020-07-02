@@ -106,10 +106,10 @@ public final class Project implements Model {
    public String toString() {
     return new StringBuilder()
       .append("Project {")
-      .append("id=" + String.valueOf(getId()))
-      .append("name=" + String.valueOf(getName()))
-      .append("key=" + String.valueOf(getKey()))
-      .append("avatarKey=" + String.valueOf(getAvatarKey()))
+      .append("id=" + String.valueOf(getId()) + ", ")
+      .append("name=" + String.valueOf(getName()) + ", ")
+      .append("key=" + String.valueOf(getKey()) + ", ")
+      .append("avatarKey=" + String.valueOf(getAvatarKey()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()))
       .append("}")
       .toString();

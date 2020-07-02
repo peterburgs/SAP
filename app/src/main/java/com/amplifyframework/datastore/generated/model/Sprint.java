@@ -130,30 +130,12 @@ public final class Sprint implements Model {
       .hashCode();
   }
   
-//  @Override
-//   public String toString() {
-//    return new StringBuilder()
-//      .append("Sprint {")
-//      .append("id=" + String.valueOf(getId()))
-//      .append("startDate=" + String.valueOf(getStartDate()))
-//      .append("endDate=" + String.valueOf(getEndDate()))
-//      .append("goal=" + String.valueOf(getGoal()))
-//      .append("name=" + String.valueOf(getName()))
-//      .append("isCompleted=" + String.valueOf(getIsCompleted()))
-//      .append("isStarted=" + String.valueOf(getIsStarted()))
-//      .append("isBacklog=" + String.valueOf(getIsBacklog()))
-//      .append("project=" + String.valueOf(getProject()))
-//      .append("}")
-//      .toString();
-//  }
-
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public static NameStep builder() {
+  @Override
+   public String toString() {
+    return name;
+  }
+  
+  public static NameStep builder() {
       return new Builder();
   }
   

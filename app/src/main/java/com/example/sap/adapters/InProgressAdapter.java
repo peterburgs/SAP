@@ -51,6 +51,7 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.Vi
         holder.tvTaskSummary.setText(taskList.get(position).getSummary());
         holder.tvTaskLabel.setText(taskList.get(position).getLabel());
         holder.tvAssignee.setText(taskList.get(position).getAssignee().getUsername());
+        holder.tvEstimatedTime.setText(taskList.get(position).getEstimatedTime() == null ? "-" : String.valueOf(taskList.get(position).getEstimatedTime()));
     }
 
     @Override
@@ -59,7 +60,7 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTaskName, tvTaskSummary, tvTaskLabel, tvAssignee;
+        TextView tvTaskName, tvTaskSummary, tvTaskLabel, tvAssignee, tvEstimatedTime;
         protected CardView cvInProgress;
 
         public ViewHolder(@NonNull View itemView, InProgressAdapter.OnItemClickListener listener) {
@@ -69,6 +70,7 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.Vi
             tvTaskSummary = itemView.findViewById(R.id.tvTaskSummary);
             tvTaskLabel = itemView.findViewById(R.id.tvTaskLabel);
             tvAssignee = itemView.findViewById(R.id.tvAssignee);
+            tvEstimatedTime = itemView.findViewById(R.id.tvEstimatedTime);
             cvInProgress = itemView.findViewById(R.id.cvInProgress);
 
             cvInProgress.setOnClickListener(new View.OnClickListener() {

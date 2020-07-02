@@ -23,6 +23,7 @@ import com.example.sap.R;
 public class CreateTaskActivity extends AppCompatActivity {
     EditText edtSummary;
     EditText edtDescription;
+    EditText edtEstimatedTime;
     private static final String TAG = CreateTaskActivity.class.getSimpleName();
     private LoadingDialog loadingDialog;
 
@@ -35,14 +36,26 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         edtSummary = findViewById(R.id.edtSummary);
         edtDescription = findViewById(R.id.edtDescription);
+        edtEstimatedTime = findViewById(R.id.edtEstimatedTime);
     }
 
     public void onCreateTaskClick(View view) {
 
         // Validation
-        if(edtSummary.getText().toString().equals("")) {
+        if (edtSummary.getText().toString().equals("")) {
             makeAlert("Summary cannot be empty");
             return;
+        }
+        if (!edtEstimatedTime.getText().toString().equals("")) {
+            try {
+                if(Float.parseFloat(edtEstimatedTime.getText().toString()) <= 0) {
+                    makeAlert("Estimated time must be greater than 0!");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                makeAlert("Estimated time is incorrect format!");
+                return;
+            }
         }
 
         loadingDialog.startLoadingDialog();
@@ -73,6 +86,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                                         .assignee(getUserRes.getData())
                                         .sprint(backlog)
                                         .description(edtDescription.getText().toString())
+                                        .estimatedTime(edtEstimatedTime.getText().toString().equals("") ? null : Float.parseFloat(edtEstimatedTime.getText().toString()))
                                         .build();
                                 Amplify.API.mutate(
                                         ModelMutation.create(task),

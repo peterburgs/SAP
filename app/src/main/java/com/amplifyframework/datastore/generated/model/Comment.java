@@ -92,10 +92,10 @@ public final class Comment implements Model {
    public String toString() {
     return new StringBuilder()
       .append("Comment {")
-      .append("id=" + String.valueOf(getId()))
-      .append("content=" + String.valueOf(getContent()))
-      .append("createdAt=" + String.valueOf(getCreatedAt()))
-      .append("author=" + String.valueOf(getAuthor()))
+      .append("id=" + String.valueOf(getId()) + ", ")
+      .append("content=" + String.valueOf(getContent()) + ", ")
+      .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
+      .append("author=" + String.valueOf(getAuthor()) + ", ")
       .append("task=" + String.valueOf(getTask()))
       .append("}")
       .toString();

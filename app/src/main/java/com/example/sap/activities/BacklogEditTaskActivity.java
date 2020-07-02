@@ -56,6 +56,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
     EditText edtSummary;
     EditText edtLabel;
     EditText edtDescription;
+    EditText edtEstimatedTime;
     com.google.android.material.textfield.TextInputLayout edtCommentLayout;
     com.google.android.material.textfield.TextInputEditText edtComment;
     Spinner spnAssignee;
@@ -92,6 +93,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
         edtDescription = findViewById(R.id.edtDescription);
         edtSummary = findViewById(R.id.edtSummary);
         edtLabel = findViewById(R.id.edtLabel);
+        edtEstimatedTime = findViewById(R.id.edtEstimatedTime);
         task = null;
         project = null;
         loadingDialog = new LoadingDialog(this);
@@ -256,6 +258,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                                     edtSummary.setText(task.getSummary());
                                     edtDescription.setText(task.getDescription());
                                     edtLabel.setText(task.getLabel());
+                                    edtEstimatedTime.setText(task.getEstimatedTime() == null ? "" : String.valueOf(task.getEstimatedTime()));
 
                                     // Data for assignee spinner
                                     assigneeList.clear();
@@ -347,6 +350,19 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
     }
 
     private void onSaveTaskClick() {
+        // Validate estimated time
+        if (!edtEstimatedTime.getText().toString().equals("")) {
+            try {
+                if(Float.parseFloat(edtEstimatedTime.getText().toString()) <= 0) {
+                    makeAlert("Estimated time must be greater than 0!");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                makeAlert("Estimated time is incorrect format!");
+                return;
+            }
+        }
+
         loadingDialog.startLoadingDialog();
         // Get Project
         Amplify.API.query(
@@ -371,6 +387,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                             .label(edtLabel.getText().toString())
                             .id(task.getId())
                             .status(taskStatus)
+                            .estimatedTime(edtEstimatedTime.getText().toString().equals("") ? null : Float.parseFloat(edtEstimatedTime.getText().toString()))
                             .build();
 
                     Amplify.API.mutate(

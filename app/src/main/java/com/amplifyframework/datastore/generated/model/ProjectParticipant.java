@@ -83,9 +83,9 @@ public final class ProjectParticipant implements Model {
    public String toString() {
     return new StringBuilder()
       .append("ProjectParticipant {")
-      .append("id=" + String.valueOf(getId()))
-      .append("role=" + String.valueOf(getRole()))
-      .append("project=" + String.valueOf(getProject()))
+      .append("id=" + String.valueOf(getId()) + ", ")
+      .append("role=" + String.valueOf(getRole()) + ", ")
+      .append("project=" + String.valueOf(getProject()) + ", ")
       .append("member=" + String.valueOf(getMember()))
       .append("}")
       .toString();

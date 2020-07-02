@@ -53,6 +53,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         holder.tvTaskSummary.setText(taskList.get(position).getSummary());
         holder.tvTaskLabel.setText(taskList.get(position).getLabel());
         holder.tvAssignee.setText(taskList.get(position).getAssignee().getUsername());
+        holder.tvEstimatedTime.setText(taskList.get(position).getEstimatedTime() == null ? "-" : String.valueOf(taskList.get(position).getEstimatedTime()));
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTaskName, tvTaskSummary, tvTaskLabel, tvAssignee;
+        TextView tvTaskName, tvTaskSummary, tvTaskLabel, tvAssignee, tvEstimatedTime;
         protected CardView cvTodo;
 
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
@@ -72,6 +73,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
             tvTaskSummary = itemView.findViewById(R.id.tvTaskSummary);
             tvTaskLabel = itemView.findViewById(R.id.tvTaskLabel);
             tvAssignee = itemView.findViewById(R.id.tvAssignee);
+            tvEstimatedTime = itemView.findViewById(R.id.tvEstimatedTime);
             cvTodo = itemView.findViewById(R.id.cvToDo);
 
             cvTodo.setOnClickListener(new View.OnClickListener() {

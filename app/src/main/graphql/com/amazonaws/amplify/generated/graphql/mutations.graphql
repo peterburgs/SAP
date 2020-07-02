@@ -38,6 +38,8 @@ mutation CreateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -88,6 +90,8 @@ mutation CreateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -112,6 +116,8 @@ mutation CreateUser(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -140,6 +146,8 @@ mutation CreateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -190,6 +198,8 @@ mutation CreateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -236,6 +246,8 @@ mutation CreateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -269,6 +281,8 @@ mutation CreateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -328,6 +342,8 @@ mutation UpdateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -378,6 +394,8 @@ mutation UpdateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -402,6 +420,8 @@ mutation UpdateUser(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -430,6 +450,8 @@ mutation UpdateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -480,6 +502,8 @@ mutation UpdateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -526,6 +550,8 @@ mutation UpdateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -559,6 +585,8 @@ mutation UpdateUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -618,6 +646,8 @@ mutation DeleteUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -668,6 +698,8 @@ mutation DeleteUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -692,6 +724,8 @@ mutation DeleteUser(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -720,6 +754,8 @@ mutation DeleteUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -770,6 +806,8 @@ mutation DeleteUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -816,6 +854,8 @@ mutation DeleteUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -849,6 +889,8 @@ mutation DeleteUser(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -909,6 +951,8 @@ mutation CreateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -959,6 +1003,8 @@ mutation CreateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -983,6 +1029,8 @@ mutation CreateProject(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -1011,6 +1059,8 @@ mutation CreateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1061,6 +1111,8 @@ mutation CreateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1107,6 +1159,8 @@ mutation CreateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1140,6 +1194,8 @@ mutation CreateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1191,6 +1247,8 @@ mutation CreateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1225,6 +1283,8 @@ mutation CreateProject(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -1314,6 +1374,8 @@ mutation UpdateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1364,6 +1426,8 @@ mutation UpdateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1388,6 +1452,8 @@ mutation UpdateProject(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -1416,6 +1482,8 @@ mutation UpdateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1466,6 +1534,8 @@ mutation UpdateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1512,6 +1582,8 @@ mutation UpdateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1545,6 +1617,8 @@ mutation UpdateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1596,6 +1670,8 @@ mutation UpdateProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1630,6 +1706,8 @@ mutation UpdateProject(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -1719,6 +1797,8 @@ mutation DeleteProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1769,6 +1849,8 @@ mutation DeleteProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1793,6 +1875,8 @@ mutation DeleteProject(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -1821,6 +1905,8 @@ mutation DeleteProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1871,6 +1957,8 @@ mutation DeleteProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1917,6 +2005,8 @@ mutation DeleteProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1950,6 +2040,8 @@ mutation DeleteProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -2001,6 +2093,8 @@ mutation DeleteProject(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -2035,6 +2129,8 @@ mutation DeleteProject(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -2148,6 +2244,8 @@ mutation CreateProjectParticipant(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2258,6 +2356,8 @@ mutation CreateProjectParticipant(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -2328,6 +2428,8 @@ mutation CreateProjectParticipant(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2474,6 +2576,8 @@ mutation UpdateProjectParticipant(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2584,6 +2688,8 @@ mutation UpdateProjectParticipant(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -2654,6 +2760,8 @@ mutation UpdateProjectParticipant(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2800,6 +2908,8 @@ mutation DeleteProjectParticipant(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2910,6 +3020,8 @@ mutation DeleteProjectParticipant(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -2980,6 +3092,8 @@ mutation DeleteProjectParticipant(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -3131,6 +3245,8 @@ mutation CreateSprint(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -3241,6 +3357,8 @@ mutation CreateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3264,6 +3382,8 @@ mutation CreateSprint(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -3292,6 +3412,8 @@ mutation CreateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3342,6 +3464,8 @@ mutation CreateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3388,6 +3512,8 @@ mutation CreateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3421,6 +3547,8 @@ mutation CreateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3510,6 +3638,8 @@ mutation UpdateSprint(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -3620,6 +3750,8 @@ mutation UpdateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3643,6 +3775,8 @@ mutation UpdateSprint(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -3671,6 +3805,8 @@ mutation UpdateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3721,6 +3857,8 @@ mutation UpdateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3767,6 +3905,8 @@ mutation UpdateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3800,6 +3940,8 @@ mutation UpdateSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3889,6 +4031,8 @@ mutation DeleteSprint(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -3999,6 +4143,8 @@ mutation DeleteSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -4022,6 +4168,8 @@ mutation DeleteSprint(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -4050,6 +4198,8 @@ mutation DeleteSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -4100,6 +4250,8 @@ mutation DeleteSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -4146,6 +4298,8 @@ mutation DeleteSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -4179,6 +4333,8 @@ mutation DeleteSprint(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -4209,6 +4365,8 @@ mutation CreateTask(
     summary
     label
     description
+    estimatedTime
+    realWorkingTime
     projectID
     assigneeID
     sprintID
@@ -4268,6 +4426,8 @@ mutation CreateTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -4378,6 +4538,8 @@ mutation CreateTask(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -4448,6 +4610,8 @@ mutation CreateTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -4576,6 +4740,8 @@ mutation CreateTask(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -4653,6 +4819,8 @@ mutation CreateTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -4761,6 +4929,8 @@ mutation CreateTask(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -4779,6 +4949,8 @@ mutation CreateTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -4870,6 +5042,8 @@ mutation UpdateTask(
     summary
     label
     description
+    estimatedTime
+    realWorkingTime
     projectID
     assigneeID
     sprintID
@@ -4929,6 +5103,8 @@ mutation UpdateTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -5039,6 +5215,8 @@ mutation UpdateTask(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -5109,6 +5287,8 @@ mutation UpdateTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -5237,6 +5417,8 @@ mutation UpdateTask(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -5314,6 +5496,8 @@ mutation UpdateTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -5422,6 +5606,8 @@ mutation UpdateTask(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -5440,6 +5626,8 @@ mutation UpdateTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -5531,6 +5719,8 @@ mutation DeleteTask(
     summary
     label
     description
+    estimatedTime
+    realWorkingTime
     projectID
     assigneeID
     sprintID
@@ -5590,6 +5780,8 @@ mutation DeleteTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -5700,6 +5892,8 @@ mutation DeleteTask(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -5770,6 +5964,8 @@ mutation DeleteTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -5898,6 +6094,8 @@ mutation DeleteTask(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -5975,6 +6173,8 @@ mutation DeleteTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -6083,6 +6283,8 @@ mutation DeleteTask(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -6101,6 +6303,8 @@ mutation DeleteTask(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -6246,6 +6450,8 @@ mutation CreateComment(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -6330,6 +6536,8 @@ mutation CreateComment(
       summary
       label
       description
+      estimatedTime
+      realWorkingTime
       projectID
       assigneeID
       sprintID
@@ -6374,6 +6582,8 @@ mutation CreateComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -6483,6 +6693,8 @@ mutation CreateComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -6561,6 +6773,8 @@ mutation CreateComment(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -6595,6 +6809,8 @@ mutation CreateComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -6666,6 +6882,8 @@ mutation CreateComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -6779,6 +6997,8 @@ mutation UpdateComment(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -6863,6 +7083,8 @@ mutation UpdateComment(
       summary
       label
       description
+      estimatedTime
+      realWorkingTime
       projectID
       assigneeID
       sprintID
@@ -6907,6 +7129,8 @@ mutation UpdateComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -7016,6 +7240,8 @@ mutation UpdateComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -7094,6 +7320,8 @@ mutation UpdateComment(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -7128,6 +7356,8 @@ mutation UpdateComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -7199,6 +7429,8 @@ mutation UpdateComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -7312,6 +7544,8 @@ mutation DeleteComment(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -7396,6 +7630,8 @@ mutation DeleteComment(
       summary
       label
       description
+      estimatedTime
+      realWorkingTime
       projectID
       assigneeID
       sprintID
@@ -7440,6 +7676,8 @@ mutation DeleteComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -7549,6 +7787,8 @@ mutation DeleteComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -7627,6 +7867,8 @@ mutation DeleteComment(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -7661,6 +7903,8 @@ mutation DeleteComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -7732,6 +7976,8 @@ mutation DeleteComment(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID

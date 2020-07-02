@@ -52,6 +52,7 @@ public class BacklogAdapter extends RecyclerView.Adapter<BacklogAdapter.ViewHold
         holder.tvTaskSummary.setText(taskList.get(position).getSummary());
         holder.tvTaskLabel.setText(taskList.get(position).getLabel());
         holder.tvAssignee.setText(taskList.get(position).getAssignee().getUsername());
+        holder.tvEstimatedTime.setText(taskList.get(position).getEstimatedTime() == null ? "-" : String.valueOf(taskList.get(position).getEstimatedTime()));
     }
 
     @Override
@@ -61,7 +62,7 @@ public class BacklogAdapter extends RecyclerView.Adapter<BacklogAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTaskName, tvTaskSummary, tvTaskLabel, tvAssignee;
+        TextView tvTaskName, tvTaskSummary, tvTaskLabel, tvAssignee, tvEstimatedTime;
         protected CardView cvBacklog;
 
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
@@ -71,6 +72,7 @@ public class BacklogAdapter extends RecyclerView.Adapter<BacklogAdapter.ViewHold
             tvTaskSummary = itemView.findViewById(R.id.tvTaskSummary);
             tvTaskLabel = itemView.findViewById(R.id.tvTaskLabel);
             tvAssignee = itemView.findViewById(R.id.tvAssignee);
+            tvEstimatedTime = itemView.findViewById(R.id.tvEstimatedTime);
             cvBacklog = itemView.findViewById(R.id.cvBacklog);
 
             cvBacklog.setOnClickListener(new View.OnClickListener() {

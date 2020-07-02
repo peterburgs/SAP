@@ -35,6 +35,8 @@ query GetUser($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -85,6 +87,8 @@ query GetUser($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -109,6 +113,8 @@ query GetUser($id: ID!) {
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -137,6 +143,8 @@ query GetUser($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -187,6 +195,8 @@ query GetUser($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -233,6 +243,8 @@ query GetUser($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -266,6 +278,8 @@ query GetUser($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -346,6 +360,8 @@ query ListUsers(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -464,6 +480,8 @@ query GetProject($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -514,6 +532,8 @@ query GetProject($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -538,6 +558,8 @@ query GetProject($id: ID!) {
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -566,6 +588,8 @@ query GetProject($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -616,6 +640,8 @@ query GetProject($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -662,6 +688,8 @@ query GetProject($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -695,6 +723,8 @@ query GetProject($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -746,6 +776,8 @@ query GetProject($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -780,6 +812,8 @@ query GetProject($id: ID!) {
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -890,6 +924,8 @@ query ListProjects(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -1000,6 +1036,8 @@ query ListProjects(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1080,6 +1118,8 @@ query GetProjectParticipant($id: ID!) {
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -1190,6 +1230,8 @@ query GetProjectParticipant($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1260,6 +1302,8 @@ query GetProjectParticipant($id: ID!) {
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -1397,6 +1441,8 @@ query ListProjectParticipants(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -1506,6 +1552,8 @@ query ListProjectParticipants(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -1622,6 +1670,8 @@ query GetSprint($id: ID!) {
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -1732,6 +1782,8 @@ query GetSprint($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1755,6 +1807,8 @@ query GetSprint($id: ID!) {
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -1783,6 +1837,8 @@ query GetSprint($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1833,6 +1889,8 @@ query GetSprint($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1879,6 +1937,8 @@ query GetSprint($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1912,6 +1972,8 @@ query GetSprint($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -1988,6 +2050,8 @@ query ListSprints(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -2065,6 +2129,8 @@ query ListSprints(
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2153,6 +2219,8 @@ query GetTask($id: ID!) {
     summary
     label
     description
+    estimatedTime
+    realWorkingTime
     projectID
     assigneeID
     sprintID
@@ -2212,6 +2280,8 @@ query GetTask($id: ID!) {
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2322,6 +2392,8 @@ query GetTask($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -2392,6 +2464,8 @@ query GetTask($id: ID!) {
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2520,6 +2594,8 @@ query GetTask($id: ID!) {
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -2597,6 +2673,8 @@ query GetTask($id: ID!) {
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2705,6 +2783,8 @@ query GetTask($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -2723,6 +2803,8 @@ query GetTask($id: ID!) {
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -2816,6 +2898,8 @@ query ListTasks(
       summary
       label
       description
+      estimatedTime
+      realWorkingTime
       projectID
       assigneeID
       sprintID
@@ -2860,6 +2944,8 @@ query ListTasks(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -2969,6 +3055,8 @@ query ListTasks(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -3047,6 +3135,8 @@ query ListTasks(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3081,6 +3171,8 @@ query ListTasks(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -3152,6 +3244,8 @@ query ListTasks(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -3262,6 +3356,8 @@ query GetComment($id: ID!) {
           summary
           label
           description
+          estimatedTime
+          realWorkingTime
           projectID
           assigneeID
           sprintID
@@ -3346,6 +3442,8 @@ query GetComment($id: ID!) {
       summary
       label
       description
+      estimatedTime
+      realWorkingTime
       projectID
       assigneeID
       sprintID
@@ -3390,6 +3488,8 @@ query GetComment($id: ID!) {
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -3499,6 +3599,8 @@ query GetComment($id: ID!) {
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -3577,6 +3679,8 @@ query GetComment($id: ID!) {
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3611,6 +3715,8 @@ query GetComment($id: ID!) {
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -3682,6 +3788,8 @@ query GetComment($id: ID!) {
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -3782,6 +3890,8 @@ query ListComments(
             summary
             label
             description
+            estimatedTime
+            realWorkingTime
             projectID
             assigneeID
             sprintID
@@ -3832,6 +3942,8 @@ query ListComments(
         summary
         label
         description
+        estimatedTime
+        realWorkingTime
         projectID
         assigneeID
         sprintID
@@ -3860,6 +3972,8 @@ query ListComments(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3910,6 +4024,8 @@ query ListComments(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3956,6 +4072,8 @@ query ListComments(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID
@@ -3989,6 +4107,8 @@ query ListComments(
               summary
               label
               description
+              estimatedTime
+              realWorkingTime
               projectID
               assigneeID
               sprintID

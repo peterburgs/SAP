@@ -68,6 +68,8 @@ type Task
   summary: String!
   label: String
   description: String
+  estimatedTime: Float
+  realWorkingTime: Float
   projectID: ID!
   assigneeID: ID!
   sprintID: ID!
@@ -96,6 +98,3 @@ type Comment
   author: User! @connection(fields: ["authorID"])
   task: Task! @connection(fields: ["taskID"])
 }
-
-
-

@@ -24,17 +24,22 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sap.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,6 +60,8 @@ public class SprintEditTaskActivity extends AppCompatActivity {
     EditText edtSummary;
     EditText edtLabel;
     EditText edtDescription;
+    EditText edtEstimatedTime;
+    EditText edtRealWorkingTime;
     com.google.android.material.textfield.TextInputLayout edtCommentLayout;
     com.google.android.material.textfield.TextInputEditText edtComment;
     Spinner spnStatus;
@@ -94,6 +101,8 @@ public class SprintEditTaskActivity extends AppCompatActivity {
         edtDescription = findViewById(R.id.edtDescription);
         edtSummary = findViewById(R.id.edtSummary);
         edtLabel = findViewById(R.id.edtLabel);
+        edtEstimatedTime = findViewById(R.id.edtEstimatedTime);
+        edtRealWorkingTime = findViewById(R.id.edtRealWorkingTime);
         task = null;
         project = null;
         loadingDialog = new LoadingDialog(this);
@@ -114,6 +123,89 @@ public class SprintEditTaskActivity extends AppCompatActivity {
         spnStatusAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, statusList);
         spnStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnStatus.setAdapter(spnStatusAdapter);
+        spnStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(task != null && task.getStatus() != TaskStatus.DONE && statusList.get(position).equals(TaskStatus.DONE)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SprintEditTaskActivity.this);
+
+                    builder.setView(getLayoutInflater().inflate(R.layout.real_working_time_dialog, null))
+                            // Add action buttons
+                            .setPositiveButton("Confirm", null)
+                            .setNegativeButton("Cancel", null);
+                    AlertDialog dialog = builder.create();
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialog) {
+                            Button positiveBtn = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                            positiveBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    EditText realWorkingTime = (EditText) ((AlertDialog) dialog).findViewById(R.id.edtRealWorkingTime);
+                                    TextView error = (TextView) ((AlertDialog) dialog).findViewById(R.id.tvError);
+                                    // Validate real working time
+                                    if (realWorkingTime.getText().toString().equals("")) {
+                                        error.setVisibility(View.VISIBLE);
+                                        error.setText("Real working time cannot be empty!");
+                                    } else {
+                                        boolean isCorrectFormat = true;
+                                        try {
+                                            if(Float.parseFloat(realWorkingTime.getText().toString()) <= 0) {
+                                                error.setVisibility(View.VISIBLE);
+                                                error.setText("Real working time must be greater than 0!");
+                                                isCorrectFormat = false;
+                                            }
+                                        } catch (NumberFormatException e) {
+                                            error.setVisibility(View.VISIBLE);
+                                            error.setText("Real working time is incorrect format!");
+                                            isCorrectFormat = false;
+                                        }
+                                        dialog.dismiss();
+
+                                        // Validate estimated time
+                                        if (edtEstimatedTime.getText().toString().equals("")) {
+                                            try {
+                                                if(Float.parseFloat(edtEstimatedTime.getText().toString()) <= 0) {
+                                                    makeAlert("Estimated time must be greater than 0!");
+                                                    spnStatus.setSelection(statusList.indexOf(task.getStatus()));
+                                                    isCorrectFormat = false;
+                                                }
+                                            } catch (NumberFormatException e) {
+                                                makeAlert("Estimated time is incorrect format!");
+                                                spnStatus.setSelection(statusList.indexOf(task.getStatus()));
+                                                isCorrectFormat = false;
+                                            }
+                                        }
+
+                                        if(isCorrectFormat) {
+                                            edtRealWorkingTime.setText(realWorkingTime.getText().toString());
+                                            onSaveTaskClick();
+                                        }
+                                    }
+                                }
+                            });
+
+                            Button negativeBtn = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                            negativeBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    edtRealWorkingTime.setText("");
+                                    spnStatus.setSelection(statusList.indexOf(task.getStatus()));
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+                    });
+
+                    dialog.show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         sprintList = new ArrayList<>();
         // Spinner
@@ -270,6 +362,22 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                                     edtDescription.setText(task.getDescription());
                                     edtLabel.setText(task.getLabel());
 
+                                    if(task.getEstimatedTime() != null) {
+                                        edtEstimatedTime.setText(String.valueOf(task.getEstimatedTime()));
+                                    } else {
+                                        edtEstimatedTime.setText("");
+                                    }
+                                    if(task.getStatus().equals(TaskStatus.TODO) || task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
+                                        ((ViewGroup)edtRealWorkingTime.getParent()).setVisibility(View.GONE);
+                                        edtRealWorkingTime.setText("");
+                                    } else {
+                                        if(task.getRealWorkingTime() != null) {
+                                            edtRealWorkingTime.setText(String.valueOf(task.getRealWorkingTime()));
+                                        } else {
+                                            edtRealWorkingTime.setText("");
+                                        }
+                                    }
+
                                     assigneeList.clear();
                                     for (ProjectParticipant member : project.getMembers()) {
                                         assigneeList.add(member.getMember());
@@ -324,6 +432,31 @@ public class SprintEditTaskActivity extends AppCompatActivity {
     }
 
     private void onSaveTaskClick() {
+        // Validate estimated time
+        if (!edtEstimatedTime.getText().toString().equals("")) {
+            try {
+                if(Float.parseFloat(edtEstimatedTime.getText().toString()) <= 0) {
+                    makeAlert("Estimated time must be greater than 0!");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                makeAlert("Estimated time is incorrect format!");
+                return;
+            }
+        }
+        // Validate real working time
+        if (!edtRealWorkingTime.getText().toString().equals("")) {
+            try {
+                if(Float.parseFloat(edtRealWorkingTime.getText().toString()) <= 0) {
+                    makeAlert("Real working time must be greater than 0!");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                makeAlert("Real working time is incorrect format!");
+                return;
+            }
+        }
+
         loadingDialog.startLoadingDialog();
         // Get Project
         Amplify.API.query(
@@ -343,6 +476,8 @@ public class SprintEditTaskActivity extends AppCompatActivity {
                             .label(edtLabel.getText().toString())
                             .id(task.getId())
                             .status((TaskStatus)spnStatus.getSelectedItem())
+                            .estimatedTime(edtEstimatedTime.getText().toString().equals("") ? null : Float.parseFloat(edtEstimatedTime.getText().toString()))
+                            .realWorkingTime(edtRealWorkingTime.getText().toString().equals("") ? null : Float.parseFloat(edtRealWorkingTime.getText().toString()))
                             .build();
 
                     Amplify.API.mutate(

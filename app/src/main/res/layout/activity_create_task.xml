@@ -48,9 +48,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtSummary"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_height="wrap_content"
                     android:backgroundTint="#F9F9F9"
                     android:inputType="text"
                     android:maxLines="1"
@@ -64,6 +64,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="Description"
+                app:boxCornerRadiusBottomEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxStrokeColor="#FFF"
+                app:boxStrokeWidth="0dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintVertical_bias="0.15"
+                app:startIconDrawable="@drawable/ic_des">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#F9F9F9"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:maxLines="10"
+                    android:minLines="1"
+                    android:nextFocusDown="@id/btnCreateTask"
+                    android:scrollbars="vertical" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Estimated time (hour)"
                 app:boxCornerRadiusTopEnd="25dp"
                 app:boxCornerRadiusTopStart="25dp"
                 app:endIconMode="clear_text"
@@ -75,7 +106,7 @@
                 app:boxStrokeWidth="0dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtDescription"
+                    android:id="@+id/edtEstimatedTime"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"

@@ -69,13 +69,14 @@
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:layout_marginBottom="100sp"
         android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="50sp"
+        android:backgroundTint="@color/colorAccent"
         app:fab_addButtonColorNormal="@color/colorAccent"
         app:fab_addButtonColorPressed="@color/black_800"
         app:fab_labelStyle="@style/custom_fab">
@@ -88,7 +89,7 @@
             app:fab_colorPressed="@color/black_800"
             app:fab_icon="@drawable/ic_setting"
             app:fab_size="mini"
-            app:fab_title="Setting" />
+            app:fab_title="Project Information" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabProject"

@@ -70,12 +70,14 @@
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:layout_width="wrap_content"
+        android:layout_gravity="end|bottom"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100sp"
-        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="50sp"
+        android:backgroundTint="@color/colorAccent"
+        app:layout_anchorGravity="bottom"
         app:fab_addButtonColorNormal="@color/colorAccent"
         app:fab_addButtonColorPressed="@color/black_800"
         app:fab_labelStyle="@style/custom_fab">

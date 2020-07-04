@@ -86,7 +86,8 @@ public class CreateTaskActivity extends AppCompatActivity {
                                         .assignee(getUserRes.getData())
                                         .sprint(backlog)
                                         .description(edtDescription.getText().toString())
-                                        .estimatedTime(edtEstimatedTime.getText().toString().equals("") ? null : Float.parseFloat(edtEstimatedTime.getText().toString()))
+                                        .estimatedTime(edtEstimatedTime.getText().toString().equals("") ? 0f : Float.parseFloat(edtEstimatedTime.getText().toString()))
+                                        .realWorkingTime(0f)
                                         .build();
                                 Amplify.API.mutate(
                                         ModelMutation.create(task),

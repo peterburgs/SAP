@@ -52,7 +52,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         holder.tvTaskSummary.setText(taskList.get(position).getSummary());
         holder.tvTaskLabel.setText(taskList.get(position).getLabel());
         holder.tvAssignee.setText(taskList.get(position).getAssignee().getUsername());
-        holder.tvEstimatedTime.setText(taskList.get(position).getEstimatedTime() == null ? "-" : String.valueOf(taskList.get(position).getEstimatedTime()) + " H");
+        holder.tvEstimatedTime.setText(taskList.get(position).getEstimatedTime() == 0f ? "-" : String.valueOf(taskList.get(position).getEstimatedTime()) + " H");
     }
 
     @Override

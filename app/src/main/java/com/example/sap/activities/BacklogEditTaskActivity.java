@@ -258,7 +258,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                                     edtSummary.setText(task.getSummary());
                                     edtDescription.setText(task.getDescription());
                                     edtLabel.setText(task.getLabel());
-                                    edtEstimatedTime.setText(task.getEstimatedTime() == null ? "" : String.valueOf(task.getEstimatedTime()));
+                                    edtEstimatedTime.setText(task.getEstimatedTime() == 0f ? "" : String.valueOf(task.getEstimatedTime()));
 
                                     // Data for assignee spinner
                                     assigneeList.clear();
@@ -387,7 +387,7 @@ public class BacklogEditTaskActivity extends AppCompatActivity {
                             .label(edtLabel.getText().toString())
                             .id(task.getId())
                             .status(taskStatus)
-                            .estimatedTime(edtEstimatedTime.getText().toString().equals("") ? null : Float.parseFloat(edtEstimatedTime.getText().toString()))
+                            .estimatedTime(edtEstimatedTime.getText().toString().equals("") ? 0 : Float.parseFloat(edtEstimatedTime.getText().toString()))
                             .build();
 
                     Amplify.API.mutate(

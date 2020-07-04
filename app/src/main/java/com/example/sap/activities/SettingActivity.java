@@ -46,6 +46,8 @@ public class SettingActivity extends AppCompatActivity {
     private LoadingDialog loadingDialog;
     TextView edtProjectName;
     TextView edtProjectKey;
+    TextView edtTotalEstimatedTime;
+    TextView edtTotalRealWorkingTime;
     ImageView imvProjectAvatar;
     RecyclerView rcvProjectParticipant;
     MaterialToolbar topAppBar;
@@ -62,6 +64,8 @@ public class SettingActivity extends AppCompatActivity {
 
         edtProjectName = findViewById(R.id.edtProjectName);
         edtProjectName.setMovementMethod(new ScrollingMovementMethod());
+        edtTotalEstimatedTime = findViewById(R.id.edtTotalEstimatedTime);
+        edtTotalRealWorkingTime = findViewById(R.id.edtTotalRealWorkingTime);
         edtProjectKey = findViewById(R.id.edtProjectKey);
         imvProjectAvatar = findViewById(R.id.imvProjectAvatar);
         btnInviteParticipant = findViewById(R.id.btnInviteParticipant);
@@ -203,6 +207,18 @@ public class SettingActivity extends AppCompatActivity {
                     }
                     runOnUiThread(() -> {
                         topAppBar.setTitle(getProjectRes.getData().getKey() + " Information");
+                        float totalEstimatedTime = 0;
+                        float totalRealWorkingTime = 0;
+                        for(Task task : taskList) {
+                            if(task.getEstimatedTime() != null) {
+                                totalEstimatedTime += task.getEstimatedTime();
+                            }
+                            if(task.getRealWorkingTime() != null) {
+                                totalRealWorkingTime += task.getRealWorkingTime();
+                            }
+                        }
+                        edtTotalEstimatedTime.setText(String.valueOf(totalEstimatedTime));
+                        edtTotalRealWorkingTime.setText(String.valueOf(totalRealWorkingTime));
                         setupPieChart(taskList);
                     });
                 },

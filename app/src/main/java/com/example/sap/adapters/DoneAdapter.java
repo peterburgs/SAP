@@ -53,7 +53,7 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.ViewHolder> {
         holder.tvTaskSummary.setText(taskList.get(position).getSummary());
         holder.tvTaskLabel.setText(taskList.get(position).getLabel());
         holder.tvAssignee.setText(taskList.get(position).getAssignee().getUsername());
-        holder.tvRealWorkingTime.setText(taskList.get(position).getRealWorkingTime() == null ? "-" : String.valueOf(taskList.get(position).getRealWorkingTime())+" H");
+        holder.tvRealWorkingTime.setText(taskList.get(position).getRealWorkingTime() == 0f ? "-" : String.valueOf(taskList.get(position).getRealWorkingTime())+" H");
     }
 
     @Override

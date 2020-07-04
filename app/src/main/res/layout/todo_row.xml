@@ -41,25 +41,57 @@
                     android:textSize="20sp"
                         android:textStyle="bold" />
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tvTaskLabel"
-                        style="@android:style/Theme.Panel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/rounded_corner"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/imvProjectImage"
-                        app:layout_constraintTop_toBottomOf="@+id/tvProjectName"
-                        app:layout_constraintVertical_bias="0.35" />
+    <TextView
+        android:id="@+id/tvTaskLabel"
+        style="@android:style/Theme.Panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_corner"
+        android:gravity="start"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imvProjectImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvProjectName"
+        app:layout_constraintVertical_bias="0.35" />
 
-                </LinearLayout>
+    <TextView
+        android:id="@+id/tvEstimatedTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/green_200"
+        android:gravity="end"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:textAlignment="gravity"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imvProjectImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvProjectName"
+        app:layout_constraintVertical_bias="0.35" />
+
+</RelativeLayout>
+
+            </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,25 +116,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvProjectName"
                         app:layout_constraintVertical_bias="0.35" />
 
-                    <TextView
-                        android:id="@+id/tvEstimatedTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:textAlignment="gravity"
-                        android:paddingVertical="5dp"
-                        android:paddingHorizontal="10dp"
-                        android:background="@drawable/rounded_corner"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="14sp"
-                        android:layout_marginEnd="10dp"
-                        android:backgroundTint="@color/green_200"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/imvProjectImage"
-                        app:layout_constraintTop_toBottomOf="@+id/tvProjectName"
-                        app:layout_constraintVertical_bias="0.35" />
 
                     <TextView
                         android:id="@+id/tvAssignee"

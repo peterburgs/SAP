@@ -52,7 +52,7 @@ public class BacklogAdapter extends RecyclerView.Adapter<BacklogAdapter.ViewHold
         holder.tvTaskSummary.setText(taskList.get(position).getSummary());
         holder.tvTaskLabel.setText(taskList.get(position).getLabel());
         holder.tvAssignee.setText(taskList.get(position).getAssignee().getUsername());
-        holder.tvEstimatedTime.setText(taskList.get(position).getEstimatedTime() == null ? "-" : String.valueOf(taskList.get(position).getEstimatedTime()));
+        holder.tvEstimatedTime.setText(taskList.get(position).getEstimatedTime() == null ? "-" : String.valueOf(taskList.get(position).getEstimatedTime())+" H");
     }
 
     @Override

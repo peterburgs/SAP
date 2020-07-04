@@ -74,6 +74,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100sp"
         android:layout_gravity="bottom|end"
         app:fab_addButtonColorNormal="@color/colorAccent"
         app:fab_addButtonColorPressed="@color/black_800"

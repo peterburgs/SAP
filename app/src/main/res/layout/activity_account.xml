@@ -108,6 +108,7 @@
         android:layout_gravity="bottom|end"
         app:fab_addButtonColorNormal="@color/colorAccent"
         app:fab_addButtonColorPressed="@color/black_800"
+        android:layout_marginBottom="100sp"
         app:fab_labelStyle="@style/custom_fab">
 
         <com.getbase.floatingactionbutton.FloatingActionButton

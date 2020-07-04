@@ -99,7 +99,7 @@
                 app:boxCornerRadiusTopStart="25dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintVertical_bias="0.15"
-                app:startIconDrawable="@drawable/ic_des"
+                app:startIconDrawable="@drawable/clock"
                 app:boxCornerRadiusBottomEnd="25dp"
                 app:boxCornerRadiusBottomStart="25dp"
                 app:boxStrokeColor="#FFF"

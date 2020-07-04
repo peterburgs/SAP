@@ -234,7 +234,7 @@
                 app:boxStrokeWidth="0dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintVertical_bias="0.15"
-                app:startIconDrawable="@drawable/ic_label"
+                app:startIconDrawable="@drawable/clock"
                 app:startIconTint="@color/colorAccent">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -264,7 +264,7 @@
                 app:boxStrokeWidth="0dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintVertical_bias="0.15"
-                app:startIconDrawable="@drawable/ic_label"
+                app:startIconDrawable="@drawable/clock"
                 app:startIconTint="@color/colorAccent">
 
                 <com.google.android.material.textfield.TextInputEditText

@@ -1,0 +1,14 @@
+[
+	{ "s": "RECEIVE", "p": [9, 4] },
+	{ "s": "REGARDING", "p": [2] },
+	{ "s": "REMOVE", "p": [3, 29, 25, 19, 18] },
+	{ "s": "REQUIRED", "p": [12, 9, 7] },
+	{ "s": "RESEMBLANCE", "p": [2] },
+	{ "s": "RESERVED", "p": [2] },
+	{ "s": "RESET", "p": [33, 9, 4, 3] },
+	{ "s": "RESOURCE", "p": [2] },
+	{ "s": "RESPECT", "p": [2] },
+	{ "s": "RIGHT", "p": [12] },
+	{ "s": "RIGHT-BOTTOM", "p": [12] },
+	{ "s": "RIGHTS", "p": [2] }
+]

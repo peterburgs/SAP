@@ -1,0 +1,21 @@
+[
+	{ "s": "PARTICIPANT", "p": [35] },
+	{ "s": "PARTICIPANT/MEMBER", "p": [35] },
+	{ "s": "PASSWORD", "p": [9, 33, 4, 3, 8, 7] },
+	{ "s": "PERIOD", "p": [35] },
+	{ "s": "PERSON", "p": [35] },
+	{ "s": "PETER", "p": [2] },
+	{ "s": "PETERBURGS", "p": [2] },
+	{ "s": "PETERBURGS.VN@GMAIL.COM", "p": [2] },
+	{ "s": "PIECE", "p": [35] },
+	{ "s": "PLEASE", "p": [2] },
+	{ "s": "PROCEED", "p": [7] },
+	{ "s": "PROGRESS", "p": [31, 3] },
+	{ "s": "PROHIBITED", "p": [2] },
+	{ "s": "PROJECT", "p": [11, 35, 3, 19, 16, 15, 12, 2, 13, 4] },
+	{ "s": "PROJECTS", "p": [11] },
+	{ "s": "PROPERTY", "p": [2] },
+	{ "s": "PUBLICATION", "p": [2] },
+	{ "s": "PURELY", "p": [2] },
+	{ "s": "PURPOSE", "p": [2] }
+]

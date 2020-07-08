@@ -1,0 +1,22 @@
+[
+	{ "s": "CAN", "p": [35] },
+	{ "s": "CASE", "p": [7] },
+	{ "s": "CHANGE", "p": [22, 3] },
+	{ "s": "CHARACTERS", "p": [7] },
+	{ "s": "CHOOSE", "p": [12, 13, 9, 7] },
+	{ "s": "CODE", "p": [9, 7, 4] },
+	{ "s": "COINCIDENTAL", "p": [2] },
+	{ "s": "COM", "p": [2] },
+	{ "s": "COMPLETE", "p": [23, 3] },
+	{ "s": "CONFIRM", "p": [7, 9, 4] },
+	{ "s": "CONSENT", "p": [2] },
+	{ "s": "CONTAINS", "p": [11] },
+	{ "s": "CONTENT", "p": [2] },
+	{ "s": "CONTENTS", "p": [3] },
+	{ "s": "CONTINUE", "p": [8] },
+	{ "s": "CORNER", "p": [12] },
+	{ "s": "COURSE", "p": [2] },
+	{ "s": "CREATE", "p": [13, 12, 11, 4, 3, 35] },
+	{ "s": "CREATED", "p": [2] },
+	{ "s": "CREATING", "p": [10, 3] }
+]
